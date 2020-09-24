@@ -215,3 +215,6 @@ Nově jste se **naučili**:
 3. Řešení A, B nebo C (nebo všechna) upravte tak, aby při nich byla použita *vektorová* data Corine Land Cover (ke stažení [zde](https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018)). (Nápověda: asi se vám bude hodit nástroj *Tabulate Intersection*.)
 
 1.  bude hodit nástroj *Tabulate Intersection*.)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTc2Mzc0MTY0NV19
+-->
