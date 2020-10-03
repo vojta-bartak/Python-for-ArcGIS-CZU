@@ -29,11 +29,11 @@ Budeme používat volně stažitelná data z následujících zdrojů:
 
 Z geodatabáze ArcČR 500 budeme potřebovat třídy prvků "Zeleznice" a "Okresy - polygony". Jsou v souřadnicovém systému S-JTSK Křovák East-North (EPSG: 5514).
 
-![](../images/image-20200917143410267.png)
+![](..\images/image-20200917143410267.png)
 
 Data [Corine Land Cover](https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018) představují krajinný pokryv pro území Evropy v souřadnicovém systému ETRS 1989 LAEA (EPSG: 3035). Tato data jsou distribuována jak v rastrové (GeoTiff), tak ve vektorové (Esri File Geodatabase) podobě. My budeme pracovat s rastrem.
 
-![](../images/data_all.png)
+![](..\images/data_all.png)
 
 Než se pustíme do analýzy, je třeba:
 
@@ -58,23 +58,23 @@ Pokud bychom úlohu řešili spouštěním jednotlivých nástrojů, a nikoli po
 
 Máme dvě možnosti. První spočívá v použití nástroje *Select* (ArcToolbox -> Analysis Tools -> Extract), který na danou vrstvu aplikuje atributový SQL dotaz a z vybraných prvků vytvoří novou datovou sadu.
 
-![](../images/Select.png)
+![](..\images/Select.png)
 
 Druhou možností je použití nástroje *Make Feature Layer* (ArcToolbox -> Data Management Tools -> Layers and Table Views). Ten ze vstupní datové sady nevytváří novou datovou sadu (jako tomu bylo u nástroje *Select*), ale pouze vrstvu. (Vrstva je dočasná reprezentace datové sady, která není uložena na pevný disk, ale existuje pouze v operační paměti počítače a po skončení běhu modelu je automaticky smazána. Lze ji v rámci modelu použít jako vstup do dalších nástrojů a může obsahovat výběr. Z jedné datové sady lze vytvořit libovolné množství vrstev, přičemž každá může obsahovat jiný výběr prvků.)
 
 Podobně jako v nástroji *Select*, i v nástroji *Make Feature Layer* lze atributový výběr specifikovat pomocí parametru *Expression*, do něhož lze zapsat SQL dotaz:
 
-![](../images/Make_FL.png) 
+![](..\images/Make_FL.png) 
 
 Jelikož druhá z uvedených možností (nástroj *Make Feature Layer*) nevyžaduje zápis nových dat na pevný disk, dáme jí přirozeně přednost.
 
 Oříznutí železničních tratí vybraným polygonem nástrojem *Clip* a tvorba obalové zóny 300 m nástrojem *Buffer* jsou triviální kroky, které nebudeme podrobně rozebírat. U nástroje *Buffer* však stojí za zmínku správné nastavení parametru *Dissolve Type*: jelikož chceme analýzu provést pro všechny úseky železniční trati dohromady, je třeba nastavit tento parametr na hodnotu "ALL". Vzniklé obalové zóny kolem jednotlivých úseků se tak spojí do jediného (multi)polygonu.
 
-![](../images/model1_buffer.png)
+![](..\images/model1_buffer.png)
 
 Pokud model spustíme (připomínáme, že je třeba jej nejprve uložit, a to nikoli do složky, ale do toolboxu), měli bychom obdržet zhruba toto (připomínáme, že výsledky z modelu je třeba přidat do ArcMap ručně):
 
-![](../images/buffer_zeleznice300.png)
+![](..\images/buffer_zeleznice300.png)
 
 Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat relativní plochu lesů". Uvedené formulaci může opět odpovídat více možných řešení. Ukážeme si jedno, které je efektivní obzvlášť tehdy, chceme-li spočítat *relativní* plochu (tj. procento plochy vztažené k celkové ploše, zde procento plochy lesů vzhledem k celkové ploše obalové zóny). Spočívá ve dvou krocích:
 
@@ -83,15 +83,15 @@ Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat rela
 
 První z uvedených kroků můžeme realizovat např. reklasifikací (ArcToolbox -> Spatial Analyst -> Reclass -> *Reclassify*) nebo nástrojem *Equal To* (ArcToolbox -> Spatial Analyst -> Math -> Logical). Druhá možnost je jednodušší, proto ji použijeme. Lesy jsou v rastru krajinného pokryvu reprezentovány hodnotou 3, proto bude rastr nástrojem *Equal To* porovnán právě s hodnotou 3:
 
-<img src="../images/image-20200917204602513.png" alt="image-20200917204602513" style="zoom:50%;" />
+<img src="..\images/image-20200917204602513.png" alt="image-20200917204602513" style="zoom:50%;" />
 
 Výsledný model tedy bude vypadat následovně:
 
-![](../images/model1_final_zonal.png)
+![](..\images/model1_final_zonal.png)
 
 Po uložení a spuštění modelu obdržíme výslednou DBF tabulku, z které plyne, že procentuální zastoupení lesů v pásmu 300 m kolem železnic je v okrese Jindřichův Hradec cca 30%:
 
-<img src="../images/image-20200917211249427.png" alt="image-20200917211249427" style="zoom:67%;" />
+<img src="..\images/image-20200917211249427.png" alt="image-20200917211249427" style="zoom:67%;" />
 
 ## B. Řešení pro všechny okresy
 
@@ -101,11 +101,11 @@ Pokud následně v nástroji *Buffer* nastavíme parametr *Dissolve Type* jako "
 
 Výsledný model:
 
-![](../images/model2_final.png)
+![](..\images/model2_final.png)
 
 a výsledek:
 
-<img src="../images/image-20200917212701242.png" alt="image-20200917212701242" style="zoom: 67%;" />
+<img src="..\images/image-20200917212701242.png" alt="image-20200917212701242" style="zoom: 67%;" />
 
 Ihned vidíme, že nejvyšší zastoupení lesů kolem tratí má (nepřekvapivě) okres Prachatice, a to 51%.
 
@@ -120,7 +120,7 @@ Druhé řešení je bezesporu efektivnější (viz úlohu 1 na konci lekce), nap
 
 Abychom nějakou proceduru nechali vykonávat opakovaně (tj. v cyklu), je třeba do modelu vložit tzv. *iterátor*. Protože chceme iterovat přes hodnoty diskrétního rastru, použijeme iterátor procházející hodnoty z daného pole atributové tabulky (Insert -> Iterators -> Field Value).
 
-![](../images/model3_iterator2.png) 
+![](..\images/model3_iterator2.png) 
 
 Na obrázku vidíte správné zapojení iterátoru do modelu. Iterátor má následující parametry:
 
@@ -136,7 +136,7 @@ Jak z toho ven? Řešením je použít hodnotu, kterou v dané iteraci vrací it
 
 Odkaz na nějakou proměnnou modelu (proměnnými v modelu jsou všechny entity reprezentované ovály) v názvu nějaké výstupní datové sady lze vytvořit pomocí znaku `%` před a za názvem proměnné. Princip bude zřejmý z příkladu na následujícím obrázku, kde je do názvu výstupní tabulky zakomponován název proměnné "Value", tedy proměnné reprezentující hodnotu, kterou vrací iterátor. Název tabulky je tedy zapsán jako `pokryvnost_%Value%.dbf`, přičemž v každém kole cyklu se část `%Value%` nahradí aktuální hodnotou proměnné Value.
 
-![](../images/model3_zonal.png)
+![](..\images/model3_zonal.png)
 
 Nyní nezbývá než model spustit a prohlédnout si výsledné tabulky.
 
@@ -146,7 +146,7 @@ Nyní nezbývá než model spustit a prohlédnout si výsledné tabulky.
 
 Vytvořený model lze snadno exportovat do skriptu v Pythonu:
 
-<img src="../images/image-20200918163344664.png" alt="image-20200918163344664" style="zoom: 50%;" />
+<img src="..\images/image-20200918163344664.png" alt="image-20200918163344664" style="zoom: 50%;" />
 
 Tím se uloží soubor s koncovkou .py. Jde o obyčejný textový soubor, který po otevření např. v poznámkovém bloku vypadá takto:
 
