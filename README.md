@@ -10,7 +10,7 @@ Obsah je rozdělen do jednotlivých lekcí, přičemž každý týden je v plán
 
 ## 1. Úvod do programování. Grafické programování nástrojem Model Builder.
 
-[Lekce 1: Grafické programování v aplikaci Model Builder](http://htmlpreview.github.io/?https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/blob/master/html/Lekce%201%20Grafick%C3%A9%20programov%C3%A1n%C3%AD%20v%20aplikaci%20Model%20Builder.html)
+[Lekce 1: Grafické programování v aplikaci Model Builder](https://owncloud.cesnet.cz/index.php/s/z0iJ5xHo7bt30OX)
 
 [Lekce 2: Uživatelské rozhraní k nástrojům z Model Builderu](http://htmlpreview.github.io/?https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/blob/master/html/Lekce%202%20U%C5%BEivatelsk%C3%A9%20rozhran%C3%AD%20k%20n%C3%A1stroj%C5%AFm%20z%20Model%20Builderu.html)
 
