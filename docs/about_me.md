@@ -1,6 +1,6 @@
 ## O mně
 
-<img src="C:/Users/vojta/ownCloud/Python-for-ArcGIS-CZU/docs/images/profilovka_small.jpg" style="zoom:25%;" />
+<img src="images/profilovka_small.jpg" style="zoom:25%;" />
 
 Ing. Vojtěch Barták, PhD.
 
