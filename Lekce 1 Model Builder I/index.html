@@ -36,7 +36,21 @@
 </li>
 
 <li>
-<a href="../lekce2/" class="">Lekce 2: Uživatelské rozhraní</a>
+<a href="../Lekce%202%20Model%20Builder%20II/" class="">Lekce 2: Uživatelské rozhraní</a>
+</li>
+
+<li class="header">Python</li>
+
+<li>
+<a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="">Lekce 3: Rozjezd Pythonu</a>
+</li>
+
+<li>
+<a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="">Lekce 4: Proměnné a datové typy</a>
+</li>
+
+<li>
+<a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="">Lekce 5: Cykly a podmínky</a>
 </li>
 
 <li class="chapter" data-path="about_me/">
@@ -141,6 +155,9 @@ Theme by GitBook
 <p><img alt="" src="../images/model1_buffer.png" /></p>
 <p>Pokud model spustíme (připomínáme, že je třeba jej nejprve uložit, a to nikoli do složky, ale do toolboxu), měli bychom obdržet zhruba toto (připomínáme, že výsledky z modelu je třeba přidat do ArcMap ručně):</p>
 <p><img alt="" src="../images/buffer_zeleznice300.png" /></p>
+<blockquote>
+<p>Ověřte, zda jste nastavili správně parametr <em>Dissolve Type</em> v nástroji <em>Buffer</em>. V atributové tabulce výsledné polygonové vrstvy byste měli vidět pouze jeden řádek.</p>
+</blockquote>
 <p>Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat relativní plochu lesů". Uvedené formulaci může opět odpovídat více možných řešení. Ukážeme si jedno, které je efektivní obzvlášť tehdy, chceme-li spočítat <em>relativní</em> plochu (tj. procento plochy vztažené k celkové ploše, zde procento plochy lesů vzhledem k celkové ploše obalové zóny). Spočívá ve dvou krocích:</p>
 <ol>
 <li>Vytvoříme logický rastr (tj. rastr s hodnotami 0/1) reprezentující lesy (1 ... les, 0 ... ostatní). </li>
@@ -166,7 +183,7 @@ Theme by GitBook
 <li>použít řešení B v cyklu přes jednotlivé třídy krajinného pokryvu,</li>
 <li>upravit řešení B tak, aby se analýza provedla pro všechny třídy krajinného pokryvu naráz.</li>
 </ul>
-<p>Druhé řešení je bezesporu efektivnější (viz úlohu 1 na konci lekce), např. proto, že při něm není třeba v každém kole cyklu znovu provádět průnik a vytvářet obalovou zónu. Jelikož naším cílem je však ukázat si použití iterátoru v modelu, přikloníme se zde k prvnímu způsobu. Výhodou je, že vyžaduje jen malou úpravu modelu vytvořeného při řešení B.</p>
+<p>Druhé řešení je bezesporu efektivnější (viz <a href="#úlohy]">úlohu 1</a> na konci lekce), např. proto, že při něm není třeba v každém kole cyklu znovu provádět průnik a vytvářet obalovou zónu. Jelikož naším cílem je však ukázat si použití iterátoru v modelu, přikloníme se zde k prvnímu způsobu. Výhodou je, že vyžaduje jen malou úpravu modelu vytvořeného při řešení B.</p>
 <p>Abychom nějakou proceduru nechali vykonávat opakovaně (tj. v cyklu), je třeba do modelu vložit tzv. <em>iterátor</em>. Protože chceme iterovat přes hodnoty diskrétního rastru, použijeme iterátor procházející hodnoty z daného pole atributové tabulky (Insert -&gt; Iterators -&gt; Field Value).</p>
 <p><img alt="" src="../images/model3_iterator2.png" /> </p>
 <p>Na obrázku vidíte správné zapojení iterátoru do modelu. Iterátor má následující parametry:</p>
@@ -249,15 +266,7 @@ arcpy.gp.ZonalStatisticsAsTable_sa(Obalové_zóny, &quot;NAZ_LAU1&quot;, Forests
 <ol>
 <li>Upravte řešení C tak, abyste se obešli bez iterátoru. (Nápověda: asi se vám bude hodit nástroj <em>Tabulate Area</em>.)</li>
 <li>Upravte řešení C tak, aby výstupem byla pouze jedna tabulka, ve které budou jednotlivým třídám krajinného pokryvu odpovídat jednotlivé sloupce. Přitom však v modelu ponechte iterátor. (Nápověda: prozkoumejte nástroje v nástrojových sadách Data Management Tools -&gt; Fields a Joins.)</li>
-<li>
-<p>Řešení A, B nebo C (nebo všechna) upravte tak, aby při nich byla použita <em>vektorová</em> data Corine Land Cover (ke stažení <a href="https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018">zde</a>). (Nápověda: asi se vám bude hodit nástroj <em>Tabulate Intersection</em>.)</p>
-</li>
-<li>
-<p>bude hodit nástroj <em>Tabulate Intersection</em>.)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2Mzc0MTY0NV19
---></p>
-</li>
+<li>Řešení A, B nebo C (nebo všechna) upravte tak, aby při nich byla použita <em>vektorová</em> data Corine Land Cover (ke stažení <a href="https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018">zde</a>). (Nápověda: asi se vám bude hodit nástroj <em>Tabulate Intersection</em>.)</li>
 </ol>
 
 

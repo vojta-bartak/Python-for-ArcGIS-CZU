@@ -32,11 +32,25 @@
 <li class="header">Model Builder</li>
 
 <li>
-<a href="../lekce1/" class="">Lekce 1: Tvorba modelu</a>
+<a href="../Lekce%201%20Model%20Builder%20I/" class="">Lekce 1: Tvorba modelu</a>
 </li>
 
 <li>
 <a href="./" class="active">Lekce 2: Uživatelské rozhraní</a>
+</li>
+
+<li class="header">Python</li>
+
+<li>
+<a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="">Lekce 3: Rozjezd Pythonu</a>
+</li>
+
+<li>
+<a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="">Lekce 4: Proměnné a datové typy</a>
+</li>
+
+<li>
+<a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="">Lekce 5: Cykly a podmínky</a>
 </li>
 
 <li class="chapter" data-path="about_me/">
@@ -96,36 +110,36 @@ Theme by GitBook
 </div>
 <h2 id="vychozi-model">Výchozí model</h2>
 <p>Výchozím modelem pro tuto lekci bude model vytvořený v lekci 1 v rámci řešení B. Tento model počítá relativní zastoupení lesů v pásu širokém 300 m kolem železnic.</p>
-<p><img alt="" src="..\images/model2_final.png" /></p>
+<p><img alt="" src="../images/model2_final.png" /></p>
 <p>Doposud jsme byli zvyklí s modelem pracovat v režimu editace (pravý klik na model v Catalogu a volba <em>Edit</em>) a spouštět jej pomocí Model -&gt; Run Entire Model. Model má však předpřipravené uživatelské rozhraní, podobné tomu, jaké mají vestavěné nástroje v ArcToolbox. Okno našeho modelu-nástroje otevřeme dvojklikem na model v Catalogu (případně pravý klik na model a volba <em>Open</em>).</p>
-<p><img src="..\images/image-20200919144334712.png" alt="image-20200919144334712" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919144334712.png" alt="image-20200919144334712" style="zoom:50%;" /></p>
 <p>Zatím toho okno nástroje příliš nenabízí: jak sděluje hláška uprostřed, nemá totiž definované žádné parametry, pomocí nichž by uživatel mohl kontrolovat běh výpočtu. Po kliknutí na OK se model spustí s tím nastavením, jak jsme je definovali při editaci modelu (neváhejte vyzkoušet).</p>
 <p>Nyní nastavíme modelu parametry tak, aby uživatelské rozhraní dávalo trochu větší smysl.</p>
 <h2 id="definice-parametru-nastroje">Definice parametrů nástroje</h2>
 <p>Nastavení parametrů se provádí při editaci modelu (tedy ještě jednou: pravý klik na model v Catalogu a volba <em>Edit</em>). Parametrem se rozumí cokoli, co chceme nechat uživatele nastavit před spuštěním nástroje. Přinejmenším by to tedy měla být vstupní a výstupní data. </p>
 <p>Z dané položky modelu se stane parametr, když na ní klikneme pravým tlačítkem a myši a zaškrtneme volbu Model Parameter.</p>
-<p><img src="..\images/image-20200919145103191.png" alt="image-20200919145103191" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919145103191.png" alt="image-20200919145103191" style="zoom:50%;" /></p>
 <p>U příslušné položky se následně v pravém horním rohu objeví písmeno "P" na znamení, že se jedná o parametr modelu. </p>
 <p>Pokud tímto způsobem nastavíme jako parametry všechny vstupní vrstvy (zeleznice, okresy a rastr CLC_2018.tif) a výstupní tabulku (output_table.dbf), model uložíme a následně otevřeme okno nástroje, bude nyní vypadat takto:</p>
-<p><img src="..\images/image-20200919145753041.png" alt="image-20200919145753041" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919145753041.png" alt="image-20200919145753041" style="zoom:50%;" /></p>
 <p>Uživatel má nyní možnost před spuštěním nástroje změnit vstupní vrstvy a rozhodnout, jak se má jmenovat a kam má být uložena výstupní tabulka.</p>
 <p>Jaké další parametry by mohl uživatel chtít měnit? Například by mohl určovat, v jak širokém okolí železnic chce analýzu provést. Nyní je okolí nastaveno pevně na 300 m, ale je docela představitelné, že bude pro nějakou aplikaci žádoucí tuto hodnotu změnit. </p>
 <p>V modelu položka s hodnotou 300 přímo nevystupuje, tato hodnota je "ukryta" v nastavení nástroje Buffer. Jak z ní tedy udělat parametr? Máme dvě možnosti:</p>
 <ol>
 <li>Můžeme přidat do modelu novou proměnnou typu číslo a propojit ji s nástrojem Buffer, tj. udělat z ní vstup do tohoto nástroje: </li>
 </ol>
-<p><img alt="" src="..\images/insert_create_variable.png" /></p>
+<p><img alt="" src="../images/insert_create_variable.png" /></p>
 <p>Z nové proměnné pak uděláme parametr standardním postupem (pravý klik na ní a <em>Model Parameter</em>).</p>
 <ol>
 <li>Můžeme parametr <em>Distance [value or field]</em> nástroje Buffer přímo udělat parametrem modelu. Stačí pravý klik na nástroj Buffer a volba <em>Make Variable -&gt; From Parameter -&gt; Distance [value or field]</em>. Vzniklou proměnnou pak nastavíme jako parametr.</li>
 </ol>
-<p><img src="..\images/image-20200919152600242.png" alt="image-20200919152600242" style="zoom: 50%;" /></p>
+<p><img src="images/image-20200919152600242.png" alt="image-20200919152600242" style="zoom: 50%;" /></p>
 <p>V těchto dvou variantách je jeden drobný rozdíl: zatímco v prvním případě byla vzniklá proměnná (a tím i příslušný parametr) typu číslo, ve druhém případě je tato proměnná typu <em>Distance [value or field]</em>. Uživatel pak může namísto pevně daného poloměru obalové zóny určit pole v atributové tabulce vstupní vrstvy, ve kterém jsou poloměry obalových zón specifikovány. Mohli bychom tak např. nastavit každému okresu či kategorii tratě jinou šířku obalové zóny. Volte vždy podle toho, co chcete, aby váš nástroj uživateli nabízel.</p>
 <p>Měl by být v modelu ještě nějaký parametr? Parametrů lze vytvářet téměř nekonečné množství, vždy však chceme, aby uživatelské prostředí nebylo přeplácané a neobsahovalo nedůležité položky. V našem nástroji stojí za úvahu ještě jeden parametr: při tvorbě modelu bylo v nástroji Buffer důležité správně nastavit <em>Dissolve Type</em> a <em>Dissolve Fields</em>, aby výsledná tabulka obsahovala sumární hodnoty pro jednotlivé okresy. Přitom pole s názvy okresů se nemusí pokaždé, kdy uživatel nástroj bude spouštět, jmenovat stejně. Koneckonců uživatel může analýzu provádět i pro jiné územní celky než pro okresy (např. kraje). Bude tedy vhodné nastavit parametr <em>Dissolve Fields</em> nástroje Buffer jako parametr modelu, a to stejným způsobem, jakým jsme to udělali s parametrem <em>Distance [value or field]</em>.</p>
 <p>Výsledný model by měl vypadat následovně (všimněte si označení parametrů písmenem "P"):</p>
-<p><img alt="" src="..\images/model2_parameters.png" /></p>
+<p><img alt="" src="../images/model2_parameters.png" /></p>
 <p>Okno nástroje nyní vypadá takto (pozor: model je třeba uložit):</p>
-<p><img src="..\images/image-20200919154834106.png" alt="image-20200919154834106" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919154834106.png" alt="image-20200919154834106" style="zoom:50%;" /></p>
 <h2 id="nastaveni-nazvu-poradi-a-vychozich-hodnot-parametru">Nastavení názvů, pořadí a výchozích hodnot parametrů</h2>
 <p>Uživatelské rozhraní, jak jsme ho nastavili, umožňuje sice uživateli měnit hodnoty parametrů, nevypadá ale moc pěkně. Pokud uživatel není dobře seznámen s tím, co má nástroj dělat a jaké parametry mají jaký význam, patrně z našeho uživatelského rozhraní nebude příliš moudrý. Abychom to zlepšili, je třeba:</p>
 <ul>
@@ -136,27 +150,27 @@ Theme by GitBook
 </ul>
 <p>V této části probereme, jak na první tři kroky, v následující části se budeme věnovat nápovědě.</p>
 <p>Názvy parametrů jsou dány názvy jednotlivých proměnných v modelu. Název proměnné (rozumněj: oválu v grafickém schematu modelu) je nejprve automaticky vygenerován (např. proměnná reprezentující vstupní data, která jsme do modelu myší přetáhli, se pojmenuje stejně, jako se jmenuje příslušná vrstva), lze jej však změnit. Stačí kliknout pravým tlačítkem myši na proměnnou a zvolit <em>Rename</em>.</p>
-<p><img src="..\images/rename_parameter.png" style="zoom:67%;" /></p>
+<p><img src="images/rename_parameter.png" style="zoom:80%;" /></p>
 <p>Když takto přejmenujeme všechny parametry modelu, dostane naše uživatelské rozhraní trochu jasnější podobu:</p>
-<p><img src="..\images/image-20200919170007626.png" alt="image-20200919170007626" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919170007626.png" alt="image-20200919170007626" style="zoom:50%;" /></p>
 <p>Dalším krokem je úprava pořadí parametrů. Současné pořadí je do značné míry dílem náhody: parametry jsou v tom pořadí, v jakém jsme je při editaci modelu vytvářeli. Změnit pořadí parametrů je možné ve vlastnostech modelu, které jsou dostupné buď přes pravý klik na model v Catalogu -&gt; <em>Properties</em>, nebo z editace modelu přes <em>Model </em>-&gt; Model Properties<em>. Na kartě vlastností přejdeme na záložku </em>Parameters*, kde je možné pořadí parametrů upravit pomocí šipek.</p>
-<p><img src="..\images/image-20200919170646814.png" alt="image-20200919170646814" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919170646814.png" alt="image-20200919170646814" style="zoom:50%;" /></p>
 <p>Po rozumné úpravě pořadí parametrů by mohl nástroj vypadat nějak takto:</p>
-<p><img src="..\images/image-20200919170834107.png" alt="image-20200919170834107" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919170834107.png" alt="image-20200919170834107" style="zoom:50%;" /></p>
 <p>Další věcí, kterou je možné změnit, jsou výchozí hodnoty parametrů. Jsou to ty hodnoty, které se automaticky předvyplní do políček pro jednotlivé parametry. Výchozí hodnoty jsou dány tím, jak jsme model vytvářeli. Změnit je můžeme jednoduše dvojklikem na jednotlivé položky modelu (při editaci) a změnou hodnoty.</p>
 <p>Pro nástroje, které chceme opakovaně spouštět s určitým daným nastavením parametrů, je vhodné tyto hodnoty nastavit jako výchozí. Pokud však chceme vytvořit co nejuniverzálnější nástroj, bývá zvykem žádné výchozí hodnoty nenastavovat. Toho jednoduše docílíme vymazáním hodnot u jednotlivých proměnných-parametrů (drobnou cenou za to je, že model nebude v editačním režimu vybarvený, tj. připravený ke spuštění).</p>
-<p><img src="..\images/image-20200919172316709.png" alt="image-20200919172316709" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919172316709.png" alt="image-20200919172316709" style="zoom:50%;" /></p>
 <p>Nyní bude uživatel donucen specifikovat hodnoty všech parametrů dle vlastního uvážení.</p>
 <p>Náš nástroj se nyní tváří výrazně obecněji, než na začátku. Zkuste si je např. spustit ne pro okresy, ale pro kraje, s šířkou analyzovaného pásma 500 m, resp. s různou šířkou pro různé kategorie tratí. (Vrstvu krajů můžete získat např. z databáze <a href="https://www.arcdata.cz/produkty/geograficka-data/arccr-500">ArcData 500</a>, musíte ji však převést do souřadnicového systému ETRS 1989 LAEA, nebo si ji již transformovanou můžete stáhnout <a href="">zde</a>).</p>
 <h2 id="napoveda">Nápověda</h2>
 <p>Nejprve ještě změníme název nástroje: na záložce <em>General</em> vlastností modelu vyplníme políčka <em>Name</em> (skutečný název nástroje používaný např. při volání nástroje v Pythonu) a <em>Label</em> (název, pod jakým se nástroj zobrazuje v toolboxu).</p>
-<p><img src="..\images/image-20200919174455626.png" alt="image-20200919174455626" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919174455626.png" alt="image-20200919174455626" style="zoom:50%;" /></p>
 <p>Nápovědu k nástroji je možné vytvářet ve formátu HTML pomocí formuláře, který otevřeme přes pravý klik na nástroj v Catalogu a volbu <em>Item Description</em>. V něm po kliknutí na <em>Edit</em> jednoduše vyplníme položky, které chceme dokumentovat. </p>
-<p><img alt="image-20200919175551407" src="..\images/image-20200919175551407.png" /></p>
+<p><img alt="image-20200919175551407" src="../images/image-20200919175551407.png" /></p>
 <p>Hotovou nápovědu můžeme otevřít (např. ve webovém prohlížeči) přes pravý klik na model v Catalogu a volbu <em>Help</em>. </p>
-<p><img alt="image-20200919175400583" src="..\images/image-20200919175400583.png" /></p>
+<p><img alt="image-20200919175400583" src="../images/image-20200919175400583.png" /></p>
 <p>Nápověda jednotlivých položek se však rovněž zobrazuje přímo v okně nástroje, klikneme-li na tlačítko <em>Show Help</em>:</p>
-<p><img src="..\images/image-20200919175146075.png" alt="image-20200919175146075" style="zoom:50%;" /></p>
+<p><img src="images/image-20200919175146075.png" alt="image-20200919175146075" style="zoom:50%;" /></p>
 <h2 id="vnoreni-modelu-do-jineho-modelu">Vnoření modelu do jiného modelu</h2>
 <p>Má-li model definované uživatelské rozhraní v podobě nastavitelných parametrů pro vstupy a výstupy do výpočtu, je možné jej použít podobným způsobem, jako jakýkoli jiný nástroj v ArcToolbox:</p>
 <ol>
@@ -170,12 +184,12 @@ Theme by GitBook
 <blockquote>
 <p>Možná jste si všimli odlišné ikony nástroje <em>Split By Attributes</em> v ArcToolbox. Tento nástroj je totiž vytvořený v Pythonu. Stejné ikony se budou zobrazovat i u nástrojů, které budete vytvářet v tomto kurzu.</p>
 </blockquote>
-<p><img src="..\images/image-20201003123744502.png" alt="image-20201003123744502" style="zoom:50%;" /> </p>
+<p><img src="images/image-20201003123744502.png" alt="image-20201003123744502" style="zoom:50%;" /> </p>
 <p>V zadané složce (parametr <em>Target Workspace</em>) nalezneme jednotlivé shapefily okresů v krajích, pojmenované jménem kraje.</p>
 <p>Nyní si v Model Builderu vytvoříme nový model a vložíme do něj náš nástroj a iterátor přes třídy prvků (<em>Insert -&gt; Iterator -&gt; Feature Classes</em>).</p>
-<p><img src="..\images/image-20201003120500607.png" alt="image-20201003120500607" style="zoom:50%;" /></p>
+<p><img src="images/image-20201003120500607.png" alt="image-20201003120500607" style="zoom:50%;" /></p>
 <p>Nyní půjde o to, obě komponenty vhodně propojit. Dvojklikem na iterátor se dostaneme do jeho parametrů a nastavíme složku, jejíž obsah se má v cyklu procházet (parametr <em>Workspace or Feature Dataset</em>). </p>
-<p><img src="..\images/image-20201003120639531.png" alt="image-20201003120639531" style="zoom:50%;" /></p>
+<p><img src="images/image-20201003120639531.png" alt="image-20201003120639531" style="zoom:50%;" /></p>
 <p>Ostatní parametry jsou nepovinné a není třeba je nastavovat, nicméně pro jistotu si jejich význam vysvětlíme:</p>
 <ul>
 <li><em>Wildcard</em> - jedná se o filtr, pomocí kterého můžeme procházet pouze třídy prvků, jejichž název má určitou specifikovanou strukturu (např. obsahuje určitý řetězec, začíná určitým písmenem apod.).</li>
@@ -183,7 +197,7 @@ Theme by GitBook
 <li><em>Recursive</em> - zaškrtnutím se budou procházet i podsložky dané procházené složky.</li>
 </ul>
 <p>Iterátor má dva výstupy: třídu prvků, která se v dané iteraci prochází (v našem případě shapefile příslušného kraje) a název této třídy (název kraje). My budeme využívat pouze první výstup, tedy samotný shapefilu, neboť ten bude v každé iteraci vstupem do našeho nástroje <em>Lesy u tratí</em>. Propojíme tedy tento výstup iterátoru s nástrojem a nastavíme ho jako hodnotu parametru <em>Vstupní polygonová vrstva zón</em>.</p>
-<p><img src="..\images/image-20201003124019952.png" alt="image-20201003124019952" style="zoom:50%;" /></p>
+<p><img src="images/image-20201003124019952.png" alt="image-20201003124019952" style="zoom:50%;" /></p>
 <blockquote>
 <p>Toto propojení je umožněné právě tím, že jsme nástroji <em>Lesy u tratí</em> definovali uživatelské rozhraní.</p>
 </blockquote>
@@ -191,10 +205,10 @@ Theme by GitBook
 <blockquote>
 <p>Pozor! Nezapomeňte na parametry, které jsou na první pohled skryté, jako např. definování poloměru analyzovaného pásma či pole s názvy zón. K nim se dostanete stejně jako k parametrům jakéhokoli jiného nástroje: dvojklikem na nástroj v modelu.</p>
 </blockquote>
-<p><img src="..\images/image-20201003124440488.png" alt="image-20201003124440488" style="zoom:50%;" /></p>
+<p><img src="images/image-20201003124440488.png" alt="image-20201003124440488" style="zoom:50%;" /></p>
 <p>Vzhledem k tomu, že výstupem nebude jedna tabulka, ale tolik tabulek, kolik je krajů, je třeba zajistit, aby se každá pojmenovala jinak, nejlépe s použitím názvu daného kraje. Podobnou situaci jsme již řešili v minulém cvičení. Připomeňme, že název kraje je v každé iteraci výstupem z iterátoru v podobě proměnné <em>Name</em>. Na tuto proměnnou se pak můžeme odkázat při definování názvu výstupní tabulky pomocí znaku <code>%</code>, takže název může vypadat např. <code>vystupni_tabulka_%Name%.dbf</code>.</p>
 <p>Výsledný model vypadá takto:</p>
-<p><img alt="" src="..\images/model4.png" /></p>
+<p><img alt="" src="../images/model4.png" /></p>
 <p>Nyní stačí model uložit, spustit pomocí <em>Model -&gt; Run Entire Model</em> a ověřit, zda výstupy odpovídají očekávání.</p>
 <blockquote>
 <p>Možná si říkáte, že by přecijen bylo jednodušší do nástroje <em>Lesy u tratí</em> prostě přidat další iterátor, namísto vkládání celého nástroje do jiného modelu. Zde ovšem narazíte na jedno ze základních omezení Model Builderu: ten totiž nepodporuje více iterátorů v jednom modelu. Pokud tedy chcete iterovat v několika hierarchicky vnořených cyklech, je vnoření modelu do jiného modelu jediným řešením. Jak ovšem uvidíte, pokud stejný nástroj vytvoříte v Pythonu, na žádná podobná omezení nenarazíte.</p>
