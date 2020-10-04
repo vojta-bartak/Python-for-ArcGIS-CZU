@@ -1,4 +1,4 @@
-# (Lekce 1: Grafické programování v aplikaci Model Builder
+# Lekce 1: Grafické programování v aplikaci Model Builder
 
 *(c) Vojtěch Barták, FŽP ČZU Praha, 2020/2021*
 
