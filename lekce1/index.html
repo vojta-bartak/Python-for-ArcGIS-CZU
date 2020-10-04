@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>ArcPy - Python pro ArcGIS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.1.2, mkdocs-gitbook-1.0.7">
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".." target="_blank" class="custom-link">Python pro ArcGIS</a>
+</li>
+<li class="divider"></li>
+<li class="chapter" data-path="">
+<a href="..">Home</a>
+<li class="header">Model Builder</li>
+
+<li>
+<a href="./" class="">Lekce 1: Tvorba modelu</a>
+</li>
+
+<li>
+<a href="../lekce2/" class="">Lekce 2: Uživatelské rozhraní</a>
+</li>
+
+<li class="chapter" data-path="lekce1/">
+<a href="./">Python</a>
+<li class="chapter active" data-path="lekce1/">
+<a href="./">ArcPy</a>
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+<section class="normal markdown-section">
+
+
+
+<h1 id="lekce-1-graficke-programovani-v-aplikaci-model-builder">Lekce 1: Grafické programování v aplikaci Model Builder</h1>
+<p><em>(c) Vojtěch Barták, FŽP ČZU Praha, 2020/2021</em></p>
+<p>Tato lekce je zaměřena na prohloubení dovedností s automatizací prostorových úloh pomocí vestavěné aplikace systému ArcGIS <em>Model Builder</em>. Pomocí jednoduchého grafického řetězení nástrojů a vrstev nám tato aplikace zprostředkuje bezbolestný úvod do programátorského myšlení. Na lekci bezprostředně navazuje lekce 2, ve které se naučíte vytvořit ke svému modelu uživatelské rozhraní. V dalších lekcí pak již Model Builder používat nebudeme, neboť jej nahradíme mnohem mocnějším nástrojem: programovacím jazykem Python.</p>
+<p>Lekce předpokládá znalost základů GIS a prostředí ArcGIS na úrovni předmětů GIS 1 a GIS 2, včetně základního ovládání aplikace Model Builder. (Pokud něco z uvedeného nesplňujete, nezoufejte, třeba zjistíte, že vám potřebné znalosti sami "dojdou".)</p>
+<div class="toc">
+<ul>
+<li><a href="#lekce-1-graficke-programovani-v-aplikaci-model-builder">Lekce 1: Grafické programování v aplikaci Model Builder</a><ul>
+<li><a href="#zakladni-uloha">Základní úloha</a></li>
+<li><a href="#data">Data</a></li>
+<li><a href="#a-reseni-pro-pevne-dany-okres">A. Řešení pro pevně daný okres</a></li>
+<li><a href="#b-reseni-pro-vsechny-okresy">B. Řešení pro všechny okresy</a></li>
+<li><a href="#c-reseni-s-iteraci-pres-tridy-krajinneho-pokryvu">C. Řešení s iterací přes třídy krajinného pokryvu</a></li>
+<li><a href="#export-modelu-do-pythonu">Export modelu do Pythonu</a></li>
+<li><a href="#shrnuti">Shrnutí</a></li>
+<li><a href="#ulohy">Úlohy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="zakladni-uloha">Základní úloha</h2>
+<p>Chceme vědět, jaké je procentuální zastoupení lesů (či potažmo jiných tříd krajinného pokryvu) v pásmu 300 m kolem železničních tratí. Analýzu budeme provádět:</p>
+<ol>
+<li>Pro pevně daný okres.</li>
+<li>Pro všechny okresy.</li>
+<li>Pro všechny okresy a všechny třídy krajinného pokryvu.</li>
+</ol>
+<p>Výstup budeme chtít v podobě tabulky, ve které bude každému analyzovanému okresu odpovídat jeden řádek.</p>
+<h2 id="data">Data</h2>
+<p>Budeme používat volně stažitelná data z následujících zdrojů: </p>
+<ul>
+<li><a href="https://www.arcdata.cz/produkty/geograficka-data/arccr-500">ArcČR 500</a></li>
+<li><a href="https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018">Corine Land Cover 2018</a></li>
+</ul>
+<p>Z geodatabáze ArcČR 500 budeme potřebovat třídy prvků "Zeleznice" a "Okresy - polygony". Jsou v souřadnicovém systému S-JTSK Křovák East-North (EPSG: 5514).</p>
+<p><img alt="" src="../images/image-20200917143410267.png" /></p>
+<p>Data <a href="https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018">Corine Land Cover</a> představují krajinný pokryv pro území Evropy v souřadnicovém systému ETRS 1989 LAEA (EPSG: 3035). Tato data jsou distribuována jak v rastrové (GeoTiff), tak ve vektorové (Esri File Geodatabase) podobě. My budeme pracovat s rastrem.</p>
+<p><img alt="" src="../images/data_all.png" /></p>
+<p>Než se pustíme do analýzy, je třeba:</p>
+<ul>
+<li><strong>Sjednotit souřadnicové systémy.</strong> Vzhledem k tomu, že transformace vektorových dat je obecně snazší a méně "ztrátová" než transformace rastrových dat, převedeme vrstvy z ArcČR 500 do systému ETRS (nástroj <em>Project</em>).</li>
+<li><strong>Oříznout rastr krajinného pokryvu na území ČR.</strong> Můžeme použít nástroj <em>Clip</em> (pozor: máme na mysli nástroj ze sady Data Management Tools -&gt; Raster -&gt; Raster Processing, nikoli stejnojmenný nástroj ze sady Analysis Tools -&gt; Extract) a polygony okresů vzniklé transformací v předchozím kroku.</li>
+<li><strong>Reklasifikovat rastr krajinného pokryvu do základních kategorií</strong>. Jak známo, krajinný pokryv Corine Land Cover je kódován třímístnými kódy, přičemž první číslice vyjadřuje základní kategorie, druhá číslice podrobnější členění a třetí číslice nejpodrobnější. My budeme pracovat se základními kategoriemi 1 - městské plochy, 2 - zemědělské plochy, 3 - lesy, 4 - mokřady a 5 - vodní plochy. Potřebujeme tedy rastr, který bude mít namísto třímístných kódů pouze těchto pět hodnot (nástroj <em>Reclassify</em>).</li>
+</ul>
+<p>Pokud se nechcete stahováním a úpravou dat zabývat nebo nevíte, jak na to, můžete si připravená data stáhnout <a href="https://owncloud.cesnet.cz/index.php/s/FCqiKR1zvimaIDz">zde</a>.</p>
+<h2 id="a-reseni-pro-pevne-dany-okres">A. Řešení pro pevně daný okres</h2>
+<p>Řekněme, že chceme úlohu řešit pro okres Jindřichův Hradec. Možných řešení je více, jedno z nich může být toto:</p>
+<ol>
+<li>Vybereme polygon okresu Jindřichův Hradec.</li>
+<li>Vybraným polygonem ořízneme vrstvu železničních tratí.</li>
+<li>Vytvoříme kolem tratí obalovou zónu (buffer) s poloměrem 300 m.</li>
+<li>Pomocí zonální mapové algebry spočítáme (relativní) plochu lesů.</li>
+</ol>
+<p>(Krok 4 působí trochu tajemně, podrobně si ho rozebereme později.)</p>
+<p>Pokud bychom úlohu řešili spouštěním jednotlivých nástrojů, a nikoli pomocí modelu, pak bychom výběr okresu provedli ručně nástrojem <em>Select Features</em>. Při následném ořezávání nástrojem <em>Clip</em> by pak stačilo jako ořezovou vrstvu použít vrstvu okresů, v níž by byl proveden výběr. Jak výběr řešit v modelu?</p>
+<p>Máme dvě možnosti. První spočívá v použití nástroje <em>Select</em> (ArcToolbox -&gt; Analysis Tools -&gt; Extract), který na danou vrstvu aplikuje atributový SQL dotaz a z vybraných prvků vytvoří novou datovou sadu.</p>
+<p><img alt="" src="../images/Select.png" /></p>
+<p>Druhou možností je použití nástroje <em>Make Feature Layer</em> (ArcToolbox -&gt; Data Management Tools -&gt; Layers and Table Views). Ten ze vstupní datové sady nevytváří novou datovou sadu (jako tomu bylo u nástroje <em>Select</em>), ale pouze vrstvu. (Vrstva je dočasná reprezentace datové sady, která není uložena na pevný disk, ale existuje pouze v operační paměti počítače a po skončení běhu modelu je automaticky smazána. Lze ji v rámci modelu použít jako vstup do dalších nástrojů a může obsahovat výběr. Z jedné datové sady lze vytvořit libovolné množství vrstev, přičemž každá může obsahovat jiný výběr prvků.)</p>
+<p>Podobně jako v nástroji <em>Select</em>, i v nástroji <em>Make Feature Layer</em> lze atributový výběr specifikovat pomocí parametru <em>Expression</em>, do něhož lze zapsat SQL dotaz:</p>
+<p><img alt="" src="../images/Make_FL.png" /> </p>
+<p>Jelikož druhá z uvedených možností (nástroj <em>Make Feature Layer</em>) nevyžaduje zápis nových dat na pevný disk, dáme jí přirozeně přednost.</p>
+<p>Oříznutí železničních tratí vybraným polygonem nástrojem <em>Clip</em> a tvorba obalové zóny 300 m nástrojem <em>Buffer</em> jsou triviální kroky, které nebudeme podrobně rozebírat. U nástroje <em>Buffer</em> však stojí za zmínku správné nastavení parametru <em>Dissolve Type</em>: jelikož chceme analýzu provést pro všechny úseky železniční trati dohromady, je třeba nastavit tento parametr na hodnotu "ALL". Vzniklé obalové zóny kolem jednotlivých úseků se tak spojí do jediného (multi)polygonu.</p>
+<p><img alt="" src="../images/model1_buffer.png" /></p>
+<p>Pokud model spustíme (připomínáme, že je třeba jej nejprve uložit, a to nikoli do složky, ale do toolboxu), měli bychom obdržet zhruba toto (připomínáme, že výsledky z modelu je třeba přidat do ArcMap ručně):</p>
+<p><img alt="" src="../images/buffer_zeleznice300.png" /></p>
+<p>Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat relativní plochu lesů". Uvedené formulaci může opět odpovídat více možných řešení. Ukážeme si jedno, které je efektivní obzvlášť tehdy, chceme-li spočítat <em>relativní</em> plochu (tj. procento plochy vztažené k celkové ploše, zde procento plochy lesů vzhledem k celkové ploše obalové zóny). Spočívá ve dvou krocích:</p>
+<ol>
+<li>Vytvoříme logický rastr (tj. rastr s hodnotami 0/1) reprezentující lesy (1 ... les, 0 ... ostatní). </li>
+<li>Nástrojem <em>Zonal Statistics as Table</em> (ArcToolbox -&gt; Spatial Analyst -&gt; Zonal) spočítáme v obalové zóně průměr z výše uvedeného rastru. (Uvědomte si, že průměrem z nul a jedniček v obalové zóně dostaneme relativní zastoupení jedniček, tj. vlastně relativní plochu lesů, na škále 0, 1. Relativní plochu v procentech pak dostaneme jednoduše vynásobením stem.)</li>
+</ol>
+<p>První z uvedených kroků můžeme realizovat např. reklasifikací (ArcToolbox -&gt; Spatial Analyst -&gt; Reclass -&gt; <em>Reclassify</em>) nebo nástrojem <em>Equal To</em> (ArcToolbox -&gt; Spatial Analyst -&gt; Math -&gt; Logical). Druhá možnost je jednodušší, proto ji použijeme. Lesy jsou v rastru krajinného pokryvu reprezentovány hodnotou 3, proto bude rastr nástrojem <em>Equal To</em> porovnán právě s hodnotou 3:</p>
+<p><img src="images/image-20200917204602513.png" alt="image-20200917204602513" style="zoom:50%;" /></p>
+<p>Výsledný model tedy bude vypadat následovně:</p>
+<p><img alt="" src="../images/model1_final_zonal.png" /></p>
+<p>Po uložení a spuštění modelu obdržíme výslednou DBF tabulku, z které plyne, že procentuální zastoupení lesů v pásmu 300 m kolem železnic je v okrese Jindřichův Hradec cca 30%:</p>
+<p><img src="images/image-20200917211249427.png" alt="image-20200917211249427" style="zoom:67%;" /></p>
+<h2 id="b-reseni-pro-vsechny-okresy">B. Řešení pro všechny okresy</h2>
+<p>Pokud chceme stejnou úlohu řešit pro všechny okresy, odpadne nutnost na začátku vybírat okres nástrojem <em>Make Feature Layer</em> a ořezávat jím železniční tratě. Abychom nicméně rozlišili, které části tratí patří do kterých okresů, musíme spočítat průnik obou vrstev nástrojem <em>Intersect</em>. Výsledná vrstva bude obsahovat úseky tratí "rozřezané" hranicemi okresů a v atributech těchto úseků bude i informace, do kterého okresu který úsek patří. </p>
+<p>Pokud následně v nástroji <em>Buffer</em> nastavíme parametr <em>Dissolve Type</em> jako "LIST" a v seznamu polí <em>Dissolve Fields</em> zaškrtneme pole s názvy okresů ("NAZ_LAU1"), bude výsledkem jeden (multi)polygon pro každý okres. Vrstvu těchto polygonů (obalových zón) pak použijeme jako <em>Input Zone Data</em> v nástroji <em>Zonal Statistics As Table</em>. </p>
+<p>Výsledný model:</p>
+<p><img alt="" src="../images/model2_final.png" /></p>
+<p>a výsledek:</p>
+<p><img src="images/image-20200917212701242.png" alt="image-20200917212701242" style="zoom: 67%;" /></p>
+<p>Ihned vidíme, že nejvyšší zastoupení lesů kolem tratí má (nepřekvapivě) okres Prachatice, a to 51%.</p>
+<h2 id="c-reseni-s-iteraci-pres-tridy-krajinneho-pokryvu">C. Řešení s iterací přes třídy krajinného pokryvu</h2>
+<p>Pokud budeme chtít naši analýzu provést pro všechny třídy krajinného pokryvu, máme dvě možnosti:</p>
+<ul>
+<li>použít řešení B v cyklu přes jednotlivé třídy krajinného pokryvu,</li>
+<li>upravit řešení B tak, aby se analýza provedla pro všechny třídy krajinného pokryvu naráz.</li>
+</ul>
+<p>Druhé řešení je bezesporu efektivnější (viz úlohu 1 na konci lekce), např. proto, že při něm není třeba v každém kole cyklu znovu provádět průnik a vytvářet obalovou zónu. Jelikož naším cílem je však ukázat si použití iterátoru v modelu, přikloníme se zde k prvnímu způsobu. Výhodou je, že vyžaduje jen malou úpravu modelu vytvořeného při řešení B.</p>
+<p>Abychom nějakou proceduru nechali vykonávat opakovaně (tj. v cyklu), je třeba do modelu vložit tzv. <em>iterátor</em>. Protože chceme iterovat přes hodnoty diskrétního rastru, použijeme iterátor procházející hodnoty z daného pole atributové tabulky (Insert -&gt; Iterators -&gt; Field Value).</p>
+<p><img alt="" src="../images/model3_iterator2.png" /> </p>
+<p>Na obrázku vidíte správné zapojení iterátoru do modelu. Iterátor má následující parametry:</p>
+<ul>
+<li><em>Input Table</em>: vstupní tabulka, která se má v cyklu procházet. V našem případě jde o atributovou tabulku rastru Corine Land Cover, hodnotu parametru tedy nastavíme jako tento rastr. (Pravděpodobně jste toto provedli ručně propojením rastru a iterátoru šipkou.) </li>
+<li><em>Field</em>: pole, které chceme cyklicky procházet. V našem případě je to pole Value, obsahující přímo hodnoty rastru. </li>
+<li><em>Data Type</em>. Iterátor prochází dané pole řádek po řádku a v každém kole cyklu vrací na výstupu příslušnou hodnotu tohoto pole. Parametrem <em>Data Type</em> lze určit, v jakém datovém typu má tato hodnota na výstupu z iterátoru být. To závisí především na tom, co s ní dál v modelu chceme dělat. V našem případě bude výstupní hodnota z iterátoru použita do nástroje <em>Equal To</em> jako konstanta, s níž se má porovnat rastr Corine Land Cover. Odpovídajícím datovým typem bude tedy "Double" neboli číslo (u diskrétního rastru bychom mohli použít i "Long", tj. celé číslo).</li>
+<li><em>Unique Values</em>. Pokud je toto políčko zaškrtnuté, procházejí se v daném poli pouze unikátní hodnoty (tj. žádná se neopakuje). Pokud zaškrtnuté není, prochází se celá tabulka řádek po řádku. My pochopitelně chceme procházet pouze unikátní hodnoty.</li>
+<li><em>Skip Null Values</em>. Pokud bychom věděli, že pole obsahuje nějaké hodnoty, které se mají při procházení vynechat, zaškrtneme toto políčko a parametrem <em>Null Value</em> specifikujeme, o jaké hodnoty se jedná.</li>
+</ul>
+<p>Pokud bychom takto model spustili, patrně by výpočet bez problémů proběhl, výsledkem by však byla pouze jedna tabulka odpovídající poslednímu procházenému krajinnému typu. To je proto, že v každém kole cyklu výpočet končí vytvořením tabulky nástrojem <em>Zonal Statistics as Table</em>, přičemž tato tabulka je stále stejně pojmenovaná. Pokud máme v ArcMap povolené přepisování již existujících datových sad, pak bude v každé iteraci vytvořena nová tabulka pro daný krajinný pokryv, jelikož však bude pojmenovaná stejně jako tabulka z předchozí iteraci, tuto předchozí tabulku prostě nahradí. (Pokud přepisování existujících dat povolené nemáte, pak bude výsledkem dokonce chybové hlášení.)</p>
+<p>Jak z toho ven? Řešením je použít hodnotu, kterou v dané iteraci vrací iterátor, jako součást názvu výstupní tabulky. Pokud např. zvolíme jako strukturu názvu <code>&lt;základ názvu&gt;_&lt;kód krajinného pokryvu&gt;.dbf</code>, mohou se výstupní tabulky jmenovat např. <code>pokryvnost_1.dbf</code>, <code>pokryvnost_2.dbf</code> atd. </p>
+<p>Odkaz na nějakou proměnnou modelu (proměnnými v modelu jsou všechny entity reprezentované ovály) v názvu nějaké výstupní datové sady lze vytvořit pomocí znaku <code>%</code> před a za názvem proměnné. Princip bude zřejmý z příkladu na následujícím obrázku, kde je do názvu výstupní tabulky zakomponován název proměnné "Value", tedy proměnné reprezentující hodnotu, kterou vrací iterátor. Název tabulky je tedy zapsán jako <code>pokryvnost_%Value%.dbf</code>, přičemž v každém kole cyklu se část <code>%Value%</code> nahradí aktuální hodnotou proměnné Value.</p>
+<p><img alt="" src="../images/model3_zonal.png" /></p>
+<p>Nyní nezbývá než model spustit a prohlédnout si výsledné tabulky.</p>
+<p>(Pokud vás napadlo, že by bylo skvělé nemít výstup v pěti různých tabulkách, ale vytvořit jen jednu tabulku, ve které by jednotlivé krajinné typy byly ve sloupcích, podívejte se na úlohy 1 a 2 na konci lekce. Úloha 1 by v takový výstup měla přirozeně vyústit. Úloha 2 se oproti tomu může ukázat jako docela složitá. Ale nebojte,  pokud jí nezvládnete: až se naučíte místo sestavování modelů psát skripty v Pythonu, bude vše mnohem jednodušší!)</p>
+<h2 id="export-modelu-do-pythonu">Export modelu do Pythonu</h2>
+<p>Vytvořený model lze snadno exportovat do skriptu v Pythonu:</p>
+<p><img src="images/image-20200918163344664.png" alt="image-20200918163344664" style="zoom: 50%;" /></p>
+<p>Tím se uloží soubor s koncovkou .py. Jde o obyčejný textový soubor, který po otevření např. v poznámkovém bloku vypadá takto:</p>
+<pre><code># -*- coding: utf-8 -*-
+# ---------------------------------------------------------------------------
+# exported_model.py
+# Created on: 2020-09-18 16:35:39.00000
+#   (generated by ArcGIS/ModelBuilder)
+# Description: 
+# ---------------------------------------------------------------------------
+
+# Import arcpy module
+import arcpy
+
+# Load required toolboxes
+arcpy.ImportToolbox(&quot;Model Functions&quot;)
+
+
+# Local variables:
+okresy = &quot;okresy&quot;
+zeleznice = &quot;zeleznice&quot;
+okresy_zeleznice_Intersect = &quot;C:\\Users\\vojta\\Documents\\ArcGIS\\Default.gdb\\okresy_Intersect&quot;
+Obalové_zóny = &quot;C:\\Users\\vojta\\Documents\\ArcGIS\\Default.gdb\\okresy_Intersect_Buffer&quot;
+CLC_2018_tif = &quot;CLC_2018.tif&quot;
+Value = CLC_2018_tif
+Forests__0_1_ = &quot;C:\\Users\\vojta\\Documents\\ArcGIS\\Default.gdb\\EqualTo_tif1&quot;
+pokryvnost__Value__dbf = &quot;C:\\my_path\\pokryvnost_%Value%.dbf&quot;
+
+# Process: Intersect
+arcpy.Intersect_analysis(&quot;okresy #;zeleznice #&quot;, okresy_zeleznice_Intersect, &quot;ALL&quot;, &quot;&quot;, &quot;INPUT&quot;)
+
+# Process: Buffer
+arcpy.Buffer_analysis(okresy_zeleznice_Intersect, Obalové_zóny, &quot;300 Meters&quot;, &quot;RIGHT&quot;, &quot;ROUND&quot;, &quot;LIST&quot;, &quot;NAZ_LAU1&quot;, &quot;PLANAR&quot;)
+
+# Process: Iterate Field Values
+arcpy.IterateFieldValues_mb(CLC_2018_tif, &quot;Value&quot;, &quot;Double&quot;, &quot;true&quot;, &quot;false&quot;, &quot;0&quot;)
+
+# Process: Equal To
+arcpy.gp.EqualTo_sa(CLC_2018_tif, Value, Forests__0_1_)
+
+# Process: Zonal Statistics as Table
+arcpy.gp.ZonalStatisticsAsTable_sa(Obalové_zóny, &quot;NAZ_LAU1&quot;, Forests__0_1_, pokryvnost__Value__dbf, &quot;NODATA&quot;, &quot;MEAN&quot;)
+</code></pre>
+
+<p>Není cílem zde vysvětlovat vše, co je ve skriptu napsáno. Jde jen o letmou ukázku toho, co se v rámci tohoto kurzu naučíte psát sami. Tak s chutí do toho!</p>
+<h2 id="shrnuti">Shrnutí</h2>
+<p>V této lekci jste si <strong>zopakovali</strong>: </p>
+<ul>
+<li>
+<p>několik vektorových (Clip, Buffer, Intersect) a několik rastrových (Equal To, Zonal Statistics as Table) analytických nástrojů, </p>
+</li>
+<li>
+<p>jak se používá Model Builder ke zřetězení nástrojů při návrhu řešení komplexní úlohy. </p>
+</li>
+</ul>
+<p>Nově jste se <strong>naučili</strong>:</p>
+<ul>
+<li>jak se v modelu provede výběr prvků, aniž byste museli vybrané prvky zapisovat do nové datové sady na disk (nástroj Make Feature Layer), </li>
+<li>jak v modelu použít iterátor (s iterací přes hodnoty pole), </li>
+<li>jak model exportovat do skriptu v Pythonu.</li>
+</ul>
+<h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>Upravte řešení C tak, abyste se obešli bez iterátoru. (Nápověda: asi se vám bude hodit nástroj <em>Tabulate Area</em>.)</li>
+<li>Upravte řešení C tak, aby výstupem byla pouze jedna tabulka, ve které budou jednotlivým třídám krajinného pokryvu odpovídat jednotlivé sloupce. Přitom však v modelu ponechte iterátor. (Nápověda: prozkoumejte nástroje v nástrojových sadách Data Management Tools -&gt; Fields a Joins.)</li>
+<li>
+<p>Řešení A, B nebo C (nebo všechna) upravte tak, aby při nich byla použita <em>vektorová</em> data Corine Land Cover (ke stažení <a href="https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018">zde</a>). (Nápověda: asi se vám bude hodit nástroj <em>Tabulate Intersection</em>.)</p>
+</li>
+<li>
+<p>bude hodit nástroj <em>Tabulate Intersection</em>.)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTc2Mzc0MTY0NV19
+--></p>
+</li>
+</ol>
+
+
+</section>
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+</body>
+</html>
