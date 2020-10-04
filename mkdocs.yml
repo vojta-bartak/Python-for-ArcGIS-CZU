@@ -7,6 +7,10 @@ plugins: []
 nav:
     - Home: index.md
     - Model Builder: 
-        - 'Lekce 1: Tvorba modelu': 'lekce1.md'
-        - 'Lekce 2: Uživatelské rozhraní': 'lekce2.md'
+        - 'Lekce 1: Tvorba modelu': 'Lekce 1 Model Builder I.md'
+        - 'Lekce 2: Uživatelské rozhraní': 'Lekce 2 Model Builder II.md'
+    - Python:
+        - 'Lekce 3: Rozjezd Pythonu': 'Lekce 3 Jak a kde napsat a spustit program v Pythonu.md'
+        - 'Lekce 4: Proměnné a datové typy': 'Lekce 4 Proměnné a datové typy.md'
+        - 'Lekce 5: Cykly a podmínky': 'Lekce 5 Řídící struktury programu - cykly a podmínky.md'
     - O mně...: about_me.md

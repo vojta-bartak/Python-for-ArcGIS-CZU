@@ -74,6 +74,8 @@ Pokud model spustíme (připomínáme, že je třeba jej nejprve uložit, a to n
 
 ![](images/buffer_zeleznice300.png)
 
+> Ověřte, zda jste nastavili správně parametr *Dissolve Type* v nástroji *Buffer*. V atributové tabulce výsledné polygonové vrstvy byste měli vidět pouze jeden řádek.
+
 Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat relativní plochu lesů". Uvedené formulaci může opět odpovídat více možných řešení. Ukážeme si jedno, které je efektivní obzvlášť tehdy, chceme-li spočítat *relativní* plochu (tj. procento plochy vztažené k celkové ploše, zde procento plochy lesů vzhledem k celkové ploše obalové zóny). Spočívá ve dvou krocích:
 
 1. Vytvoříme logický rastr (tj. rastr s hodnotami 0/1) reprezentující lesy (1 ... les, 0 ... ostatní). 
@@ -114,7 +116,7 @@ Pokud budeme chtít naši analýzu provést pro všechny třídy krajinného pok
 - použít řešení B v cyklu přes jednotlivé třídy krajinného pokryvu,
 - upravit řešení B tak, aby se analýza provedla pro všechny třídy krajinného pokryvu naráz.
 
-Druhé řešení je bezesporu efektivnější (viz úlohu 1 na konci lekce), např. proto, že při něm není třeba v každém kole cyklu znovu provádět průnik a vytvářet obalovou zónu. Jelikož naším cílem je však ukázat si použití iterátoru v modelu, přikloníme se zde k prvnímu způsobu. Výhodou je, že vyžaduje jen malou úpravu modelu vytvořeného při řešení B.
+Druhé řešení je bezesporu efektivnější (viz [úlohu 1](#úlohy]) na konci lekce), např. proto, že při něm není třeba v každém kole cyklu znovu provádět průnik a vytvářet obalovou zónu. Jelikož naším cílem je však ukázat si použití iterátoru v modelu, přikloníme se zde k prvnímu způsobu. Výhodou je, že vyžaduje jen malou úpravu modelu vytvořeného při řešení B.
 
 Abychom nějakou proceduru nechali vykonávat opakovaně (tj. v cyklu), je třeba do modelu vložit tzv. *iterátor*. Protože chceme iterovat přes hodnoty diskrétního rastru, použijeme iterátor procházející hodnoty z daného pole atributové tabulky (Insert -> Iterators -> Field Value).
 
@@ -211,8 +213,3 @@ Nově jste se **naučili**:
 1. Upravte řešení C tak, abyste se obešli bez iterátoru. (Nápověda: asi se vám bude hodit nástroj *Tabulate Area*.)
 2. Upravte řešení C tak, aby výstupem byla pouze jedna tabulka, ve které budou jednotlivým třídám krajinného pokryvu odpovídat jednotlivé sloupce. Přitom však v modelu ponechte iterátor. (Nápověda: prozkoumejte nástroje v nástrojových sadách Data Management Tools -> Fields a Joins.)
 3. Řešení A, B nebo C (nebo všechna) upravte tak, aby při nich byla použita *vektorová* data Corine Land Cover (ke stažení [zde](https://land.copernicus.eu/pan-european/corine-land-cover/lcc-2012-2018)). (Nápověda: asi se vám bude hodit nástroj *Tabulate Intersection*.)
-
-1.  bude hodit nástroj *Tabulate Intersection*.)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2Mzc0MTY0NV19
--->
