@@ -1,0 +1,11 @@
+site_name: Python pro ArcGIS
+theme:
+  name: gitbook
+plugins: []
+nav:
+    - Home: index.md
+    - Model Builder: 
+        - 'Lekce 1: Tvorba modelu': 'lekce1.md'
+        - 'Lekce 2: Uživatelské rozhraní': 'lekce2.md'
+    - Python: 'lekce1.md'
+    - ArcPy: 'lekce1.md'
