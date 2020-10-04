@@ -1,6 +1,6 @@
 ## O mně
 
-<img src="images/profilovka_small.jpg" style="zoom:25%;" />
+![](images\profilovka_small.jpg)
 
 Ing. Vojtěch Barták, PhD.
 
