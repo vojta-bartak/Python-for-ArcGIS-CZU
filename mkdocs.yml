@@ -1,4 +1,5 @@
 site_name: Python pro ArcGIS
+repo_url: https://github.com/vojta-bartak/Python-for-ArcGIS-CZU
 theme:
   name: gitbook
 plugins: []
