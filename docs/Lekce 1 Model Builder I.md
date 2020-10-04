@@ -1,4 +1,4 @@
-# Lekce 1: Grafické programování v aplikaci Model Builder
+# (Lekce 1: Grafické programování v aplikaci Model Builder
 
 *(c) Vojtěch Barták, FŽP ČZU Praha, 2020/2021*
 
@@ -83,7 +83,7 @@ Nyní zbývá poslední krok, "pomocí zonální mapové algebry spočítat rela
 
 První z uvedených kroků můžeme realizovat např. reklasifikací (ArcToolbox -> Spatial Analyst -> Reclass -> *Reclassify*) nebo nástrojem *Equal To* (ArcToolbox -> Spatial Analyst -> Math -> Logical). Druhá možnost je jednodušší, proto ji použijeme. Lesy jsou v rastru krajinného pokryvu reprezentovány hodnotou 3, proto bude rastr nástrojem *Equal To* porovnán právě s hodnotou 3:
 
-<img src="images/image-20200917204602513.png" alt="image-20200917204602513" style="zoom:50%;" />
+![](images/image-20200917204602513.png)
 
 Výsledný model tedy bude vypadat následovně:
 
@@ -91,7 +91,7 @@ Výsledný model tedy bude vypadat následovně:
 
 Po uložení a spuštění modelu obdržíme výslednou DBF tabulku, z které plyne, že procentuální zastoupení lesů v pásmu 300 m kolem železnic je v okrese Jindřichův Hradec cca 30%:
 
-<img src="images/image-20200917211249427.png" alt="image-20200917211249427" style="zoom:67%;" />
+![](images/image-20200917211249427.png)
 
 ## B. Řešení pro všechny okresy
 
@@ -105,7 +105,7 @@ Výsledný model:
 
 a výsledek:
 
-<img src="images/image-20200917212701242.png" alt="image-20200917212701242" style="zoom: 67%;" />
+![](images/image-20200917212701242.png)
 
 Ihned vidíme, že nejvyšší zastoupení lesů kolem tratí má (nepřekvapivě) okres Prachatice, a to 51%.
 
@@ -146,7 +146,7 @@ Nyní nezbývá než model spustit a prohlédnout si výsledné tabulky.
 
 Vytvořený model lze snadno exportovat do skriptu v Pythonu:
 
-<img src="images/image-20200918163344664.png" alt="image-20200918163344664" style="zoom: 50%;" />
+![](images/image-20200918163344664.png)
 
 Tím se uloží soubor s koncovkou .py. Jde o obyčejný textový soubor, který po otevření např. v poznámkovém bloku vypadá takto:
 
