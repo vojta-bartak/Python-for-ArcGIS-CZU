@@ -1,4 +1,6 @@
 site_name: Python pro ArcGIS
+site_author: Vojta Barták
+copyright: FŽP ČZU Praha
 repo_url: https://github.com/vojta-bartak/Python-for-ArcGIS-CZU
 theme:
   name: gitbook
@@ -8,5 +10,5 @@ nav:
     - Model Builder: 
         - 'Lekce 1: Tvorba modelu': 'lekce1.md'
         - 'Lekce 2: Uživatelské rozhraní': 'lekce2.md'
-    - Python: 'lekce1.md'
-    - ArcPy: 'lekce1.md'
+    - O mě...: about_me.md
+    - 
