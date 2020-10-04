@@ -1,6 +1,5 @@
 site_name: Python pro ArcGIS
 site_author: Vojta Barták
-copyright: FŽP ČZU Praha
 repo_url: https://github.com/vojta-bartak/Python-for-ArcGIS-CZU
 theme:
   name: gitbook
