@@ -91,13 +91,13 @@ Theme by GitBook
 
 
 
-<h1 id="lekce-1-graficke-programovani-v-aplikaci-model-builder">Lekce 1: Grafické programování v aplikaci Model Builder</h1>
+<h1 id="lekce-1-graficke-programovani-v-aplikaci-model-builder">(Lekce 1: Grafické programování v aplikaci Model Builder</h1>
 <p><em>(c) Vojtěch Barták, FŽP ČZU Praha, 2020/2021</em></p>
 <p>Tato lekce je zaměřena na prohloubení dovedností s automatizací prostorových úloh pomocí vestavěné aplikace systému ArcGIS <em>Model Builder</em>. Pomocí jednoduchého grafického řetězení nástrojů a vrstev nám tato aplikace zprostředkuje bezbolestný úvod do programátorského myšlení. Na lekci bezprostředně navazuje lekce 2, ve které se naučíte vytvořit ke svému modelu uživatelské rozhraní. V dalších lekcí pak již Model Builder používat nebudeme, neboť jej nahradíme mnohem mocnějším nástrojem: programovacím jazykem Python.</p>
 <p>Lekce předpokládá znalost základů GIS a prostředí ArcGIS na úrovni předmětů GIS 1 a GIS 2, včetně základního ovládání aplikace Model Builder. (Pokud něco z uvedeného nesplňujete, nezoufejte, třeba zjistíte, že vám potřebné znalosti sami "dojdou".)</p>
 <div class="toc">
 <ul>
-<li><a href="#lekce-1-graficke-programovani-v-aplikaci-model-builder">Lekce 1: Grafické programování v aplikaci Model Builder</a><ul>
+<li><a href="#lekce-1-graficke-programovani-v-aplikaci-model-builder">(Lekce 1: Grafické programování v aplikaci Model Builder</a><ul>
 <li><a href="#zakladni-uloha">Základní úloha</a></li>
 <li><a href="#data">Data</a></li>
 <li><a href="#a-reseni-pro-pevne-dany-okres">A. Řešení pro pevně daný okres</a></li>
@@ -164,18 +164,18 @@ Theme by GitBook
 <li>Nástrojem <em>Zonal Statistics as Table</em> (ArcToolbox -&gt; Spatial Analyst -&gt; Zonal) spočítáme v obalové zóně průměr z výše uvedeného rastru. (Uvědomte si, že průměrem z nul a jedniček v obalové zóně dostaneme relativní zastoupení jedniček, tj. vlastně relativní plochu lesů, na škále 0, 1. Relativní plochu v procentech pak dostaneme jednoduše vynásobením stem.)</li>
 </ol>
 <p>První z uvedených kroků můžeme realizovat např. reklasifikací (ArcToolbox -&gt; Spatial Analyst -&gt; Reclass -&gt; <em>Reclassify</em>) nebo nástrojem <em>Equal To</em> (ArcToolbox -&gt; Spatial Analyst -&gt; Math -&gt; Logical). Druhá možnost je jednodušší, proto ji použijeme. Lesy jsou v rastru krajinného pokryvu reprezentovány hodnotou 3, proto bude rastr nástrojem <em>Equal To</em> porovnán právě s hodnotou 3:</p>
-<p><img src="images/image-20200917204602513.png" alt="image-20200917204602513" style="zoom:50%;" /></p>
+<p><img alt="" src="../images/image-20200917204602513.png" /></p>
 <p>Výsledný model tedy bude vypadat následovně:</p>
 <p><img alt="" src="../images/model1_final_zonal.png" /></p>
 <p>Po uložení a spuštění modelu obdržíme výslednou DBF tabulku, z které plyne, že procentuální zastoupení lesů v pásmu 300 m kolem železnic je v okrese Jindřichův Hradec cca 30%:</p>
-<p><img src="images/image-20200917211249427.png" alt="image-20200917211249427" style="zoom:67%;" /></p>
+<p><img alt="" src="../images/image-20200917211249427.png" /></p>
 <h2 id="b-reseni-pro-vsechny-okresy">B. Řešení pro všechny okresy</h2>
 <p>Pokud chceme stejnou úlohu řešit pro všechny okresy, odpadne nutnost na začátku vybírat okres nástrojem <em>Make Feature Layer</em> a ořezávat jím železniční tratě. Abychom nicméně rozlišili, které části tratí patří do kterých okresů, musíme spočítat průnik obou vrstev nástrojem <em>Intersect</em>. Výsledná vrstva bude obsahovat úseky tratí "rozřezané" hranicemi okresů a v atributech těchto úseků bude i informace, do kterého okresu který úsek patří. </p>
 <p>Pokud následně v nástroji <em>Buffer</em> nastavíme parametr <em>Dissolve Type</em> jako "LIST" a v seznamu polí <em>Dissolve Fields</em> zaškrtneme pole s názvy okresů ("NAZ_LAU1"), bude výsledkem jeden (multi)polygon pro každý okres. Vrstvu těchto polygonů (obalových zón) pak použijeme jako <em>Input Zone Data</em> v nástroji <em>Zonal Statistics As Table</em>. </p>
 <p>Výsledný model:</p>
 <p><img alt="" src="../images/model2_final.png" /></p>
 <p>a výsledek:</p>
-<p><img src="images/image-20200917212701242.png" alt="image-20200917212701242" style="zoom: 67%;" /></p>
+<p><img alt="" src="../images/image-20200917212701242.png" /></p>
 <p>Ihned vidíme, že nejvyšší zastoupení lesů kolem tratí má (nepřekvapivě) okres Prachatice, a to 51%.</p>
 <h2 id="c-reseni-s-iteraci-pres-tridy-krajinneho-pokryvu">C. Řešení s iterací přes třídy krajinného pokryvu</h2>
 <p>Pokud budeme chtít naši analýzu provést pro všechny třídy krajinného pokryvu, máme dvě možnosti:</p>
@@ -202,7 +202,7 @@ Theme by GitBook
 <p>(Pokud vás napadlo, že by bylo skvělé nemít výstup v pěti různých tabulkách, ale vytvořit jen jednu tabulku, ve které by jednotlivé krajinné typy byly ve sloupcích, podívejte se na úlohy 1 a 2 na konci lekce. Úloha 1 by v takový výstup měla přirozeně vyústit. Úloha 2 se oproti tomu může ukázat jako docela složitá. Ale nebojte,  pokud jí nezvládnete: až se naučíte místo sestavování modelů psát skripty v Pythonu, bude vše mnohem jednodušší!)</p>
 <h2 id="export-modelu-do-pythonu">Export modelu do Pythonu</h2>
 <p>Vytvořený model lze snadno exportovat do skriptu v Pythonu:</p>
-<p><img src="images/image-20200918163344664.png" alt="image-20200918163344664" style="zoom: 50%;" /></p>
+<p><img alt="" src="../images/image-20200918163344664.png" /></p>
 <p>Tím se uloží soubor s koncovkou .py. Jde o obyčejný textový soubor, který po otevření např. v poznámkovém bloku vypadá takto:</p>
 <pre><code># -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------------
