@@ -471,8 +471,9 @@ C:\Users\Muj_pocitac\Documents
 </code></pre>
 
 <p>Vedle výše uvedených možností, jak pracovat se seznamy pomocí matematických operátorů a řezů, existují v Pythonu ještě tzv. <em>metody seznamů</em>, což jsou funkce, které se volají pomocí jména seznamu, tečky a jména dané funkce:</p>
-<pre><code class="python"># Přidání nového prvku na konec seznamu metodou append
-&gt;&gt;&gt; x = [1,2,3]
+<pre><code class="python">&gt;&gt;&gt; x = [1,2,3]
+
+# Přidání nového prvku na konec seznamu metodou append
 &gt;&gt;&gt; x.append(&quot;ahoj&quot;)
 &gt;&gt;&gt; x
 [1, 2, 3, 'ahoj']
@@ -509,6 +510,54 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; x.reverse()
 &gt;&gt;&gt; x
 ['snidane', 'zapalovac', 'kafe', 'rohlik', 'ahoj']
+</code></pre>
+
+<p>Vedle metod seznamů jsou v Pythonu k dispozici další vestavěné funkce, pomocí nichž lze se seznamy pracovat (tyto funkce lze stejně dobře použít i pro řetězce):</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+
+# Zjištění délky seznamu funkcí len
+&gt;&gt;&gt; len(a)
+3
+
+# Zjištění nejmenšího a největšího prvku seznamu funkcí min a max
+&gt;&gt;&gt; min(a)
+1
+&gt;&gt;&gt; max(a)
+3
+
+# Umazání části seznamu funkcí del
+&gt;&gt;&gt; a = [1,2,3,4,5]
+&gt;&gt;&gt; del(a[2])
+&gt;&gt;&gt; a
+[1, 2, 4, 5]
+&gt;&gt;&gt; del a[:2]
+&gt;&gt;&gt; a
+[4, 5]
+
+</code></pre>
+
+<p>Do pythonovského seznamu lze vkládat i jiné seznamy (tzv. <em>vnořené</em> <em>seznamy</em>) a vytvořit tak seznam seznamů, příp. seznam seznamů seznamů atd.:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1, &quot;ahoj&quot;, [1,2,3], [&quot;a&quot;,&quot;b&quot;]]
+&gt;&gt;&gt; a[2]
+[1, 2, 3]
+&gt;&gt;&gt; a[3]
+['a', 'b']
+&gt;&gt;&gt; a[3][0]
+'a'
+</code></pre>
+
+<p>Hloubka vnoření může být značná (prakticky neomezená):</p>
+<pre><code class="python">&gt;&gt;&gt; a = [[[[[1]]]]]
+&gt;&gt;&gt; a[0]
+[[[[1]]]]
+&gt;&gt;&gt; a[0][0]
+[[[1]]]
+&gt;&gt;&gt; a[0][0][0]
+[[1]]
+&gt;&gt;&gt; a[0][0][0][0]
+[1]
+&gt;&gt;&gt; a[0][0][0][0][0]
+1
 </code></pre>
 
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
