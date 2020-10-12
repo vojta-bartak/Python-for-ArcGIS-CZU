@@ -125,7 +125,7 @@ Theme by GitBook
 <ul>
 <li>Název začíná písmenem anglické abecedy nebo podtržítkem</li>
 <li>Následuje libovolná posloupnost číslic, písmen angl. abecedy a podtržítek</li>
-<li>Nesmí jít o klíčové slovo jazyka (např. <code>and</code> nebo <code>if</code></li>
+<li>Nesmí jít o klíčové slovo jazyka (např. <code>and</code> nebo <code>if</code>)</li>
 <li>Malá a velká písmena se <strong>rozlišují</strong></li>
 </ul>
 <p>Python umožňuje i následující podivnost (vytvoření dvou či více proměnných najednou):</p>
@@ -139,15 +139,15 @@ Theme by GitBook
 <blockquote>
 <p><strong>Úkol 1.</strong> Zkuste si vytvořit několik proměnných různých názvů a ověřit jejich výše uvedené chování.</p>
 </blockquote>
-<p>Vytvořenou proměnnou lze také smazat, a to pomocí příkazu del:</p>
+<p>Vytvořenou proměnnou lze také smazat, a to pomocí příkazu <code>del</code>:</p>
 <pre><code class="python">&gt;&gt;&gt; x = 5
 &gt;&gt;&gt; x
 5
 &gt;&gt;&gt; del x
 &gt;&gt;&gt; x
 Traceback (most recent call last):
-    File &quot;&lt;pyshell#5&gt;&quot;, line 1, in &lt;module&gt;
-        x
+  File &quot;&lt;pyshell#5&gt;&quot;, line 1, in &lt;module&gt;
+    x
 NameError: name 'x' is not defined
 </code></pre>
 
@@ -287,8 +287,8 @@ o retezce budu delat rezy:
 <pre><code class="python">&gt;&gt;&gt; a = &quot;kost&quot;
 &gt;&gt;&gt; a[0] = &quot;m&quot;
 Traceback (most recent call last):
-    File &quot;&lt;pyshell#57&gt;&quot;, line 1, in &lt;module&gt;
-        a[0] = &quot;m&quot;
+  File &quot;&lt;pyshell#57&gt;&quot;, line 1, in &lt;module&gt;
+    a[0] = &quot;m&quot;
 TypeError: 'str' object does not support item assignment
 </code></pre>
 
@@ -512,6 +512,19 @@ C:\Users\Muj_pocitac\Documents
 </code></pre>
 
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
+<p><em>n</em>-tice (angl. <em>tuple</em>) je struktura ve všem podobná seznamům, až na to, že ji nelze měnit pomocí indexů. Oproti seznamům se zapisuje pomocí <em>kulatých</em> závorek:</p>
+<pre><code class="python">&gt;&gt;&gt; a = (1,2,3)
+&gt;&gt;&gt; a[1]
+2
+&gt;&gt;&gt; a[1] = 4
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#43&gt;&quot;, line 1, in &lt;module&gt;
+    a[1] = 4
+TypeError: 'tuple' object does not support item assignment
+</code></pre>
+
+<p>Důvod, proč existují <em>n</em>-tice a čím se v praxi liší od seznamů, si vysvětlíme později.</p>
+<p>Slovníky snad někdy příště...</p>
 <h2 id="pravdivostni-hodnoty">Pravdivostní hodnoty</h2>
 <p>Pravdivostní hodnoty jsou jak známo dvě: <em>pravda</em> (anglicky <em>true</em>) a <em>nepravda</em> (anglicky <em>false</em>). Většina programovacích jazyků, Python nevyjímaje, disponuje zvláštním datovým typem pro reprezentaci těchto dvou hodnot. Většinou se takovému datovému typu říká <em>boolovský</em> (anglicky <em>Boolean</em>), na počest slavného britského matematika 19. století George Boola, který se významně zasloužil o rozvoj matematické logiky a někdy bývá označován i za praotce informatiky.</p>
 <p>V pythonu je datový typ <code>bool</code> přímo odvozen od datového typu <code>int</code>, tedy celých čísel. Hodnota <code>True</code> (pravda) je tak vlastně ve skutečnosti celočíselná hodnota <code>1</code> (a může být jedničkou i zastoupena), hodnotě <code>False</code> zase odpovídá číslo <code>0</code> (a rovněž může být nulou zastoupena). Důsledkem toho je např. to, že hodnoty <code>True</code> a <code>False</code> mohou být součástí aritmetických výrazů s čísly:</p>
@@ -562,7 +575,7 @@ True
 False
 </code></pre>
 
-<h2 id="shrnuti">"Shrnutí</h2>
+<h2 id="shrnuti">Shrnutí</h2>
 <p>V této kapitole jste se seznámili s pravidly práce s proměnnými a se základními datovými typy jazyka Python.</p>
 <h2 id="ulohy">Úlohy</h2>
 
