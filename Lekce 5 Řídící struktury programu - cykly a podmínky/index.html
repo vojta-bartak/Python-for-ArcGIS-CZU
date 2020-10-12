@@ -92,8 +92,154 @@ Theme by GitBook
 
 
 <h1 id="lekce-5-ridici-struktury-programu-cykly-a-podminky">Lekce 5: Řídící struktury programu - cykly a podmínky</h1>
-<h2 id="blokova-struktura-kodu">Bloková struktura kódu</h2>
+<p>Řídícími strukturami programu (též struktury řízení chodu programu) se rozumí syntaktické struktury jazyka, umožňující podmíněné a opakované provádění posloupnosti příkazů.</p>
+<h2 id="logicke-vyrazy">Logické výrazy</h2>
+<p><em>Logický výraz</em> (jinak též <em>pravdivostní výrok</em>) je jakýkoli výrok, kterému lze jednoznačně přisoudit pravdivostní hodnotu, tj. určit, zda je pravdivý či nepravdivý. Přisouzení pravdivostní hodnoty danému výrazu se označuje jako jeho <em>vyhodnocení</em>. Logické výrazy se v programování používají všude tam, kde je třeba provézt nějaký příkaz (či sérii příkazů) pouze tehdy, je-li splněna nějaká podmínka (takovým příkazům se říká <em>podmíněné příkazy</em>). Podmínka pak má podobu logického výrazu, přičemž její splnění/nesplnění je dáno pravdivostní hodnotou tohoto výrazu.</p>
+<p>Porovnáním dvou hodnot lze vytvořit jednoduchý logický výraz, jehož pravdivostní hodnota je dána pravdivostí příslušného tvrzení:</p>
+<pre><code class="python">&gt;&gt;&gt; 3 &lt; 5
+True
+&gt;&gt;&gt; 3 &gt; 5
+False
+</code></pre>
+
+<p>Porovnávat lze i textové řetězce. Porovnání je pak založeno na abecedním pořadí (tj. na tzv. <em>lexikografickém</em> <em>uspořádání</em>), přičemž velká písmena mají přednost před malými:</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;ahoj&quot; &lt; &quot;svete&quot;
+True
+&gt;&gt;&gt; &quot;Ahoj&quot; &lt; &quot;AHOJ&quot;
+False
+</code></pre>
+
+<p>Rovnost se testuje operátorem <code>==</code> (pozor, nezaměňovat s operací <code>=</code>, která přiřazuje hodnotu proměnné!):</p>
+<pre><code class="python">&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; a == 5
+True
+</code></pre>
+
+<p>Nerovnost se testuje buď operátorem <code>!=</code> nebo <code>&lt;&gt;</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; a != 5
+False
+&gt;&gt;&gt; a &lt;&gt; 3
+True
+</code></pre>
+
+<p>Poněkud složitější je porovnávací operátor <code>is</code>. U čísel a řetězců testuje rovnost stejně jako <code>==</code>, ale u složitějších objektů, jako jsou seznamy, testuje totožnost objektů (tj. zda se jedná o tentýž objekt se shodnou adresou v paměti):</p>
+<pre><code class="python">&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; b = 3
+&gt;&gt;&gt; a is b
+True
+&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; b = [1,2,3]
+&gt;&gt;&gt; a is b
+False
+&gt;&gt;&gt; a = b
+&gt;&gt;&gt; a is b
+True
+</code></pre>
+
+<p>Opakem <code>is</code> je operátor <code>is not</code>.</p>
+<p>Operátor <code>in</code> testuje, zda je určitý prvek v daném seznamu, případně určitý znak v daném řetězci:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; 2 in a
+True
+&gt;&gt;&gt; &quot;a&quot; in &quot;ahoj&quot;
+True
+</code></pre>
+
+<p>Jeho opakem je <code>not in</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; 4 not in a
+True
+&gt;&gt;&gt; &quot;z&quot; not in &quot;ahoj&quot;
+True
+</code></pre>
+
+<p>Složené logické výroky lze z jednoduchých vytvářet pomocí tzv. <em>logických operátorů</em> <code>and</code>, <code>or</code> a <code>not</code> (mluvíme pak o tzv. <em>logických operacích</em> s logickými výrazy). Význam těchto operátorů je všeobecně známý z logiky, proto výklad omezíme jen na malou ukázku. Např. pokud chceme otestovat, zda je hodnota nějaké číselné proměnné obsažena v určitém seznamu <em>a zároveň</em> zda je větší než 3, lze to provést pomocí operátoru <code>and</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam = [1,2,3,4]
+&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; a in seznam and a &gt; 3
+True
+</code></pre>
+
+<p>Struktura složeného výrazu může být libovolně složitá, obsahující libovolné množství dílčích jednoduchých i složitých výrazů. Pokud jsou dílčí výrazy rovněž složené, je často nutné zdůraznit strukturu výrazu závorkami:</p>
+<pre><code class="python">&gt;&gt;&gt; a in seznam and (a &gt; 3 or a &lt; -3)
+True
+</code></pre>
+
+<p>Umístění závorek se řídí známou prioritou operací: nejprve se vždy vyhodnocuje <code>not</code>, pak <code>and</code>, posléze <code>or</code> (viz tabulku níže). Závorky bylo možné psát i v předchozím případě (nicméně to nebylo nutné):</p>
+<pre><code class="python">&gt;&gt;&gt; (a in seznam) and (a &gt; 3)
+True
+</code></pre>
+
 <h2 id="podminene-prikazy">Podmíněné příkazy</h2>
+<p>Příkaz se nazývá <em>podmíněný</em>, je-li jeho provedení vázáno splněním nějaké podmínky. Podmínkou přitom může být jakýkoli logický výraz, přičemž splnění podmínky je dáno jeho pravdivostní hodnotou. Syntaxe podmíněných příkazů v Pythonu je značně intuitivní, neboť kopíruje syntaxi běžného jazyka: pokud (anglicky <em>if</em>) platí podmínka, proveď následující příkaz(y):</p>
+<pre><code class="python">if podmínka: příkaz
+</code></pre>
+
+<p>V případě více příkazů:</p>
+<pre><code class="python">if podmínka:
+    příkaz 1
+    příkaz 2
+    příkaz 3
+    ...
+</code></pre>
+
+<p>Vidíme zde blokovou strukturu kódu, založenou na povinném odsazování. Příkazy vázané na splnění podmínky jsou vůči řádku s klíčovým slovem <code>if</code> odsazené o jednu úroveň (= čtyři mezery) doprava. Jakýkoli příkaz odsazený na úroveň slova <code>if</code> již nebude s podmínkou nijak souviset, tj. provede se bez ohledu na její splnění či nesplnění.</p>
+<p>Uveďme příklad:</p>
+<pre><code class="python">&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; b = 6
+&gt;&gt;&gt; if a &lt; 6: print a
+
+5
+&gt;&gt;&gt; if b &lt; 6: print b
+
+&gt;&gt;&gt; if a &lt; b:
+    print a
+    print b
+    print a,&quot;je mensi nez&quot;,b
+
+5
+6
+5 je mensi nez 6
+</code></pre>
+
+<blockquote>
+<p>Pokud zapisujeme podmíněný příkaz do okna Python Shell, je po ukončení zápisu třeba stisknout klávesu <code>Enter</code> hned dvakrát. Druhým stisknutím klávesy <code>Enter</code> dáváme interpretu najevo, že jsme již skončili se zápisem a celý blok může být interpretován (tj. proveden). To je důvod, proč za posledním řádkem zápisu je vždy jeden prázdný řádek.</p>
+</blockquote>
+<p>Vedle specifikace, co se má provézt za příkazy v případě splnění nějaké podmínky, lze také programu říct, co má provézt za příkazy, pokud naopak podmínka splněna není. Syntaxe je opět intuitivní: <em>pokud</em> (<em>if</em>) platí podmínka, proveď následující příkaz(y), <em>jinak</em> (anglicky <em>else</em>) proveď alternativní příkaz(y):</p>
+<pre><code class="python">if podmínka:
+    příkaz 1
+    příkaz 2
+else:
+    příkaz 3
+    příkaz 4
+</code></pre>
+
+<p>Konkrétním příklad tentokrát zapíšeme pomocí skriptu:</p>
+<pre><code class="python">a = 5
+b = 6
+if a == b:
+    print(str(a) + &quot; se rovna &quot; + str(b))
+else:
+    print(str(a) + &quot; se nerovna &quot; + str(b))
+</code></pre>
+
+<p>Po spuštění skriptu se v okně Python Shell vypíše:</p>
+<pre><code class="python">5 se nerovna 6
+</code></pre>
+
+<p>Často také nastává případ, že potřebujeme postupně otestovat více různých podmínek, při jejichž splnění se vždy má provést odpovídající příkazy. Struktura zápisu je: <em>pokud</em> platí podmínka 1, proveď příkaz(y) 1, <em>jinak</em> <em>pokud</em> platí podmínka 2, proveď příkaz(y) 2, <em>jinak</em> proveď příkaz(y) 3. Podmínek je přitom možné za sebe zřetězit libovolné množství a celý zápis může, ale nemusí být ukončen závěrečnou částí <em>else</em>, za níž následují příkazy provedené v případě, kdy není splněna žádná z předchozích podmínek.</p>
+<p>Jednou možností, jak výše popsané schéma realizovat, je následující:</p>
+<pre><code class="python">a = 5
+b = 6
+if a == b:
+print a,&quot;se rovna&quot;,b
+else:
+if a &lt; b:
+print a,&quot;je mensi nez&quot;,b
+else:
+print a,&quot;je vetsi nez&quot;,b
+</code></pre>
+
 <h2 id="cyklus-for">Cyklus <code>for</code></h2>
 <h2 id="cyklus-while">Cyklus <code>while</code></h2>
 <h2 id="pythonovske-triky">Pythonovské triky</h2>
