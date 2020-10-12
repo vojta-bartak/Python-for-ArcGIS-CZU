@@ -114,6 +114,9 @@ Theme by GitBook
 </blockquote>
 <p>Prostředí IDLE lze spustit z programové nabídky systému Windows. Po spuštění programu IDLE se otevře interaktivní okno nazvané Python Shell.</p>
 <p><img alt="image-20201004185152083" src="../images/image-20201004185152083.png" /></p>
+<blockquote>
+<p><strong>Úkol 1.</strong> Popsaným způsobem otevřete program IDLE.</p>
+</blockquote>
 <p>Okno Python Shell slouží k vykonávání jednotlivých příkazů a ke spouštění skriptů. Symbol <code>&gt;&gt;&gt;</code> je tzv. <em>výzva příkazového řádku</em>, za kterou je možné psát příkaz. Po stisknutí klávesy <code>Enter</code> je příkaz poslán do <em>překladače</em> a výsledek se vypíše na další řádek:</p>
 <pre><code class="python">&gt;&gt;&gt; 1 + 2
 3
@@ -143,9 +146,31 @@ Theme by GitBook
 - <strong>Historie</strong> <strong>příkazů</strong>. Po stisknutí klávesové zkratky <code>Alt</code>+<code>P</code> (z anglického „previous“) vyvoláme poslední spouštěný příkaz, při opakovaném stisknutí této zkratky procházíme historii příkazů dozadu. Obdobně stisknutím klávesové zkratky <code>Alt</code>+<code>N</code> (z anglického „next“) můžeme procházet v historii příkazů směrem dopředu. Jinou možností, jak znovu vyvolat předchozí příkaz, je umístit na něj kurzor a stisknout enter. Tím je daný příkaz automaticky vypsán na aktuální řádek a dalším stisknutím enter je spuštěn.
 - <strong>Ukončení</strong> <strong>překladu</strong>. Chceme-li přerušit aktuální vykonávání příkazu, stiskneme <code>Ctrl</code>+<code>C</code>. (Hodí se tehdy, trvá-li výpočet z nějakého důvodu příliš dlouho.)
 - <strong>Našeptávání</strong>. Po napsání libovolné posloupnosti znaků a stisknutí klávesové zkratky <code>Ctrl</code>+<code>Space</code> se otevře seznam všech dostupných funkcí, proměnných a slov jazyka začínajících danými písmeny. Z nich je možné vybírat pomocí šipek nahoru a dolu.</p>
+<blockquote>
+<p><strong>Úkol 2.</strong> V okně Python Shell vytvořte několik proměnných a vyzkoušejte jednoduché aritmetické operace. Zkuste procházet historii příkazů.</p>
+</blockquote>
 <h2 id="psani-a-spousteni-skriptu">Psaní a spouštění skriptů</h2>
+<p>Skript je samostatný textový soubor s kódem, který je možné spustit najednou. Skript je možné psát v libovolném textovém editoru, je nicméně nutné jej uložit s koncovkou <code>.py</code>, aby překladač (např. Python Shell) rozeznal, že se jedná o kód v jazyce Python.</p>
+<p>V programu IDLE je možné sát skripty ve speciálně upraveném textovém editoru, který oproti běžným textovým editorům skýtá některé výhody - např. se kód vybarvuje tak, aby se v něm dalo lépe orientovat. Zároveň lze vytvořený skript ihned poslat do překladače a spustit.</p>
+<blockquote>
+<p><strong>Úkol 3.</strong> Otevřete nový skript v programu IDLE pomocí <em>File -&gt; New File</em>, případně pomocí <code>Ctrl</code>+<code>N</code>. Do skriptu napište kód:</p>
+<p><code>python
+a = "Ahoj"
+b = "Světe"
+print(a + " " + b)</code></p>
+<p>Skript uložte a pomocí klávesy <code>F5</code>, případně pomocí <em>Run -&gt; Run Module</em> jej spusťte.</p>
+</blockquote>
+<p>Program IDLE lze spouštět i pomocí uloženého skriptu.</p>
+<blockquote>
+<p><strong>Úkol 4.</strong> Zavřete program IDLE. V prohlížeči souborů vyhledejte vytvořený skript, klikněte na něj pravým tlačítkem myši a zvolte <em>Edit with IDLE</em>.</p>
+</blockquote>
 <h2 id="python-window-v-arcmap">Python Window v ArcMap</h2>
+<p>Python je integrovaný do programu ArcMap několika způsoby. Jedním z nich je i interaktivní okno Python Window, jakási obdoba překladače Python Shell. V tomto okně můžeme volat libovolné příkazy Pythonu, zároveň však (jak uvidíme později) umožňuje integrovat do příkazů vrstvy v dané chvíli nahrané v Table Of Contents. Zároveň se výstupní geodata z analýz, provedených v Python Window, automaticky vkládají jako vrstvy do Table Of Contents.</p>
+<blockquote>
+<p><strong>Úkol 5.</strong> V programu ArcMap otevřete Python Window a vyzkoušejte si spustit jednoduché příkazy, které jste spouštěli v okně Python Shell.</p>
+</blockquote>
 <h2 id="shrnuti">Shrnutí</h2>
+<p>V této lekci jste se seznámili s prostředím programu IDLE, zkusili si napsat a spustit jednoduché příkazy v okně Python Shell a napsat a spustit jednoduchý skript. Zároveň jste se seznámili s oknem Python Window v programu ArcMap.</p>
 <h2 id="ulohy">Úlohy</h2>
 
 

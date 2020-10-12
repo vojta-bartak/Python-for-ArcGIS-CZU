@@ -93,9 +93,253 @@ Theme by GitBook
 
 <h1 id="lekce-4-promenne-a-datove-typy">Lekce 4: Proměnné a datové typy</h1>
 <h2 id="promenne">Proměnné</h2>
+<p>V Pythonu je proměnná odkazem na nějaký objekt v operační paměti. Tento objekt může být různého typu (neboli třídy): může jít o číslo, o textový řetězec, nebo o cokoli jiného (viz dále). Proměnná má nějaký název (zvolený námi) a nějakou hodnotu. Hodnotu do proměnné přiřazujeme operátorem <code>=</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; a = 5
+</code></pre>
+
+<p>Datový typ proměnné lze zjistit funkcí <em>type</em>:</p>
+<pre><code class="python">&gt;&gt;&gt; type(a)
+&lt;type 'int'&gt;
+&gt;&gt;&gt; b = &quot;Ahoj světe&quot;
+&gt;&gt;&gt; type(b)
+&lt;type 'str'&gt;
+</code></pre>
+
+<blockquote>
+<p>Pojem <em>funkce</em> si důkladně rozebereme později. Zatím stačí chápat, že při volání nějaké funkce vždy napíšeme její název a do závorky její <em>argumenty</em>, tj. nějaké hodnoty, se kterými daná funkce něco dělá. Funkce pak většinou něco tzv. <em>vrací</em>, tj. jejím výsledkem je nějaká hodnota (objekt). Kdykoli tedy vidíte za nějakým názvem složené závorky, máte co do činění s funkcí.</p>
+</blockquote>
+<p>Do proměnné lze "uložit" hodnotu nějaké jiné proměnné:</p>
+<pre><code class="python">&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; b
+5
+</code></pre>
+
+<p>Je důležité však mít na paměti, že změníme-li hodnotu původní proměnné, hodnota nové proměnné zůstává nezměněna (tato proměnná totiž odkazuje stále na původní objekt - v našem případě číslo 5, kdežto původní proměnná už odkazuje na jiný objekt - např. číslo 100):</p>
+<pre><code class="python">&gt;&gt;&gt; a = 100
+&gt;&gt;&gt; b
+5
+</code></pre>
+
+<p>Proměnné mohou mít téměř libovolné názvy, je však nutné dodržet následující pravidla:</p>
+<ul>
+<li>Název začíná písmenem anglické abecedy nebo podtržítkem</li>
+<li>Následuje libovolná posloupnost číslic, písmen angl. abecedy a podtržítek</li>
+<li>Nesmí jít o klíčové slovo jazyka (např. <code>and</code> nebo <code>if</code></li>
+<li>Malá a velká písmena se <strong>rozlišují</strong></li>
+</ul>
+<blockquote>
+<p><strong>Úkol 1.</strong> Zkuste si vytvořit několik proměnných různých názvů a ověřit jejich výše uvedené chování.</p>
+</blockquote>
+<p>Vytvořenou proměnnou lze také smazat, a to pomocí příkazu del:</p>
+<pre><code class="python">&gt;&gt;&gt; x = 5
+&gt;&gt;&gt; x
+5
+&gt;&gt;&gt; del x
+&gt;&gt;&gt; x
+Traceback (most recent call last):
+    File &quot;&lt;pyshell#5&gt;&quot;, line 1, in &lt;module&gt;
+        x
+NameError: name 'x' is not defined
+</code></pre>
+
 <h2 id="cisla">Čísla</h2>
+<p>V Pythonu jsou dva základní datové typy pro čísla. Jsou to celá čísla (anglicky <em>integer</em>, zkráceně <em>int</em>):</p>
+<pre><code class="python">&gt;&gt;&gt; 56
+56
+&gt;&gt;&gt; -32586
+-32586
+</code></pre>
+
+<p>a čísla s desetinnou čárkou (anglicky <em>floating point number</em>, zkráceně <em>float</em>):</p>
+<pre><code class="python">&gt;&gt;&gt; 5.32
+5.32
+&gt;&gt;&gt; -6e-7
+-6e-7
+&gt;&gt;&gt; -5.0E-4
+-0.0005
+</code></pre>
+
+<p>S čísly lze provádět běžné matematické operace pomocí aritmetických operátorů:</p>
+<pre><code class="python">&gt;&gt;&gt; 3 + 2 # Sčítání
+5
+&gt;&gt;&gt; 3 – 2 # Odčítání
+1
+&gt;&gt;&gt; 3 * 2 # Násobení
+6
+&gt;&gt;&gt; 3 / 2 # Celočíselní dělení celých čísel
+1
+&gt;&gt;&gt; 3.0 / 2 # Dělení
+1.5
+&gt;&gt;&gt; 3.1 // 2 # Celočíselné dělení
+1.0
+&gt;&gt;&gt; 3**2 # Mocnina
+9
+&gt;&gt;&gt; 3 % 2 # Modulo (zbytek po celočíselném dělení)
+1
+</code></pre>
+
+<p>Číselný typ výsledku je vždy určen číselným typem vstupních čísel: jsou-li vstupem pouze celá čísla, je výsledkem celé číslo (při dělení se tedy provede celočíselné dělení); je-li alespoň jeden ze vstupů číslo s desetinnou čárkou, je výsledkem rovněž číslo s desetinnou čárkou.</p>
+<p>Python disponuje řadou vestavěných matematických funkcí (v ukázkou jsou jen některé):</p>
+<pre><code class="python">&gt;&gt;&gt; abs(-5) # Absolutní hodnota
+5
+&gt;&gt;&gt; max(5,3,-5,1) # Maximum
+5
+&gt;&gt;&gt; min(5,3,-5,1) # Minimum
+-5
+&gt;&gt;&gt; pow(2,3) # Mocnina (ekvivalent 2**3)
+8
+&gt;&gt;&gt; round(5.6) # Zaokrouhlení
+6.0
+&gt;&gt;&gt; round(5.627,2) # Zaokrouhlení na dvě desetinná místa
+5.63
+</code></pre>
+
+<p>Další matematické funkce lze nalézt v modulu <code>math</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; import math # Načtení modulu math
+&gt;&gt;&gt; math.pi # Aproximace čísla pí
+3.141592653589793
+&gt;&gt;&gt; math.sqrt(2) # Odmocnina
+1.4142135623730951
+&gt;&gt;&gt; math.log(math.exp(1)) # Logaritmus a exponenciela
+1.0
+</code></pre>
+
+<p>Mezi jednotlivými číselnými typy lze konvertovat:</p>
+<pre><code class="python">&gt;&gt;&gt; a = 5.6
+&gt;&gt;&gt; type(a)
+&lt;type 'float'&gt;
+&gt;&gt;&gt; b = int(a) # Konverze na celé číslo
+&gt;&gt;&gt; b
+5
+&gt;&gt;&gt; type(b)
+&lt;type 'int'&gt;
+&gt;&gt;&gt; c = float(b) # Konverze na číslo s desetinnou čárkou
+&gt;&gt;&gt; c
+5.0
+&gt;&gt;&gt; type(c)
+&lt;type 'float'&gt;
+</code></pre>
+
+<p>Podobně lze konvertovat i mezi jinými datovými typy:</p>
+<pre><code class="python">&gt;&gt;&gt; int(&quot;56&quot;) # Převod textu na celé číslo
+56
+&gt;&gt;&gt; float(&quot;56&quot;) # Převod textu na číslo s desetinnou čárkou
+56.0
+&gt;&gt;&gt; str(56) # Převod čísla na text
+'56'
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 2.</strong> Vyzkoušejte si všechny výše uvedené operace a příkazy.</p>
+</blockquote>
 <h2 id="textove-retezce">Textové řetězce</h2>
-<h2 id="logicke-hodnoty-a-vyrazy">Logické hodnoty a výrazy</h2>
+<p>Textové řetězce (či krátce jen řetězce) se zapisují buď v uvozovkách, nebo v apostrofech:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;Toto je textovy retezec, ktery muze obsahovat znak ',&quot;
+&gt;&gt;&gt; b = 'a toto je retezec, ktery muze obsahovat znak &quot;.'
+&gt;&gt;&gt; print(a); print(b)
+Toto je textovy retezec, ktery muze obsahovat znak ',
+a toto je retezec, ktery muze obsahovat znak &quot;.
+</code></pre>
+
+<p>Třetím způsobem, jak vytvořit řetězec, je použití trojitých uvozovek. Do takového řetězce je pak možné vkládat i více řádků (aniž bychom museli použít speciální znak pro konec řádku):</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;&quot;&quot;Toto je textovy retezec,
+ktery obsahuje
+tri radky&quot;&quot;&quot;
+&gt;&gt;&gt; print a
+Toto je textovy retezec,
+ktery obsahuje
+tri radky
+</code></pre>
+
+<p>Řetězce lze do jisté míry chápat jako posloupnosti jednotlivých znaků. V Pythonu jsou řetězce indexované, to znamená, že lze např. číst přímo konkrétní (třeba pátý) znak:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu cist paty znak:&quot;
+&gt;&gt;&gt; print a[4]
+h
+</code></pre>
+
+<p>Indexování v Pythonu začíná nulou, nikoli jedničkou, proto bylo pro vypsání pátého znaku nutné do hranatých závorek psát index 4.</p>
+<p>Vedle přístupu k jednotlivým znakům lze také pomocí hranatých závorek a indexů vytvářet tzv. <em>řezy</em>, neboli číst pouze určitou část řetězce:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu delat rezy:&quot;
+&gt;&gt;&gt; print a[2:10]
+tohoto r
+&gt;&gt;&gt; print a[:20]
+Z tohoto retezce bud
+&gt;&gt;&gt; print a[7:]
+o retezce budu delat rezy:
+</code></pre>
+
+<p>Tvorba řezů se řídí následujícími pravidly:</p>
+<ul>
+<li>Řez začíná znakem na pozici prvního indexu a končí na pozici před posledním indexem (poslední prvek tedy již není součástí řezu). Řez a <code>[2:10]</code> tak obsahuje třetí až desátý znak.</li>
+<li>Řez s prázdným prvním indexem obsahuje celý původní řetězec od začátku až do znaku na pozici před posledním indexem.</li>
+<li>Řez s prázdným druhým indexem obsahuje celý původní řetězec počínaje znakem na pozici prvního indexu.</li>
+</ul>
+<p>Řetězce (na rozdíl od seznamů) nelze pomocí indexování a řezů přepisovat. Např. pokud bychom chtěli v textu „kost“ změnit první písmeno na „m“, nelze to provést přímo:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;kost&quot;
+&gt;&gt;&gt; a[0] = &quot;m&quot;
+Traceback (most recent call last):
+    File &quot;&lt;pyshell#57&gt;&quot;, line 1, in &lt;module&gt;
+        a[0] = &quot;m&quot;
+TypeError: 'str' object does not support item assignment
+</code></pre>
+
+<p>Řetězce lze sčítat a násobit přirozeným číslem pomocí operátorů <code>+</code> a <code>*</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;Ahoj&quot;
+28
+&gt;&gt;&gt; b = &quot;Svete&quot;
+&gt;&gt;&gt; print a + b
+AhojSvete
+&gt;&gt;&gt; print a + &quot; &quot; + b + &quot;!&quot;
+Ahoj Svete!
+&gt;&gt;&gt; print a*5
+AhojAhojAhojAhojAhoj
+</code></pre>
+
+<p>Změnit výše zmíněnou „kost“ na „most“ lze tedy např. takto:</p>
+<pre><code class="python">&gt;&gt;&gt; a = &quot;kost&quot;
+&gt;&gt;&gt; a = &quot;m&quot; + a[1:]
+&gt;&gt;&gt; print a
+most
+</code></pre>
+
+<p>Řetězec může obsahovat tzv. <em>escape sekvence</em>, tj. posloupnosti znaků, nesoucí speciální význam. Escape sekvence je vždy uvozena zpětným lomítkem <code>\</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; print '\'' # Znak apostrofu v řetězci uvozeném apostrofy
+'
+&gt;&gt;&gt; print &quot;\&quot;&quot; # Znak uvozovek v řetězci uvozeném uvozovkami
+&quot;
+&gt;&gt;&gt; print &quot;Zde je\ttabulator&quot; # Znak tabulátoru
+Zde je tabulator
+&gt;&gt;&gt; print &quot;Zde je\nnovy radek&quot; # Znak konce řádku
+Zde je
+novy radek
+</code></pre>
+
+<p>Jelikož escape sekvence jsou uvozeny zpětným lomítkem, zpětné lomítko samotné nelze v textu použít:</p>
+<pre><code class="python">&gt;&gt;&gt; print(V tomto textu se snazim pouzit znak \&quot;)
+SyntaxError: EOL while scanning string literal
+</code></pre>
+
+<p>To lze vyřešit použitím dvojitého zpětného lomítka, což je další z escape sekvencí:</p>
+<pre><code class="python">&gt;&gt;&gt; print(&quot;V tomto textu znak \\ klidne pouziji&quot;)
+V tomto textu znak \ klidne pouziji
+</code></pre>
+
+<p>Toto je důležité zejména při psaní adresářových a souborových adres, kde se zpětná lomítka používají:</p>
+<pre><code class="python">&gt;&gt;&gt; print &quot;C:\\Users\\Muj_pocitac\\Documents&quot;
+C:\Users\Muj_pocitac\Documents
+</code></pre>
+
+<p>Jiným způsobem psaní adres je použití dopředného lomítka:</p>
+<pre><code class="python">&gt;&gt;&gt; print &quot;C:/Users/Muj_pocitac/Documents&quot;
+C:/Users/Muj_pocitac/Documents
+</code></pre>
+
+<p>Ještě jiný způsob spočívá v uvození řetězce znakem <code>r</code> (před uvozovkami). Tím dáváme najevo, že se jedná o tzv. <em>surový řetězec</em> (angl. <em>raw string</em>), ve kterém se mají všechny znaky číst svým obvyklým způsobem (zpětné lomítko je proto pouze zpětným lomítkem a žádné escape sekvence zde být nemohou):</p>
+<pre><code class="python">&gt;&gt;&gt; print r&quot;C:\Users\Muj_pocitac\Documents&quot;
+C:\Users\Muj_pocitac\Documents
+</code></pre>
+
 <h2 id="seznamy">Seznamy</h2>
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
 <h2 id="shrnuti">Shrnutí</h2>
