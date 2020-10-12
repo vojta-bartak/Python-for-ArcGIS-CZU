@@ -128,6 +128,14 @@ Theme by GitBook
 <li>Nesmí jít o klíčové slovo jazyka (např. <code>and</code> nebo <code>if</code></li>
 <li>Malá a velká písmena se <strong>rozlišují</strong></li>
 </ul>
+<p>Python umožňuje i následující podivnost (vytvoření dvou či více proměnných najednou):</p>
+<pre><code class="python">&gt;&gt;&gt; a, b = 3, 5
+&gt;&gt;&gt; a
+3
+&gt;&gt;&gt; b
+5
+</code></pre>
+
 <blockquote>
 <p><strong>Úkol 1.</strong> Zkuste si vytvořit několik proměnných různých názvů a ověřit jejich výše uvedené chování.</p>
 </blockquote>
@@ -234,7 +242,7 @@ NameError: name 'x' is not defined
 <p><strong>Úkol 2.</strong> Vyzkoušejte si všechny výše uvedené operace a příkazy.</p>
 </blockquote>
 <h2 id="textove-retezce">Textové řetězce</h2>
-<p>Textové řetězce (či krátce jen řetězce) se zapisují buď v uvozovkách, nebo v apostrofech:</p>
+<p>Textové řetězce (či krátce jen řetězce, angl. <em>string</em>) se zapisují buď v uvozovkách, nebo v apostrofech:</p>
 <pre><code class="python">&gt;&gt;&gt; a = &quot;Toto je textovy retezec, ktery muze obsahovat znak ',&quot;
 &gt;&gt;&gt; b = 'a toto je retezec, ktery muze obsahovat znak &quot;.'
 &gt;&gt;&gt; print(a); print(b)
@@ -341,7 +349,170 @@ C:\Users\Muj_pocitac\Documents
 </code></pre>
 
 <h2 id="seznamy">Seznamy</h2>
+<p>Seznam je posloupnost libovolných objektů. Definuje se pomocí hranatých závorek a jeho položky se oddělují čárkami:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam1 = [2,-4,56,105,0]
+&gt;&gt;&gt; seznam2 = [&quot;ahoj&quot;,&quot;STROM&quot;,&quot;&quot;,&quot;guru&quot;]
+</code></pre>
+
+<p>Do jednoho seznamu lze ukládat hodnoty různých datových typů (to v jiných programovacích jazycích nebývá zvykem):</p>
+<pre><code class="python">&gt;&gt;&gt; seznam3 = [0, &quot;ahoj&quot;,-5.78,2,4]
+</code></pre>
+
+<p>Podobně jako tomu bylo v případě textových řetězců, k jednotlivým položkám seznamu lze přistupovat pomocí indexů:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam3[3]
+2
+</code></pre>
+
+<p>Indexy začínají nulou (tj. první položka seznamu má index 0, nikoli 1!) a lze používat i záporné indexy. Záporné indexy indexují seznam od konce, tj. poslední prvek seznamu má index -1, předposlední -2 atd. Záporné indexování je zvláště výhodné v tom, že lze rychle přistupovat např. k poslední položce seznamu, aniž bychom znali či se odkazovali na délku seznamu:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam3[-1]
+4
+</code></pre>
+
+<p>Na rozdíl od textových řetězců, u seznamů lze pomocí indexů měnit jednotlivé položky:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam1[2] = &quot;nova hodnota&quot;
+&gt;&gt;&gt; seznam1
+[2, -4, 'nova hodnota', 105, 0]
+</code></pre>
+
+<p>Řez seznamu je seznam sestávající pouze z některých prvků původního seznamu. Vytváří se pomocí hranatých závorek, dvou indexů (začátku a konce řezu) a dvojtečky mezi nimi:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam2[1:4]
+['STROM', '', 'guru']
+</code></pre>
+
+<p>Jak vyplývá z ukázky, prvek na pozici druhého indexu již do řezu nepatří. V řezu lze používat i záporné indexy, takže např. řez</p>
+<pre><code class="python">&gt;&gt;&gt; seznam2[0:-1]
+['ahoj', 'STROM', '']
+</code></pre>
+
+<p>obsahuje všechny prvky od prvního do předposledního.</p>
+<p>Pokud necháme některý z indexů prázdný, je příslušný řez proveden od začátku resp. do konce seznamu:</p>
+<pre><code class="python"># toto je rez od zacatku seznamu do tretiho prvku:
+&gt;&gt;&gt; seznam2[:3]
+['ahoj', 'STROM', '']
+
+# toto je rez od druheho prvku do konce seznamu:
+&gt;&gt;&gt; seznam2[1:]
+['STROM', '', 'guru']
+
+# toto je tzv. uplny rez:
+&gt;&gt;&gt; seznam2[:]
+['ahoj', 'STROM', '', 'guru']
+</code></pre>
+
+<p>Další možností, jak vytvářet řezy, je použití třetího „indexu“, lépe řečeno hodnoty, která určuje délku kroku při výběru prvků do řezu. Tímto způsobem lze např. vytvořit řez obsahující každé druhé (či třetí) číslo z určitého rozmezí:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+&gt;&gt;&gt; a[2:10:2]
+[3, 5, 7, 9]
+&gt;&gt;&gt; a[1:13:2]
+[2, 4, 6, 8, 10, 12]
+&gt;&gt;&gt; a[::3]
+[1, 4, 7, 10, 13, 16]
+</code></pre>
+
+<p>Podobně jako u textových řetězců, seznamy lze sčítat a násobit přirozeným číslem (včetně nuly):</p>
+<pre><code class="python">&gt;&gt;&gt; seznam1 + seznam2
+[2, -4, 'nova hodnota', 105, 0, 'ahoj', 'STROM', '', 'guru']
+&gt;&gt;&gt; seznam1 * 2
+[2, -4, 'nova hodnota', 105, 0, 2, -4, 'nova hodnota', 105, 0]
+&gt;&gt;&gt; 0 * seznam2
+[]
+</code></pre>
+
+<p>Výsledkem násobení seznamu nulou (a stejně tak i libovolným záporným celým číslem) je prázdný seznam.</p>
+<p>Stejně jako lze pomocí indexů přepisovat jednotlivé položky seznamu, lze také přepisovat celé řezy, a to opět libovolným (tj. libovolně dlouhým) seznamem:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3,4,5]
+&gt;&gt;&gt; a[:3] = [&quot;jedna&quot;,&quot;dva&quot;,&quot;tri&quot;,&quot;tri a pul&quot;]
+&gt;&gt;&gt; a
+['jedna', 'dva', 'tri', 'tri a pul', 4, 5]
+</code></pre>
+
+<p>Tímto způsobem lze také přidávat libovolné položky na konec seznamu (všimněte si, že v takovém případě lze použít index, který již je mimo rozsah původního seznamu):</p>
+<pre><code class="python">&gt;&gt;&gt; a[6:] = [6]
+&gt;&gt;&gt; a
+['jedna', 'dva', 'tri', 'tri a pul', 4, 5, 6]
+</code></pre>
+
+<p>nebo na začátek seznamu:</p>
+<pre><code class="python">&gt;&gt;&gt; a[:0] = [-1,0]
+&gt;&gt;&gt; a
+[-1, 0, 'jedna', 'dva', 'tri', 'tri a pul', 4, 5, 6]
+</code></pre>
+
+<p>případně kamkoli doprostřed seznamu:</p>
+<pre><code class="python">&gt;&gt;&gt; a[3:3] = [1.5]
+&gt;&gt;&gt; a
+[-1, 0, 'jedna', 1.5, 'dva', 'tri', 'tri a pul', 4, 5, 6]
+</code></pre>
+
+<p>Stejně lze i vymazat část seznamu vložením prázdného seznamu:</p>
+<pre><code class="python">&gt;&gt;&gt; a[4:7] = []
+&gt;&gt;&gt; a
+[-1, 0, 'jedna', 1.5, 4, 5, 6]
+</code></pre>
+
+<p>V kapitole "Proměnné" jsme si vysvětlili, že proměnná je odkazem na objekt v operační paměti. Proměnná <code>a = [1,2,3]</code> je tedy odkazem na příslušný objekt-seznam. To ale znamená, že pokud vytvořím proměnnou <code>b = a</code>, bude tato nová proměnná odkazovat na stejný objekt. Pokud nyní nyní tento objekt prostřednictvím jedné z proměnných změním, změna se pochopitelně dotkne i druhé proměnné:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; a[0] = -50
+&gt;&gt;&gt; a
+[-50, 2, 3]
+&gt;&gt;&gt; b
+[-50, 2, 3]
+</code></pre>
+
+<p>Pokud chceme vytvořit nezávislou kopii daného seznamu, můžeme použít úplný řez:</p>
+<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; b = a[:]
+&gt;&gt;&gt; a[0] = -50
+&gt;&gt;&gt; a
+[-50, 2, 3]
+&gt;&gt;&gt; b
+[1, 2, 3]
+</code></pre>
+
+<p>Vedle výše uvedených možností, jak pracovat se seznamy pomocí matematických operátorů a řezů, existují v Pythonu ještě tzv. <em>metody seznamů</em>, což jsou funkce, které se volají pomocí jména seznamu, tečky a jména dané funkce:</p>
+<pre><code class="python"># Přidání nového prvku na konec seznamu metodou append
+&gt;&gt;&gt; x = [1,2,3]
+&gt;&gt;&gt; x.append(&quot;ahoj&quot;)
+&gt;&gt;&gt; x
+[1, 2, 3, 'ahoj']
+
+# Vložení prvku na danou pozici seznamu metodou insert
+&gt;&gt;&gt; x.insert(1, 1.5) # Vloží hodnotu 1.5 na druhou pozici (tj. s indexem 1)
+&gt;&gt;&gt; x
+[1, 1.5, 2, 3, 'ahoj']
+
+# Seřazení seznamu čísel nebo textových řetězců metodou sort
+&gt;&gt;&gt; x = [2,9,-13,0,50]
+&gt;&gt;&gt; x.sort()
+&gt;&gt;&gt; x
+[-13, 0, 2, 9, 50]
+&gt;&gt;&gt; x = [&quot;ahoj&quot;,&quot;rohlik&quot;,&quot;kafe&quot;,&quot;zapalovac&quot;,&quot;sirky&quot;,&quot;snidane&quot;]
+&gt;&gt;&gt; x.sort()
+&gt;&gt;&gt; x
+['ahoj', 'kafe', 'rohlik', 'sirky', 'snidane', 'zapalovac']
+
+# Zjištění indexu dané hodnoty metodou index
+&gt;&gt;&gt; x.index(&quot;sirky&quot;)
+4
+
+# Zjištění, kolikrát se daná hodnota v seznamu vyskytuje, metodou count
+&gt;&gt;&gt; x.count(&quot;sirky&quot;)
+1
+
+# Vymazání prvního výskytu dané hodnoty metodou remove
+&gt;&gt;&gt; x.remove(&quot;sirky&quot;)
+&gt;&gt;&gt; x
+['ahoj', 'rohlik', 'kafe', 'zapalovac', 'snidane']
+
+# Převrácení pořadí hodnot v seznamu metodou reverse
+&gt;&gt;&gt; x.reverse()
+&gt;&gt;&gt; x
+['snidane', 'zapalovac', 'kafe', 'rohlik', 'ahoj']
+</code></pre>
+
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
+<h2 id="logicke-hodnoty">Logické hodnoty</h2>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
 
