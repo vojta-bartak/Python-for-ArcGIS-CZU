@@ -512,8 +512,58 @@ C:\Users\Muj_pocitac\Documents
 </code></pre>
 
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
-<h2 id="logicke-hodnoty">Logické hodnoty</h2>
-<h2 id="shrnuti">Shrnutí</h2>
+<h2 id="pravdivostni-hodnoty">Pravdivostní hodnoty</h2>
+<p>Pravdivostní hodnoty jsou jak známo dvě: <em>pravda</em> (anglicky <em>true</em>) a <em>nepravda</em> (anglicky <em>false</em>). Většina programovacích jazyků, Python nevyjímaje, disponuje zvláštním datovým typem pro reprezentaci těchto dvou hodnot. Většinou se takovému datovému typu říká <em>boolovský</em> (anglicky <em>Boolean</em>), na počest slavného britského matematika 19. století George Boola, který se významně zasloužil o rozvoj matematické logiky a někdy bývá označován i za praotce informatiky.</p>
+<p>V pythonu je datový typ <code>bool</code> přímo odvozen od datového typu <code>int</code>, tedy celých čísel. Hodnota <code>True</code> (pravda) je tak vlastně ve skutečnosti celočíselná hodnota <code>1</code> (a může být jedničkou i zastoupena), hodnotě <code>False</code> zase odpovídá číslo <code>0</code> (a rovněž může být nulou zastoupena). Důsledkem toho je např. to, že hodnoty <code>True</code> a <code>False</code> mohou být součástí aritmetických výrazů s čísly:</p>
+<pre><code class="python">&gt;&gt;&gt; True + 1
+2
+&gt;&gt;&gt; False * 3
+0
+</code></pre>
+
+<p>Velkou výhodou Pythonu je, že je schopen interpretovat v podstatě libovolnou hodnotu libovolného datového typu jako hodnotu pravdivostní. Jakou pravdivostní hodnotu má ta která hodnota lze přitom snadno zjistit pomocí konverzní funkce <code>bool</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; bool(0) 
+False
+&gt;&gt;&gt; bool(5)
+True
+&gt;&gt;&gt; bool(0.0) 
+False 
+&gt;&gt;&gt; bool(-7.0)
+True
+&gt;&gt;&gt; bool(&quot;&quot;) 
+False 
+&gt;&gt;&gt; bool(&quot;Ahoj&quot;)
+True
+&gt;&gt;&gt; bool([]) 
+False 
+&gt;&gt;&gt; bool([1,2,3])
+True
+</code></pre>
+
+<p>Pravdivostní hodnota je také výsledkem operací porovnání:</p>
+<pre><code class="python">&gt;&gt;&gt; 5 &gt; 3
+True
+&gt;&gt;&gt; 5 &lt;= 3
+False
+&gt;&gt;&gt; &quot;a&quot; == &quot;a&quot;
+True
+</code></pre>
+
+<h2 id="hodnota-none">Hodnota <code>None</code></h2>
+<p>V Pythonu, podobně jako ve většině jiných jazyků, existuje zvláštní hodnota reprezentující <em>nic</em>, neboli prázdnou hodnotu. Prázdná hodnota existuje v Pythonu jako datový objekt <code>None</code>, což si lze představit jako hodnotu, kterou lze přiřadit libovolné proměnné:</p>
+<pre><code class="python">&gt;&gt;&gt; a = None
+&gt;&gt;&gt; a
+&gt;&gt;&gt;
+</code></pre>
+
+<p>Po zadání jména proměnné se nevypíše „None“, ale opravdu se nevypíše nic. Proměnná sice existuje, ale nic neobsahuje. Ve skutečnosti je při spuštění Pythonu vytvořen v operační paměti počítače datový objekt <code>None</code>, na který se odkazují všechny proměnné, kterým je hodnota <code>None</code> přiřazena (existuje tedy vždy jen jedno nic, bez ohledu na to, kolik proměnných je obsahuje).</p>
+<p>Pravdivostní hodnota <code>None</code> je <code>False</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; bool(None)
+False
+</code></pre>
+
+<h2 id="shrnuti">"Shrnutí</h2>
+<p>V této kapitole jste se seznámili s pravidly práce s proměnnými a se základními datovými typy jazyka Python.</p>
 <h2 id="ulohy">Úlohy</h2>
 
 
