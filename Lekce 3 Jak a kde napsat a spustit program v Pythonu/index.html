@@ -1,97 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>Lekce 3: Rozjezd Pythonu - Python pro ArcGIS</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Vojta Barták">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lekce 3: Rozjezd Pythonu - Python pro ArcGIS</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 
-<meta name="generator" content="mkdocs-1.1.2, mkdocs-gitbook-1.0.7">
-<meta name="author" content="Vojta Barták">
-<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-<meta name="HandheldFriendly" content="true"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta rel="next" href="" />
-<link href="../css/style.min.css" rel="stylesheet"> 
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lekce 3: Jak napsat a spustit program v Pythonu?", url: "#_top", children: [
+              {title: "Pro\u010d Python?", url: "#proc-python" },
+              {title: "Instalace a verze Pythonu", url: "#instalace-a-verze-pythonu" },
+              {title: "Prost\u0159ed\u00ed IDLE a Python Shell", url: "#prostredi-idle-a-python-shell" },
+              {title: "Psan\u00ed a spou\u0161t\u011bn\u00ed skript\u016f", url: "#psani-a-spousteni-skriptu" },
+              {title: "Python Window v ArcMap", url: "#python-window-v-arcmap" },
+              {title: "Shrnut\u00ed", url: "#shrnuti" },
+              {title: "\u00dalohy", url: "#ulohy" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
 </head>
 
 <body>
-<div class="book">
-<div class="book-summary">
-
-<nav role="navigation">
-<ul class="summary">
-<li>
-<a href=".." target="_blank" class="custom-link">Python pro ArcGIS</a>
-</li>
-<li class="divider"></li>
-<li class="chapter" data-path="">
-<a href="..">Home</a>
-<li class="header">Model Builder</li>
-
-<li>
-<a href="../Lekce%201%20Model%20Builder%20I/" class="">Lekce 1: Tvorba modelu</a>
-</li>
-
-<li>
-<a href="../Lekce%202%20Model%20Builder%20II/" class="">Lekce 2: Uživatelské rozhraní</a>
-</li>
-
-<li class="header">Python</li>
-
-<li>
-<a href="./" class="active">Lekce 3: Rozjezd Pythonu</a>
-</li>
-
-<li>
-<a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="">Lekce 4: Proměnné a datové typy</a>
-</li>
-
-<li>
-<a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="">Lekce 5: Cykly a podmínky</a>
-</li>
-
-<li class="chapter" data-path="about_me/">
-<a href="../about_me/">O mně...</a>
-<li class="divider"></li>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
 
 
 
-<li><a href="http://www.mkdocs.org">
-Published with MkDocs
-</a></li>
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
 
-<li><a href="https://github.com/GitbookIO/theme-default">
-Theme by GitBook
-</a></li>
-</ul>
+    
+    
+      
+    
 
-</nav>
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-link">
+        Lekce 4: Proměnné a datové typy
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-link">
+        Lekce 2: Uživatelské rozhraní
+      </a>
+    </div>
+    
+  </div>
 
-</div> <!-- end of book-summary -->
+    
 
-<div class="book-body">
-<div class="body-inner">
-<div class="book-header" role="navigation">
-
-<!-- Title -->
-<h1>
-<i class="fa fa-circle-o-notch fa-spin"></i>
-<a href="." ></a>
-</h1>
-
-</div> <!-- end of book-header -->
-
-<div class="page-wrapper" tabindex="-1" role="main">
-<div class="page-inner">
-
-<section class="normal markdown-section">
-
-
-
-<h1 id="lekce-3-jak-napsat-a-spustit-program-v-pythonu">Lekce 3: Jak napsat a spustit program v Pythonu?</h1>
+    <h1 id="lekce-3-jak-napsat-a-spustit-program-v-pythonu">Lekce 3: Jak napsat a spustit program v Pythonu?</h1>
 <h2 id="proc-python">Proč Python?</h2>
 <p>Jazyk Python vyvinul nizozemský vývojář Guido van Rossum koncem 80. let 20. století, první verze spatřila světlo světa v roce 1991. Motivací přitom bylo vyvinout opravdu jednoduchý, efektivní, ale také zábavný jazyk. Poslední aspekt se odráží i v samotném jméně jazyka (česky "krajta"), které je reminiscencí na známou britskou komickou skupinu Monty Python.</p>
 <p>Důvodů, proč je Python tou správnou volbou pro pokročilou práci s geografickými informačními systémy, je hned několik:</p>
@@ -168,17 +164,46 @@ Theme by GitBook
 <p>V této lekci jste se seznámili s prostředím programu IDLE, zkusili si napsat a spustit jednoduché příkazy v okně Python Shell a napsat a spustit jednoduchý skript. Zároveň jste se seznámili s oknem Python Window v programu ArcMap.</p>
 <h2 id="ulohy">Úlohy</h2>
 
+  <br>
+    
 
-</section>
+    
+    
+      
+    
 
-</div> <!-- end of page-inner -->
-</div> <!-- end of page-wrapper -->
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-link">
+        Lekce 4: Proměnné a datové typy
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-link">
+        Lekce 2: Uživatelské rozhraní
+      </a>
+    </div>
+    
+  </div>
 
-</div> <!-- end of body-inner -->
+    <br>
+</div>
 
-</div> <!-- end of book-body -->
-<script src="../js/main.js"></script>
-<script src="../js/gitbook.min.js"></script>
-<script src="../js/theme.min.js"></script>
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 3 Jak a kde napsat a spustit program v Pythonu.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
 </body>
 </html>
