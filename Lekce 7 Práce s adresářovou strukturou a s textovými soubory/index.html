@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Vojta Barták">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lekce 7: Adresáře a textové soubory - Python pro ArcGIS</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lekce 7: Pr\u00e1ce s adres\u00e1\u0159ovou strukturou a s textov\u00fdmi soubory", url: "#_top", children: [
+              {title: "Modul os", url: "#modul-os" },
+              {title: "Modul os.path", url: "#modul-ospath" },
+              {title: "\u010cten\u00ed textov\u00fdch soubor\u016f", url: "#cteni-textovych-souboru" },
+              {title: "Z\u00e1pis textov\u00fdch soubor\u016f", url: "#zapis-textovych-souboru" },
+              {title: "Shrnut\u00ed", url: "#shrnuti" },
+              {title: "\u00dalohy", url: "#ulohy" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-link">
+        Lekce 6: Vstupy a náhodná čísla
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="lekce-7-prace-s-adresarovou-strukturou-a-s-textovymi-soubory">Lekce 7: Práce s adresářovou strukturou a s textovými soubory</h1>
+<p>V této lekci si probereme, jak se v Pythonu dá zacházet s adresářovou strukturou počítače (nastavování pracovního adresáře, tvorba adresářových cest, tvorba a mazání adresářů apod.) a jak lze číst a zapisovat textové soubory. Přitom si zároveň rozšíříme možnosti práce s textovými řetězci.</p>
+<h2 id="modul-os">Modul <code>os</code></h2>
+<h2 id="modul-ospath">Modul <code>os.path</code></h2>
+<h2 id="cteni-textovych-souboru">Čtení textových souborů</h2>
+<h2 id="zapis-textovych-souboru">Zápis textových souborů</h2>
+<h2 id="shrnuti">Shrnutí</h2>
+<h2 id="ulohy">Úlohy</h2>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-link">
+        Lekce 6: Vstupy a náhodná čísla
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 7 Práce s adresářovou strukturou a s textovými soubory.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
