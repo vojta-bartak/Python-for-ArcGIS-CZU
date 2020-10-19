@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Vojta Barták">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lekce 6: Vstupy a náhodná čísla - Python pro ArcGIS</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lekce 6: Interaktivn\u00ed vstupy do programu a n\u00e1hodn\u00e1 \u010d\u00edsla", url: "#_top", children: [
+              {title: "Funkce input a raw_input v Pythonu 2.x", url: "#funkce-input-a-raw_input-v-pythonu-2x" },
+              {title: "Pou\u017eit\u00ed vstupu do dal\u0161\u00edho v\u00fdpo\u010dtu", url: "#pouziti-vstupu-do-dalsiho-vypoctu" },
+              {title: "Funkce input v Pythonu 3.x", url: "#funkce-input-v-pythonu-3x" },
+              {title: "Generov\u00e1n\u00ed n\u00e1hodn\u00fdch \u010d\u00edsel", url: "#generovani-nahodnych-cisel" },
+              {title: "Shrnut\u00ed", url: "#shrnuti" },
+              {title: "\u00dalohy", url: "#ulohy" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-link">
+        Lekce 5: Cykly a podmínky
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="lekce-6-interaktivni-vstupy-do-programu-a-nahodna-cisla">Lekce 6: Interaktivní vstupy do programu a náhodná čísla</h1>
+<p>V této lekci si ukážeme, jak lze v pythonu interaktivně zadávat vstupy do nějakého programu, který spouštíme na konzoli (např. v prostředí IDLE). Vstupy se zadávají pomocí funkce <code>input</code>. Protože její vlastnosti jsou odlišné v Pythonu řady 2.x a řady 3.x, probereme obě varianty zvlášť. Dále si ukážeme, jak v Pythonu generovat náhodná čísla.</p>
+<h2 id="funkce-input-a-raw_input-v-pythonu-2x">Funkce <code>input</code> a <code>raw_input</code> v Pythonu 2.x</h2>
+<p>Ve verzích Pythonu 2.x existují dvě funkce, <code>input</code> a <code>raw_input</code>.</p>
+<p>Funkce <code>input</code> vypíše na konzoli zadaný text a následně čeká, až uživatel zadá na konzoli vstup:</p>
+<pre><code class="python">&gt;&gt;&gt; input(&quot;Milý uživateli, zadej číslo:&quot;)
+Milý uživateli, zadej číslo:
+</code></pre>
+
+<p>Po zadání a potvrzení klávesou <code>Enter</code> funkce vrátí hodnotu zadanou uživatelem, s tím, že automaticky vyhodnotí, o jaký datový typ se jedná:</p>
+<pre><code class="python">&gt;&gt;&gt; input(&quot;Milý uživateli, zadej číslo:&quot;)
+Milý uživateli, zadej číslo: 5
+5
+</code></pre>
+
+<p>V tomto případě funkce automaticky poznala, že se jedná o číslo, neboť bylo zadáno číslo bez uvozovek. V případě, že bychom chtěli, aby funkce vstup přečetla jako textový řetězec, museli bychom vstup zadat v uvozovkách:</p>
+<pre><code class="python">&gt;&gt;&gt; input(&quot;Milý uživateli, zadej text:&quot;)
+Milý uživateli, zadej text: &quot;5&quot;
+'5'
+</code></pre>
+
+<p>Podobně lze zadávat i ostatní datové typy:</p>
+<pre><code class="python">&gt;&gt;&gt; input(&quot;Milý uživateli, zadej seznam:&quot;)
+Milý uživateli, zadej seznam: [1,2,3,4]
+[1, 2, 3, 4]
+</code></pre>
+
+<p>nebo např. volat funkce:</p>
+<pre><code class="python">&gt;&gt;&gt; input(&quot;Milý uživateli, zadej seznam od 0 do 5:&quot;)
+Milý uživateli, zadej seznam od 0 do 5: range(6)
+[0, 1, 2, 3, 4, 5]
+</code></pre>
+
+<p>Funkce <code>raw_input</code> oproti tomu vrací jakýkoli vstup v podobě textového řetězce:</p>
+<pre><code class="python">&gt;&gt;&gt; raw_input(&quot;Milý uživateli, zadej číslo:&quot;)
+Milý uživateli, zadej číslo:5
+'5'
+
+&gt;&gt;&gt; raw_input(&quot;Milý uživateli, zadej seznam:&quot;)
+Milý uživateli, zadej seznam:[1,2,3,4]
+'[1,2,3,4]'
+
+&gt;&gt;&gt; raw_input(&quot;Milý uživateli, zadej seznam od 0 do 5:&quot;)
+Milý uživateli, zadej seznam od 0 do 5:range(6)
+'range(6)'
+</code></pre>
+
+<h2 id="pouziti-vstupu-do-dalsiho-vypoctu">Použití vstupu do dalšího výpočtu</h2>
+<p>Ve výše uvedených ukázkách jsme výsledek volání funkce <code>input</code> pouze nechávali vypsat na konzoli. Zpravidla s ním však chceme provádět nějaké další výpočty či operace. To zajistíme tím, že výsledek volání funkce <code>input</code> resp. <code>raw_input</code> uložíme do proměnné:</p>
+<pre><code class="python">&gt;&gt;&gt; a = input(&quot;Milý uživateli, zadej číslo:&quot;)
+Milý uživateli, zadej číslo:5
+&gt;&gt;&gt; a + 2
+7
+</code></pre>
+
+<p>V případě funkce <code>raw_input</code> nesmíme však zapomenout na převedení textového vstupu na požadovaný datový typ:</p>
+<pre><code class="python">&gt;&gt;&gt; a = raw_input(&quot;Milý uživateli, zadej číslo:&quot;)
+Milý uživateli, zadej číslo:5
+&gt;&gt;&gt; int(a) + 2
+7
+</code></pre>
+
+<p>Je také možné využít funkci <code>eval</code> (z angl. "evaluate" čili "vyhodnoť"), která vezme textový vstup a pokusí se jej interpretovat jako kód v Pythonu a vrátit požadovaný výstup:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam = raw_input(&quot;Milý uživateli, zadej seznam od 0 do 5:&quot;)
+Milý uživateli, zadej seznam od 0 do 5:range(6)
+&gt;&gt;&gt; seznam
+'range(6)'
+&gt;&gt;&gt; eval(seznam)
+[0, 1, 2, 3, 4, 5]
+</code></pre>
+
+<p>Chování funkce <code>input()</code> lze tedy věrně imitovat použitím <code>eval(raw_input())</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam = eval(raw_input(&quot;Milý uživateli, zadej seznam od 0 do 5:&quot;))
+Milý uživateli, zadej seznam od 0 do 5:range(6)
+&gt;&gt;&gt; seznam
+[0, 1, 2, 3, 4, 5]
+</code></pre>
+
+<h2 id="funkce-input-v-pythonu-3x">Funkce <code>input</code> v Pythonu 3.x</h2>
+<p>Ve verzích Pythonu 3.x došlo k následujícím změnám:</p>
+<ul>
+<li>funkce <code>raw_input</code> byla zrušena,</li>
+<li>chování funkce <code>input</code> bylo změněno na původní chování funkce <code>raw_input</code>.</li>
+</ul>
+<p>To znamená, že k interaktivnímu vstupu přes konzoli již slouží pouze funkce <code>input</code> a vstup je vždy předáván jako textový řetězec. Pokud s ním dále chcete pracovat jako s číslem, seznamem apod., je třeba použít přetypování (konverzní funkce <code>int</code>, <code>float</code>, <code>list</code> apod.), případně funkci <code>eval</code>.</p>
+<h2 id="generovani-nahodnych-cisel">Generování náhodných čísel</h2>
+<p>Ke generování náhodných čísel slouží v Pythonu modul <code>random</code>, který je součástí základní výbavy jazyka. Modul je třeba nejprve načíst příkazem <code>import</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; import random
+</code></pre>
+
+<p>K jednotlivým funkcím modulu se pak dostaneme, jak je v Pythonu obvyklé, přes jméno modulu, tečku a jméno funkce. Např. funkce <code>random()</code> bez argumentů generuje náhodné číslo z intervalu (0, 1) (z rovnoměrného rozdělení):</p>
+<pre><code class="python">&gt;&gt;&gt; import random
+&gt;&gt;&gt; random.random()
+0.6744697203253585
+&gt;&gt;&gt; random.random()
+0.7169711430089877
+&gt;&gt;&gt; random.random()
+0.4213975602144999
+</code></pre>
+
+<p>Modul lze načíst a dále používat i pod zvoleným alternativním (např. kratším) názvem:</p>
+<pre><code class="python">&gt;&gt;&gt; import random as rn
+&gt;&gt;&gt; a = rn.random()
+&gt;&gt;&gt; a
+0.8591162717665027
+</code></pre>
+
+<p>Funkce <code>randint(a, b)</code> vrací náhodné celé číslo z intervalu &lt;<code>a</code>, <code>b</code>&gt; (včetně obou mezí):</p>
+<pre><code class="python">&gt;&gt;&gt; rn.randint(-100, 100)
+70
+&gt;&gt;&gt; rn.randint(-100, 100)
+-89
+</code></pre>
+
+<p>Funkce <code>choice(seq)</code> vrací náhodně vybraný prvek z posloupnosti (seznamu, <em>n</em>-tice apod.) <code>seq</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; seznam = [1,&quot;dva&quot;,3,&quot;ctyri&quot;,5]
+&gt;&gt;&gt; rn.choice(seznam)
+5
+&gt;&gt;&gt; rn.choice(seznam)
+'dva'
+</code></pre>
+
+<p>Funkce <code>sample(population, k)</code> vrací náhodný výběr velikosti <code>k</code> z posloupnosti <code>population</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; rn.sample(range(100), 10)
+[10, 67, 93, 45, 56, 17, 71, 8, 91, 9]
+</code></pre>
+
+<p>Funkce <code>uniform(a, b)</code> vrací náhodné číslo generované z rovnoměrného rozdělení na intervalu &lt;<code>a</code>,<code>b</code>&gt;. (Poznámka: stejné jako <code>a + random() * abs(a – b)</code>.)</p>
+<pre><code class="python">&gt;&gt;&gt; rn.uniform(2,4)
+2.8693870960257666
+</code></pre>
+
+<p>Funkce <code>gauss(mu, sigma)</code> vrací náhodné číslo generované z normálního rozdělení se střední hodnotou <code>mu</code> a směrodatnou odchylkou <code>sigma</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; rn.gauss(0, 1)
+-0.072104281974643761
+</code></pre>
+
+<p>Generátor opravdu náhodných čísel pomocí počítače neexistuje (a v principu existovat nemůže). Čísla, která označujeme za "náhodná" jsou tzv. <em>pseudonáhodná</em>, tj. taková, která se jako náhodná pouze tváří. Ve skutečnosti je každé další číslo v posloupnosti "náhodných" čísel složitým algoritmem přesně (a vždy stejně) vypočteno z čísla předchozího. V čem tedy spočívá jejich "náhodnost"? Spočívá v tom, že vygenerujeme-li libovolně dlouhou posloupnost, bude se vždy ze statistického hlediska "tvářit" jako náhodná. Žádný statistický test neodhalí souvislost mezi po sobě následujícími čísly.</p>
+<p>Z uvedeného plyne, že pokud bychom daným generátorem postupně generovali dvě řady náhodných čísel, přičemž bychom začali od stejného čísla, obě řady by byly identické (ačkoli by se každá z nich sama o sobě tvářila jako náhodná). Tento problém se v praxi řeší tím, že se pokaždé začne jiným číslem, tzv. <em>semínkem</em> (anglicky <em>seed</em>). Defaultně se semínko v danou chvíli odvodí z aktuálního času v počítači.</p>
+<p>Semínko je ale možné i nastavit pevně, což se hodí, chceme-li např. opakovaně testovat nějaký algoritmus, pracující s náhodnými čísly, přičemž chceme, aby do každého testu vstupovaly stejné hodnoty. K nastavení semínka slouží funkce <code>seed</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; rn.seed(123)
+&gt;&gt;&gt; rn.random()
+0.052363598850944326
+&gt;&gt;&gt; rn.random()
+0.08718667752263232
+&gt;&gt;&gt; rn.random()
+0.4072417636703983
+&gt;&gt;&gt; rn.seed(123)
+&gt;&gt;&gt; rn.random()
+0.052363598850944326
+&gt;&gt;&gt; rn.random()
+0.08718667752263232
+&gt;&gt;&gt; rn.random()
+0.4072417636703983
+</code></pre>
+
+<p>Jak je z ukázky vidět, po nastavení semínka na stejnou hodnotu (v našem případě 123) tvoří následující sekvenci stejná čísla.</p>
+<h2 id="shrnuti">Shrnutí</h2>
+<h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>Vytvořte program, který vás vyzkouší z malé násobilky. Program náhodně vygeneruje příklad a vyzve vás, abyste zadali výsledek. V případě špatného výsledku vám vynadá a sdělí vám správný, v případě správného výsledku vám pogratuluje.</li>
+<li>Vytvořte program, který bude zkoušet z malé násobilky tak, v případě špatného výsledku vás bude nutit zadat výsledek ještě jednou, a to tak dlouho, dokud nezadáte správný výsledek.</li>
+<li>Modifikujte program z úlohy 2 tak, aby se vás po ukončení příkladu zeptal, zda si přejete pokračovat dalším příkladem. Pokud zvolíte "ano" (například tak, že zadáte "Y" jako "YES"), dá vám další příklad. Pokud zvolíte "ne" (např. "N" jako "NO"), ukončí se.</li>
+</ol>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-link">
+        Lekce 5: Cykly a podmínky
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 6 Interaktivní vstupy do programu a náhodná čísla.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
