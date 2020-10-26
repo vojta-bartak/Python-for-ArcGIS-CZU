@@ -365,8 +365,52 @@ for l in lines[1:]:
 <p><strong>Úkol 5.</strong> Otevřte si tabulku <a href="https://owncloud.cesnet.cz/index.php/s/SMwOA7a4evWXRhC">precipitation_2014.csv</a> v aplikaci MS Excel a prozkoumejte, co obsahuje. Pak ji zavřete a otevřete ji v programu Poznámkový blok: čím jsou odděleny jednotlivé sloupce? Napište program, který tabulku otevřte a spočítá průměrný srážkový úhrn v srpnu daného roku. (Poznámka: data pocházejí z ČHMÚ.)</p>
 </blockquote>
 <h2 id="zapis-textovych-souboru">Zápis textových souborů</h2>
+<p>Chceme-li naopak do textového souboru zapisovat, je nutné jej otevřít s parametrem <code>"w"</code> (z anglického „write“):</p>
+<pre><code class="python">soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;w&quot;)
+</code></pre>
+
+<p>Soubor, který tímto způsobem otvíráme, nemusí ve skutečnosti vůbec existovat a je tímto příkazem vytvořen (musí však existovat příslušná složka). Pokud soubor již existuje, je uvedeným způsobem otevření veškerý jeho obsah vymazán a při následném zapisování nahrazen obsahem novým.</p>
+<p>Zápis se provádí pomocí funkce <code>write(text)</code>. Pokud chceme zapsat text na více řádků, je třeba použít znak pro konec řádku <code>\n</code>. Opět je třeba nezapomenout na konečné uzavření souboru.</p>
+<pre><code class="python">&gt;&gt;&gt; soubor.write(&quot;Ahoj dedo.\n&quot;)
+&gt;&gt;&gt; soubor.write(&quot;Nevis,\nco je s babickou?&quot;)
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<p>Přečteme-li výsledný soubor, obdržíme:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
+&gt;&gt;&gt; print(soubor.read()
+Ahoj dedo.
+Nevis,
+co je s babickou?
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<p>Zbývá vyřešit, jak zapisovat do existujícího souboru, aniž bychom jej při otvírání celý přepsali. To lze provést jeho otevřením s parametrem <code>"a"</code> (z anglického „append“). Následný zápis funkcí <code>write(text)</code> pak způsobí zapsání daného textu na konec za již existující text:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;a&quot;)
+&gt;&gt;&gt; soubor.write(&quot;\nJo, hochu, to vazne nevim.&quot;)
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<p>Výsledek vypadá následovně:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
+&gt;&gt;&gt; print(soubor.read())
+Ahoj dedo.
+Nevis,
+co je s babickou?
+Jo, hochu, to vazne nevim.
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 6.</strong> Napiště program, který v tabulce <a href="https://owncloud.cesnet.cz/index.php/s/SMwOA7a4evWXRhC">precipitation_2014.csv</a> změní desetinné tečky na desetinné čárky.</p>
+</blockquote>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>Napište program, který vyrobí obrácenou kopii daného textového souboru (tj. text ve výstupním souboru bude zrcadlově obrácen).</li>
+<li>Napište program, který spočítá četnost výskytu daného písmene v zadaném vstupním textovém souboru. Řešte nejdříve s použitím metody <code>count</code> seznamů, následně bez této metody.</li>
+<li>Ve složce</li>
+</ol>
 
   <br>
     
