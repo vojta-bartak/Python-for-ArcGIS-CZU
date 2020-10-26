@@ -33,6 +33,7 @@
         
         var pageToc = [
           {title: "Lekce 7: Pr\u00e1ce s adres\u00e1\u0159ovou strukturou a s textov\u00fdmi soubory", url: "#_top", children: [
+              {title: "Z\u00e1pis adres\u00e1\u0159ov\u00fdch cest", url: "#zapis-adresarovych-cest" },
               {title: "Modul os", url: "#modul-os" },
               {title: "Modul os.path", url: "#modul-ospath" },
               {title: "\u010cten\u00ed textov\u00fdch soubor\u016f", url: "#cteni-textovych-souboru" },
@@ -65,12 +66,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../about_me/" class="btn btn-xs btn-link">
-        O mně...
+      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-link">
+        Lekce 8: Funkce a moduly
       </a>
     </div>
     
@@ -88,8 +89,153 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     <h1 id="lekce-7-prace-s-adresarovou-strukturou-a-s-textovymi-soubory">Lekce 7: Práce s adresářovou strukturou a s textovými soubory</h1>
 <p>V této lekci si probereme, jak se v Pythonu dá zacházet s adresářovou strukturou počítače (nastavování pracovního adresáře, tvorba adresářových cest, tvorba a mazání adresářů apod.) a jak lze číst a zapisovat textové soubory. Přitom si zároveň rozšíříme možnosti práce s textovými řetězci.</p>
+<h2 id="zapis-adresarovych-cest">Zápis adresářových cest</h2>
+<p>V Pythonu je výchozím způsobem, jak zapsat adresářovou cestu, klasický styl se zpětnými lomítky, např. <code>C:\Moje_slozka\muj_soubor.txt</code>. Problém je, že zpětné lomítko, jak víme, má v textových řetězcích speciální význam (uvozuje <em>escape</em> sekvenci). To lze obejít třemi způsoby:</p>
+<ol>
+<li>V zápisu cest použijeme dopředná lomítka: <code>"C:/Moje_slozka/muj_soubor.txt"</code>. S tím si Python poradí. </li>
+<li>Použijeme escape sekvenci <code>\\</code>, tj. dvojitá zpětná lomítka: <code>"C:\\Moje_slozka\\muj_soubor.txt"</code>. Oba popsané způsoby jsou jistě výhodné tehdy, chceme-li cesty vypisovat ručně. Často ale využíváme např. toho, že si cestu zkopírujeme z nějakého prohlížeče a následně vložíme do kódu. Takové cesty mívají zpětná lomítka a jejich následná editace (záměna za dopředná či dvojitá zpětná lomítka) je zdlouhavá a nepraktická. Z takovém případě se hodí třetí způsob:</li>
+<li>Před textový řetězec napíšeme <code>r</code>, čímž z něj vytvoříme "surový" (angl. "raw") řetězec, jehož všechny znaky se interpretují tak, jak jsou (tj. řetězec neobsahuje žádné escape sekvence): <code>r"C:\Moje_slozka\muj_soubor.txt"</code>.</li>
+</ol>
+<p>Přehled všech tří metod:</p>
+<pre><code class="python"># Dopředná lomítka
+path = &quot;C:/Moje_slozka/muj_soubor.txt&quot;
+
+# Dvojitá zpětná lomítka
+path = &quot;C:\\Moje_slozka\\muj_soubor.txt&quot;
+
+# Surový řetězec
+path = r&quot;C:\Moje_slozka\muj_soubor.txt&quot;
+</code></pre>
+
 <h2 id="modul-os">Modul <code>os</code></h2>
+<p>Jméno modulu je zkratkou slov operační systém (anglicky "operating system"). Modul je určen pro správu adresářů a procesů. Z mnoha funkcí modulu budou pro nás užitečné zvláště některé pro správu adresářů. Parametr <code>path</code> (anglicky "cesta") má ve všech ukázkách význam textového řetězce s adresou složky nebo souboru.</p>
+<p>Modul načteme standardním způsobem:</p>
+<pre><code class="python">import os
+</code></pre>
+
+<p>Při operacích s adresářovou strukturou je výhodné mít správně nastaven tzv. <strong>pracovní adresář</strong>  (angl. "workspace direcory"). Je-li nastaven, nemusíme např. při zadávání vstupních souborů do nějakého výpočtu zadávat celou cestu k souboru - pokud je vstupní soubor v pracovním adresáři, interpret Pythonu jej bude hledat tam. Rovněž jakékoli výstupní soubory, pokud neurčíme celou cestu, kam mají být uloženy, se budou ukládat do pracovního adresáře. Výchozí nastavení pracovního adresáře závisí na tom, jak jsme program IDLE spustili:</p>
+<ul>
+<li>
+<p>Při otevření programu IDLE standardním způsobem z nabídky programů je pracovní adresář nastaven na výchozí pozici, typicky třeba <code>'C:\\WINDOWS\\system32'</code>. (Pokud budeme nyní chtít např. otevřít nějaký skript stisknutím kláves <code>Ctrl</code>+<code>O</code>, vyhledávací okno se otevře právě v tomto umístění.)</p>
+</li>
+<li>
+<p>Při otevření programu IDLE "ze skriptu", tj. tím, že skript otevřeme pro editaci v programu IDLE, je pracovní adresář automaticky nastaven na složku s tímto skriptem. </p>
+</li>
+</ul>
+<p>Pro zjištění aktuálního pracovního adresáře slouží funkce <code>getcwd()</code> (z angl. "current workspace directory"):</p>
+<pre><code class="python">&gt;&gt;&gt; os.getcwd()
+'C:\\Documents and Settings\\Muj_pocitac'
+</code></pre>
+
+<p>Pokud chceme naopak pracovní adresář změnit, použijeme funkci <code>chdir(path)</code> (z angl. "change directory"). Pozor: příslušné umístění <code>path</code> musí existovat!</p>
+<pre><code class="python">&gt;&gt;&gt; os.chdir(&quot;C:/Moje_slozka&quot;)
+&gt;&gt;&gt; os.getcwd()
+'C:\\Moje_slozka'
+</code></pre>
+
+<p>Často chceme nějaký výpočet provést v cyklu pro všechny soubory v nějaké složce, případně pro všechny složky v nějaké nadřazené složce. Abychom získali seznam položek uvnitř nějaké složky, použijeme funkci <code>listdir(path)</code>. Výstupní seznam je seznamem názvů (tj. řetězců) položek, včetně koncovek:</p>
+<pre><code class="python">&gt;&gt;&gt; os.listdir(&quot;C:/Moje_slozka&quot;)
+['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
+</code></pre>
+
+<p>Často se potřebujeme v podobných funkcích odkázat na aktuální pracovní adresář (např. vypsat jeho obsah). To je možné pomocí již zmíněné funkce <code>getcwd</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; os.listdir(getcwd())
+['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
+</code></pre>
+
+<p>Existuje však i jednodušší způsob. V Pythonu se totiž lze odkazovat na pracovní adresář zkratkou <code>"."</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; os.listdir(&quot;.&quot;)
+['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 1.</strong> Změňte svůj pracovní adresář na nějakou složku, ve které máte větší množství souborů různých typů. Následně vypište její obsah na konzoli.</p>
+</blockquote>
+<p>Další dvě funkce, které si ukážeme, slouží k vytváření nových adresářů. První, funkce <code>mkdir(path)</code>, vytvoří na dané adrese novou složku. Podmínkou je, že celá cesta kromě koncové vytvářené složky existuje. TUto podmínku obchází druhá funkce, <code>makedirs(path)</code>, která vytvoří na dané adrese novou složku, včetně všech případných neexistujících nadřazených složek.</p>
+<pre><code class="python">&gt;&gt;&gt; os.mkdir(&quot;C:/nova_slozka&quot;)
+&gt;&gt;&gt; os.makedirs(&quot;C:/nejaka_nadslozka/nova_slozka&quot;)
+</code></pre>
+
+<p>Pokud naopak chceme nějakou složku či soubor smazat, máme k dispozici následující funkce:</p>
+<pre><code class="python"># Smazání souboru
+&gt;&gt;&gt; os.remove(&quot;C:/Moje_slozka/muj_soubor.doc&quot;)
+
+# Smazání (prázdné!) složky
+&gt;&gt;&gt; os.rmdir(&quot;C:/nova_slozka&quot;)
+
+# Smazání (prázdné!) složky včetně všech (prázdných!) nadsložek
+&gt;&gt;&gt; os.removedirs(&quot;C:/ nejaka_nadslozka/nova_slozka&quot;)
+</code></pre>
+
+<p>Užitečné jsou rovněž funkce <code>rename(old, new)</code> a <code>renames(old_path, new_path)</code>, pomocí kterých lze přejmenovávat cesty k souborů, a tím nejen měnit jejich název, ale i soubory přesouvat na nová umístění. První z nich, <code>rename</code>, přejmenuje cílový soubor ze staré cesty na novou, složka nového umístění souboru však již musí existovat. Druhá funkce, <code>renames</code>, toto nepožaduje a potřebné neexistující složky v nové cestě nejprve vytvoří (a zároveň odstraní již nepotřebné složky původní cesty).</p>
+<pre><code class="python"># Přejmenování souboru
+os.listdir(&quot;C:/nova_slozka&quot;)
+['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
+os.rename(&quot;C:/nova_slozka/Prvni_soubor.doc&quot;, &quot;C:/nova_slozka/Treti_soubor.doc&quot;)
+os.listdir(&quot;C:/nova_slozka&quot;)
+['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Treti_soubor.doc']
+
+# Přesunutí souboru
+os.renames(&quot;C:/nova_slozka/Prvni_soubor.doc&quot;, &quot;C:/uplne/jina/cesta/Treti_soubor.doc&quot;)
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 2.</strong> Uložte všechny textové soubory (nebo soubory jiného určitého typu) z vašeho pracovního adresáře do nově vytvořené podsložky "<code>textove_soubory</code>". Použijte cyklus a podmínku <code>if</code>.</p>
+</blockquote>
 <h2 id="modul-ospath">Modul <code>os.path</code></h2>
+<p>Modul <code>os.path</code> je podmodul modulu <code>os</code>, obsahující funkce pro práci se samotnými adresářovými cestami. Po načtení modulu <code>os</code> jsou funkce podmodulu přístupné přes <code>os.path.nejaka_funkce()</code>, podmodul lze však také načíst samostatně (pak ovšem ostatní funkce z modulu <code>os</code> přístupné nebudou):</p>
+<pre><code class="python">import os.path
+</code></pre>
+
+<p>případně:</p>
+<pre><code class="python">from os import path
+</code></pre>
+
+<p>Ve druhém případě budou funkce podmodulu dostupné přes <code>path.nejaka_funkce()</code>.</p>
+<p>Funkce <code>basename(path)</code> vrací poslední položku názvu cesty <code>path</code>, tj. v případě, že jde o adresu souboru, vrací jméno souboru, v případě, že jde o složku, vrací jméno složky:</p>
+<pre><code class="python">&gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+'Dalsi_soubor.xls'
+&gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka&quot;)
+'Moje_slozka'
+</code></pre>
+
+<p>Funkce <code>dirname(path)</code> vrací nadřazenou složku poslední položky cesty:</p>
+<pre><code class="python">&gt;&gt;&gt; os.path.dirname(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+'C:/Moje_slozka'
+&gt;&gt;&gt; os.path.dirname(&quot;C:/Moje_slozka&quot;)
+'C:/'
+</code></pre>
+
+<p>Často potřebuju spojit adresu nějakého umístění z jednotlivých částí, např. <code>C:\hlavni_slozka</code>, <code>dalsi_slozka</code> a <code>nazev_souboru.xls</code>, které máme uložené samostatně v nějakých proměnných. To můžeme udělat buď ručně:</p>
+<pre><code class="python">a = &quot;C:/hlavni_slozka&quot;
+b = &quot;dalsi_slozka&quot;
+c = &quot;nazev_souboru.xls&quot;
+path = a + &quot;/&quot; + b + &quot;/&quot; + c
+path
+&quot;C:/hlavni_slozka/dalsi_slozka/nazev_souboru.xls&quot;
+</code></pre>
+
+<p>nebo trochu stručnějším a bezpečnějším způsobem pomocí funkce <code>join</code>:</p>
+<pre><code class="python">path = os.path.join(a, b, c)
+path
+&quot;C:\\hlavni_slozka\\dalsi_slozka\\nazev_souboru.xls&quot;
+</code></pre>
+
+<p>Chceme-li ověřit, že dané umístění (soubor či složka) existuje, použijeme funkci <code>exists</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; os.path.exists(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+True
+&gt;&gt;&gt; os.path.exists(&quot;C:/Moje_slozka/Dalsi_soubor.txt&quot;)
+False
+</code></pre>
+
+<p>Někdy se také hodí zjistit, zda je dané existující umístění adresou složky či souboru:</p>
+<pre><code class="python"># Ověří, zda je daná cesta cestou k souboru
+os.path.isfile(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+True
+
+# Ověří, zda je daná cesta
+</code></pre>
+
 <h2 id="cteni-textovych-souboru">Čtení textových souborů</h2>
 <h2 id="zapis-textovych-souboru">Zápis textových souborů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
@@ -106,12 +252,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../about_me/" class="btn btn-xs btn-link">
-        O mně...
+      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-link">
+        Lekce 8: Funkce a moduly
       </a>
     </div>
     
