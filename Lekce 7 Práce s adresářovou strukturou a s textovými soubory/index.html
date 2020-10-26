@@ -36,6 +36,7 @@
               {title: "Z\u00e1pis adres\u00e1\u0159ov\u00fdch cest", url: "#zapis-adresarovych-cest" },
               {title: "Modul os", url: "#modul-os" },
               {title: "Modul os.path", url: "#modul-ospath" },
+              {title: "Rozd\u011blen\u00ed \u0159et\u011bzce znakem", url: "#rozdeleni-retezce-znakem" },
               {title: "\u010cten\u00ed textov\u00fdch soubor\u016f", url: "#cteni-textovych-souboru" },
               {title: "Z\u00e1pis textov\u00fdch soubor\u016f", url: "#zapis-textovych-souboru" },
               {title: "Shrnut\u00ed", url: "#shrnuti" },
@@ -192,6 +193,7 @@ os.renames(&quot;C:/nova_slozka/Prvni_soubor.doc&quot;, &quot;C:/uplne/jina/cest
 </code></pre>
 
 <p>Ve druhém případě budou funkce podmodulu dostupné přes <code>path.nejaka_funkce()</code>.</p>
+<p>Z obsahu podmodulu <code>os.path</code> vybíráme pouze některé, pro nás potenciálně užitečné funkce.</p>
 <p>Funkce <code>basename(path)</code> vrací poslední položku názvu cesty <code>path</code>, tj. v případě, že jde o adresu souboru, vrací jméno souboru, v případě, že jde o složku, vrací jméno složky:</p>
 <pre><code class="python">&gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 'Dalsi_soubor.xls'
@@ -230,13 +232,135 @@ False
 
 <p>Někdy se také hodí zjistit, zda je dané existující umístění adresou složky či souboru:</p>
 <pre><code class="python"># Ověří, zda je daná cesta cestou k souboru
-os.path.isfile(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+&gt;&gt;&gt; os.path.isfile(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 True
+&gt;&gt;&gt; os.path.isfile(&quot;C:/Moje_slozka&quot;)
+False
 
-# Ověří, zda je daná cesta
+# Ověří, zda je daná cesta cestou ke složce
+&gt;&gt;&gt; os.path.isdir(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+False
+&gt;&gt;&gt; os.path.isdir(&quot;C:/Moje_slozka&quot;)
+True
 </code></pre>
 
+<blockquote>
+<p><strong>Úkol 3.</strong> Modifikujte řešení úkolu 2 tak, abyste použili funkci <code>os.path.join</code>.</p>
+</blockquote>
+<h2 id="rozdeleni-retezce-znakem">Rozdělení řetězce znakem</h2>
+<p>Pro další část této lekce bude výhodné seznámit se s jednou technikou práce s textovými řetězci, která nebyla probrána v lekci o datových typech. Je jí rozdělení řetězce daným znakem či sérií znaků metodou <code>split</code>, což je funkce, která se volá přímo na daném řetězci či na proměnné obsahující řetězec:</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;anakonda&quot;.split(&quot;a&quot;)
+['', 'n', 'kond', '']
+
+&gt;&gt;&gt; a = &quot;okolo potoka&quot;
+&gt;&gt;&gt; b = a.split(&quot;o&quot;)
+&gt;&gt;&gt; b
+['', 'k', 'l', ' p', 't', 'ka']
+</code></pre>
+
+<p>Vidíme, že funkce <code>split</code> vrací seznam jednotlivých částí původního řetězce, rozděleného zadaným znakem. Pokud je tento znak na začátku či na konci řetězce, obsahuje výsledný seznam na začátku resp. na konci prázdný řetězec.</p>
+<p>Pokud použijeme funkci <code>split</code> bez argumentu, tj. bez zadání řetězce, kterým se má vstupní řetězec rodělit, rozdělí se všemi tzn. prázdnými znaky, tj. mezerou, tabulátorem (znak <code>\t</code>) či znakem nového řádku (znak <code>\n</code>). V případě, že text obsahuje posloupnost jakýchkoli prázdných znaků za sebou, interpretuje se tato posloupnost, jako by šlo o jeden prázdný znak (tj. řetězec se v tomto místě rozdělí jen jednou):</p>
+<pre><code class="python">&gt;&gt;&gt; zprava = &quot;Ahoj lasko\tje to    jiz dlouho\nco jsme\t\t\tse nevideli&quot;
+&gt;&gt;&gt; print(zprava)
+Ahoj lasko  je to    jiz dlouho
+co jsme         se nevideli
+
+&gt;&gt;&gt; zprava.split()
+['Ahoj', 'lasko', 'je', 'to', 'jiz', 'dlouho', 'co', 'jsme', 'se', 'nevideli']
+</code></pre>
+
+<p>Tímto způsobem lze snadno nějaký text rozdělit na jednotlivá slova.</p>
 <h2 id="cteni-textovych-souboru">Čtení textových souborů</h2>
+<p>Pro ilustraci si představme textový soubor obsahující následující text:</p>
+<pre><code>Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!
+Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
+Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu.
+</code></pre>
+
+<p>Dejme tomu, že je soubor s tímto textem uložen na adrese <code>C:\Documents and Settings\user\Dokumenty\babicka.txt.</code></p>
+<p>K otevření souboru pro čtení slouží vestavěná funkce <code>open</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;, &quot;r&quot;)
+</code></pre>
+
+<p>Hodnota druhého parametru <code>"r“</code> je odvozena z anglického „read“ a udává, že bude soubor otevřen pro čtení.</p>
+<p>Pokud chceme ze souboru přečíst naráz vše, co obsahuje, použijeme funkci <code>read()</code>. Výsledkem je jediný textový řetězec obsahující celý text:</p>
+<pre><code class="python">&gt;&gt;&gt; a = soubor.read()
+&gt;&gt;&gt; print(a)
+Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!
+Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
+Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu.
+</code></pre>
+
+<p>Důležité je po každé ukončené akci se souborem daný soubor uzavřít:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<p>Jinou možností je číst pouze jeden řádek pomocí funkce <code>radline()</code> (pozor: v našem textu je celý odstavec jediným řádkem!). Opakované volání této funkce čte postupně jednotlivé řádky:</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
+&gt;&gt;&gt; a = soubor.readline()
+&gt;&gt;&gt; b = soubor.readline()
+&gt;&gt;&gt; print(a)
+Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!
+&gt;&gt;&gt; print(b)
+Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<p>Konečně poslední možností je číst celý text po řádcích pomocí funkce <code>readlines()</code>. V takovém případě je výsledkem seznam textových řetězců obsahujících jednotlivé řádky (všimněte si znaků <code>\n</code> na konci každého řádku):</p>
+<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
+&gt;&gt;&gt; a = soubor.readlines()
+&gt;&gt;&gt; print(a)
+['Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!\n', 'Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!\n', 'Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu. \n']
+&gt;&gt;&gt; soubor.close()
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 4.</strong> Uložte si ("manuálně", např. pomocí Poznámkového bloku) uvedený text do textového souboru. Následně soubor v Pythonu otevřte a zjistěte počet řádků, počet slov a počet znaků v textu.</p>
+</blockquote>
+<p>V aplikacích často chceme procházet text přečtený z nějakého souboru "řádek po řádku". Např. se může jednat o datovou tabulku ve formátu <code>.csv</code> ("comma-separated values", hodnoty oddělené čárkou), což je jednoduchý textový soubor s tabulkovými daty, který lze nicméně přímo otevírat např. v aplikaci MS Excel. Procházení "řádek po řádku" pak znamená procházení jednotlivých řádků tabulky. Lze k němu využít již zmíněné funkce <code>readlines</code>, která vrací seznam řádků - ten lze samozřejmě následně procházet cyklem:</p>
+<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+lines = f.readlines()
+f.close()
+for l in lines:
+    # Tady bude nějaká akce s proměnnou l
+</code></pre>
+
+<p>Objekt, který vrací funkce <code>open</code>, je nicméně v Pythonu udělán tak, že lze v cyklu procházet přímo jej, chová se tedy sám jako seznam řádků:</p>
+<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+for l in f:
+    # Tady bude nějaká akce s proměnnou l
+f.close()
+</code></pre>
+
+<p>V tomto případě se ovšem procházení děje pomocí tzv. <strong>kurzoru</strong>, což se mimo jiné projeví tím, že projdeme-li celý soubor až do konce, je kurzor na konci souboru a další procházení již nic nevrací:</p>
+<pre><code class="python">&gt;&gt;&gt; f = open(&quot;text.txt&quot;, &quot;r&quot;)
+&gt;&gt;&gt; for l in f: print(l)
+
+prvni radek
+druhy radek
+...
+posledni radek
+&gt;&gt;&gt; for l in f: print(l)
+
+&gt;&gt;&gt; f.close()
+</code></pre>
+
+<p>Abychom soubor mohli procházet znovu, museli bychom soubor znovu načíst.</p>
+<p>Způsob pomocí načtení seznamu řádků metodou <code>readlines</code> má navíc tu výhodu, že lze procházet jen vybrané řádky, např. při čtení tabulky vynechat první řádek, jímž bývá hlavička tabulky:</p>
+<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+lines = f.readlines()
+f.close()
+for l in lines[1:]:
+    # Tady bude nějaká akce s proměnnou l
+</code></pre>
+
+<p>Závěrem si ještě ukážeme způsob, jak soubory otevírat, aniž byste museli myslet na jejich následné zavření. Je to možné pomocí klauzule <code>with</code>, která vytváří odsazený blok kódu. Jakmile blok kódu skončí tím, že odsadíme na původní úroveň, otevřený soubor se sám automaticky zavře. Syntax je následující:</p>
+<pre><code class="python">with open(&quot;soubor.txt&quot;) as f:
+    f.readlines()
+    ...
+# Tady pokračuje kód a soubor již je uzavřen
+</code></pre>
+
 <h2 id="zapis-textovych-souboru">Zápis textových souborů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
