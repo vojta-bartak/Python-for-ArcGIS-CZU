@@ -173,6 +173,23 @@ print faktorialn
 1024
 </code></pre>
 
+<p>Jak jsme se již zmínili, funkce mohou, ale nemusí mít návratovou hodnotu. Pokud funkce pouze něco vykoná, ale nic nevrátí, říká se jít někdy <em>procedura</em>. Pozná se podle toho, že v definici neobsahuje klíčové slovo <code>return</code>. Příkladem může být funkce, která výsledek výpočtu zapíše do textového souboru:</p>
+<pre><code class="python"># funkce, která otevře textový soubor a vytvoří nový, se zrcadlově obráceným textem
+def prevrat_text(txt_in, txt_out):
+
+    # přečtení vstupního textového souboru
+    in_file = open(txt_in, &quot;r&quot;)
+    in_text = in_file.read()
+    in_file.close()
+
+    # zápis výstupního souboru se zrcadlově otočeným textem
+    out_file = open(txt_out, &quot;w&quot;)
+    for i in range(len(in_text), 0, -1):
+        out_file.write(in_text[i-1])
+    out_file.close()
+</code></pre>
+
+<p>Pokud volání takové funkce (procedury) uložíme do nějaké proměnné, nebude tato proměnná nic obsahuje (bude odkazovat na objekt <code>None</code>). Přesto funkce (procedura) svou práci odvede.</p>
 <blockquote>
 <p><strong>Úkol 1.</strong> Napište funkci pro výpočet <em>n</em>-tého členu Fibonacciho posloupnosti.</p>
 <p><strong>Úkol 2.</strong> Napište funkci, která otevře daný textový soubor a vrátí počet jeho slov (parametrem funkce bude textový řetězec s adresou souboru).</p>
@@ -312,9 +329,9 @@ def obsah_kruhu(r):
     return pi*r*r
 </code></pre>
 
-<p>Následně skript uložte pod názvem <code>matematika.py</code>.</p>
-<p>Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5). Výsledkem je, že se obsah skriptu nahraje do okna Python Shell (a je tudíž přístupný pomocí procházení paměti příkazů), takže jednotlivé funkce ve skriptu definované jsou přímo přístupné pod svým názvem (naopak ale nebudou přístupné pod názvem modulu, protože ve skutečnosti nedošlo k jeho načtení).</p>
-<p>Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu:</p>
+<p>Následně skript uložte do pracovního adresáře pod názvem <code>matematika.py</code>. (Připomínáme, že aktuální pracovní adresář zjistíte pomocí funkce <code>getcwd</code> z modulu <code>os</code>, případně jej můžete změnit funkcí <code>chdir</code> ze stejného modulu.)</p>
+<p>Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5) tak, jak jsme zvyklí spouštět skripty. Výsledkem je, že se obsah skriptu nahraje do okna Python Shell (a je tudíž přístupný pomocí procházení paměti příkazů), takže jednotlivé funkce ve skriptu definované jsou přímo přístupné pod svým názvem (naopak ale nebudou přístupné pod názvem modulu, protože ve skutečnosti nedošlo k jeho načtení).</p>
+<p>Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu <code>import</code>:</p>
 <pre><code class="python">&gt;&gt;&gt; import matematika
 </code></pre>
 
@@ -335,9 +352,34 @@ def obsah_kruhu(r):
 'Tato funkce pocita obsah kruhu o polomeru r.'
 </code></pre>
 
-<p>Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem <code>import</code>, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz K tomu, aby se změny projevily, je třeba použít vestavěnou funkci reload:</p>
+<p>Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem <code>import</code>, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz <code>import</code> totiž nejprve zkontroluje, zda příslušný modul již není načtený, a pokud ne načte jej. Pokud ano, neudělá nic. K tomu, abychom již načtený modul načetly znovu, je třeba použít vestavěnou funkci <code>reload</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; reload(matematika)
+&lt;module 'matematika' from 'C:\Python25\matematika.pyc'&gt;
+</code></pre>
+
+<p>Nyní zbývá vyřešit, kam vlastně moduly ukládat, abychom je mohli načítat příkazem <code>import</code>. Pokud zavoláme příkaz <code>import</code> a uvedeme název nějakého modulu, interpret načte první modul zadaného jména, který nalezne ve složkách, v nichž moduly hledá. Jaké složky to jsou, lze zjistit pomocí proměnné <code>path</code> definované v modulu <code>sys</code>. Tato proměnná obsahuje seznam adres, které se mají při načítání modulů prohledávat. K jejímu zavolání je třeba samozřejmě nejprve načíst modul <code>sys</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path
+['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages']
+</code></pre>
+
+<p>Konkrétní obsah seznamu bude samozřejmě záviset na konkrétním počítači.</p>
+<p>Pokud budeme chtít k tomuto seznamu nějakou složku přidat, je možné proměnnou <code>path</code> změnit standardním způsobem, jakým se pracuje se seznamy:</p>
+<pre><code class="python">&gt;&gt;&gt; sys.path.append(&quot;C:\\Moje_slozka&quot;)
+&gt;&gt;&gt; sys.path
+['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages', 'C:\\Moje_slozka']
+</code></pre>
+
+<p>Tímto způsobem můžeme do proměnné <code>path</code> přidat složky, v nichž máme uložené moduly. Tuto akci však budeme muset udělat vždy znovu, kdykoli spustíme Python. Jinou možností je ukládat moduly do složky, která již v seznamu proměnné <code>path</code> je. Tento způsobe však není vhodný, neboť při přeinstalování Pythonu jsou tyto složky většinou smazány a s nimi i vše, co obsahují. Vhodnější je proto např. do kódu programu, v němž budeme chtít načítat nějaké vlastní moduly, rovnou vložit příkaz s aktualizací proměnné <code>path</code>.</p>
+<p>Jinou možností je ukládat moduly do stejné složky, v níž je uložen samotný program (či „hlavní skript“), neboť do proměnné <code>path</code> je vždy automaticky přidána aktuální pracovní složka (tj. např. složka, z níž je spouštěn nějaký skript). </p>
+<p>Jiný způsob, jak prohlížet složky s moduly, je pomocí prohlížeče <em>Path Browser</em>, umístěného v hlavní nabídce okna Python Shell pod <em>File -&gt; Path Browser</em>. Okno prohlížeče vypadá následovně:</p>
+<p><img alt="image-20201102183750177" src="../images/image-20201102183750177.png" /></p>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>Napište funkci, která vrátí maximum resp. minimum ze zadaného seznamu čísel (řešte bez použití vestavěné funkce <code>max</code> resp. <code>min</code>).</li>
+<li>Napište funkci, která seřadí vzestupně (sestupně) zadaný seznam čísel (řešte bez použití metody seznamu <code>sort</code>). (Nápověda: můžete použít např. algoritmus "řazení výběrem", "řazení vkládáním" či "bublinkové řazení". Pro přehled různých přístupů viz např. tento <a href="https://cs.wikipedia.org/wiki/%C5%98adic%C3%AD_algoritmus">odkaz na wikipedii</a>.)</li>
+</ol>
 
   <br>
     
