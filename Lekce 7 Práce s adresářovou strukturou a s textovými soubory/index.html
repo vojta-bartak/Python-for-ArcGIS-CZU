@@ -295,7 +295,7 @@ Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vs
 <pre><code class="python">&gt;&gt;&gt; soubor.close()
 </code></pre>
 
-<p>Jinou možností je číst pouze jeden řádek pomocí funkce <code>radline()</code> (pozor: v našem textu je celý odstavec jediným řádkem!). Opakované volání této funkce čte postupně jednotlivé řádky:</p>
+<p>Jinou možností je číst pouze jeden řádek pomocí funkce <code>readline()</code> (pozor: v našem textu je celý odstavec jediným řádkem!). Opakované volání této funkce čte postupně jednotlivé řádky:</p>
 <pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
 &gt;&gt;&gt; a = soubor.readline()
 &gt;&gt;&gt; b = soubor.readline()
@@ -409,7 +409,7 @@ Jo, hochu, to vazne nevim.
 <ol>
 <li>Napište program, který vyrobí obrácenou kopii daného textového souboru (tj. text ve výstupním souboru bude zrcadlově obrácen).</li>
 <li>Napište program, který spočítá četnost výskytu daného písmene v zadaném vstupním textovém souboru. Řešte nejdříve s použitím metody <code>count</code> seznamů, následně bez této metody.</li>
-<li>Ve složce</li>
+<li>Ve složce <a href="https://owncloud.cesnet.cz/index.php/s/C3cV43wNi3ngFiJ">data_teplota</a> najdete textové soubory, v nichž jsou údaje o měření teploty (v desetinách stupně Celsia) na jednotlivých evropských stanicích (každé stanici odpovídá jeden soubor). Napište program, který z těchto textových souborů vyextrahuje hodnoty teplot pro květen 1998, spočítá pro každou stanici z těchto hodnot průměr a výsledek uloží do nové textové tabulky ve formátu <code>.csv</code> (oddělovačem sloupců bude středník). Výstupní tabulka bude obsahovat dva sloupce: "STAID" s identifikátorem stanice a "T" s průměrnou teplotou v květnu 1998.</li>
 </ol>
 
   <br>

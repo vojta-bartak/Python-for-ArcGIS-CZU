@@ -33,8 +33,8 @@
         
         var pageToc = [
           {title: "Lekce 8: Funkce a moduly", url: "#_top", children: [
-              {title: "Funkce", url: "#funkce" },
-              {title: "Argumenty p\u0159ed\u00e1van\u00e9 odkazem", url: "#argumenty-predavane-odkazem" },
+              {title: "Definice a vol\u00e1n\u00ed funkce", url: "#definice-a-volani-funkce" },
+              {title: "Jmenn\u00e9 prostory a jejich hierarchie", url: "#jmenne-prostory-a-jejich-hierarchie" },
               {title: "Pr\u00e1ce s moduly", url: "#prace-s-moduly" },
               {title: "Jak vytvo\u0159it vlastn\u00ed modul", url: "#jak-vytvorit-vlastni-modul" },
               {title: "Shrnut\u00ed", url: "#shrnuti" },
@@ -87,8 +87,97 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="lekce-8-funkce-a-moduly">Lekce 8: Funkce a moduly</h1>
-<h2 id="funkce">Funkce</h2>
-<h2 id="argumenty-predavane-odkazem">Argumenty předávané odkazem</h2>
+<h2 id="definice-a-volani-funkce">Definice a volání funkce</h2>
+<p>Často nastává situace, kdy nějakou část kódu chceme používat opakovaně. Například můžeme chtít opakovaně v našem programu počítat faktoriál nějakého čísla (přičemž toto číslo může být pokaždé jiné). Výpočet faktoriálu jsme si ukázali v kapitole o cyklu <code>for</code>, řešení může vypadat třeba takto:</p>
+<pre><code class="python">faktorialn = 1
+for i in range(n): faktorialn = faktorialn * (i+1)
+print faktorialn
+</code></pre>
+
+<p>„Nejprimitivnější“ možností by bylo vložit tento kód všude tam, kde v kódu potřebujeme počítat faktoriál, samozřejmě vždy s patřičně změněnou hodnotou <code>n</code>.</p>
+<p>Problém takového řešení nastává ve chvíli, kdy budeme chtít samotný výpočet faktoriálu změnit – např. pokud bychom zjistili, že jsme v původním kódu udělali chybu a je třeba jej opravit. Máme-li totiž výše uvedený kód v našem programu na mnoha místech, je třeba jej (správně) přepsat na každém takovém místě. To je značně nepohodlné a navíc se při tom snadno dopustíme chyb.</p>
+<p>Elegantnějším řešením je vytvořit (tj. definovat) <strong>funkci</strong>, která bude výpočet faktoriálu provádět, a tuto funkci pak na příslušných místech volat.</p>
+<p>Struktura zápisu definice funkce je následující:</p>
+<pre><code class="python">def nazev_funkce(parametr1, parametr2, ... , parametrN):
+    tělo funkce
+</code></pre>
+
+<p>Definice je uvozena klíčovým slovem <code>def</code>, podle kterého interpret pozná, že se jedná o definici funkce. Následuje libovolný název a v závorkách posloupnost tzv. <strong>parametrů</strong>, tj. proměnných zastupujících hodnoty vstupující do výpočtu, který má funkce provádět. <strong>Tělo funkce</strong> pak obsahuje příkazy (psané na samostatné řádky odsazené o jednu úroveň za slovo <code>def</code>), které obvykle něco provádějí s parametry. Ukažme si funkci na konkrétním příkladu výpočtu faktoriálu:</p>
+<pre><code class="python">def faktorial(n):
+    faktorialn = 1
+    for i in range(n): faktorialn = faktorialn * (i+1)
+    return faktorialn
+</code></pre>
+
+<p>Klíčové slovo <code>return</code> ukončuje definici funkce (není však povinné, jak uvidíme níže), přičemž stanoví, jaká hodnota má být funkcí vrácena při jejím volání.</p>
+<p>Pokud odešleme kód s definicí funkce do překladače (resp. interpretu), není výsledkem provedení příslušných příkazů uvedených v těle funkce, ale pouze je funkce uložena v operační paměti a je ji možné kdykoli tzv. <strong>zavolat</strong>. Volání funkce má strukturu analogickou její definici:</p>
+<pre><code class="python">nazev_funkce(argmunet1, argument2, ... , argumentN)
+</code></pre>
+
+<p>Jednotlivé argumenty přesně odpovídají jednotlivým parametrům funkce, jsou vlastně konkrétními hodnotami, které se při volání funkce za jednotlivé parametry dosadí. Ukažme si volání funkce opět na příkladu faktoriálu, přičemž budeme funkci definovanou výše volat v okně Python Shell:</p>
+<pre><code class="python">&gt;&gt;&gt; faktorial(3)
+6
+&gt;&gt;&gt; faktorial(6)
+720
+&gt;&gt;&gt; faktorial(10)
+3628800
+</code></pre>
+
+<p>Výhoda tohoto řešení je zřejmá: kdykoli lze nyní použít funkci <code>faktorial</code> s libovolným celočíselným argumentem, přičemž pokud bychom chtěli funkci nějak změnit, stačí tak učinit pouze jednou, v samotné její definici.</p>
+<p>Uveďme příklad funkce s více než jedním parametrem, např. funkci, která počítá zadanou celočíselnou mocninu zadaného čísla:</p>
+<pre><code class="python">def mocnina(x,y):
+    vysledek = 1
+    for i in range(y): vysledek = vysledek * x
+    return vysledek
+</code></pre>
+
+<p>(Samozřejmě jsme mohli funkci definovat i jednodušeji: <code>def mocnina(x,y): return x**y</code>. Prozkoumejte nicméně uvedenou složitější definici a uvědomte si, že bude pro celočíselnou mocninu fungovat.)</p>
+<p>Při volání funkce je nutné zapsat argumenty ve stejném pořadí, v jakém jsou definovány příslušné parametry:</p>
+<pre><code class="python">&gt;&gt;&gt; mocnina(3,4)
+81
+&gt;&gt;&gt; mocnina(4,3)
+64
+</code></pre>
+
+<p>Pokud bychom chtěli z nějakého důvodu zadat argumenty v jiném pořadí, než jak jsou definovány argumenty, je možné použít při volání funkce explicitně jména příslušných parametrů a operátor <code>=</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; mocnina(y=4, x=3)
+81
+</code></pre>
+
+<p>Zadávání argumentů jménem parametru je výhodné u funkcí s velkým počtem parametrů: muset si pamatovat jejich pořadí by bylo nepraktické. </p>
+<p>Parametry mohou mít tzv. <strong>implicitní</strong> neboli <strong>výchozí hodnotu</strong>, takže je pak není nutné při volání funkce zadávat. Pokud příslušný argument nezadáme, použije se tato výchozí hodnota. Parametry s implicitní hodnotou je však nutné umístit v definici funkce na konec, tj. až za parametry bez implicitních hodnot. Důvodem je, aby parametrům bez implicitních hodnot bylo možné zadávat hodnoty na základě pořadí.</p>
+<p>Ukažme si definování implicitní hodnoty na příkladu funkce mocnina. Pokud definujeme implicitní hodnotu parametru <code>y</code> jako 2, bude funkce při zadání pouze jednoho argumentu počítat jeho druhou mocninu:</p>
+<pre><code class="python">def mocnina(x, y = 2):
+    vysledek = 1
+    for i in range(y): vysledek = vysledek * x
+    return vysledek
+</code></pre>
+
+<p>Po zavolání v okně Python Shell:</p>
+<pre><code class="python">&gt;&gt;&gt; mocnina(4) # Zde bude použita implicitní hodnota parametru y
+16
+&gt;&gt;&gt; mocnina(4, 3) # Zde bude použita uživatelem specifikovaná hodnota parametru y
+64
+</code></pre>
+
+<p>Samozřejmě výsledek volání funkce lze uložit do proměnné, tak jak to znáte při používání vestavěných funkcí Pythonu (např. <code>input</code>, <code>range</code> či konverzní funkce <code>int</code> apod.):</p>
+<pre><code class="python">&gt;&gt;&gt; a = mocnina(4)
+&gt;&gt;&gt; print a
+16
+</code></pre>
+
+<p>Stejně tak argumenty funkce mohou být zadávány přímo pomocí hodnot (viz ukázky výše), nebo pomocí proměnných:</p>
+<pre><code class="python">&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; b = 5
+&gt;&gt;&gt; mocnina(a, b)
+1024
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 1.</strong> Napište funkci pro výpočet <em>n</em>-tého členu Fibonacciho posloupnosti.</p>
+<p><strong>Úkol 2.</strong> Napište funkci, která otevře daný textový soubor a vrátí počet jeho slov (parametrem funkce bude textový řetězec s adresou souboru).</p>
+</blockquote>
+<h2 id="jmenne-prostory-a-jejich-hierarchie">Jmenné prostory a jejich hierarchie</h2>
 <h2 id="prace-s-moduly">Práce s moduly</h2>
 <h2 id="jak-vytvorit-vlastni-modul">Jak vytvořit vlastní modul</h2>
 <h2 id="shrnuti">Shrnutí</h2>
