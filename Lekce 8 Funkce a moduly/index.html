@@ -299,6 +299,43 @@ vlastni_kratsi_nazev.funkce_modulu()
 </code></pre>
 
 <h2 id="jak-vytvorit-vlastni-modul">Jak vytvořit vlastní modul</h2>
+<p>Vytvořit vlastní modul je stejně jednoduché, jako napsat skript. Je to vlastně totéž. Pro ukázku si vytvořme jednoduchý modul, nazvaný <code>matematika</code>, který bude obsahovat dvě funkce, <code>obsah_kruhu</code> a <code>obvod_kruhu</code>. Vytvořte skript s následujícím kódem:</p>
+<pre><code class="python">&quot;&quot;&quot;Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.&quot;&quot;&quot;
+pi = 3.1416
+
+def obvod_kruhu(r):
+    &quot;&quot;&quot;Tato funkce pocita obvod kruhu o polomeru r.&quot;&quot;&quot;
+    return 2*pi*r
+
+def obsah_kruhu(r):
+    &quot;&quot;&quot;Tato funkce pocita obsah kruhu o polomeru r.&quot;&quot;&quot;
+    return pi*r*r
+</code></pre>
+
+<p>Následně skript uložte pod názvem <code>matematika.py</code>.</p>
+<p>Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5). Výsledkem je, že se obsah skriptu nahraje do okna Python Shell (a je tudíž přístupný pomocí procházení paměti příkazů), takže jednotlivé funkce ve skriptu definované jsou přímo přístupné pod svým názvem (naopak ale nebudou přístupné pod názvem modulu, protože ve skutečnosti nedošlo k jeho načtení).</p>
+<p>Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu:</p>
+<pre><code class="python">&gt;&gt;&gt; import matematika
+</code></pre>
+
+<p>Nyní lze k funkcím a proměnným modulu přistupovat přes název modulu:</p>
+<pre><code class="python">&gt;&gt;&gt; import matematika
+&gt;&gt;&gt; matematika.pi
+3.1416
+&gt;&gt;&gt; matematika.obvod_kruhu(4)
+25.1328
+&gt;&gt;&gt; matematika.obsah_kruhu(4)
+50.2656
+</code></pre>
+
+<p>Zbývá vysvětlit, k čemu jsou dobré textové řetězce na začátku výše uvedeného skriptu a uvnitř definic obou uvedených funkcí. Tyto textové řetězce jsou nepovinné, tj. modul i funkce by stejně dobře fungovaly i bez nich. Uvedli jsme je v této ukázce proto, abychom ukázali možnost psát dokumentační řetězce, v nichž je zpravidla uvedena popisná informace o účelu daného modulu či funkce. Dokumentační řetězec, pokud existuje, je možné vyvolat zavolání jména modulu či funkce, tečky a řetězce <code>__doc__</code> (pozor: před i za slovem doc jsou vždy dvě podtržítka):</p>
+<pre><code class="python">&gt;&gt;&gt; matematika.__doc__
+'Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.'
+&gt;&gt;&gt; matematika.obsah_kruhu.__doc__
+'Tato funkce pocita obsah kruhu o polomeru r.'
+</code></pre>
+
+<p>Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem <code>import</code>, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz K tomu, aby se změny projevily, je třeba použít vestavěnou funkci reload:</p>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
 
