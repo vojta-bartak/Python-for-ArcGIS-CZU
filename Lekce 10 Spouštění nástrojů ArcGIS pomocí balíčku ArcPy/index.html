@@ -87,13 +87,59 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="lekce-10-spousteni-nastroju-arcgis-pomoci-balicku-arcpy">Lekce 10: Spouštění nástrojů ArcGIS pomocí balíčku ArcPy</h1>
+<p>Tato lekce uvádí do balíčku <code>arcpy</code>, který zprostředkovává funkcionalitu programu ArcGIS pro použití v rámci jazyka Python. To - mimo mnoho dalších věcí - zahrnuje možnost spouštění jednotlivých nástrojů z ArcToolboxu přímo ze skriptu, aniž bychom museli program ArcGIS (např. ArcMap) vůbec spouštět (musí však být pochopitelně nainstalován). Balíček <code>arcpy</code>, stejně jako celý Python, je distribuován společně s programem ArcGIS. Je však třeba dát si pozor na správnou verzi: v řadě ArcGIS Desktop 10.X se stále používá Python 2.7 (a ten je i distribuován spolu s programem). Od verze ArcGIS Pro se naopak používá poslední řada Pythonu, tedy 3.X. Mít v počítači více verzí Pythonu a používat vždy tu, která je třeba, by však nemělo představovat žádný velký problém.</p>
 <p>V této lekci budeme používat <a href="https://owncloud.cesnet.cz/index.php/s/YlaMGKuRZ0NIb2e">data</a> z území Libereckého kraje.</p>
 <h2 id="spusteni-nastroje-a-objekt-result">Spuštění nástroje a objekt <em>Result</em></h2>
+<p>Prvním krokem ke zpřístupnění funkcionality ArcGIS do Pythonu je načtení modulu <code>arcpy</code>:</p>
+<pre><code class="python">import arcpy
+</code></pre>
+
+<p>Chceme-li následně spustit nějaký nástroj z ArcToolbox, např. <em>Clip</em>, je syntaxe většinou následující:</p>
+<pre><code class="python">arcpy.&lt;Nazev_nastroje&gt;_&lt;alias_toolboxu&gt;(&lt;argumenty_nastroje&gt;)
+</code></pre>
+
+<p>Alias příslušného toolboxu je důležité uvést, neboť v různých toolboxech mohou existovat nástroje stejného jména, které však dělají něco jiného (dobrým příkladem je právě nástroj <em>Clip</em>). Alias toolboxu můžeme snadno zjistit v jeho vlastnostech (pravý klik na toolbox v ArcMap a volba <em>Properties</em>). V případě nástroje <em>Clip</em> z nástrojové sady <em>Analysis Tools -&gt; Extract</em> bude vypadat příkaz nějak takto:</p>
+<pre><code class="python">arcpy.Clip_analysis(r&quot;C:\cesta\k\vrstve\co\chci\orezat.shp&quot;, r&quot;C:\orezova\vrstva.shp&quot;, 
+                    r&quot;C:\cesta\kde\bude\ulozen\vysledek.shp&quot;)
+</code></pre>
+
+<p>Syntax jednotlivých nástrojů je vždy uveden na příslušné stránce nápovědy ArcGIS, kde je vždy uvedena sekce <em>Syntax</em> s vysvětlením všech parametrů a sekce <em>Code sample</em> s ukázkou použití. Používání nápovědy by se pro vás mělo stát běžnou záležitostí. V případě nástroje <em>Clip</em> vypadají příslušné sekce takto:</p>
+<p><img alt="image-20201114140158549" src="../images/image-20201114140158549.png" /></p>
+<blockquote>
+<p><strong>Úkol 1.</strong> Použijte nástroj <em>Clip</em> (buď ve skriptu nebo na konzoli Python Shell) k nalezení části silniční sítě, jež se nachází v lesích.</p>
+</blockquote>
+<p>Jak je vidět, nástroje z ArcToolboxu jsou v modulu <code>arcpy</code> implementovány ve formě funkcí. Jakou mají tyto funkce návratovou hodnotu? V drtivé většině případů (neplatí pro rastrové nástroje, jak bude osvětleno později) je návratovou hodnotou tzv. objekt třídy <em>Result</em>. Ten je možné při spuštění nástroje "zachytit" do proměnné a dále s ním pracovat:</p>
+<pre><code class="python">clip_result = arcpy.Clip_analysis(r&quot;C:\cesta\k\vrstve\co\chci\orezat.shp&quot;, 
+                                  r&quot;C:\orezova\vrstva.shp&quot;, 
+                                  r&quot;C:\cesta\kde\bude\ulozen\vysledek.shp&quot;)
+</code></pre>
+
+<p>Objekt <em>Result</em> reprezentuje záznam o průběhu výpočtu daného nástroje, odpovídající tomu, co znáte z okna <em>Results</em> v ArcMap. Co vlastně tento objekt (resp. příslušná třída) všechno obsahuje? Nejlepší odpověď nám opět dá nápověda. V systému nápovědy ArcGIS vyhledejte sekci <em>Analyze -&gt; ArcPy -&gt; ArcPy Classes -&gt; General -&gt; Result</em>:</p>
+<p><img alt="image-20201114141044240" src="../images/image-20201114141044240.png" /></p>
+<p>V nápovědě k této třídě vidíme následující sekce: <em>Summary</em> (základní popis k čemu třída je), <em>Discussion</em> (další detailu), <em>Syntax</em> (popis, jak lze stejnojmennou funkcí - tzv. <em>konstruktorem</em> třídy - vytvořit konkrétní objekt této třídy; toto v případě objektů <em>Result</em> v praxi nebudeme potřebovat), <em>Properties</em> (seznam vlastností třídy - důlěžité!), <em>Methods Overview</em> (přehled metod třídy - důležité!), <em>Methods</em> (detaily jednotlivých metod - důležité!) a <em>Code sample</em> (ukázky kódu, jak se s třídou běžně zachází - užitečné!).</p>
+<blockquote>
+<p><strong>Úkol 2.</strong> Prostudujte si nápovědu k třídě <em>Result</em> a snažte se porozumět alespoň některým jejím vlastnostem a metodám.</p>
+</blockquote>
+<p>Demonstrovat obsah - adresu výstupu, messages...</p>
+<p>Buffer...</p>
+<p>Počet prvků GetCount...</p>
 <h2 id="python-window-v-arcmap">Python Window v ArcMap</h2>
+<p>Spusti Clip... provázanost s mapovým dokumentem...</p>
 <h2 id="nastaveni-prostredi">Nastavení prostředí</h2>
+<p>Třída env a co obsahuje...</p>
+<blockquote>
+<p><strong>Úkol X.</strong> Pomocí modulu <code>arcpy</code> změňte pracovní adresář programu ArcGIS.</p>
+</blockquote>
+<p>in_memory...</p>
+<p>Další nastavení ... přepis vrstev...</p>
+<p>Druhý způsob...</p>
 <h2 id="sprava-licenci">Správa licencí</h2>
+<p>zapínání a vypínání licencí...</p>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>MutliBuffer...</li>
+</ol>
 
   <br>
     
