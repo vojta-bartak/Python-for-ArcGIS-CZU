@@ -91,7 +91,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <h1 id="lekce-12-uzivatelska-rozhrani-nastroju">Lekce 12: Uživatelská rozhraní nástrojů</h1>
 <p>V této kapitole si předvedeme, jak lze ke skriptu, využívajícímu nástroje ArcGIS, vytvořit uživatelské rozhraní tak, aby nástroj vypadal a choval se podobně, jako ostatní vestavěné nástroje v ArcToolbox. Jde o podobnou věc, jakou již znáte z lekce 2, kde jste vytvářeli uživatelská rozhraní k modelům z Model Builderu.</p>
 <h2 id="jednoduche-rozhrani">Jednoduché rozhraní</h2>
-<p>Tvorbu nástroje si předvedeme na jednoduchém příkladu nástroje <em>MultiClip</em>, který jste vytvářeli v lekci 10 (viz úlohu X). Příslušný skript může vypadat např. takto:</p>
+<p>Tvorbu nástroje si předvedeme na jednoduchém příkladu nástroje <em>BatchClip</em>, který jste vytvářeli v lekci 10 (viz úlohu X). Příslušný skript může vypadat např. takto:</p>
 <pre><code class="python">import arcpy, os.path
 
 # Vstupní parametry
@@ -119,6 +119,8 @@ for shp in shps:
 <p>(Pochopitelně, v jednom toolboxu můžeme mít uloženo více nástrojů.)</p>
 <p>Po vytvoření toolboxu do něj přidáme nový nástroj pomocí kliknutí na něj pravým tlačítkem myši a volbou <em>Add -&gt; Script</em>:</p>
 <p><img alt="image-20201116124148539" src="../images/image-20201116124148539.png" /></p>
+<p>Tím se otevře dialogové okno <em>Add Script</em>, které nás provede tvorbou grafického rozhraní. Na první stránce je třeba zadat název (<em>Name</em>) a popisek (<em>Label</em>) nástroje. Zatímco název by neměl obsahovat diakritiku a mezery, popisek bude tím, pod čím se bude nástroj zobrazovat v toolboxu (může tedy obsahovat mezery a diakritiku). V parametru <em>Description</em> je možné zadat stručný popis fungování nástroje, který se bude zobrazovat v okně nástroje. Parametr <em>Stylesheet</em> umožňuje vybrat jiný než výchozí styl rozhraní, včetně vlastních uživatelsky definovaných stylů. Vlastní styly zde nebudeme řešit, použijeme výchozí styl (tj. ponechte políčko nevyplněné). Poslední dva parametry, zaškrtávací políčka <em>Store relative pathnames</em> a <em>Always run in foreground</em> je dobré obě zaškrtnout. To první způsobí, že cesta ke skriptu (kterou budeme zadávat hned v dalším kroku) bude brána relativně k poloze toolboxu. To usnadní případnou distribuci nástroje na jiné počítače. Druhá možnost zase zajišťuje, že nástroj vždy poběží na popředí (nikoli na pozadí), což je obecně bezpečnější a stabilnější možnost.</p>
+<p><img alt="image-20201116125524225" src="../images/image-20201116125524225.png" /></p>
 <h2 id="zpravy-o-prubehu-vypoctu">Zprávy o průběhu výpočtu</h2>
 <h2 id="odvozene-parametry">Odvozené parametry</h2>
 <h2 id="napoveda">Nápověda</h2>
