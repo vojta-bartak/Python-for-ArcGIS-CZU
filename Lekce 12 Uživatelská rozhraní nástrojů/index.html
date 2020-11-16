@@ -119,8 +119,43 @@ for shp in shps:
 <p>(Pochopitelně, v jednom toolboxu můžeme mít uloženo více nástrojů.)</p>
 <p>Po vytvoření toolboxu do něj přidáme nový nástroj pomocí kliknutí na něj pravým tlačítkem myši a volbou <em>Add -&gt; Script</em>:</p>
 <p><img alt="image-20201116124148539" src="../images/image-20201116124148539.png" /></p>
-<p>Tím se otevře dialogové okno <em>Add Script</em>, které nás provede tvorbou grafického rozhraní. Na první stránce je třeba zadat název (<em>Name</em>) a popisek (<em>Label</em>) nástroje. Zatímco název by neměl obsahovat diakritiku a mezery, popisek bude tím, pod čím se bude nástroj zobrazovat v toolboxu (může tedy obsahovat mezery a diakritiku). V parametru <em>Description</em> je možné zadat stručný popis fungování nástroje, který se bude zobrazovat v okně nástroje. Parametr <em>Stylesheet</em> umožňuje vybrat jiný než výchozí styl rozhraní, včetně vlastních uživatelsky definovaných stylů. Vlastní styly zde nebudeme řešit, použijeme výchozí styl (tj. ponechte políčko nevyplněné). Poslední dva parametry, zaškrtávací políčka <em>Store relative pathnames</em> a <em>Always run in foreground</em> je dobré obě zaškrtnout. To první způsobí, že cesta ke skriptu (kterou budeme zadávat hned v dalším kroku) bude brána relativně k poloze toolboxu. To usnadní případnou distribuci nástroje na jiné počítače. Druhá možnost zase zajišťuje, že nástroj vždy poběží na popředí (nikoli na pozadí), což je obecně bezpečnější a stabilnější možnost.</p>
+<p>Tím se otevře dialogové okno <em>Add Script</em>, které nás provede tvorbou grafického rozhraní. Na první stránce je třeba zadat název (<em>Name</em>) a popisek (<em>Label</em>) nástroje. Zatímco název by neměl obsahovat diakritiku a mezery, popisek bude tím, pod čím se bude nástroj zobrazovat v toolboxu (může tedy obsahovat mezery a diakritiku). V parametru <em>Description</em> je možné zadat stručný popis fungování nástroje, který se bude zobrazovat v okně nástroje. Parametr <em>Stylesheet</em> umožňuje vybrat jiný než výchozí styl rozhraní, včetně vlastních uživatelsky definovaných stylů. Vlastní styly zde nebudeme řešit, použijeme výchozí styl (tj. ponechte políčko nevyplněné). Poslední dva parametry, zaškrtávací políčka <em>Store relative pathnames</em> a <em>Always run in foreground</em>, je dobré obě zaškrtnout. To první způsobí, že cesta ke skriptu (kterou budeme zadávat hned v dalším kroku) bude brána relativně k poloze toolboxu. To usnadní případnou distribuci nástroje na jiné počítače. Druhá možnost zase zajišťuje, že nástroj vždy poběží na popředí (nikoli na pozadí), což je obecně bezpečnější a stabilnější možnost.</p>
 <p><img alt="image-20201116125524225" src="../images/image-20201116125524225.png" /></p>
+<p>Po kliknutí na <em>Další</em> se v dalším okně zadává cesta k samotnému skriptu. Je dobrou praxí mít skript uložený ve stejné složce, ve které máme uložen i toolbox.</p>
+<p><img alt="image-20201116133326472" src="../images/image-20201116133326472.png" /></p>
+<p>Následuje stránka se zadáváním parametrů nástroje. V horní části je tabulka s parametry, v dolní části jsou vlastnosti daného označeného parametru. Začněte psát do levého sloupce tabulky název parametru. Následně v pravém sloupci vyberte jeho typ. Prvním parametrem bude "Input Workspace", tedy složka se vstupními vrstvami. Typ tohoto parametru může být buď <em>Folder</em> nebo <em>Workspace</em>. Pokud zvolíme první možnost, bude nástroj schopen pracovat pouze v klasické složce se shapefily. Druhá možnost, <em>Workspace</em>, je obecnější a zahrnuje vedle klasické složky i geodatabázi, takže nástroj bude schopen oříznout všechny vektorové vrstvy v nějaké geodatabázi či její datové sadě (<em>Feature Dataset</em>). Je tedy výhodnější zvolit tuto druhou možnost. U tohoto parametru jsou všechny výchozí hodnoty vlastností (v dolní části okna) vyhovující (projděte si je a zkusit usoudit, jaký mají jednotlivé vlastnosti význam).</p>
+<p><img alt="image-20201116134416440" src="../images/image-20201116134416440.png" /></p>
+<p>Dalším parametrem bude ořezová vrstva ("Clip Features"). Jejím typem by mohl být <em>Shapefile</em>, <em>Feature Class</em> nebo <em>Feature Layer</em>. Druhá možnost je oproti první opět obecnější a umožňuje pracovat nejen s shapefily, ale i s vrstvami v geodatabázi. Třetí možnost je nicméně nejlepší, neboť vedle uvedených možností umožňuje i práci s vrstvami v ArcMap. Pokud jí tedy zvolíme (a my ji zvolíme), bude se v nástroji do příslušného parametru automaticky nabízet seznam aktuálně načtených vrstev z mapového dokumentu.</p>
+<p>K parametru <em>Clip Features</em> je také vhodné nastavit tzv. <em>Filtr</em>, který neumožní uživateli zadat jiný geometrický typ než polygon. Příslušné nastavení se provede ve vlastnostech parametru, vlastnost <em>Filter</em>. </p>
+<p><img alt="image-20201116135018604" src="../images/image-20201116135018604.png" /></p>
+<p>Po klinutí na <em>Feature Class</em> se otevře okno se zaškrtávacími políčky, kde je třeba ponechat zaškrtnutou pouze možnost "Polygon":</p>
+<p><img alt="image-20201116135113491" src="../images/image-20201116135113491.png" /></p>
+<p>Posledním parametrem bude <em>Output Workspace</em>, tj. složka (či geodatabáze), kam se budou ukládat výstupní vrstvy. Opět půjde o typ <em>Workspace</em> s výchozími nastaveními vlastností. Nyní máme parametry nastaveny a můžeme kliknout na <em>Finish</em>. Po otevření nástroje z <em>Catalogu</em> vidíme připravené uživatelské rozhraní:</p>
+<p><img alt="image-20201116135503743" src="../images/image-20201116135503743.png" /></p>
+<p>Zbývá zařídit, aby se hodnoty parametrů zadané uživatelem v grafickém rozhraní předaly do skriptu pro výpočet. K tomu je slouží funkce <code>GetParameterAsText</code> z balíčku <code>arcpy</code>. Při spuštění nástroje tato funkce přečte hodnotu z uživatelského rozhraní a vrátí jí v podobě textového řetězce. (<em>Poznámka: V našem případě jsou všechny prametry textové - viz skript na začátku lekce - proto jejich předání ve formě textu je to, co potřebujeme. Pokud bychom však chtěli např. zadávat v některých parametrech čísla či jiné datové typy, je nutné je po obdržení hodnoty parametru z funkce</em> <code>GetParamaterAsText</code> <em>zkonvertovat na příslušný datový typ.</em>)</p>
+<p>Jediným parametrem funkce <code>GetParameterAsText</code> je index neboli pořadí parametru, který se má číst. Pořadí parametrů přitom odpovídá tomu, jak jsme je seřadili v grafickém rozhraní. Hlavička našeho skriptu proto bude vypadat nyní takto:</p>
+<pre><code class="python">import arcpy, os.path
+
+# Vstupní parametry
+input_folder = arcpy.GetParameterAsText(0)
+clip_features = arcpy.GetParameterAsText(1)
+output_folder = arcpy.GetParameterAsText(2)
+
+# Nastavení prostředí
+arcpy.env.workspace = input_folder
+arcpy.env.overwriteOutput = True
+
+# Dávkové zpracování nástrojem Clip
+shps = arcpy.ListFeatureClasses()
+for shp in shps:
+    output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
+    arcpy.Clip_analysis(shp, clip_features, output)
+</code></pre>
+
+<p>Nyní je nástroj připraven a můžeme jej spustit.</p>
+<blockquote>
+<p><strong>Úkol 2.</strong> Popsaným způsobem vytvořte rozhraní k nástroji <em>BatchClip</em> a nástroj vyzkoušejte.</p>
+</blockquote>
 <h2 id="zpravy-o-prubehu-vypoctu">Zprávy o průběhu výpočtu</h2>
 <h2 id="odvozene-parametry">Odvozené parametry</h2>
 <h2 id="napoveda">Nápověda</h2>
