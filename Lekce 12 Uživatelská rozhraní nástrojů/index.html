@@ -38,8 +38,7 @@
               {title: "V\u00edcen\u00e1sobn\u00e9 a v\u00fdstupn\u00ed parametry", url: "#vicenasobne-a-vystupni-parametry" },
               {title: "Odvozen\u00e9 parametry", url: "#odvozene-parametry" },
               {title: "N\u00e1pov\u011bda", url: "#napoveda" },
-              {title: "Podm\u00edn\u011bn\u00e9 nastaven\u00ed parametr\u016f", url: "#podminene-nastaveni-parametru" },
-              {title: "Python Toolbox", url: "#python-toolbox" },
+              {title: "Z\u00e1v\u011bre\u010dn\u00e9 pozn\u00e1mky", url: "#zaverecne-poznamky" },
               {title: "Shrnut\u00ed", url: "#shrnuti" },
               {title: "\u00dalohy", url: "#ulohy" },
           ]},
@@ -90,7 +89,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="lekce-12-uzivatelska-rozhrani-nastroju">Lekce 12: Uživatelská rozhraní nástrojů</h1>
-<p>V této kapitole si předvedeme, jak lze ke skriptu, využívajícímu nástroje ArcGIS, vytvořit uživatelské rozhraní tak, aby nástroj vypadal a choval se podobně, jako ostatní vestavěné nástroje v ArcToolbox. Jde o podobnou věc, jakou již znáte z lekce 2, kde jste vytvářeli uživatelská rozhraní k modelům z Model Builderu.</p>
+<p>V této kapitole si předvedeme, jak lze ke skriptu, využívajícímu nástroje ArcGIS, vytvořit uživatelské rozhraní tak, aby nástroj vypadal a choval se podobně jako ostatní vestavěné nástroje v ArcToolbox. Jde o podobnou věc, jakou již znáte z lekce 2, kde jste vytvářeli uživatelská rozhraní k modelům z Model Builderu.</p>
 <h2 id="jednoduche-rozhrani">Jednoduché rozhraní</h2>
 <p>Tvorbu nástroje si předvedeme na jednoduchém příkladu nástroje <em>BatchClip</em>, který jste vytvářeli v lekci 10 (viz úlohu X). Příslušný skript může vypadat např. takto:</p>
 <pre><code class="python">import arcpy, os.path
@@ -133,8 +132,8 @@ for shp in shps:
 <p><img alt="image-20201116135113491" src="../images/image-20201116135113491.png" /></p>
 <p>Posledním parametrem bude <em>Output Workspace</em>, tj. složka (či geodatabáze), kam se budou ukládat výstupní vrstvy. Opět půjde o typ <em>Workspace</em> s výchozími nastaveními vlastností. Nyní máme parametry nastaveny a můžeme kliknout na <em>Finish</em>. Po otevření nástroje z <em>Catalogu</em> vidíme připravené uživatelské rozhraní:</p>
 <p><img alt="image-20201116135503743" src="../images/image-20201116135503743.png" /></p>
-<p>Zbývá zařídit, aby se hodnoty parametrů zadané uživatelem v grafickém rozhraní předaly do skriptu pro výpočet. K tomu je slouží funkce <code>GetParameterAsText</code> z balíčku <code>arcpy</code>. Při spuštění nástroje tato funkce přečte hodnotu z uživatelského rozhraní a vrátí jí v podobě textového řetězce. (<em>Poznámka: V našem případě jsou všechny prametry textové - viz skript na začátku lekce - proto jejich předání ve formě textu je to, co potřebujeme. Pokud bychom však chtěli např. zadávat v některých parametrech čísla či jiné datové typy, je nutné je po obdržení hodnoty parametru z funkce</em> <code>GetParamaterAsText</code> <em>zkonvertovat na příslušný datový typ.</em>)</p>
-<p>Jediným parametrem funkce <code>GetParameterAsText</code> je index neboli pořadí parametru, který se má číst. Pořadí parametrů přitom odpovídá tomu, jak jsme je seřadili v grafickém rozhraní. Hlavička našeho skriptu proto bude vypadat nyní takto:</p>
+<p>Zbývá zařídit, aby se hodnoty parametrů zadané uživatelem v grafickém rozhraní předaly do skriptu pro výpočet. K tomu je slouží funkce <code>GetParameterAsText</code> z balíčku <code>arcpy</code>. Při spuštění nástroje tato funkce přečte hodnotu z uživatelského rozhraní a vrátí jí v podobě textového řetězce. (<em>Poznámka: V našem případě jsou všechny parametry textové - viz skript na začátku lekce - proto jejich předání ve formě textu je to, co potřebujeme. Pokud bychom však chtěli např. zadávat v některých parametrech čísla či jiné datové typy, je nutné je po obdržení hodnoty parametru z funkce</em> <code>GetParamaterAsText</code> <em>zkonvertovat na příslušný datový typ.</em>)</p>
+<p>Jediným argumentem funkce <code>GetParameterAsText</code> je index neboli pořadí parametru, který se má číst. Pořadí parametrů přitom odpovídá tomu, jak jsme je seřadili v grafickém rozhraní. Hlavička našeho skriptu proto bude vypadat nyní takto:</p>
 <pre><code class="python">import arcpy, os.path
 
 # Vstupní parametry
@@ -186,7 +185,7 @@ for shp in shps:
     arcpy.Clip_analysis(shp, clip_features, output)
 </code></pre>
 
-<p>Podivný řádek <code>sys.__stdout__.flush()</code> zajišťuje, že se výpis provede opravdu ihned. Pokud jej neuvedeme, často se nic špatného nestane a výpisy budou fungovat jak mají. Někdy však dochází ke zpoždění výpisů, takže se třeba veškeré výpočty nejprve provedou, a pak se na konzoli vypíšou všechna hlášení najednou. Tím ovšem průběžná hlášení přestávají být průběžná a ztrácí smysl. Objekt <code>__stdout__</code> z modulu <code>sys</code> (všimněte si, že tento modul musel být na začátku skriptu načten!) reprezentuje tzv. <em>standardní výstup</em>, kterým je v našem případě konzole Python Shell. Jeho metoda <code>flush</code> pak tzv. "vyleje" či "spláchne" vše, co čeká aktuálně ve frontě na vypsání.</p>
+<p>Podivný řádek <code>sys.__stdout__.flush()</code> zajišťuje, že se výpis provede opravdu ihned. Pokud jej neuvedeme, často se nic špatného nestane a výpisy budou fungovat jak mají. Někdy však dochází ke zpoždění výpisů, takže se veškeré výpočty nejprve provedou, a až pak se na konzoli vypíší všechna hlášení najednou. Tím ovšem průběžná hlášení přestávají být průběžná a ztrácí smysl. Objekt <code>__stdout__</code> z modulu <code>sys</code> (všimněte si, že tento modul musel být na začátku skriptu načten!) reprezentuje tzv. <em>standardní výstup</em>, kterým je v našem případě konzole Python Shell. Jeho metoda <code>flush</code> pak tzv. "vyleje" či "spláchne" vše, co čeká aktuálně ve frontě na vypsání.</p>
 <p>Jak je možné podobné zprávy posílat do okna výpočtu nástroje v ArcMap? Zde již klasický <code>print</code> nefunguje, nicméně podobnou práci udělá funkce <code>AddMessage</code> balíčku <code>arcpy</code>. Skript nástroje tedy upravíme následovně:</p>
 <pre><code class="python">import arcpy, os.path
 
@@ -292,10 +291,13 @@ arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;
 <blockquote>
 <p><strong>Úkol 5.</strong> Vytvořte uvedený nástroj a vyzkoušejte jeho funkčnost.</p>
 </blockquote>
+<p><em>Poznámka na závěr:</em> Parametr <em>Buffer Distance</em> je typu <em>Double</em>, mohli bychom však s výhodou použít i typ <em>Linear unit</em>, který nabízí i volbu jednotek. V takovém případě ale nelze hodnotu parametru předanou funkcí <code>GetParameterAsText</code> převádět na číslo, neboť půjde o text typu <code>"100 Meters"</code>. Ten je však možné přímo použít jako vstup do nástroje <em>Buffer</em>. </p>
+<p>Rozhraní nástroje bude s parametrem typu <em>Linear unit</em> vypadat takto:</p>
+<p><img alt="image-20201116165646450" src="../images/image-20201116165646450.png" /></p>
 <h2 id="odvozene-parametry">Odvozené parametry</h2>
+<p>Převod vektorové vrstvy na rastr...</p>
 <h2 id="napoveda">Nápověda</h2>
-<h2 id="podminene-nastaveni-parametru">Podmíněné nastavení parametrů</h2>
-<h2 id="python-toolbox">Python Toolbox</h2>
+<h2 id="zaverecne-poznamky">Závěrečné poznámky</h2>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
 <ol>
