@@ -35,7 +35,7 @@
           {title: "Lekce 12: U\u017eivatelsk\u00e1 rozhran\u00ed n\u00e1stroj\u016f", url: "#_top", children: [
               {title: "Jednoduch\u00e9 rozhran\u00ed", url: "#jednoduche-rozhrani" },
               {title: "Zpr\u00e1vy o pr\u016fb\u011bhu v\u00fdpo\u010dtu", url: "#zpravy-o-prubehu-vypoctu" },
-              {title: "Odvozen\u00e9 parametry", url: "#odvozene-parametry" },
+              {title: "Dal\u0161\u00ed typy parametr\u016f", url: "#dalsi-typy-parametru" },
               {title: "N\u00e1pov\u011bda", url: "#napoveda" },
               {title: "Podm\u00edn\u011bn\u00e9 nastaven\u00ed parametr\u016f", url: "#podminene-nastaveni-parametru" },
               {title: "Python Toolbox", url: "#python-toolbox" },
@@ -210,7 +210,48 @@ for shp in shps:
 
 <p>Průběžný výpis při výpočtu nyní vypadá takto:</p>
 <p><img alt="image-20201116144325079" src="../images/image-20201116144325079.png" /></p>
-<h2 id="odvozene-parametry">Odvozené parametry</h2>
+<blockquote>
+<p><strong>Úkol 3.</strong> Doplňte do nástroje <em>BatchClip</em> běhové zprávy výše uvedeným způsobem a vyzkoušejte.</p>
+</blockquote>
+<h2 id="dalsi-typy-parametru">Další typy parametrů</h2>
+<p>Různých typů parametrů a jejich vlastností je velké množství. Některé z nich si ukážeme na příkladu dalšího nástroje, který má pro vstupní seznam vektorových vrstev udělat obalovanou zónu o zadaném poloměru. Obalové zóny vstupních vrstev by přitom měly být spojeny do jediné vrstvy, přičemž prostorově se nepřekrývající části by měly být v samostatných polygonech, naopak prostorově se překrývající části obalové zóny by měly být spojené do jediného polygonu.</p>
+<p>Pokud bychom měli na vstupu bodovou, liniovou a polygonovou vrstvu jako na tomto obrázku:</p>
+<p><img alt="" src="../images/super_buffer_input.png" /></p>
+<p>měla by výstupní vrstva vypadat nějak takto:</p>
+<p><img alt="" src="../images/super_buffer_output.png" /></p>
+<p>Skript, který by tuto úlohu zpracovával, by mohl vypadat nějak takto:</p>
+<pre><code class="python">import arcpy
+
+# Vstupní parametry
+feature_list = [r&quot;C:\vrstva1.shp&quot;, r&quot;C:\vrstva2.shp&quot;, ...]
+buffer_distance = 100
+output_features = r&quot;C:\vystupni_vrstva&quot;
+
+# Nastavení environments
+arcpy.env.workspace = &quot;in_memory&quot;
+arcpy.env.overwriteOutput = True
+
+# Obalové zóny
+buffers = []
+for fc in feature_list:
+    b = arcpy.Buffer_analysis(fc, fc + &quot;_buffer&quot;, buffer_distance)
+    buffers.append(b)
+
+# Spojení obalových zón
+u = arcpy.Union_analysis(buffers, &quot;union.shp&quot;)
+arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
+</code></pre>
+
+<p>Všimněme si zde několika věcí:</p>
+<ul>
+<li>Pracovní adresář byl na začátku nastaven na <code>"in_memory"</code>. Díky tomu se veškeré průběžné výstupy (tj. všechny výstupy z nástroje <em>Buffer</em> a výstup z nástroje <em>Union</em>) budou dočasně ukládat do operační paměti a nikoli na pevný disk. Pouze konečný výstup z nástroje <em>Dissolve</em> se uloží do umístění specifikovaného v parametru <code>output_features</code>.</li>
+<li>Seznam <code>buffers</code>, do kterého se ukládají výsledky jednotlivých obalových zón, obsahuje objekty <em>Result</em>. Ty je však možné použít jako vstupy do dalších analýz.</li>
+<li>V nástroji <em>Union</em> se vícenásobný vstup (seznam vrstev, které se mají spojit) zadává jako pythonovský seznam (jaké jiné nástroje s vícenásobným vstupním parametrem znáte?).</li>
+<li>V nástroji <em>Dissolve</em> je parametr <em>multi_part</em> nastaven na hodnotu "SINGLE_PART" (viz nápovědu k tomuto nástroji!). Jelikož je tento parametr až pátý v řadě a předcházejí mu dva nepovinné parametry, u nichž chceme ponechat výchozí hodnoty, je na místě těchto parametrů prázdný řetězec. </li>
+</ul>
+<blockquote>
+<p><strong>Úkol 4.</strong> Vyzkoušejte uvedený skript na reálných datech.</p>
+</blockquote>
 <h2 id="napoveda">Nápověda</h2>
 <h2 id="podminene-nastaveni-parametru">Podmíněné nastavení parametrů</h2>
 <h2 id="python-toolbox">Python Toolbox</h2>
