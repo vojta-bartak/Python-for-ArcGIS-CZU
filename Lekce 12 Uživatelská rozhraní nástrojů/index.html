@@ -35,7 +35,8 @@
           {title: "Lekce 12: U\u017eivatelsk\u00e1 rozhran\u00ed n\u00e1stroj\u016f", url: "#_top", children: [
               {title: "Jednoduch\u00e9 rozhran\u00ed", url: "#jednoduche-rozhrani" },
               {title: "Zpr\u00e1vy o pr\u016fb\u011bhu v\u00fdpo\u010dtu", url: "#zpravy-o-prubehu-vypoctu" },
-              {title: "Dal\u0161\u00ed typy parametr\u016f", url: "#dalsi-typy-parametru" },
+              {title: "V\u00edcen\u00e1sobn\u00e9 a v\u00fdstupn\u00ed parametry", url: "#vicenasobne-a-vystupni-parametry" },
+              {title: "Odvozen\u00e9 parametry", url: "#odvozene-parametry" },
               {title: "N\u00e1pov\u011bda", url: "#napoveda" },
               {title: "Podm\u00edn\u011bn\u00e9 nastaven\u00ed parametr\u016f", url: "#podminene-nastaveni-parametru" },
               {title: "Python Toolbox", url: "#python-toolbox" },
@@ -213,7 +214,7 @@ for shp in shps:
 <blockquote>
 <p><strong>Úkol 3.</strong> Doplňte do nástroje <em>BatchClip</em> běhové zprávy výše uvedeným způsobem a vyzkoušejte.</p>
 </blockquote>
-<h2 id="dalsi-typy-parametru">Další typy parametrů</h2>
+<h2 id="vicenasobne-a-vystupni-parametry">Vícenásobné a výstupní parametry</h2>
 <p>Různých typů parametrů a jejich vlastností je velké množství. Některé z nich si ukážeme na příkladu dalšího nástroje, který má pro vstupní seznam vektorových vrstev udělat obalovanou zónu o zadaném poloměru. Obalové zóny vstupních vrstev by přitom měly být spojeny do jediné vrstvy, přičemž prostorově se nepřekrývající části by měly být v samostatných polygonech, naopak prostorově se překrývající části obalové zóny by měly být spojené do jediného polygonu.</p>
 <p>Pokud bychom měli na vstupu bodovou, liniovou a polygonovou vrstvu jako na tomto obrázku:</p>
 <p><img alt="" src="../images/super_buffer_input.png" /></p>
@@ -252,6 +253,46 @@ arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;
 <blockquote>
 <p><strong>Úkol 4.</strong> Vyzkoušejte uvedený skript na reálných datech.</p>
 </blockquote>
+<p>Nyní k nástroji vytvoříme uživatelské rozhraní. Postupujeme stejně jako v předchozím případě: přidáme do našeho toolboxu nový skript a projedeme dialogové okno s názvem, umístěním skriptu a tabulkou parametrů. Ta bude vypadat nějak takto:</p>
+<p><img alt="image-20201116155635815" src="../images/image-20201116155635815.png" /></p>
+<p>Nyní se zaměříme na vlastnosti jednotlivých parametrů. První parametr - <em>Input Feature Classes</em> - je sice typu <em>Feature Layer</em>, musíme nicméně zařídit, aby umožňoval zadání více vstupních vrstev. K tomu slouží vlastnost <em>MutliValue</em>, kterou je třeba nastavit na "Yes":</p>
+<p><img alt="image-20201116155928363" src="../images/image-20201116155928363.png" /></p>
+<p>Parametr <em>Buffer Distance</em> je typu <em>Double</em>, parametr <em>Output Buffer Zone Features</em> je typu <em>Feature Layer</em>. U posledního parametru je třeba nastavit vlastnost <em>Direction</em> na "Output", neboť příslušná vrstva ve chvíli spouštění nástroje ještě neexistuje a bude teprve nástrojem vytvořena:</p>
+<p><img alt="image-20201116160202017" src="../images/image-20201116160202017.png" /></p>
+<p>Uživatelské rozhraní nástroje nyní vypadá takto:</p>
+<p><img alt="image-20201116160340309" src="../images/image-20201116160340309.png" /></p>
+<p>Nyní je ještě třeba upravit skript a pomocí funkce <code>GetParameterAsText</code> před parametry do skriptu:</p>
+<pre><code class="python">import arcpy
+
+# Vstupní parametry
+feature_list = arcpy.GetParameterAsText(0)
+buffer_distance = float(arcpy.GetParameterAsText(1))
+output_features = arcpy.GetParameterAsText(2)
+
+# Nastavení environments
+arcpy.env.workspace = &quot;in_memory&quot;
+arcpy.env.overwriteOutput = True
+
+# Obalové zóny
+buffers = []
+for fc in feature_list:
+    b = arcpy.Buffer_analysis(fc, fc + &quot;_buffer&quot;, buffer_distance)
+    buffers.append(b)
+
+# Spojení obalových zón
+u = arcpy.Union_analysis(buffers, &quot;union.shp&quot;)
+arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
+</code></pre>
+
+<p>Všimněme si dvou věcí:</p>
+<ul>
+<li>Do parametru <code>feature_list</code> předá funkce <code>GetParameterAsText</code> jednotlivé vstupní vrstvy jako pythonovský seznam textů (adres jednotlivých vrstev), takže je možné tento seznam následně v cyklu procházet a vytvářet obalové zóny. To je díky tomu, že jsme v grafickém rozhraní u příslušného parametru nastavili jeho vlastnost <em>MultiValue</em> na "Yes".</li>
+<li>U parametru <em>buffer_distance</em> je třeba hodnotu vrácenou funkcí <code>GetParameterAsText</code> převést na číselný typ funkcí <code>float</code>, jinak by se totiž jednalo o textový řetězec. (Ve skutečnosti by nástroj <em>Buffer</em> akceptoval i textový vstup, ale v řadě jiných případů je třeba textový výstup funkce <code>GetParameterAsText</code> převést na jiný datový typ.)</li>
+</ul>
+<blockquote>
+<p><strong>Úkol 5.</strong> Vytvořte uvedený nástroj a vyzkoušejte jeho funkčnost.</p>
+</blockquote>
+<h2 id="odvozene-parametry">Odvozené parametry</h2>
 <h2 id="napoveda">Nápověda</h2>
 <h2 id="podminene-nastaveni-parametru">Podmíněné nastavení parametrů</h2>
 <h2 id="python-toolbox">Python Toolbox</h2>
