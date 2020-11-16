@@ -157,6 +157,57 @@ for shp in shps:
 <p><strong>Úkol 2.</strong> Popsaným způsobem vytvořte rozhraní k nástroji <em>BatchClip</em> a nástroj vyzkoušejte.</p>
 </blockquote>
 <h2 id="zpravy-o-prubehu-vypoctu">Zprávy o průběhu výpočtu</h2>
+<p>Někdy je výhodné, pokud máme ve skriptu zakomponovány zprávy, jež se mají v určité fázi výpočtu vypisovat na výstup (např. na konzoli Python Shell). Je to výhodné zejména ve dvou případech:</p>
+<ul>
+<li>Pokud je výpočet dlouhý a zahrnuje řadu kroků, případně nějaký cyklus, je možné na začátku každého kroku či iterace cyklu nechat vypsat, co program zrovna dělá. Tak budeme mít přehled, v jaké fázi výpočtu zrovna jsme. Navíc pokud program v nějaké fázi selže a skončí chybovým hlášením, budeme vědět, v jaké fázi výpočtu to bylo a kde v kódu máme tedy hledat chybu.</li>
+<li>Druhou situací je, pokud náš program nefunguje správně a my nevíme, kde je chyba. Máme-li např. podezření, že v určité fázi nějaká proměnná neobsahuje hodnotu, kterou by měla, můžeme si nechat obsah této proměnné v dané fázi výpočtu vypsat. To nám může velmi pomoct při hledání, kde jsme udělali chybu.</li>
+</ul>
+<p>V případě našeho jednoduchého nástroje <em>BatchClip</em> bychom mohli např. chtít, aby se v každém kole cyklu vypsala na výstup informace o tom, jakou vrstvu program zrovna zpracovává. Výpis na standardní výstup (např. konzoli Python Shell) se provede jednoduše pomocí funkce <code>print</code>:</p>
+<pre><code class="python">import arcpy, os.path, sys
+
+# Vstupní parametry
+input_folder = r&quot;C:\cesta\ke\slozce\se\vstupnimi\daty&quot;
+clip_features = r&quot;C:\cesta\k\polygonove\vrstve\kterou\se\bude\orezavat.shp&quot;
+output_folder = r&quot;C:\cesta\ke\slozce\s\oriznutymi\vrstvami&quot;
+
+# Nastavení prostředí
+arcpy.env.workspace = input_folder
+arcpy.env.overwriteOutput = True
+
+# Dávkové zpracování nástrojem Clip
+shps = arcpy.ListFeatureClasses()
+for shp in shps:
+
+    print(&quot;Working on &quot; + shp + &quot;...&quot;)
+    sys.__stdout__.flush()
+
+    output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
+    arcpy.Clip_analysis(shp, clip_features, output)
+</code></pre>
+
+<p>Podivný řádek <code>sys.__stdout__.flush()</code> zajišťuje, že se výpis provede opravdu ihned. Pokud jej neuvedeme, často se nic špatného nestane a výpisy budou fungovat jak mají. Někdy však dochází ke zpoždění výpisů, takže se třeba veškeré výpočty nejprve provedou, a pak se na konzoli vypíšou všechna hlášení najednou. Tím ovšem průběžná hlášení přestávají být průběžná a ztrácí smysl. Objekt <code>__stdout__</code> z modulu <code>sys</code> (všimněte si, že tento modul musel být na začátku skriptu načten!) reprezentuje tzv. <em>standardní výstup</em>, kterým je v našem případě konzole Python Shell. Jeho metoda <code>flush</code> pak tzv. "vyleje" či "spláchne" vše, co čeká aktuálně ve frontě na vypsání.</p>
+<p>Jak je možné podobné zprávy posílat do okna výpočtu nástroje v ArcMap? Zde již klasický <code>print</code> nefunguje, nicméně podobnou práci udělá funkce <code>AddMessage</code> balíčku <code>arcpy</code>. Skript nástroje tedy upravíme následovně:</p>
+<pre><code class="python">import arcpy, os.path
+
+# Vstupní parametry
+input_folder = arcpy.GetParameterAsText(0)
+clip_features = arcpy.GetParameterAsText(1)
+output_folder = arcpy.GetParameterAsText(2)
+
+# Nastavení prostředí
+arcpy.env.workspace = input_folder
+arcpy.env.overwriteOutput = True
+
+# Dávkové zpracování nástrojem Clip
+shps = arcpy.ListFeatureClasses()
+for shp in shps:
+
+    arcpy.AddMessage(&quot;Working on &quot; + shp + &quot;...&quot;)
+
+    output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
+    arcpy.Clip_analysis(shp, clip_features, output)
+</code></pre>
+
 <h2 id="odvozene-parametry">Odvozené parametry</h2>
 <h2 id="napoveda">Nápověda</h2>
 <h2 id="podminene-nastaveni-parametru">Podmíněné nastavení parametrů</h2>
