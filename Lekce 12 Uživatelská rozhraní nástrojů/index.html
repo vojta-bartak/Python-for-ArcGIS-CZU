@@ -225,7 +225,7 @@ for shp in shps:
 # Vstupní parametry
 feature_list = [r&quot;C:\vrstva1.shp&quot;, r&quot;C:\vrstva2.shp&quot;, ...]
 buffer_distance = 100
-output_features = r&quot;C:\vystupni_vrstva&quot;
+output_features = r&quot;C:\vystupni_vrstva.shp&quot;
 
 # Nastavení environments
 arcpy.env.workspace = &quot;in_memory&quot;
@@ -238,7 +238,7 @@ for fc in feature_list:
     buffers.append(b)
 
 # Spojení obalových zón
-u = arcpy.Union_analysis(buffers, &quot;union.shp&quot;)
+u = arcpy.Union_analysis(buffers, &quot;union&quot;)
 arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
 </code></pre>
 
