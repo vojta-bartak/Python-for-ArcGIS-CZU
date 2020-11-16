@@ -280,13 +280,13 @@ for fc in feature_list:
     buffers.append(b)
 
 # Spojení obalových zón
-u = arcpy.Union_analysis(buffers, &quot;union.shp&quot;)
+u = arcpy.Union_analysis(buffers, &quot;union&quot;)
 arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
 </code></pre>
 
 <p>Všimněme si dvou věcí:</p>
 <ul>
-<li>Do parametru <code>feature_list</code> předá funkce <code>GetParameterAsText</code> jednotlivé vstupní vrstvy jako pythonovský seznam textů (adres jednotlivých vrstev), takže je možné tento seznam následně v cyklu procházet a vytvářet obalové zóny. To je díky tomu, že jsme v grafickém rozhraní u příslušného parametru nastavili jeho vlastnost <em>MultiValue</em> na "Yes".</li>
+<li>Do parametru <code>feature_list</code> předá funkce <code>GetParameterAsText</code> jednotlivé vstupní vrstvy jako jeden textový řetězec, ve kterém jsou adresy jednotlivých vstupních vrstev za sebou oddělené středníky. (To je díky tomu, že jsme v grafickém rozhraní u příslušného parametru nastavili jeho vlastnost <em>MultiValue</em> na "Yes".) Metoda <code>split(";")</code> zavolaná na tomto řetězci z něj vytvoří pythonovský seznam, který je možné následně v cyklu procházet a vytvářet obalové zóny. </li>
 <li>U parametru <em>buffer_distance</em> je třeba hodnotu vrácenou funkcí <code>GetParameterAsText</code> převést na číselný typ funkcí <code>float</code>, jinak by se totiž jednalo o textový řetězec. (Ve skutečnosti by nástroj <em>Buffer</em> akceptoval i textový vstup, ale v řadě jiných případů je třeba textový výstup funkce <code>GetParameterAsText</code> převést na jiný datový typ.)</li>
 </ul>
 <blockquote>
