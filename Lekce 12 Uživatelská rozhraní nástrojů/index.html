@@ -265,7 +265,7 @@ arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;
 <pre><code class="python">import arcpy
 
 # Vstupní parametry
-feature_list = arcpy.GetParameterAsText(0)
+feature_list = arcpy.GetParameterAsText(0).split(&quot;;&quot;)
 buffer_distance = float(arcpy.GetParameterAsText(1))
 output_features = arcpy.GetParameterAsText(2)
 
