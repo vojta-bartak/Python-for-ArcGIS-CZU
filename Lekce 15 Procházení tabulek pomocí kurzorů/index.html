@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Vojta Barták">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lekce 15: Kurzory - Python pro ArcGIS</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lekce 15: Proch\u00e1zen\u00ed tabulek pomoc\u00ed kurzor\u016f", url: "#_top", children: [
+              {title: "\u010cten\u00ed \u0159\u00e1dk\u016f pomoc\u00ed Search kurzoru", url: "#cteni-radku-pomoci-search-kurzoru" },
+              {title: "P\u0159eps\u00e1n\u00ed hodnot v \u0159\u00e1dku pomoc\u00ed Update kurzoru", url: "#prepsani-hodnot-v-radku-pomoci-update-kurzoru" },
+              {title: "P\u0159id\u00e1n\u00ed nov\u00e9ho \u0159\u00e1dku pomoc\u00ed Insert kurzoru", url: "#pridani-noveho-radku-pomoci-insert-kurzoru" },
+              {title: "Star\u00e9 typy kurzor\u016f", url: "#stare-typy-kurzoru" },
+              {title: "Shrnut\u00ed", url: "#shrnuti" },
+              {title: "\u00dalohy", url: "#ulohy" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-link">
+        Lekce 12: Uživatelská rozhraní
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="lekce-15-prochazeni-tabulek-pomoci-kurzoru">Lekce 15: Procházení tabulek pomocí kurzorů</h1>
+<h2 id="cteni-radku-pomoci-search-kurzoru">Čtení řádků pomocí <em>Search</em> kurzoru</h2>
+<h2 id="prepsani-hodnot-v-radku-pomoci-update-kurzoru">Přepsání hodnot v řádku pomocí <em>Update</em> kurzoru</h2>
+<h2 id="pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí <em>Insert</em> kurzoru</h2>
+<h2 id="stare-typy-kurzoru">Staré typy kurzorů</h2>
+<h2 id="shrnuti">Shrnutí</h2>
+<h2 id="ulohy">Úlohy</h2>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-link">
+        Lekce 12: Uživatelská rozhraní
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 15 Procházení tabulek pomocí kurzorů.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
