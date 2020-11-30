@@ -218,6 +218,25 @@ with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&qu
 <p><strong>Úkol 4.</strong> Pomocí kurzoru vypočítejte index tvaru (obvod dělený plochou) jednotlivých polygonů krajů. (Nápověda: nejprve do tabulky přidejte pole "Plocha" a "Obvod" a nástrojem <em>Calculate Field</em> vypočítejte jejich hodnoty. Následně kurzorem projděte tabulku a tyto hodnoty podělte.)</p>
 </blockquote>
 <h2 id="prepsani-hodnot-v-radku-pomoci-update-kurzoru">Přepsání hodnot v řádku pomocí <em>Update</em> kurzoru</h2>
+<p>Pokud chceme obsah tabulky nejen číst, ale i měnit, použijeme <em>Update</em> kurzor. Syntaxe je prakticky stejná jako u <em>Search</em> kurzoru:</p>
+<pre><code class="python">tab = arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
+</code></pre>
+
+<p>Rozdíl je v tom, jaké metody má příslušný kurzor v nabídce (v předchozí části jsme používali např. metodu <code>next</code>, která je dostupná i v <em>Update</em> kurzoru). U <em>Update</em> kurzoru jde především o metodu <em>updateRow</em>, pomocí které lze daný řádek, na kterém zrovna kurzor je, nahradit jiným řádkem. Ten je třeba metodě předat v podobě <em>n</em>-tice nebo seznamu odpovídající délky, přičemž jednotlivé položky musejí svým datovým typem odpovídat otevřeným sloupcům.</p>
+<p>V následující ukázce změníme kategorii města Brno z 2 na 3 (tím o tomto městu nenaznačujeme nic špatného!):</p>
+<pre><code class="python">import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\CR_kraje_sidla_toky&quot;
+tab = arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;], 
+                            '&quot;NAZEV&quot; = \'Brno\'')
+tab.next()
+tab.updateRow((&quot;Brno&quot;, 3))
+del(tab)
+</code></pre>
+
+<p>Všimněte si, že jsme otevřeli rovnou pouze řádek s Brnem. Přesto jsme museli použít metodu <code>next</code>, abychom se na tento první řádek kurzorem posunuli.</p>
+<blockquote>
+<p><strong>Úkol 5.</strong> Do tabulky krajů přidejte textové pole "STAV" a vyplňte do něj hodnotu "OK" pro ty kraje, kde je zemřelých méně či stejně jako narozených, a "KO" pro ostatní.</p>
+</blockquote>
 <h2 id="pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí <em>Insert</em> kurzoru</h2>
 <h2 id="stare-typy-kurzoru">Staré typy kurzorů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
