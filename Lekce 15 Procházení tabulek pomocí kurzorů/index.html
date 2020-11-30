@@ -87,12 +87,145 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="lekce-15-prochazeni-tabulek-pomoci-kurzoru">Lekce 15: Procházení tabulek pomocí kurzorů</h1>
+<p>V této lekci si ukážeme, jak lze procházet atributové tabulky (či jiné tabulky ve formátu <code>.dbf</code>) řádek po řádku a část a zapisovat hodnoty z jednotlivých polí (sloupců). Jednotlivé procedury si budeme zkoušet na <a href="https://owncloud.cesnet.cz/index.php/s/87mECJH9RhNIdVz">datech</a> krajů (polygony) a velkých měst (body) ČR. </p>
+<blockquote>
+<p><strong>Úkol 1.</strong> Obě vrstvy si nahrajte do mapového dokumentu v ArcMap a prohlédněte si je, včetně atributových tabulek.</p>
+</blockquote>
+<p>Procházení tabulky se děje pomocí tzv. <em>kurzoru</em>, což je objekt podobný tomu, jaký vytváříme při otevírání textových souborů funkcí <code>open</code>: zprostředkovává spojení s daným souborem (tabulkou), takže po celou dobu, kdy tabulku procházíme, je uzamčena pro úpravy jinými aplikacemi. Z toho důvodu je po ukončení práce s tabulkou nutné vytvořený kurzor smazat (příkazem <code>del</code>), podobně jako po ukončení práce s textovým souborem jej uzavřeme metodou <code>close</code>.</p>
+<p>Kurzory v <code>arcpy</code> jsou trojího druhu:</p>
+<ul>
+<li><strong>Search Cursor</strong> - určený pro pouhé čtení hodnot z tabulky,</li>
+<li><strong>Update Cursor</strong> - určený pro čtení a zápis do existujících řádků tabulky,</li>
+<li><strong>Insert Cursor</strong> - určený pro vkládání nových řádků do tabulky.</li>
+</ul>
 <h2 id="cteni-radku-pomoci-search-kurzoru">Čtení řádků pomocí <em>Search</em> kurzoru</h2>
+<p>Syntaxe použití kurzoru je následující:</p>
+<pre><code class="python">tab = arcpy.da.SearchCursor(in_table, field_names, {where_clause}, ...)
+</code></pre>
+
+<p>V uvedeném kódu ukládáme kurzor do proměnné <code>tab</code>. Část <code>arcpy.da.</code> odkazuje na skutečnost, že kurzory jsou v balíčku <code>arcpy</code> implementovány v samostatném modulu <code>da</code> (zkratka pro "Data Access"). Kurzor se vytváří stejnojmenným konstruktorem dané třídy (funkce <code>SearchCursor</code> v ukázce). Nejdůležitějšími parametry funkce jsou: </p>
+<ul>
+<li><strong>in_table</strong> - tabulka, která se má otevřít (celá cesta jako řetězec, případně relativní cesta vzhledem k pracovnímu adresáři) - může se jednat o shapefile, <code>.dbf</code> tabulku, diskrétní rastr (který má tabulku), vrstvu (pokud jsme ji vytvořili či pokud pracujeme v Python Window v ArcMap) apod.,</li>
+<li><strong>field_names</strong> - seznam polí (sloupců), která chceme otevřít (pythonovský seznam řetězců),</li>
+<li><strong>where_clause</strong> - SQL dotaz (nepovinně), kterým můžeme omezit otevíranou tabulku pouze na vybrané řádky.</li>
+</ul>
+<p>Kurzor obsahuje ještě další parametry (znázorněné v ukázce třemi tečkami), ty však zde ponecháme stranou.</p>
+<p>Kurzor je možné přímo procházet <code>for</code> cyklem. Iterační proměnná přitom prochází jednotlivé řádky a nabývá vždy hodnoty <em>n</em>-tice stejné délky, jako je délka řádku (tj. počet otevřených polí). Ukažme si to na příkladu otevření atributů "KATEGORIE" a "NAZEV" vrstvy sídel:</p>
+<pre><code class="python">import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\...&quot;
+tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
+for r in tab:
+    print(r)
+del(tab)
+</code></pre>
+
+<p>Po spuštění skriptu obdržíme na konzoli následující výpis:</p>
+<pre><code>(u'Praha', 1)
+(u'Brno', 2)
+(u'Plze\u0148', 2)
+(u'Ostrava', 2)
+(u'Karlovy Vary', 3)
+(u'Zl\xedn', 3)
+(u'Chomutov', 3)
+(u'Most', 3)
+(u'\xdast\xed nad Labem', 3)
+(u'Kladno', 3)
+(u'Hradec Kr\xe1lov\xe9', 3)
+(u'Karvin\xe1', 3)
+(u'Pardubice', 3)
+(u'Fr\xfddek-M\xedstek', 3)
+(u'Hav\xed\u0159ov', 3)
+(u'Liberec', 3)
+(u'\u010cesk\xe9 Bud\u011bjovice', 3)
+(u'Olomouc', 3)
+</code></pre>
+
+<p>Jelikož je řádek jednoduchou <em>n</em>-ticí, jemožné k jednotlivým položkám (sloupcům) řádku přistupovat pomocí indexů:</p>
+<pre><code class="python"># -*- coding: cp1250 -*-
+
+import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\...&quot;
+tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
+for r in tab:
+    print(u&quot;Město kategorie &quot; + str(r[1]) + &quot; se jmenuje &quot; + r[0] + &quot;.&quot;)
+del(tab)
+</code></pre>
+
+<p>Výpis vypadá následovně:</p>
+<pre><code class="python">Město kategorie 1 se jmenuje Praha.
+Město kategorie 2 se jmenuje Brno.
+Město kategorie 2 se jmenuje Plzeň.
+Město kategorie 2 se jmenuje Ostrava.
+Město kategorie 3 se jmenuje Karlovy Vary.
+Město kategorie 3 se jmenuje Zlín.
+Město kategorie 3 se jmenuje Chomutov.
+Město kategorie 3 se jmenuje Most.
+Město kategorie 3 se jmenuje Ústí nad Labem.
+Město kategorie 3 se jmenuje Kladno.
+Město kategorie 3 se jmenuje Hradec Králové.
+Město kategorie 3 se jmenuje Karviná.
+Město kategorie 3 se jmenuje Pardubice.
+Město kategorie 3 se jmenuje Frýdek-Místek.
+Město kategorie 3 se jmenuje Havířov.
+Město kategorie 3 se jmenuje Liberec.
+Město kategorie 3 se jmenuje České Budějovice.
+Město kategorie 3 se jmenuje Olomouc.
+</code></pre>
+
+<p>Všimněme si, že jsme při otevírání tabulky změnili pořadí sloupců oproti tomu, jak se tabulka zobrazuje v ArcMap. Při otevírání tabulky pomocí kurzoru můžeme zvolit libovolné sloupce v libovolném pořadí, dokonce můžeme jeden sloupec otevřít v několika kopiích (což má zřídka nějaký dobrý důvod). Při čtení hodnot z řádku je přitom pořadí položek přesně takové, v jakém pořadí jsme sloupce seřadili při vytváření kurzoru.</p>
+<p>V předešlé ukázce jsme nevyužili volitelný parametr <em>where_clause</em>, kterým můžeme omezit otvírané řádky. Pokud bychom např. chtěli otevřít pouze záznamy o městech první a druhé kategorie, vypadal by kód takto:</p>
+<pre><code class="python">import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\...&quot;
+tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&quot;KATEGORIE&quot; &lt; 3')
+for r in tab:
+    print(r[0])
+del(tab)
+</code></pre>
+
+<p>Výsledek:</p>
+<pre><code>Praha
+Brno
+Plzeň
+Ostrava
+</code></pre>
+
+<p>Procházení pomocí <code>for</code> cyklu není jediný způsob, jak kurzorem procházet tabulku. Chceme-li se v tabulce posunout o jeden řádek, můžeme použít metodu kurzoru <code>next</code>, která vrací aktuální řádek a zároveň posouvá polohu kurzoru na následující řádek. Tímto způsobem je možné např. číst obsah osmnáctého řádku:</p>
+<pre><code class="python">import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\CR_kraje_sidla_toky&quot;
+tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
+for i in range(18):
+    r = tab.next()
+print(r)
+del(tab)
+</code></pre>
+
+<pre><code>(u'Olomouc', 3)
+</code></pre>
+
+<p>Při procházení tabulky je možné kurzor posouvat pouze dopředu. Pokud se dostaneme na konec tabulky (ať již <code>for</code> cyklem nebo metodou <code>next</code>), tabulku již znovu procházet nelze. K tomu účelu je nutné kurzor vytvořit znovu.</p>
+<p>Na závěr pojednání o <em>Search</em> kurzoru si ukážeme, jak se lze vyhnout nutnosti kurzor po použití mazat, a to díky klauzuli <code>with</code>, kterou znáte (v podobném kontextu) z lekce o textových souborech:</p>
+<pre><code class="python">import arcpy
+arcpy.env.workspace = r&quot;C:\my_path\...&quot;
+with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&quot;KATEGORIE&quot; &lt; 3') as tab:
+    for r in tab:
+        print(r[0])
+# Zde následují další příkazy, přičemž kurzor již je zavřený
+</code></pre>
+
+<blockquote>
+<p><strong>Úkol 2.</strong> Otevřete tabulku krajů a vypište jejich názvy a počty obyvatel.</p>
+<p><strong>Úkol 3.</strong> Pomocí kurzoru najděte kraj s největší početní převahou žen nad muži.</p>
+<p><strong>Úkol 4.</strong> Pomocí kurzoru vypočítejte index tvaru (obvod dělený plochou) jednotlivých polygonů krajů. (Nápověda: nejprve do tabulky přidejte pole "Plocha" a "Obvod" a nástrojem <em>Calculate Field</em> vypočítejte jejich hodnoty. Následně kurzorem projděte tabulku a tyto hodnoty podělte.)</p>
+</blockquote>
 <h2 id="prepsani-hodnot-v-radku-pomoci-update-kurzoru">Přepsání hodnot v řádku pomocí <em>Update</em> kurzoru</h2>
 <h2 id="pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí <em>Insert</em> kurzoru</h2>
 <h2 id="stare-typy-kurzoru">Staré typy kurzorů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
+<ol>
+<li>Napište skript, který pro polygonovou vrstvu krajinného pokryvu vypočítá průměrný index tvaru pro jednotlivé třídy krajinného pokryvu. Řešte bez kurzorů. </li>
+<li>Řešte předchozí úlohu s pomocí kurzorů, výsledek uložte do tabulky ve formátu <code>.csv</code>.</li>
+</ol>
 
   <br>
     
