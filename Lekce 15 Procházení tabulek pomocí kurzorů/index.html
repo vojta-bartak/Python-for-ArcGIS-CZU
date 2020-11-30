@@ -35,6 +35,7 @@
           {title: "Lekce 15: Proch\u00e1zen\u00ed tabulek pomoc\u00ed kurzor\u016f", url: "#_top", children: [
               {title: "\u010cten\u00ed \u0159\u00e1dk\u016f pomoc\u00ed Search kurzoru", url: "#cteni-radku-pomoci-search-kurzoru" },
               {title: "P\u0159eps\u00e1n\u00ed hodnot v \u0159\u00e1dku pomoc\u00ed Update kurzoru", url: "#prepsani-hodnot-v-radku-pomoci-update-kurzoru" },
+              {title: "Smaz\u00e1n\u00ed \u0159\u00e1dku", url: "#smazani-radku" },
               {title: "P\u0159id\u00e1n\u00ed nov\u00e9ho \u0159\u00e1dku pomoc\u00ed Insert kurzoru", url: "#pridani-noveho-radku-pomoci-insert-kurzoru" },
               {title: "Star\u00e9 typy kurzor\u016f", url: "#stare-typy-kurzoru" },
               {title: "Shrnut\u00ed", url: "#shrnuti" },
@@ -96,7 +97,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><strong>Search Cursor</strong> - určený pro pouhé čtení hodnot z tabulky,</li>
 <li><strong>Update Cursor</strong> - určený pro čtení a zápis do existujících řádků tabulky,</li>
-<li><strong>Insert Cursor</strong> - určený pro vkládání nových řádků do tabulky.</li>
+<li><strong>Insert Cursor</strong> - určený pro vkládání nových řádků do tabulky a mazání existujících řádků.</li>
 </ul>
 <h2 id="cteni-radku-pomoci-search-kurzoru">Čtení řádků pomocí <em>Search</em> kurzoru</h2>
 <p>Syntaxe použití kurzoru je následující:</p>
@@ -237,7 +238,30 @@ del(tab)
 <blockquote>
 <p><strong>Úkol 5.</strong> Do tabulky krajů přidejte textové pole "STAV" a vyplňte do něj hodnotu "OK" pro ty kraje, kde je zemřelých méně či stejně jako narozených, a "KO" pro ostatní.</p>
 </blockquote>
+<h2 id="smazani-radku">Smazání řádku</h2>
+<p>Dalším použitím <em>Update</em> kurzoru je smazání řádku. Toho nyní využijeme a pokusíme se vymazat město Brno z mapy světa nadobro. Jelikož však následně budeme chtít svůj strašný čin odčinit a pomocí <em>Insert</em> kurzoru Brno opět na mapu světa vrátit, bude vhodné si příslušný záznam někam dopředu uložit, např. takto:</p>
+<pre><code class="python">with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
+                          '&quot;NAZEV&quot; = \'Brno\'') as tab:
+    brno = tab.next()
+</code></pre>
+
+<p>Důležité je zde uchovat i obsah sloupce <em>Shape</em>, což se děje pomocí názvu <code>"SHAPE@"</code> (o tomto poli a jeho použití se důkladně zmíníme v další lekci). V tomto poli je totiž uložena geometrie prvku (v našem případě souřadnice města Brna), které budeme při jeho obnovování potřebovat.</p>
+<p>Nyní již samotná poprava:</p>
+<pre><code class="python">with arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
+                          '&quot;NAZEV&quot; = \'Brno\'') as tab:
+    tab.next()
+    tab.deleteRow()
+</code></pre>
+
+<p>O výsledku se v tabulce měst přesvědčte sami...</p>
 <h2 id="pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí <em>Insert</em> kurzoru</h2>
+<p>Nyní, jak jsme avizovali, jsme si uvědomili dosah našeho brutálního činu. Naštěstí je zde <em>Insert</em> kurzor, umožňující do tabulky vložit nový řádek. Má jednodušší syntax, neboť neumožňuje filtrování otvíraných řádků pomocí SQL dotazu. Jediné, co můžeme ovlivnit, je, které sloupce otevřeme. Nový řádek se přitom vždy přidává na konec tabulky (i v případě tak významného města, jakým je Brno).</p>
+<p>Pokud pracujeme s atributovou tabulkou vektorové vrstvy, je nutné mít na paměti, že kdykoli přidáváme nový záznam, je třeba v daném řádku mít i geometrii přidávaného prvku, kterou je třeba vložit do pole <em>Shape</em>. Jinak by danému řádku neodpovídal žádný geometrický prvek a celá vrstva by byla poškozena nepoužitelná. My jsme si naštěstí v případě Brna geometrii uložili, takže není problém ji do tabulky opět vrátit:</p>
+<pre><code class="python">with arcpy.da.InsertCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;]) as tab:
+    tab.insertRow(brno)
+</code></pre>
+
+<p>Zbývá než doufat, že jste celou proceduru smazání a opětovné záchrany Brna dělali v rámci jedné session, tj. že jste mezitím nerestartovali konzoli. Proměnná <code>brno</code> by tak byla smazána a město nadobro ztraceno... </p>
 <h2 id="stare-typy-kurzoru">Staré typy kurzorů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
 <h2 id="ulohy">Úlohy</h2>
