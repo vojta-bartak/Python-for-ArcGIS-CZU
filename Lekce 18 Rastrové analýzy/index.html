@@ -39,6 +39,7 @@
               {title: "Lok\u00e1ln\u00ed mapov\u00e1 algebra", url: "#lokalni-mapova-algebra" },
               {title: "Reklasifikace", url: "#reklasifikace" },
               {title: "Anal\u00fdza viditelnosti", url: "#analyza-viditelnosti" },
+              {title: "Spojen\u00ed podm\u00ednek", url: "#spojeni-podminek" },
           ]},
         ];
 
@@ -183,6 +184,29 @@ aspect.save(&quot;path\to\aspect.tif&quot;)
 <p>Dalším krokem je zjistit, která místa <em>nejsou</em> vidět ani z jednoho z vrcholů. Použijeme nástroj <em>Visibility</em> (mohli bychom však stejně dobře použít i starší nástroj <em>Viewshed</em>, který provádí stejný výpočet, jen mí trochu jiné rozhraní). Jak snadno zjistíme v nápovědě, nástroj <em>Visibility</em> má velké množství parametrů. Z nich budeme chtít většinu ponechat ve výchozím nastavení. Budeme však potřebovat nastavit parametr <em>Observation offset</em>, neboť je třeba uvažovat výšku pozorovatele, stojícího vždy na daném vrcholu (uvažujme např. výšku 1,7 m). Jelikož je parametr <em>Observation offset</em> až jedenáctým parametrem v pořadí, je možné nepovinné parametry umístěné před ním, u nichž chceme ponechat výchozí hodnoty, nahradit prázdnými řetězci (prozkoumejte ostatní parametry v nápovědě k nástroji!):</p>
 <pre><code class="python">visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
 </code></pre>
+
+<p>Jelikož jsme typ analýzy ponechali ve výchozím nastavení jako "FREQUENCY", je výsledkem analýzy viditelnosti rastr, kde je v každé buňce informace o počtu viditelných vrcholů (resp. počtu vrcholů, z nichž je daná buňka vidět). Kdybychom typ analýzy změnily na "OBSERVERS", pak by se ve výsledku daly odlišit jednotlivé vrcholy od sebe.</p>
+<p>Jelikož my chceme zjistit, které buňky <em>nejsou</em> vidět zni z jednoho vrcholu, potřebujeme změnit hodnoty 0 (není vidět ani z jednoho vrcholu) na 1 a ostatní hodnoty na 0. To lze buď reklasifikací, </p>
+<pre><code class="python">reclass_table = arcpy.sa.RemapRange([[0,0,1], [1,1000,0]])
+visibility_ok = arcpy.sa.Reclassify(visibility, &quot;Value&quot;, reclass_table)
+</code></pre>
+
+<p>nebo pomocí nástroje <em>Equal To</em>,</p>
+<pre><code class="python">visibility_ok = arcpy.sa.EqualTo(visibility, 0)
+</code></pre>
+
+<p>nebo pomocí operátoru <code>==</code>:</p>
+<pre><code class="python">visibility_ok = visbility == 0
+</code></pre>
+
+<p>Poslední způsob je zjevně nejjednodušší.</p>
+<h2 id="spojeni-podminek">Spojení podmínek</h2>
+<p>Výsledné spojení podmínek je možné realizovat opakovaným použitím nástroje <em>Boolean And</em>:</p>
+<pre><code class="python">plochy_1 = arcpy.sa.BooleanAnd(slp_ok, aspect_ok)
+plochy_ok = arcpy.sa.BooleanAnd(plochy_1, visibility_ok)
+</code></pre>
+
+<p>Nahradíme-li nástroj</p>
 
   <br>
     
