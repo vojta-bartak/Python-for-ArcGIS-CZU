@@ -289,12 +289,57 @@ cs = float(result.getOutput(0))
 </code></pre>
 
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
-<p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť. Principem řešení bude pochopitelně cyklus přes všechny okresy. Možných řešení je více, zde si ukážeme následující:</p>
+<p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť. Principem řešení bude pochopitelně cyklus přes všechny okresy. Výstupem budou jednak jednotlivé vrstvy vyhovujících ploch (pojmenované názvy okresů), jednak souhrnná tabulka <code>csv</code> s názvy okresů a rozlohami vyhovujících ploch. </p>
+<p>Možných řešení je více, zde si ukážeme následující:</p>
 <ol>
 <li>Kurzorem si otevřeme vrstvu okresů a budeme postupně <code>for</code> cyklem procházet jednotlivé okresy.</li>
 <li>V každém kole cyklu si daný okres si uložíme jako samostatný shapefile (<code>"in_memory"</code>).</li>
 <li>Nastavíme rozsah a masku dle tohoto okresu a celou analýzu provedeme tak, jak jsme ji řešili pro celou ČR.</li>
+<li>Zjištěnou plochu uložíme společně s názvem okresu do výstupní tabulky.</li>
 </ol>
+<p>Nejprve upravíme začátek skriptu tak, že adresu výstupního rastru nahradíme výstupní složkou a přidáme adresu výstupní tabulky. Dále také změníme velikost buňky, neboť nyní může v rámci každého okresu analýza proběhnout podrobněji. Dále vypustíme nastavení masky, neboť masku budeme nastavovat pro každý okres zvlášť.</p>
+<pre><code class="python">import arcpy
+
+# Vstupní vrstvy a další parametry
+in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
+in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
+in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
+vrst_field = &quot;VYSKA&quot; # Pole ve vrstvě vrstevnic, kde je nadmořská výška
+vrch_field = &quot;VYSKA&quot; # Pole ve vrstvě vrcholů, kde je nadmořská výška
+out_folder = r&quot;C:\cesta\k\výstupní\složce&quot;
+out_csv = r&quot;C:\cesta\kde\má\být\uložena\výstupní\tabulka.csv&quot;
+
+# Nastavení prostředí
+arcpy.env.workspace = r&quot;in_memory&quot;
+arcpy.env.cellSize = 50
+arcpy.env.overwriteOutput = True
+arcpy.CheckOutExtension(&quot;Spatial&quot;)
+</code></pre>
+
+<p>Než začneme procházet v cyklu jednotlivé okresy, otevřeme si výstupní tabulky pro zápis a přidáme hlavičku:</p>
+<pre><code class="python">csv = open(out_csv, &quot;w&quot;)
+csv.write(&quot;OKRES;ROZLOHA_VINIC\n&quot;)
+</code></pre>
+
+<p>Nyní můžeme přistoupit k samotnému cyklu. Otevřeme si kurzorem okresy a zahájíme cyklus. Budeme přitom potřebovat jednak název okresu, jednak samotnou geometrii okresu, abychom ji použili jako masku:</p>
+<pre><code class="python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
+for r in tab:
+</code></pre>
+
+<p>Hned na začátku si v každém kole cyklu "vytáhneme" z řádku název zpracovávaného okresu a jeho geometrii (toto není nutné, jen pak bude další část přehlednější).</p>
+<pre><code class="python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
+for r in tab:
+    nazev_okresu = r[0]
+    okres = r[1]
+</code></pre>
+
+<p>Nyní okres využijeme k nastavení masky a prostorového rozsahu (pochopitelně stále zůstáváme odsazeni na úroveň těla cyklu, tj. jednu úroveň za hlavičku <code>for</code> cyklu):</p>
+<pre><code class="python">    arcpy.env.extent = okres.extent
+    arcpy.env.mask = okres
+</code></pre>
+
+<p>Jak vidíme, k těmto nastavením můžeme použít přímo objekt třídy <code>Polygon</code></p>
+<p>V řadě analýz, kde bychom </p>
 
   <br>
     
