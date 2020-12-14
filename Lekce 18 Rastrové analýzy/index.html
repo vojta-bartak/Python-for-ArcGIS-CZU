@@ -33,6 +33,8 @@
         
         var pageToc = [
           {title: "Lekce 18: Rastrov\u00e9 anal\u00fdzy", url: "#_top", children: [
+              {title: "Nastaven\u00ed prost\u0159ed\u00ed a parametr\u016f", url: "#nastaveni-prostredi-a-parametru" },
+              {title: "Topo to Raster", url: "#topo-to-raster" },
           ]},
         ];
 
@@ -93,6 +95,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><code>okresy.shp</code>: polygonová vrstva okresů ČR.</li>
 </ul>
 <p>Úlohu budeme řešit nejprve pro celou ČR, následně řešení upravíme tak, aby proběhlo postupně pro jednotlivé okresy ČR.</p>
+<h2 id="nastaveni-prostredi-a-parametru">Nastavení prostředí a parametrů</h2>
 <p>Prvním krokem bude načtení modulů, nastavení prostředí a definování proměnných se vstupními parametry výpočtu:</p>
 <pre><code class="python">import arcpy
 
@@ -102,16 +105,36 @@ arcpy.env.cellSize = 250
 arcpy.env.overwriteOutput = True
 arcpy.CheckOutExtension(&quot;Spatial&quot;)
 
-# Vstupní vrstvy
-in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice.shp&quot;
+# Vstupní vrstvy a další parametry
+in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
 in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
 in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
+vrst_field = &quot;VYSKA&quot; # Pole ve vrstvě vrstevnic, kde je nadmořská výška
+vrch_field = &quot;VYSKA&quot; # Pole ve vrstvě vrcholů, kde je nadmořská výška
 </code></pre>
 
 <p>Příkaz <code>arcpy.CheckOutExtension('Spatial')</code> zajišťuje zpřístupnění licence extenze <em>Spatial Analyst</em>, kterou budeme pro výpočet potřebovat. Zapnutí extenze v ArcMap je součástí nastavení mapového dokumentu, proto při práci s Extenzemi pomocí Pythonu je třeba toto nastavení vždy explicitně udělat. Výraz <code>CheckOut</code> může být matoucí - opravdu se jím extenze zapíná, a nikoli vypíná. Naopak příkazem <code>CheckInExtension</code> se extenze vypíná.</p>
+<h2 id="topo-to-raster">Topo to Raster</h2>
 <p>Jelikož podmínky pro vinici zahrnují sklon, orientaci svahu a viditelnost, bude prvním krokem naší analýzy vytvoření digitálního modelu terénu. Protože informaci o terénu máme v podobě vrstevnic, nezbývá než použít nástroj <em>TopoToRaster</em>. Ten je z hlediska volání v Pythonu poněkud složitější (viz nápovědu!).</p>
 <p>Jak víte, do nástroje <em>TopoToRaster</em> může vstupovat více různých vstupních vrstev, přičemž každá může být jiného typu. Základním vstupem je zpravidla vrstva vrstevnic (typ <em>Contour</em>), doplňkovými vstupy v našem případě budou vrstva vrcholů (typ <em>Point Elevation</em>) a vrstva okresů (typ <em>Boundary</em>). Odpovídá to následujícímu nastavení v okně nástroje:</p>
 <p><img alt="image-20201214124258717" src="../images/image-20201214124258717.png" /></p>
+<p>Každému z typů vstupů odpovídá v balíčku <code>arcpy</code> samostatná třída, která tento typ vstup reprezentuje. Pro typ <em>Contour</em> je zde třída <code>TopoContour</code>, pro typ <em>PointElevation</em> třída <code>TopoPointElevation</code> a pro typ <em>Boundary</em> třída <code>TopoBoundary</code> (obdobně i pro ostatní typy vstupů). To znamená, že každý ze vstupů je třeba reprezentovat objektem příslušné třídy. Tyto třídy, stejně jako samotný nástroj <em>TopoToRaster</em>, jsou přitom přístupné přes modul <code>sa</code> ("Spatial Analyst"). Vytvoření jednotlivých vstupů bude tedy vypadat následovně:</p>
+<pre><code class="python">inContours = arcpy.sa.TopoContour([[in_vrst, vrst_field]])
+inPoints = arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]])
+inBoundary = arcpy.sa.TopoBoundary([in_okre])
+</code></pre>
+
+<p>U vrstevnic a vrcholů se vstup zadává jako seznam seznamů: vnější seznam je zde proto, že vrstev s vrstevnicemi (či vrcholy) může být teoreticky více, přičemž všechny se společně zadávají do jediného objektu <code>TopoContour</code>. Vnitřní seznam je zde proto, že ke každé vrstvě vrstevnic či vrcholů je třeba připojit informaci, ve kterém poli jsou hodnoty nadmořské výšky. Vstup <em>Boundary</em> se zadává jako jednoduchý seznam, neboť i vrstev s hranicemi zájmového území by teoreticky mohlo být více.</p>
+<p>Z jednotlivých objektů <code>Topo*</code> se následně vytvoří seznam, a ten se předá jako vstup do nástroje <em>TopoToRaster</em>:</p>
+<pre><code class="python">dtm = arcpy.sa.TopoToRaster([inContours, inPoints, inBoundary], enforce = &quot;NO_ENFORCE&quot;)
+</code></pre>
+
+<p>Zde je třeba upozornit na základní rozdíl mezi tím, jak v Pythonu funguje většina nástrojů z ArcToolboxu a jak fungují rastrové nástroje z extenze Spatial Analyst. Zatímco návratovou hodnotou většiny ostatních nástrojů je objekt třídy <em>Result</em>, u nástrojů, jejichž výstupem je rastr, je návratovou hodnotou objekt třídy <code>RasterLayer</code>, což je přímo výstupní rastr, nicméně pouze jako vrstva v operační paměti. Výstup se tedy nezapisuje automaticky na disk, a chceme-li jej uchovat (tj. uložit na disk), je třeba tak učinit explicitně v samostatném kroku pomocí metody <code>save</code>, kterou třída <code>RasterLayer</code> disponuje:</p>
+<pre><code class="python">dtm.save(&quot;C\:cesta\kde\má\být\uložen\rastr\dtm.tif&quot;)
+</code></pre>
+
+<p>Toto chování je ve skutečnosti velmi výhodné: umožňuje nám vykonat při výpočtu celou řadu mezikroků, jejichž výstupy není třeba ukládat na disk. Tam nakonec uložíme až finální výsledek analýzy.</p>
+<p>Dalším krokem analýzy je </p>
 
   <br>
     
