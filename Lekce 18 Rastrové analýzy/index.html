@@ -352,6 +352,100 @@ for r in tab:
 <pre><code class="python">    arcpy.env.mask = okres_shp
 </code></pre>
 
+<p>Dále můžeme do těla cyklu (s odpovídajícím odsazení) vložit celou analýzu tak, jak jsme ji vytvořili pro celou ČR, takže celý cyklus bude nyní vypadat nějak takto:</p>
+<pre><code class="python">for r in tab:
+
+    nazev_okresu = r[0]
+    okres = r[1]
+
+    # Nastavení rozsahu
+    arcpy.env.extent = okres.extent
+
+    # Uložení okresu do nového shapefilu
+    okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
+
+    # Nastavení masky
+    arcpy.env.mask = okres_shp
+
+    # Tvorba DTM (Topo to Raster)
+    dtm = arcpy.sa.TopoToRaster([arcpy.sa.TopoContour([[in_vrst, vrst_field]]), 
+                                 arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]]), 
+                                 arcpy.sa.TopoBoundary([okres_shp])],
+                                enforce = &quot;NO_ENFORCE&quot;)
+
+    # Sklon, aspekt a viditelnost
+    slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
+    aspect = arcpy.sa.Aspect(dtm)
+    visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
+
+    # Multikriteriální analýza
+    plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
+
+    # Uložení výsledku
+    out_name = os.path.join(out_folder, nazev_okresu + &quot;_vinice.tif&quot;)
+    plochy_ok.save(out_name)
+
+    # Výpočet plochy
+    cs = arcpy.env.cellsize
+    area = arcpy.da.SearchCursor(out_name, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
+</code></pre>
+
+<p>Oproti původnímu kódu jsme provedli následující úpravy:</p>
+<ul>
+<li>Trochu jinak jsme napsali vstupy do nástroje <em>TopoToRaster</em>: předtím jsme si jednotlivé vstupy vytvořili předem do zvláštních proměnných, nyní jsme je vytvořili přímo uvnitř volání nástroje. (Tato úprava nebyla nijak nutná, slouží jen k ukázce různých způsobů, jak danou věc zapsat.)</li>
+<li>Kdekoli jsme předtím používali proměnnou <code>in_okre</code>, nahradili jsme ji proměnnou<code>okres_shp</code>.</li>
+<li>Název výstupu jsme složili z názvu výstupní složky, názvu okresu a koncovky <code>"_vinice.tif"</code> pomocí funkce <code>os.path.join</code>. Pozor: na začátek skriptu je třeba přidat příkaz k načtení příslušného modulu!</li>
+<li>Název výstupního rastru (viz předchozí bod) uložený do proměnné <code>out_name</code> jsme použili při výpočtu plochy pomocí kurzoru.</li>
+</ul>
+<p>Poslední věc, kterou je třeba v rámci cyklu udělat, je zapsat název okresu a rozlohu vyhovujících ploch do výstupní tabulky:</p>
+<pre><code class="python">    csv.write(nazev_okresu + &quot;;&quot; + str(area) + &quot;\n&quot;)
+</code></pre>
+
+<p>Nakonec, na závěr celého skriptu (tj. až po skončení cyklu), je třeba zavřít otevřenou tabulku a kurzor:</p>
+<pre><code class="python">csv.close()
+del(tab)
+</code></pre>
+
+<p>A to je vše. Přidáme-li ještě průběžné hlášení, jaký okres se zrovna zpracovává, bude skript vypadat takto:</p>
+<pre><code class="python">
+import arcpy, os.path, sys
+
+# Vstupní vrstvy a další parametry
+in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
+in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
+in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
+vrst_field = &quot;VYSKA&quot; # Pole ve vrstvě vrstevnic, kde je nadmořská výška
+vrch_field = &quot;VYSKA&quot; # Pole ve vrstvě vrcholů, kde je nadmořská výška
+out_folder = r&quot;C:\cesta\k\výstupní\složce&quot;
+out_csv = r&quot;C:\cesta\kde\má\být\uložena\výstupní\tabulka.csv&quot;
+
+# Nastavení prostředí
+arcpy.env.workspace = r&quot;in_memory&quot;
+arcpy.env.cellSize = 50
+arcpy.env.overwriteOutput = True
+arcpy.CheckOutExtension(&quot;Spatial&quot;)
+
+# Otevření výstupní tabulky pro zápis
+csv = open(out_csv, &quot;w&quot;)
+csv.write(&quot;OKRES;ROZLOHA_VINIC\n&quot;)
+
+# Otevření okresů kurzorem a zahájení cyklu
+tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
+for r in tab:
+
+    nazev_okresu = r[0]
+    okres = r[1]
+
+    print(u&quot;Zpracovávám okres&quot;)
+
+    # Nastavení masky a rozsahu
+    arcpy.env.extent = okres.extent
+    arcpy.env.mask = okres
+
+    # Uložení okresu do nového shapefilu
+    okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
+</code></pre>
+
   <br>
     
 
