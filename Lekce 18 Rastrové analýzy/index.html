@@ -407,7 +407,7 @@ del(tab)
 </code></pre>
 
 <p>A to je vše. Přidáme-li ještě průběžné hlášení, jaký okres se zrovna zpracovává, bude skript vypadat takto:</p>
-<pre><code class="python">
+<pre><code class="python"># -*- coding: cp1250 -*-
 import arcpy, os.path, sys
 
 # Vstupní vrstvy a další parametry
@@ -436,14 +436,46 @@ for r in tab:
     nazev_okresu = r[0]
     okres = r[1]
 
-    print(u&quot;Zpracovávám okres&quot;)
+    print(u&quot;Zpracovávám okres &quot; + nazev_okresu + &quot;...&quot;)
+    sys.__stdout__.flush()
 
-    # Nastavení masky a rozsahu
+    # Nastavení rozsahu
     arcpy.env.extent = okres.extent
-    arcpy.env.mask = okres
 
     # Uložení okresu do nového shapefilu
     okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
+
+    # Nastavení masky
+    arcpy.env.mask = okres_shp
+
+    # Tvorba DTM (Topo to Raster)
+    dtm = arcpy.sa.TopoToRaster([arcpy.sa.TopoContour([[in_vrst, vrst_field]]), 
+                                 arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]]), 
+                                 arcpy.sa.TopoBoundary([okres_shp])],
+                                enforce = &quot;NO_ENFORCE&quot;)
+
+    # Sklon, aspekt a viditelnost
+    slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
+    aspect = arcpy.sa.Aspect(dtm)
+    visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
+
+    # Multikriteriální analýza
+    plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
+
+    # Uložení výsledku
+    out_name = os.path.join(out_folder, nazev_okresu + &quot;_vinice.tif&quot;)
+    plochy_ok.save(out_name)
+
+    # Výpočet plochy
+    cs = arcpy.env.cellsize
+    area = arcpy.da.SearchCursor(out_name, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
+
+    # Zápis plochy do tabulky
+    csv.write(nazev_okresu + &quot;;&quot; + str(area) + &quot;\n&quot;)
+
+# Úklid
+csv.close()
+del(tab)
 </code></pre>
 
   <br>
