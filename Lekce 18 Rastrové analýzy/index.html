@@ -258,8 +258,8 @@ plochy_ok.save(out_plochy)
 </code></pre>
 
 <h2 id="vypocet-plochy">Výpočet plochy</h2>
-<p>Zbývá ještě vypočítat plochu. K tomu můžeme použít údaj o počtu buněk s danou hodnotou, který najdeme v atributové tabulce výsledného rastru <code>plochy_ok</code>. Vyhovující plochy jsou kódované hodnotou <code>1</code>. Tabulku rastru můžeme standardním způsobem otevřít kurzorem:</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(plochy_ok)
+<p>Zbývá ještě vypočítat plochu. K tomu můžeme použít údaj o počtu buněk s danou hodnotou, který najdeme v atributové tabulce výsledného rastru <code>plochy_ok</code>. Vyhovující plochy jsou kódované hodnotou <code>1</code>. Tabulku rastru můžeme standardním způsobem otevřít kurzorem, do něj však není možné dát jako vstup přímo objekt <code>Raster</code>. Můžeme však využít toho, že jsem výsledný rastr již uložili na disk, a otevřít tak kurzorem tento uložený rastr, jehož adresu máme v proměnné <code>out_plochy</code>:</p>
+<pre><code class="python">tab = arcpy.da.SearchCursor(out_plochy)
 </code></pre>
 
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
