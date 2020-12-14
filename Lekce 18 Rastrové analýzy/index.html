@@ -333,13 +333,24 @@ for r in tab:
     okres = r[1]
 </code></pre>
 
-<p>Nyní okres využijeme k nastavení masky a prostorového rozsahu (pochopitelně stále zůstáváme odsazeni na úroveň těla cyklu, tj. jednu úroveň za hlavičku <code>for</code> cyklu):</p>
+<p>Nyní okres využijeme k nastavení prostorového rozsahu (pochopitelně stále zůstáváme odsazeni na úroveň těla cyklu, tj. jednu úroveň za hlavičku <code>for</code> cyklu):</p>
 <pre><code class="python">    arcpy.env.extent = okres.extent
-    arcpy.env.mask = okres
 </code></pre>
 
-<p>Jak vidíme, k těmto nastavením můžeme použít přímo objekt třídy <code>Polygon</code></p>
-<p>V řadě analýz, kde bychom </p>
+<p>Jak vidíme, k tomuto nastavením můžeme použít přímo objekt třídy <code>Polygon</code> a jeho vlastnost <code>extent</code>, reprezentující jeden prvek vrstvy okresů. Podobně bychom mohli tento objekt použít i ve většině analýz. Bohužel nastavení masky takto provést nelze, stejně jako nelze použít objekt <code>Polygon</code> jako vstup <code>TopoBoundary</code> v nástroji <em>TopoToRaster</em>. Proto nám nezbyde, než polygon uložit jako samostatný shapefile. To lze např. takto:</p>
+<pre><code class="python">    okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
+</code></pre>
+
+<p>případně složitěji:</p>
+<pre><code class="python">    okres_shp = arcpy.CreateFeatureclass_management(arcpy.env.workspace, 
+                                                    &quot;okres.shp&quot;, 
+                                                    &quot;POLYGON&quot;)
+    arcpy.da.InsertCursor(&quot;okres.shp&quot;, [&quot;SHAPE@&quot;]).insertRow((okres,))
+</code></pre>
+
+<p>Nyní můžeme nastavit masku:</p>
+<pre><code class="python">    arcpy.env.mask = okres_shp
+</code></pre>
 
   <br>
     
