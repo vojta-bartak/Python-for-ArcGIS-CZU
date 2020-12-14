@@ -252,11 +252,16 @@ visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot
 plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
 
 # Uložení výsledku
-plochy_ok.sace(r&quot;C:\cesta\kde\má\být\uložen\výsledeke.tif&quot;)
+plochy_ok.save(r&quot;C:\cesta\kde\má\být\uložen\výsledeke.tif&quot;)
 </code></pre>
 
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
-<p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť.</p>
+<p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť. Principem řešení bude pochopitelně cyklus přes všechny okresy. Možných řešení je více, zde si ukážeme následující:</p>
+<ol>
+<li>Kurzorem si otevřeme vrstvu okresů a budeme postupně <code>for</code> cyklem procházet jednotlivé okresy.</li>
+<li>V každém kole cyklu si daný okres si uložíme jako samostatný shapefile ("in_memory").</li>
+<li>Nastavíme rozsah a masku dle tohoto okresu a celou analýzu provedeme tak, jak jsme ji řešili pro celou ČR.</li>
+</ol>
 
   <br>
     
