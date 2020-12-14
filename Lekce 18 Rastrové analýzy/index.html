@@ -201,12 +201,22 @@ visibility_ok = arcpy.sa.Reclassify(visibility, &quot;Value&quot;, reclass_table
 
 <p>Poslední způsob je zjevně nejjednodušší.</p>
 <h2 id="spojeni-podminek">Spojení podmínek</h2>
-<p>Výsledné spojení podmínek je možné realizovat opakovaným použitím nástroje <em>Boolean And</em>:</p>
+<p>Výsledné spojení (průnik) podmínek je možné realizovat opakovaným použitím nástroje <em>Boolean And</em>:</p>
 <pre><code class="python">plochy_1 = arcpy.sa.BooleanAnd(slp_ok, aspect_ok)
 plochy_ok = arcpy.sa.BooleanAnd(plochy_1, visibility_ok)
 </code></pre>
 
-<p>Nahradíme-li nástroj</p>
+<p>Nahradíme-li nástroj <em>Boolean And</em> operátorem <code>&amp;</code>, je navíc možné oba kroky spojit do jednoho:</p>
+<pre><code class="python">plochy_ok = slp_ok &amp; aspect_ok &amp; visibility_ok
+</code></pre>
+
+<p>Pochopitelně stejného výsledku dosáhneme i pouhým vynásobením rastrů (kontrolní otázka: proč?):</p>
+<pre><code class="python">plochy_ok = slp_ok * aspect_ok * visibility_ok
+</code></pre>
+
+<p>Do jednoho kroku bychom případně mohli sloučit nejen toto finální spojení podmínek, ale i jednotlivé dílčí podmínky, asi takto:</p>
+<pre><code class="python">plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
+</code></pre>
 
   <br>
     
