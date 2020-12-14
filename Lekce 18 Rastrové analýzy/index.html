@@ -40,6 +40,7 @@
               {title: "Reklasifikace", url: "#reklasifikace" },
               {title: "Anal\u00fdza viditelnosti", url: "#analyza-viditelnosti" },
               {title: "Spojen\u00ed podm\u00ednek", url: "#spojeni-podminek" },
+              {title: "V\u00fdpo\u010det plochy", url: "#vypocet-plochy" },
               {title: "\u0158e\u0161en\u00ed zvl\u00e1\u0161\u0165 pro jednotliv\u00e9 okresy", url: "#reseni-zvlast-pro-jednotlive-okresy" },
           ]},
         ];
@@ -111,6 +112,7 @@ in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
 in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
 vrst_field = &quot;VYSKA&quot; # Pole ve vrstvě vrstevnic, kde je nadmořská výška
 vrch_field = &quot;VYSKA&quot; # Pole ve vrstvě vrcholů, kde je nadmořská výška
+out_plochy = r&quot;C:\cesta\kde\má\být\uložen\výsledek.tif&quot;
 
 # Nastavení prostředí
 arcpy.env.workspace = r&quot;in_memory&quot;
@@ -252,7 +254,12 @@ visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot
 plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
 
 # Uložení výsledku
-plochy_ok.save(r&quot;C:\cesta\kde\má\být\uložen\výsledeke.tif&quot;)
+plochy_ok.save(out_plochy)
+</code></pre>
+
+<h2 id="vypocet-plochy">Výpočet plochy</h2>
+<p>Zbývá ještě vypočítat plochu. K tomu můžeme použít údaj o počtu buněk s danou hodnotou, který najdeme v atributové tabulce výsledného rastru <code>plochy_ok</code>. Vyhovující plochy jsou kódované hodnotou <code>1</code>. Tabulku rastru můžeme standardním způsobem otevřít kurzorem:</p>
+<pre><code class="python">tab = arcpy.da.SearchCursor(plochy_ok)
 </code></pre>
 
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
