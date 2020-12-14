@@ -259,14 +259,40 @@ plochy_ok.save(out_plochy)
 
 <h2 id="vypocet-plochy">Výpočet plochy</h2>
 <p>Zbývá ještě vypočítat plochu. K tomu můžeme použít údaj o počtu buněk s danou hodnotou, který najdeme v atributové tabulce výsledného rastru <code>plochy_ok</code>. Vyhovující plochy jsou kódované hodnotou <code>1</code>. Tabulku rastru můžeme standardním způsobem otevřít kurzorem, do něj však není možné dát jako vstup přímo objekt <code>Raster</code>. Můžeme však využít toho, že jsem výsledný rastr již uložili na disk, a otevřít tak kurzorem tento uložený rastr, jehož adresu máme v proměnné <code>out_plochy</code>:</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(out_plochy)
+<pre><code class="python">tab = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value&quot; = 1')
+</code></pre>
+
+<p>Otevíráme pole <code>Count</code>, obsahující počty buněk pro jednotlivé hodnoty rastru. Zároveň otevíráme pouze řádek, odpovídající hodnotě 1, což je zajištěno SQL dotazem <code>"Value" = 1</code>. Otevíraná tabulka má tedy jen jeden řádek, na který se dostaneme metodu <code>next</code>:</p>
+<pre><code class="python">radek = tab.next()
+</code></pre>
+
+<p>Počet buněk s hodnotou 1 je tedy první položkou (otevíráme jen jeden sloupec: <code>Count</code>) tohoto řádku:</p>
+<pre><code class="python">pocet_bunek = radek[0]
+</code></pre>
+
+<p>Rozlohu vyhovujících ploch dostaneme vynásobením tohoto počtu buněk druhou mocninou velikosti buňky:</p>
+<pre><code class="python">cs = arcpy.env.cellsize
+area = pocet_bunek*cs*cs
+</code></pre>
+
+<p>Zde předpokládáme, že velikost buňky nastavená v Environments odpovídá velikosti buňky našeho výstupního rastru. Alternativně bychom mohlo velikost buňky daného rastru zjistit pomocí funkce <code>Describe</code>:</p>
+<pre><code class="python">cs = arcpy.Describe(out_plochy).meanCellWidth
+</code></pre>
+
+<p>případně pomocí nástroje <em>GetRasterProperties</em> ze sady <em>Data Management Tools</em>:</p>
+<pre><code class="python">result = arcpy.GetRasterProperties_management(out_plochy, &quot;CELLSIZEX&quot;)
+cs = float(result.getOutput(0))
+</code></pre>
+
+<p>Ať již získáme hodnotu <code>cs</code> (cellsize) tak či tak, následný výpočet plochy můžeme stručně napsat na jeden řádek:</p>
+<pre><code class="python">area = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
 </code></pre>
 
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
 <p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť. Principem řešení bude pochopitelně cyklus přes všechny okresy. Možných řešení je více, zde si ukážeme následující:</p>
 <ol>
 <li>Kurzorem si otevřeme vrstvu okresů a budeme postupně <code>for</code> cyklem procházet jednotlivé okresy.</li>
-<li>V každém kole cyklu si daný okres si uložíme jako samostatný shapefile ("in_memory").</li>
+<li>V každém kole cyklu si daný okres si uložíme jako samostatný shapefile (<code>"in_memory"</code>).</li>
 <li>Nastavíme rozsah a masku dle tohoto okresu a celou analýzu provedeme tak, jak jsme ji řešili pro celou ČR.</li>
 </ol>
 
