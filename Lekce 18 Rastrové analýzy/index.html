@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Vojta Barták">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lekce 18: Rastrové analýzy - Python pro ArcGIS</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lekce 18: Rastrov\u00e9 anal\u00fdzy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
+        Lekce 15: Kurzory
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="lekce-18-rastrove-analyzy">Lekce 18: Rastrové analýzy</h1>
+<p>Budeme řešit následující úlohu:</p>
+<blockquote>
+<p>Jako vášnivý milovník vína toužíte po vlastní vinici. Nejprve je pro ni však třeba vybrat vhodné území, splňující následující kritéria: bude na svazích se sklonem menším než 20%, s jihovýchodní až jihozápadní orientací a zároveň skryta před zraky nenechavých turistů, kteří by ji mohli z okolních vyhlídek vidět a přijít na ochutnávku hroznů. Jakou rozlohu má vhodné území pro založení vinice?</p>
+</blockquote>
+<p>(Samozřejmě pro reálnou analýzu bychom navíc uvažovali nadmořskou výšku (např. do 400 m n. m.) a půdní typ.)</p>
+<p>K dispozici máme (data jsou ke stažení <a href="https://owncloud.cesnet.cz/index.php/s/1HMr6tOrOCYIPiq">zde</a>):</p>
+<ul>
+<li><code>vrstevnice_25.shp</code>: liniová vrstva vrstevnic s krokem 25 m.</li>
+<li><code>vrcholy.shp</code>: bodová vrstva vrcholků kopců.</li>
+<li><code>okresy.shp</code>: polygonová vrstva okresů ČR.</li>
+</ul>
+<p>Úlohu budeme řešit nejprve pro celou ČR, následně řešení upravíme tak, aby proběhlo postupně pro jednotlivé okresy ČR.</p>
+<p>Prvním krokem bude načtení modulů, nastavení prostředí a definování proměnných se vstupními parametry výpočtu:</p>
+<pre><code class="python">import arcpy
+
+# Nastavení prostředí
+arcpy.env.workspace = r&quot;in_memory&quot;
+arcpy.env.cellSize = 250
+arcpy.env.overwriteOutput = True
+arcpy.CheckOutExtension(&quot;Spatial&quot;)
+
+# Vstupní vrstvy
+in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice.shp&quot;
+in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
+in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
+</code></pre>
+
+<p>Příkaz <code>arcpy.CheckOutExtension('Spatial')</code> zajišťuje zpřístupnění licence extenze <em>Spatial Analyst</em>, kterou budeme pro výpočet potřebovat. Zapnutí extenze v ArcMap je součástí nastavení mapového dokumentu, proto při práci s Extenzemi pomocí Pythonu je třeba toto nastavení vždy explicitně udělat. Výraz <code>CheckOut</code> může být matoucí - opravdu se jím extenze zapíná, a nikoli vypíná. Naopak příkazem <code>CheckInExtension</code> se extenze vypíná.</p>
+<p>Jelikož podmínky pro vinici zahrnují sklon, orientaci svahu a viditelnost, bude prvním krokem naší analýzy vytvoření digitálního modelu terénu. Protože informaci o terénu máme v podobě vrstevnic, nezbývá než použít nástroj <em>TopoToRaster</em>. Ten je z hlediska volání v Pythonu poněkud složitější (viz nápovědu!).</p>
+<p>Jak víte, do nástroje <em>TopoToRaster</em> může vstupovat více různých vstupních vrstev, přičemž každá může být jiného typu. Základním vstupem je zpravidla vrstva vrstevnic (typ <em>Contour</em>), doplňkovými vstupy v našem případě budou vrstva vrcholů (typ <em>Point Elevation</em>) a vrstva okresů (typ <em>Boundary</em>). Odpovídá to následujícímu nastavení v okně nástroje:</p>
+<p><img alt="image-20201214124258717" src="../images/image-20201214124258717.png" /></p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../about_me/" class="btn btn-xs btn-link">
+        O mně...
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
+        Lekce 15: Kurzory
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 18 Rastrové analýzy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
