@@ -38,6 +38,7 @@
               {title: "Slope a Aspect", url: "#slope-a-aspect" },
               {title: "Lok\u00e1ln\u00ed mapov\u00e1 algebra", url: "#lokalni-mapova-algebra" },
               {title: "Reklasifikace", url: "#reklasifikace" },
+              {title: "Anal\u00fdza viditelnosti", url: "#analyza-viditelnosti" },
           ]},
         ];
 
@@ -174,7 +175,14 @@ aspect.save(&quot;path\to\aspect.tif&quot;)
 </code></pre>
 
 <p>Vidíme, že reklasifikační tabulka je do tohoto objektu poslána ve formě seznamu seznamů, kdy vnější seznam je seznamem řádků, vnitřní seznamy reprezentují jednotlivé řádky tabulky. První a druhá hodnota těchto seznamů reprezentují meze daného rozsahu ("Old values"), třetí hodnota reprezentuje novou hodnotu ("New values").</p>
-<p>Takto vytvořená rekla</p>
+<p>Takto vytvořenou reklasifikační tabulku je možné použít jako vstup do nástroje <em>Reclassify</em>:</p>
+<pre><code class="python">aspect_ok = arcpy.sa.Reclassify(aspect, &quot;Value&quot;, reclass_table)
+</code></pre>
+
+<h2 id="analyza-viditelnosti">Analýza viditelnosti</h2>
+<p>Dalším krokem je zjistit, která místa <em>nejsou</em> vidět ani z jednoho z vrcholů. Použijeme nástroj <em>Visibility</em> (mohli bychom však stejně dobře použít i starší nástroj <em>Viewshed</em>, který provádí stejný výpočet, jen mí trochu jiné rozhraní). Jak snadno zjistíme v nápovědě, nástroj <em>Visibility</em> má velké množství parametrů. Z nich budeme chtít většinu ponechat ve výchozím nastavení. Budeme však potřebovat nastavit parametr <em>Observation offset</em>, neboť je třeba uvažovat výšku pozorovatele, stojícího vždy na daném vrcholu (uvažujme např. výšku 1,7 m). Jelikož je parametr <em>Observation offset</em> až jedenáctým parametrem v pořadí, je možné nepovinné parametry umístěné před ním, u nichž chceme ponechat výchozí hodnoty, nahradit prázdnými řetězci (prozkoumejte ostatní parametry v nápovědě k nástroji!):</p>
+<pre><code class="python">visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
+</code></pre>
 
   <br>
     
