@@ -40,6 +40,7 @@
               {title: "Reklasifikace", url: "#reklasifikace" },
               {title: "Anal\u00fdza viditelnosti", url: "#analyza-viditelnosti" },
               {title: "Spojen\u00ed podm\u00ednek", url: "#spojeni-podminek" },
+              {title: "\u0158e\u0161en\u00ed zvl\u00e1\u0161\u0165 pro jednotliv\u00e9 okresy", url: "#reseni-zvlast-pro-jednotlive-okresy" },
           ]},
         ];
 
@@ -218,6 +219,44 @@ plochy_ok = arcpy.sa.BooleanAnd(plochy_1, visibility_ok)
 <p>Do jednoho kroku bychom případně mohli sloučit nejen toto finální spojení podmínek, ale i jednotlivé dílčí podmínky, asi takto:</p>
 <pre><code class="python">plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
 </code></pre>
+
+<p>Celé řešení by tedy mohlo vypadat např. nějak takto (rozhodně to není jediná správná možnost!):</p>
+<pre><code class="python">import arcpy
+
+# Vstupní vrstvy a další parametry
+in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
+in_vrch = r&quot;C:\cesta\k\souboru\vrcholy.shp&quot;
+in_okre = r&quot;C:\cesta\k\souboru\okresy.shp&quot;
+vrst_field = &quot;VYSKA&quot; # Pole ve vrstvě vrstevnic, kde je nadmořská výška
+vrch_field = &quot;VYSKA&quot; # Pole ve vrstvě vrcholů, kde je nadmořská výška
+
+# Nastavení prostředí
+arcpy.env.workspace = r&quot;in_memory&quot;
+arcpy.env.cellSize = 250
+arcpy.env.overwriteOutput = True
+arcpy.env.mask = in_okre
+arcpy.CheckOutExtension(&quot;Spatial&quot;)
+
+# Tvorba DTM (Topo to Raster)
+inContours = arcpy.sa.TopoContour([[in_vrst, vrst_field]])
+inPoints = arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]])
+inBoundary = arcpy.sa.TopoBoundary([in_okre])
+dtm = arcpy.sa.TopoToRaster([inContours, inPoints, inBoundary], enforce = &quot;NO_ENFORCE&quot;)
+
+# Sklon, aspekt a viditelnost
+slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
+aspect = arcpy.sa.Aspect(dtm)
+visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
+
+# Multikriteriální analýza
+plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
+
+# Uložení výsledku
+plochy_ok.sace(r&quot;C:\cesta\kde\má\být\uložen\výsledeke.tif&quot;)
+</code></pre>
+
+<h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
+<p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť.</p>
 
   <br>
     
