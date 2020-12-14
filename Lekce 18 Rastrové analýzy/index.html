@@ -35,6 +35,9 @@
           {title: "Lekce 18: Rastrov\u00e9 anal\u00fdzy", url: "#_top", children: [
               {title: "Nastaven\u00ed prost\u0159ed\u00ed a parametr\u016f", url: "#nastaveni-prostredi-a-parametru" },
               {title: "Topo to Raster", url: "#topo-to-raster" },
+              {title: "Slope a Aspect", url: "#slope-a-aspect" },
+              {title: "Lok\u00e1ln\u00ed mapov\u00e1 algebra", url: "#lokalni-mapova-algebra" },
+              {title: "Reklasifikace", url: "#reklasifikace" },
           ]},
         ];
 
@@ -129,12 +132,49 @@ inBoundary = arcpy.sa.TopoBoundary([in_okre])
 <pre><code class="python">dtm = arcpy.sa.TopoToRaster([inContours, inPoints, inBoundary], enforce = &quot;NO_ENFORCE&quot;)
 </code></pre>
 
-<p>Zde je třeba upozornit na základní rozdíl mezi tím, jak v Pythonu funguje většina nástrojů z ArcToolboxu a jak fungují rastrové nástroje z extenze Spatial Analyst. Zatímco návratovou hodnotou většiny ostatních nástrojů je objekt třídy <em>Result</em>, u nástrojů, jejichž výstupem je rastr, je návratovou hodnotou objekt třídy <code>RasterLayer</code>, což je přímo výstupní rastr, nicméně pouze jako vrstva v operační paměti. Výstup se tedy nezapisuje automaticky na disk, a chceme-li jej uchovat (tj. uložit na disk), je třeba tak učinit explicitně v samostatném kroku pomocí metody <code>save</code>, kterou třída <code>RasterLayer</code> disponuje:</p>
+<p>Zde je třeba upozornit na základní rozdíl mezi tím, jak v Pythonu funguje většina nástrojů z ArcToolboxu a jak fungují rastrové nástroje z extenze Spatial Analyst. Zatímco návratovou hodnotou většiny ostatních nástrojů je objekt třídy <em>Result</em>, u nástrojů, jejichž výstupem je rastr, je návratovou hodnotou objekt třídy <code>Raster</code>, což je přímo výstupní rastr, nicméně pouze jako vrstva v operační paměti. Výstup se tedy nezapisuje automaticky na disk, a chceme-li jej uchovat (tj. uložit na disk), je třeba tak učinit explicitně v samostatném kroku pomocí metody <code>save</code>, kterou třída <code>Raster</code> disponuje:</p>
 <pre><code class="python">dtm.save(&quot;C\:cesta\kde\má\být\uložen\rastr\dtm.tif&quot;)
 </code></pre>
 
 <p>Toto chování je ve skutečnosti velmi výhodné: umožňuje nám vykonat při výpočtu celou řadu mezikroků, jejichž výstupy není třeba ukládat na disk. Tam nakonec uložíme až finální výsledek analýzy.</p>
-<p>Dalším krokem analýzy je </p>
+<h2 id="slope-a-aspect">Slope a Aspect</h2>
+<p>Dalším krokem analýzy je výpočet sklonu nástrojem <em>Slope</em> (opět bude výstupem pouze vrstva třídy <code>Raster</code> neuložená na disk):</p>
+<pre><code class="python">slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
+</code></pre>
+
+<p>Podobným způsobem vypočítáme aspekt:</p>
+<pre><code class="python">aspect = arcpy.sa.Aspect(dtm)
+</code></pre>
+
+<p>Pokud bychom chtěli některý z rastrů uložit na disk (což nyní nepotřebujeme), můžeme opět použít metodu <code>save</code>:</p>
+<pre><code class="python">slp.save(&quot;path\to\slope.tif&quot;)
+aspect.save(&quot;path\to\aspect.tif&quot;)
+</code></pre>
+
+<h2 id="lokalni-mapova-algebra">Lokální mapová algebra</h2>
+<p>Podmínka týkající se vyhovujícího sklonu říká, že by měl být menší než 20%. K tomu můžeme buď použít nástroj <em>LessThan</em>:</p>
+<pre><code class="python">slp_ok = arpcy.sa.LessThan(slp, 20)
+</code></pre>
+
+<p>mnohem elegantnější a jednodušší je však využít toho, že modul <code>sa</code> definuje pro standardní matematické operátory speciální význam při použití na objekty <code>Raster</code>. Díky tomu můžeme s rastry provádět výpočty na způsob, jaký dobře znáte z <em>RasterCalculatoru</em>:</p>
+<pre><code class="python">slp_ok = slp &lt; 20
+</code></pre>
+
+<p>Výsledkem je opět vrstva třídy <code>Raster</code>, kterou je v případě potřeby metodou <code>save</code> možné uložit na disk jako rastr v požadovaném formátu.</p>
+<p>V případě aspektu máme najít místa, kde je orientace svahu zhruba jižní, tj. mezi jihovýchodem (azimut 135°) a jihozápadem (azimut 225°). Jednou možností by bylo využít matematických a logických operátorů a složit výslednou podmínku průnikem dílčích podmínek: vyhovující aspekt je větší než 135 <em>a zároveň</em> menší než 225:</p>
+<pre><code class="python">aspect_ok = (aspect &gt; 135) &amp; (aspect &lt; 225)
+</code></pre>
+
+<h2 id="reklasifikace">Reklasifikace</h2>
+<p>Jinou možností, jak najít místa s vyhovujícím aspektem, je reklasifikace. Jak známo, základem reklasifikace je tzv. reklasifikační tabulka, což je tabulka o dvou sloupcích, kde levý sloupec definuje původní hodnoty či jejich rozsah, pravý sloupec definuje odpovídající hodnoty v novém, reklasifikovaném rastru. V naší úloze by reklasifikační tabulka vypadala nějak takto:</p>
+<p><img alt="image-20201214133547673" src="../images/image-20201214133547673.png" /></p>
+<p>(Připomeňme, že zahrnutí hodnoty -1 je proto, že touto hodnotou jsou v rastru aspektu kódována plochá území.)</p>
+<p>Podobně jako u nástroje <em>TopoToRaster</em>, i do nástroje <em>Reclassify</em> se vstupní reklasifikační tabulka zadává pomocí objektu speciální třídy. Pokud jsou v levém sloupci tabulky jednotlivé hodnoty, použije se objekt třídy <code>RemapValue</code>. Pokud jsou "staré" hodnoty definovány rozsahem hodnot (jako v našem případě), použije se objekt třídy <code>RemapRange</code>, a to následujícím způsobem:</p>
+<pre><code class="python">reclass_table = arcpy.sa.RemapRange([[-1, 135, 0], [135, 225, 1], [225, 360, 0]])
+</code></pre>
+
+<p>Vidíme, že reklasifikační tabulka je do tohoto objektu poslána ve formě seznamu seznamů, kdy vnější seznam je seznamem řádků, vnitřní seznamy reprezentují jednotlivé řádky tabulky. První a druhá hodnota těchto seznamů reprezentují meze daného rozsahu ("Old values"), třetí hodnota reprezentuje novou hodnotu ("New values").</p>
+<p>Takto vytvořená rekla</p>
 
   <br>
     
