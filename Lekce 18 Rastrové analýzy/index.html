@@ -122,12 +122,12 @@ arcpy.env.mask = in_okre
 arcpy.CheckOutExtension(&quot;Spatial&quot;)
 </code></pre>
 
-<p>Příkaz <code>arcpy.CheckOutExtension('Spatial')</code> zajišťuje zpřístupnění licence extenze <em>Spatial Analyst</em>, kterou budeme pro výpočet potřebovat. Zapnutí extenze v ArcMap je součástí nastavení mapového dokumentu, proto při práci s Extenzemi pomocí Pythonu je třeba toto nastavení vždy explicitně udělat. Výraz <code>CheckOut</code> může být matoucí - opravdu se jím extenze zapíná, a nikoli vypíná. Naopak příkazem <code>CheckInExtension</code> se extenze vypíná.</p>
+<p>Příkaz <code>arcpy.CheckOutExtension('Spatial')</code> zajišťuje zpřístupnění licence extenze <em>Spatial Analyst</em>, kterou budeme pro výpočet potřebovat. Zapnutí extenze v ArcMap je součástí nastavení mapového dokumentu, proto při práci s extenzemi pomocí Pythonu je třeba toto nastavení vždy explicitně udělat. Výraz <code>CheckOut</code> může být matoucí - opravdu se jím extenze zapíná, a nikoli vypíná. Naopak příkazem <code>CheckInExtension</code> se extenze vypíná.</p>
 <h2 id="topo-to-raster">Topo to Raster</h2>
 <p>Jelikož podmínky pro vinici zahrnují sklon, orientaci svahu a viditelnost, bude prvním krokem naší analýzy vytvoření digitálního modelu terénu. Protože informaci o terénu máme v podobě vrstevnic, nezbývá než použít nástroj <em>TopoToRaster</em>. Ten je z hlediska volání v Pythonu poněkud složitější (viz nápovědu!).</p>
 <p>Jak víte, do nástroje <em>TopoToRaster</em> může vstupovat více různých vstupních vrstev, přičemž každá může být jiného typu. Základním vstupem je zpravidla vrstva vrstevnic (typ <em>Contour</em>), doplňkovými vstupy v našem případě budou vrstva vrcholů (typ <em>Point Elevation</em>) a vrstva okresů (typ <em>Boundary</em>). Odpovídá to následujícímu nastavení v okně nástroje:</p>
 <p><img alt="image-20201214124258717" src="../images/image-20201214124258717.png" /></p>
-<p>Každému z typů vstupů odpovídá v balíčku <code>arcpy</code> samostatná třída, která tento typ vstup reprezentuje. Pro typ <em>Contour</em> je zde třída <code>TopoContour</code>, pro typ <em>PointElevation</em> třída <code>TopoPointElevation</code> a pro typ <em>Boundary</em> třída <code>TopoBoundary</code> (obdobně i pro ostatní typy vstupů). To znamená, že každý ze vstupů je třeba reprezentovat objektem příslušné třídy. Tyto třídy, stejně jako samotný nástroj <em>TopoToRaster</em>, jsou přitom přístupné přes modul <code>sa</code> ("Spatial Analyst"). Vytvoření jednotlivých vstupů bude tedy vypadat následovně:</p>
+<p>Každému z typů vstupů odpovídá v balíčku <code>arcpy</code> samostatná třída, která tento typ vstupu reprezentuje. Pro typ <em>Contour</em> je zde třída <code>TopoContour</code>, pro typ <em>PointElevation</em> třída <code>TopoPointElevation</code> a pro typ <em>Boundary</em> třída <code>TopoBoundary</code> (obdobně i pro ostatní typy vstupů). To znamená, že každý ze vstupů je třeba reprezentovat objektem příslušné třídy. Tyto třídy, stejně jako samotný nástroj <em>TopoToRaster</em>, jsou přitom přístupné přes modul <code>sa</code> ("Spatial Analyst"). Vytvoření jednotlivých vstupů bude tedy vypadat následovně:</p>
 <pre><code class="python">inContours = arcpy.sa.TopoContour([[in_vrst, vrst_field]])
 inPoints = arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]])
 inBoundary = arcpy.sa.TopoBoundary([in_okre])
@@ -159,7 +159,7 @@ aspect.save(&quot;path\to\aspect.tif&quot;)
 
 <h2 id="lokalni-mapova-algebra">Lokální mapová algebra</h2>
 <p>Podmínka týkající se vyhovujícího sklonu říká, že by měl být menší než 20%. K tomu můžeme buď použít nástroj <em>LessThan</em>:</p>
-<pre><code class="python">slp_ok = arpcy.sa.LessThan(slp, 20)
+<pre><code class="python">slp_ok = arcpy.sa.LessThan(slp, 20)
 </code></pre>
 
 <p>mnohem elegantnější a jednodušší je však využít toho, že modul <code>sa</code> definuje pro standardní matematické operátory speciální význam při použití na objekty <code>Raster</code>. Díky tomu můžeme s rastry provádět výpočty na způsob, jaký dobře znáte z <em>RasterCalculatoru</em>:</p>
@@ -271,7 +271,7 @@ plochy_ok.save(out_plochy)
 </code></pre>
 
 <p>Rozlohu vyhovujících ploch dostaneme vynásobením tohoto počtu buněk druhou mocninou velikosti buňky:</p>
-<pre><code class="python">cs = arcpy.env.cellsize
+<pre><code class="python">cs = arcpy.env.cellSize
 area = pocet_bunek*cs*cs
 </code></pre>
 
@@ -348,10 +348,7 @@ for r in tab:
     arcpy.da.InsertCursor(&quot;okres.shp&quot;, [&quot;SHAPE@&quot;]).insertRow((okres,))
 </code></pre>
 
-<p>Nyní můžeme nastavit masku:</p>
-<pre><code class="python">    arcpy.env.mask = okres_shp
-</code></pre>
-
+<p>Masku nastavovat nemusíme, neboť oříznutí na daný okres vyřešíme v nástroji <em>TopoToRaster</em> pomocí vstupu typu <code>TopoBoundary</code>.</p>
 <p>Dále můžeme do těla cyklu (s odpovídajícím odsazení) vložit celou analýzu tak, jak jsme ji vytvořili pro celou ČR, takže celý cyklus bude nyní vypadat nějak takto:</p>
 <pre><code class="python">for r in tab:
 
@@ -363,9 +360,6 @@ for r in tab:
 
     # Uložení okresu do nového shapefilu
     okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
-
-    # Nastavení masky
-    arcpy.env.mask = okres_shp
 
     # Tvorba DTM (Topo to Raster)
     dtm = arcpy.sa.TopoToRaster([arcpy.sa.TopoContour([[in_vrst, vrst_field]]), 
@@ -386,7 +380,7 @@ for r in tab:
     plochy_ok.save(out_name)
 
     # Výpočet plochy
-    cs = arcpy.env.cellsize
+    cs = arcpy.env.cellSize
     area = arcpy.da.SearchCursor(out_name, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
 </code></pre>
 
@@ -445,9 +439,6 @@ for r in tab:
     # Uložení okresu do nového shapefilu
     okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
 
-    # Nastavení masky
-    arcpy.env.mask = okres_shp
-
     # Tvorba DTM (Topo to Raster)
     dtm = arcpy.sa.TopoToRaster([arcpy.sa.TopoContour([[in_vrst, vrst_field]]), 
                                  arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]]), 
@@ -467,7 +458,7 @@ for r in tab:
     plochy_ok.save(out_name)
 
     # Výpočet plochy
-    cs = arcpy.env.cellsize
+    cs = arcpy.env.cellSize
     area = arcpy.da.SearchCursor(out_name, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
 
     # Zápis plochy do tabulky
