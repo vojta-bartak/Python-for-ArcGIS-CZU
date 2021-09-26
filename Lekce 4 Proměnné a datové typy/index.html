@@ -1,124 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 4: Proměnné a datové typy - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 4: Proměnné a datové typy - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 4: Prom\u011bnn\u00e9 a datov\u00e9 typy", url: "#_top", children: [
-              {title: "Prom\u011bnn\u00e9", url: "#promenne" },
-              {title: "\u010c\u00edsla", url: "#cisla" },
-              {title: "Textov\u00e9 \u0159et\u011bzce", url: "#textove-retezce" },
-              {title: "Seznamy", url: "#seznamy" },
-              {title: "n-tice a slovn\u00edky", url: "#n-tice-a-slovniky" },
-              {title: "Pravdivostn\u00ed hodnoty", url: "#pravdivostni-hodnoty" },
-              {title: "Hodnota None", url: "#hodnota-none" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 4: Prom\u011bnn\u00e9 a datov\u00e9 typy";
+    var mkdocs_page_input_path = "Lekce 4 Prom\u011bnn\u00e9 a datov\u00e9 typy.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 4: Proměnné a datové typy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#promenne">Proměnné</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cisla">Čísla</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#textove-retezce">Textové řetězce</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#seznamy">Seznamy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#n-tice-a-slovniky">n-tice a slovníky</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pravdivostni-hodnoty">Pravdivostní hodnoty</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hodnota-none">Hodnota None</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Python &raquo;</li>
+        
+      
     
+    <li>Lekce 4: Proměnné a datové typy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 4 Proměnné a datové typy.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-link">
-        Lekce 5: Cykly a podmínky
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="btn btn-xs btn-link">
-        Lekce 3: Rozjezd Pythonu
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-4-promenne-a-datove-typy">Lekce 4: Proměnné a datové typy</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-4-promenne-a-datove-typy">Lekce 4: Proměnné a datové typy</h1>
 <h2 id="promenne">Proměnné</h2>
 <p>V Pythonu je proměnná odkazem na nějaký objekt v operační paměti. Tento objekt může být různého typu (neboli třídy): může jít o číslo, o textový řetězec, nebo o cokoli jiného (viz dále). Proměnná má nějaký název (zvolený námi) a nějakou hodnotu. Hodnotu do proměnné přiřazujeme operátorem <code>=</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; a = 5
+<pre><code class="language-python">&gt;&gt;&gt; a = 5
 </code></pre>
-
 <p>Datový typ proměnné lze zjistit funkcí <em>type</em>:</p>
-<pre><code class="python">&gt;&gt;&gt; type(a)
+<pre><code class="language-python">&gt;&gt;&gt; type(a)
 &lt;type 'int'&gt;
 &gt;&gt;&gt; b = &quot;Ahoj světe&quot;
 &gt;&gt;&gt; type(b)
 &lt;type 'str'&gt;
 </code></pre>
-
 <blockquote>
-<p>Pojem <em>funkce</em> si důkladně rozebereme později. Zatím stačí chápat, že při volání nějaké funkce vždy napíšeme její název a do závorky její <em>argumenty</em>, tj. nějaké hodnoty, se kterými daná funkce něco dělá. Funkce pak většinou něco tzv. <em>vrací</em>, tj. jejím výsledkem je nějaká hodnota (objekt). Kdykoli tedy vidíte za nějakým názvem složené závorky, máte co do činění s funkcí.</p>
+<p>Pojem <em>funkce</em> si důkladně rozebereme později. Zatím stačí chápat, že při volání nějaké funkce vždy napíšeme její název a do závorky její <em>argumenty</em>, tj. nějaké hodnoty, se kterými daná funkce něco dělá. Funkce pak většinou něco tzv. <em>vrací</em>, tj. jejím výsledkem je nějaká hodnota (objekt). Kdykoli tedy vidíte za nějakým názvem jednoduché závorky, máte co do činění s funkcí.</p>
 </blockquote>
 <p>Do proměnné lze "uložit" hodnotu nějaké jiné proměnné:</p>
-<pre><code class="python">&gt;&gt;&gt; a = 5
+<pre><code class="language-python">&gt;&gt;&gt; a = 5
 &gt;&gt;&gt; b = a
 &gt;&gt;&gt; b
 5
 </code></pre>
-
 <p>Je důležité však mít na paměti, že změníme-li hodnotu původní proměnné, hodnota nové proměnné zůstává nezměněna (tato proměnná totiž odkazuje stále na původní objekt - v našem případě číslo 5, kdežto původní proměnná už odkazuje na jiný objekt - např. číslo 100):</p>
-<pre><code class="python">&gt;&gt;&gt; a = 100
+<pre><code class="language-python">&gt;&gt;&gt; a = 100
 &gt;&gt;&gt; b
 5
 </code></pre>
-
 <p>Proměnné mohou mít téměř libovolné názvy, je však nutné dodržet následující pravidla:</p>
 <ul>
 <li>Název začíná písmenem anglické abecedy nebo podtržítkem</li>
@@ -127,18 +181,17 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Malá a velká písmena se <strong>rozlišují</strong></li>
 </ul>
 <p>Python umožňuje i následující podivnost (vytvoření dvou či více proměnných najednou):</p>
-<pre><code class="python">&gt;&gt;&gt; a, b = 3, 5
+<pre><code class="language-python">&gt;&gt;&gt; a, b = 3, 5
 &gt;&gt;&gt; a
 3
 &gt;&gt;&gt; b
 5
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 1.</strong> Zkuste si vytvořit několik proměnných různých názvů a ověřit jejich výše uvedené chování.</p>
 </blockquote>
 <p>Vytvořenou proměnnou lze také smazat, a to pomocí příkazu <code>del</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; x = 5
+<pre><code class="language-python">&gt;&gt;&gt; x = 5
 &gt;&gt;&gt; x
 5
 &gt;&gt;&gt; del x
@@ -148,26 +201,23 @@ Traceback (most recent call last):
     x
 NameError: name 'x' is not defined
 </code></pre>
-
 <h2 id="cisla">Čísla</h2>
 <p>V Pythonu jsou dva základní datové typy pro čísla. Jsou to celá čísla (anglicky <em>integer</em>, zkráceně <em>int</em>):</p>
-<pre><code class="python">&gt;&gt;&gt; 56
+<pre><code class="language-python">&gt;&gt;&gt; 56
 56
 &gt;&gt;&gt; -32586
 -32586
 </code></pre>
-
 <p>a čísla s desetinnou čárkou (anglicky <em>floating point number</em>, zkráceně <em>float</em>):</p>
-<pre><code class="python">&gt;&gt;&gt; 5.32
+<pre><code class="language-python">&gt;&gt;&gt; 5.32
 5.32
 &gt;&gt;&gt; -6e-7
 -6e-7
 &gt;&gt;&gt; -5.0E-4
 -0.0005
 </code></pre>
-
 <p>S čísly lze provádět běžné matematické operace pomocí aritmetických operátorů:</p>
-<pre><code class="python">&gt;&gt;&gt; 3 + 2 # Sčítání
+<pre><code class="language-python">&gt;&gt;&gt; 3 + 2 # Sčítání
 5
 &gt;&gt;&gt; 3 – 2 # Odčítání
 1
@@ -184,10 +234,9 @@ NameError: name 'x' is not defined
 &gt;&gt;&gt; 3 % 2 # Modulo (zbytek po celočíselném dělení)
 1
 </code></pre>
-
 <p>Číselný typ výsledku je vždy určen číselným typem vstupních čísel: jsou-li vstupem pouze celá čísla, je výsledkem celé číslo (při dělení se tedy provede celočíselné dělení); je-li alespoň jeden ze vstupů číslo s desetinnou čárkou, je výsledkem rovněž číslo s desetinnou čárkou.</p>
 <p>Python disponuje řadou vestavěných matematických funkcí (v ukázkou jsou jen některé):</p>
-<pre><code class="python">&gt;&gt;&gt; abs(-5) # Absolutní hodnota
+<pre><code class="language-python">&gt;&gt;&gt; abs(-5) # Absolutní hodnota
 5
 &gt;&gt;&gt; max(5,3,-5,1) # Maximum
 5
@@ -200,9 +249,8 @@ NameError: name 'x' is not defined
 &gt;&gt;&gt; round(5.627,2) # Zaokrouhlení na dvě desetinná místa
 5.63
 </code></pre>
-
 <p>Další matematické funkce lze nalézt v modulu <code>math</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; import math # Načtení modulu math
+<pre><code class="language-python">&gt;&gt;&gt; import math # Načtení modulu math
 &gt;&gt;&gt; math.pi # Aproximace čísla pí
 3.141592653589793
 &gt;&gt;&gt; math.sqrt(2) # Odmocnina
@@ -210,9 +258,8 @@ NameError: name 'x' is not defined
 &gt;&gt;&gt; math.log(math.exp(1)) # Logaritmus a exponenciela
 1.0
 </code></pre>
-
 <p>Mezi jednotlivými číselnými typy lze konvertovat:</p>
-<pre><code class="python">&gt;&gt;&gt; a = 5.6
+<pre><code class="language-python">&gt;&gt;&gt; a = 5.6
 &gt;&gt;&gt; type(a)
 &lt;type 'float'&gt;
 &gt;&gt;&gt; b = int(a) # Konverze na celé číslo
@@ -226,30 +273,27 @@ NameError: name 'x' is not defined
 &gt;&gt;&gt; type(c)
 &lt;type 'float'&gt;
 </code></pre>
-
 <p>Podobně lze konvertovat i mezi jinými datovými typy:</p>
-<pre><code class="python">&gt;&gt;&gt; int(&quot;56&quot;) # Převod textu na celé číslo
+<pre><code class="language-python">&gt;&gt;&gt; int(&quot;56&quot;) # Převod textu na celé číslo
 56
 &gt;&gt;&gt; float(&quot;56&quot;) # Převod textu na číslo s desetinnou čárkou
 56.0
 &gt;&gt;&gt; str(56) # Převod čísla na text
 '56'
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 2.</strong> Vyzkoušejte si všechny výše uvedené operace a příkazy.</p>
 </blockquote>
 <h2 id="textove-retezce">Textové řetězce</h2>
 <p>Textové řetězce (či krátce jen řetězce, angl. <em>string</em>) se zapisují buď v uvozovkách, nebo v apostrofech:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;Toto je textovy retezec, ktery muze obsahovat znak ',&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;Toto je textovy retezec, ktery muze obsahovat znak ',&quot;
 &gt;&gt;&gt; b = 'a toto je retezec, ktery muze obsahovat znak &quot;.'
 &gt;&gt;&gt; print(a); print(b)
 Toto je textovy retezec, ktery muze obsahovat znak ',
 a toto je retezec, ktery muze obsahovat znak &quot;.
 </code></pre>
-
 <p>Třetím způsobem, jak vytvořit řetězec, je použití trojitých uvozovek. Do takového řetězce je pak možné vkládat i více řádků (aniž bychom museli použít speciální znak pro konec řádku):</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;&quot;&quot;Toto je textovy retezec,
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;&quot;&quot;Toto je textovy retezec,
 ktery obsahuje
 tri radky&quot;&quot;&quot;
 &gt;&gt;&gt; print a
@@ -257,16 +301,14 @@ Toto je textovy retezec,
 ktery obsahuje
 tri radky
 </code></pre>
-
 <p>Řetězce lze do jisté míry chápat jako posloupnosti jednotlivých znaků. V Pythonu jsou řetězce indexované, to znamená, že lze např. číst přímo konkrétní (třeba pátý) znak:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu cist paty znak:&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu cist paty znak:&quot;
 &gt;&gt;&gt; print a[4]
 h
 </code></pre>
-
 <p>Indexování v Pythonu začíná nulou, nikoli jedničkou, proto bylo pro vypsání pátého znaku nutné do hranatých závorek psát index 4.</p>
 <p>Vedle přístupu k jednotlivým znakům lze také pomocí hranatých závorek a indexů vytvářet tzv. <em>řezy</em>, neboli číst pouze určitou část řetězce:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu delat rezy:&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;Z tohoto retezce budu delat rezy:&quot;
 &gt;&gt;&gt; print a[2:10]
 tohoto r
 &gt;&gt;&gt; print a[:20]
@@ -274,7 +316,6 @@ Z tohoto retezce bud
 &gt;&gt;&gt; print a[7:]
 o retezce budu delat rezy:
 </code></pre>
-
 <p>Tvorba řezů se řídí následujícími pravidly:</p>
 <ul>
 <li>Řez začíná znakem na pozici prvního indexu a končí na pozici před posledním indexem (poslední prvek tedy již není součástí řezu). Řez <code>a[2:10]</code> tak obsahuje třetí až desátý znak.</li>
@@ -282,17 +323,15 @@ o retezce budu delat rezy:
 <li>Řez s prázdným druhým indexem obsahuje celý původní řetězec počínaje znakem na pozici prvního indexu.</li>
 </ul>
 <p>Řetězce (na rozdíl od seznamů) nelze pomocí indexování a řezů přepisovat. Např. pokud bychom chtěli v textu „kost“ změnit první písmeno na „m“, nelze to provést přímo:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;kost&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;kost&quot;
 &gt;&gt;&gt; a[0] = &quot;m&quot;
 Traceback (most recent call last):
   File &quot;&lt;pyshell#57&gt;&quot;, line 1, in &lt;module&gt;
     a[0] = &quot;m&quot;
 TypeError: 'str' object does not support item assignment
 </code></pre>
-
 <p>Řetězce lze sčítat a násobit přirozeným číslem pomocí operátorů <code>+</code> a <code>*</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;Ahoj&quot;
-28
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;Ahoj&quot;
 &gt;&gt;&gt; b = &quot;Svete&quot;
 &gt;&gt;&gt; print a + b
 AhojSvete
@@ -301,90 +340,75 @@ Ahoj Svete!
 &gt;&gt;&gt; print a*5
 AhojAhojAhojAhojAhoj
 </code></pre>
-
 <p>Změnit výše zmíněnou „kost“ na „most“ lze tedy např. takto:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;kost&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;kost&quot;
 &gt;&gt;&gt; a = &quot;m&quot; + a[1:]
 &gt;&gt;&gt; print a
 most
 </code></pre>
-
 <p>Řetězec může obsahovat tzv. <em>escape sekvence</em>, tj. posloupnosti znaků, nesoucí speciální význam. Escape sekvence je vždy uvozena zpětným lomítkem <code>\</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; print '\'' # Znak apostrofu v řetězci uvozeném apostrofy
+<pre><code class="language-python">&gt;&gt;&gt; print '\'' # Znak apostrofu v řetězci uvozeném apostrofy
 '
 &gt;&gt;&gt; print &quot;\&quot;&quot; # Znak uvozovek v řetězci uvozeném uvozovkami
 &quot;
 &gt;&gt;&gt; print &quot;Zde je\ttabulator&quot; # Znak tabulátoru
-Zde je tabulator
+Zde je     tabulator
 &gt;&gt;&gt; print &quot;Zde je\nnovy radek&quot; # Znak konce řádku
 Zde je
 novy radek
 </code></pre>
-
 <p>Jelikož escape sekvence jsou uvozeny zpětným lomítkem, zpětné lomítko samotné nelze v textu použít:</p>
-<pre><code class="python">&gt;&gt;&gt; print(V tomto textu se snazim pouzit znak \&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; print(V tomto textu se snazim pouzit znak \&quot;)
 SyntaxError: EOL while scanning string literal
 </code></pre>
-
 <p>To lze vyřešit použitím dvojitého zpětného lomítka, což je další z escape sekvencí:</p>
-<pre><code class="python">&gt;&gt;&gt; print(&quot;V tomto textu znak \\ klidne pouziji&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; print(&quot;V tomto textu znak \\ klidne pouziji&quot;)
 V tomto textu znak \ klidne pouziji
 </code></pre>
-
 <p>Toto je důležité zejména při psaní adresářových a souborových adres, kde se zpětná lomítka používají:</p>
-<pre><code class="python">&gt;&gt;&gt; print &quot;C:\\Users\\Muj_pocitac\\Documents&quot;
+<pre><code class="language-python">&gt;&gt;&gt; print &quot;C:\\Users\\Muj_pocitac\\Documents&quot;
 C:\Users\Muj_pocitac\Documents
 </code></pre>
-
 <p>Jiným způsobem psaní adres je použití dopředného lomítka:</p>
-<pre><code class="python">&gt;&gt;&gt; print &quot;C:/Users/Muj_pocitac/Documents&quot;
+<pre><code class="language-python">&gt;&gt;&gt; print &quot;C:/Users/Muj_pocitac/Documents&quot;
 C:/Users/Muj_pocitac/Documents
 </code></pre>
-
 <p>Ještě jiný způsob spočívá v uvození řetězce znakem <code>r</code> (před uvozovkami). Tím dáváme najevo, že se jedná o tzv. <em>surový řetězec</em> (angl. <em>raw string</em>), ve kterém se mají všechny znaky číst svým obvyklým způsobem (zpětné lomítko je proto pouze zpětným lomítkem a žádné escape sekvence zde být nemohou):</p>
-<pre><code class="python">&gt;&gt;&gt; print r&quot;C:\Users\Muj_pocitac\Documents&quot;
+<pre><code class="language-python">&gt;&gt;&gt; print r&quot;C:\Users\Muj_pocitac\Documents&quot;
 C:\Users\Muj_pocitac\Documents
 </code></pre>
-
 <h2 id="seznamy">Seznamy</h2>
 <p>Seznam je posloupnost libovolných objektů. Definuje se pomocí hranatých závorek a jeho položky se oddělují čárkami:</p>
-<pre><code class="python">&gt;&gt;&gt; seznam1 = [2,-4,56,105,0]
+<pre><code class="language-python">&gt;&gt;&gt; seznam1 = [2,-4,56,105,0]
 &gt;&gt;&gt; seznam2 = [&quot;ahoj&quot;,&quot;STROM&quot;,&quot;&quot;,&quot;guru&quot;]
 </code></pre>
-
 <p>Do jednoho seznamu lze ukládat hodnoty různých datových typů (to v jiných programovacích jazycích nebývá zvykem):</p>
-<pre><code class="python">&gt;&gt;&gt; seznam3 = [0, &quot;ahoj&quot;,-5.78,2,4]
+<pre><code class="language-python">&gt;&gt;&gt; seznam3 = [0, &quot;ahoj&quot;,-5.78,2,4]
 </code></pre>
-
 <p>Podobně jako tomu bylo v případě textových řetězců, k jednotlivým položkám seznamu lze přistupovat pomocí indexů:</p>
-<pre><code class="python">&gt;&gt;&gt; seznam3[3]
+<pre><code class="language-python">&gt;&gt;&gt; seznam3[3]
 2
 </code></pre>
-
 <p>Indexy začínají nulou (tj. první položka seznamu má index 0, nikoli 1!) a lze používat i záporné indexy. Záporné indexy indexují seznam od konce, tj. poslední prvek seznamu má index -1, předposlední -2 atd. Záporné indexování je zvláště výhodné v tom, že lze rychle přistupovat např. k poslední položce seznamu, aniž bychom znali či se odkazovali na délku seznamu:</p>
-<pre><code class="python">&gt;&gt;&gt; seznam3[-1]
+<pre><code class="language-python">&gt;&gt;&gt; seznam3[-1]
 4
 </code></pre>
-
 <p>Na rozdíl od textových řetězců, u seznamů lze pomocí indexů měnit jednotlivé položky:</p>
-<pre><code class="python">&gt;&gt;&gt; seznam1[2] = &quot;nova hodnota&quot;
+<pre><code class="language-python">&gt;&gt;&gt; seznam1[2] = &quot;nova hodnota&quot;
 &gt;&gt;&gt; seznam1
 [2, -4, 'nova hodnota', 105, 0]
 </code></pre>
-
 <p>Řez seznamu je seznam sestávající pouze z některých prvků původního seznamu. Vytváří se pomocí hranatých závorek, dvou indexů (začátku a konce řezu) a dvojtečky mezi nimi:</p>
-<pre><code class="python">&gt;&gt;&gt; seznam2[1:4]
+<pre><code class="language-python">&gt;&gt;&gt; seznam2[1:4]
 ['STROM', '', 'guru']
 </code></pre>
-
 <p>Jak vyplývá z ukázky, prvek na pozici druhého indexu již do řezu nepatří. V řezu lze používat i záporné indexy, takže např. řez</p>
-<pre><code class="python">&gt;&gt;&gt; seznam2[0:-1]
+<pre><code class="language-python">&gt;&gt;&gt; seznam2[0:-1]
 ['ahoj', 'STROM', '']
 </code></pre>
-
 <p>obsahuje všechny prvky od prvního do předposledního.</p>
 <p>Pokud necháme některý z indexů prázdný, je příslušný řez proveden od začátku resp. do konce seznamu:</p>
-<pre><code class="python"># toto je rez od zacatku seznamu do tretiho prvku:
+<pre><code class="language-python"># toto je rez od zacatku seznamu do tretiho prvku:
 &gt;&gt;&gt; seznam2[:3]
 ['ahoj', 'STROM', '']
 
@@ -396,9 +420,8 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; seznam2[:]
 ['ahoj', 'STROM', '', 'guru']
 </code></pre>
-
 <p>Další možností, jak vytvářet řezy, je použití třetího „indexu“, lépe řečeno hodnoty, která určuje délku kroku při výběru prvků do řezu. Tímto způsobem lze např. vytvořit řez obsahující každé druhé (či třetí) číslo z určitého rozmezí:</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 &gt;&gt;&gt; a[2:10:2]
 [3, 5, 7, 9]
 &gt;&gt;&gt; a[1:13:2]
@@ -406,50 +429,43 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; a[::3]
 [1, 4, 7, 10, 13, 16]
 </code></pre>
-
 <p>Podobně jako u textových řetězců, seznamy lze sčítat a násobit přirozeným číslem (včetně nuly):</p>
-<pre><code class="python">&gt;&gt;&gt; seznam1 + seznam2
+<pre><code class="language-python">&gt;&gt;&gt; seznam1 + seznam2
 [2, -4, 'nova hodnota', 105, 0, 'ahoj', 'STROM', '', 'guru']
 &gt;&gt;&gt; seznam1 * 2
 [2, -4, 'nova hodnota', 105, 0, 2, -4, 'nova hodnota', 105, 0]
 &gt;&gt;&gt; 0 * seznam2
 []
 </code></pre>
-
 <p>Výsledkem násobení seznamu nulou (a stejně tak i libovolným záporným celým číslem) je prázdný seznam.</p>
 <p>Stejně jako lze pomocí indexů přepisovat jednotlivé položky seznamu, lze také přepisovat celé řezy, a to opět libovolným (tj. libovolně dlouhým) seznamem:</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1,2,3,4,5]
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3,4,5]
 &gt;&gt;&gt; a[:3] = [&quot;jedna&quot;,&quot;dva&quot;,&quot;tri&quot;,&quot;tri a pul&quot;]
 &gt;&gt;&gt; a
 ['jedna', 'dva', 'tri', 'tri a pul', 4, 5]
 </code></pre>
-
 <p>Tímto způsobem lze také přidávat libovolné položky na konec seznamu (všimněte si, že v takovém případě lze použít index, který již je mimo rozsah původního seznamu):</p>
-<pre><code class="python">&gt;&gt;&gt; a[6:] = [6]
+<pre><code class="language-python">&gt;&gt;&gt; a[6:] = [6]
 &gt;&gt;&gt; a
 ['jedna', 'dva', 'tri', 'tri a pul', 4, 5, 6]
 </code></pre>
-
 <p>nebo na začátek seznamu:</p>
-<pre><code class="python">&gt;&gt;&gt; a[:0] = [-1,0]
+<pre><code class="language-python">&gt;&gt;&gt; a[:0] = [-1,0]
 &gt;&gt;&gt; a
-[-1, 0, 'jedna', 'dva', 'tri', 'tri a pul', 4, 5, 6]
+[-1.0, 'jedna', 'dva', 'tri', 'tri a pul', 4, 5, 6]
 </code></pre>
-
 <p>případně kamkoli doprostřed seznamu:</p>
-<pre><code class="python">&gt;&gt;&gt; a[3:3] = [1.5]
+<pre><code class="language-python">&gt;&gt;&gt; a[3:3] = [1.5]
 &gt;&gt;&gt; a
 [-1, 0, 'jedna', 1.5, 'dva', 'tri', 'tri a pul', 4, 5, 6]
 </code></pre>
-
 <p>Stejně lze i vymazat část seznamu vložením prázdného seznamu:</p>
-<pre><code class="python">&gt;&gt;&gt; a[4:7] = []
+<pre><code class="language-python">&gt;&gt;&gt; a[4:7] = []
 &gt;&gt;&gt; a
 [-1, 0, 'jedna', 1.5, 4, 5, 6]
 </code></pre>
-
 <p>V kapitole "Proměnné" jsme si vysvětlili, že proměnná je odkazem na objekt v operační paměti. Proměnná <code>a = [1,2,3]</code> je tedy odkazem na příslušný objekt-seznam. To ale znamená, že pokud vytvořím proměnnou <code>b = a</code>, bude tato nová proměnná odkazovat na stejný objekt. Pokud nyní nyní tento objekt prostřednictvím jedné z proměnných změním, změna se pochopitelně dotkne i druhé proměnné:</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3]
 &gt;&gt;&gt; b = a
 &gt;&gt;&gt; a[0] = -50
 &gt;&gt;&gt; a
@@ -457,9 +473,8 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; b
 [-50, 2, 3]
 </code></pre>
-
 <p>Pokud chceme vytvořit nezávislou kopii daného seznamu, můžeme použít úplný řez:</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3]
 &gt;&gt;&gt; b = a[:]
 &gt;&gt;&gt; a[0] = -50
 &gt;&gt;&gt; a
@@ -467,9 +482,8 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; b
 [1, 2, 3]
 </code></pre>
-
 <p>Vedle výše uvedených možností, jak pracovat se seznamy pomocí matematických operátorů a řezů, existují v Pythonu ještě tzv. <em>metody seznamů</em>, což jsou funkce, které se volají pomocí jména seznamu, tečky a jména dané funkce:</p>
-<pre><code class="python">&gt;&gt;&gt; x = [1,2,3]
+<pre><code class="language-python">&gt;&gt;&gt; x = [1,2,3]
 
 # Přidání nového prvku na konec seznamu metodou append
 &gt;&gt;&gt; x.append(&quot;ahoj&quot;)
@@ -509,9 +523,8 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; x
 ['snidane', 'zapalovac', 'kafe', 'rohlik', 'ahoj']
 </code></pre>
-
 <p>Vedle metod seznamů jsou v Pythonu k dispozici další vestavěné funkce, pomocí nichž lze se seznamy pracovat (tyto funkce lze stejně dobře použít i pro řetězce):</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1,2,3]
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3]
 
 # Zjištění délky seznamu funkcí len
 &gt;&gt;&gt; len(a)
@@ -533,9 +546,8 @@ C:\Users\Muj_pocitac\Documents
 [4, 5]
 
 </code></pre>
-
-<p>Do pythonovského seznamu lze vkládat i jiné seznamy (tzv. <em>vnořené</em> <em>seznamy</em>) a vytvořit tak seznam seznamů, příp. seznam seznamů seznamů atd.:</p>
-<pre><code class="python">&gt;&gt;&gt; a = [1, &quot;ahoj&quot;, [1,2,3], [&quot;a&quot;,&quot;b&quot;]]
+<p>Do pythonovského seznamu lze vkládat i jiné seznamy (tzv. <em>vnořené seznamy</em>) a vytvořit tak seznam seznamů, příp. seznam seznamů seznamů atd.:</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, &quot;ahoj&quot;, [1,2,3], [&quot;a&quot;,&quot;b&quot;]]
 &gt;&gt;&gt; a[2]
 [1, 2, 3]
 &gt;&gt;&gt; a[3]
@@ -543,9 +555,8 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; a[3][0]
 'a'
 </code></pre>
-
 <p>Hloubka vnoření může být značná (prakticky neomezená):</p>
-<pre><code class="python">&gt;&gt;&gt; a = [[[[[1]]]]]
+<pre><code class="language-python">&gt;&gt;&gt; a = [[[[[1]]]]]
 &gt;&gt;&gt; a[0]
 [[[[1]]]]
 &gt;&gt;&gt; a[0][0]
@@ -557,10 +568,9 @@ C:\Users\Muj_pocitac\Documents
 &gt;&gt;&gt; a[0][0][0][0][0]
 1
 </code></pre>
-
 <h2 id="n-tice-a-slovniky"><em>n</em>-tice a slovníky</h2>
 <p><em>n</em>-tice (angl. <em>tuple</em>) je struktura ve všem podobná seznamům, až na to, že ji nelze měnit pomocí indexů. Oproti seznamům se zapisuje pomocí <em>kulatých</em> závorek:</p>
-<pre><code class="python">&gt;&gt;&gt; a = (1,2,3)
+<pre><code class="language-python">&gt;&gt;&gt; a = (1,2,3)
 &gt;&gt;&gt; a[1]
 2
 &gt;&gt;&gt; a[1] = 4
@@ -569,20 +579,35 @@ Traceback (most recent call last):
     a[1] = 4
 TypeError: 'tuple' object does not support item assignment
 </code></pre>
-
 <p>Důvod, proč existují <em>n</em>-tice a čím se v praxi liší od seznamů, si vysvětlíme později.</p>
-<p>Slovníky snad někdy příště...</p>
+<p>Dalším datovým typem podobným seznamu jsou tzv. <em>slovníky</em>. Slovník si lze představit jako seznam s pojmenovanými položkami. Jménům položek se říká <em>klíče</em>. Každou položku slovníku tak tvoří dvojice klíč-hodnota. Slovník se uvozuje složenými závorkami, jednotlivé položky jsou oddělené čárkami a klíč od příslušné hodnoty je oddělen dvojtečkou:</p>
+<pre><code class="language-python">&gt;&gt;&gt; person = {&quot;name&quot;: &quot;Charles&quot;, &quot;age&quot;: 60, &quot;childern&quot;: 3}
+&gt;&gt;&gt; person
+{'age': 60, 'name': 'Charles', 'childern': 3}
+</code></pre>
+<p>Základní odlišností slovníků od seznamů je, že ve slovníku se k jednotlivým položkám přistupuje nikoli pomocí indexů, ale právě pomocí <em>klíčů</em>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; person['name']
+'Charles'
+&gt;&gt;&gt; person['age']
+60
+</code></pre>
+<p>Seznam hodnot resp. klíčů daného slovníku lze obdržet pomocí metod <code>values</code> a <code>keys</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; person.keys()
+['age', 'name', 'childern']
+&gt;&gt;&gt; person.values()
+[60, 'Charles', 3]
+</code></pre>
+<p>Slovníky tvoří velmi užitečnou součást jazyka Python a možnosti jejich použití se zdaleka nevyčerpávají uvedenou malou ukázkou. V tomto kurzu s nimi však příliš pracovat nebudeme, proto necháváme hlubší seznámení s nimi na čtenáři. </p>
 <h2 id="pravdivostni-hodnoty">Pravdivostní hodnoty</h2>
 <p>Pravdivostní hodnoty jsou jak známo dvě: <em>pravda</em> (anglicky <em>true</em>) a <em>nepravda</em> (anglicky <em>false</em>). Většina programovacích jazyků, Python nevyjímaje, disponuje zvláštním datovým typem pro reprezentaci těchto dvou hodnot. Většinou se takovému datovému typu říká <em>boolovský</em> (anglicky <em>Boolean</em>), na počest slavného britského matematika 19. století George Boola, který se významně zasloužil o rozvoj matematické logiky a někdy bývá označován i za praotce informatiky.</p>
 <p>V pythonu je datový typ <code>bool</code> přímo odvozen od datového typu <code>int</code>, tedy celých čísel. Hodnota <code>True</code> (pravda) je tak vlastně ve skutečnosti celočíselná hodnota <code>1</code> (a může být jedničkou i zastoupena), hodnotě <code>False</code> zase odpovídá číslo <code>0</code> (a rovněž může být nulou zastoupena). Důsledkem toho je např. to, že hodnoty <code>True</code> a <code>False</code> mohou být součástí aritmetických výrazů s čísly:</p>
-<pre><code class="python">&gt;&gt;&gt; True + 1
+<pre><code class="language-python">&gt;&gt;&gt; True + 1
 2
 &gt;&gt;&gt; False * 3
 0
 </code></pre>
-
 <p>Velkou výhodou Pythonu je, že je schopen interpretovat v podstatě libovolnou hodnotu libovolného datového typu jako hodnotu pravdivostní. Jakou pravdivostní hodnotu má ta která hodnota lze přitom snadno zjistit pomocí konverzní funkce <code>bool</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; bool(0) 
+<pre><code class="language-python">&gt;&gt;&gt; bool(0) 
 False
 &gt;&gt;&gt; bool(5)
 True
@@ -599,73 +624,83 @@ False
 &gt;&gt;&gt; bool([1,2,3])
 True
 </code></pre>
-
 <p>Pravdivostní hodnota je také výsledkem operací porovnání:</p>
-<pre><code class="python">&gt;&gt;&gt; 5 &gt; 3
+<pre><code class="language-python">&gt;&gt;&gt; 5 &gt; 3
 True
 &gt;&gt;&gt; 5 &lt;= 3
 False
 &gt;&gt;&gt; &quot;a&quot; == &quot;a&quot;
 True
 </code></pre>
-
 <h2 id="hodnota-none">Hodnota <code>None</code></h2>
 <p>V Pythonu, podobně jako ve většině jiných jazyků, existuje zvláštní hodnota reprezentující <em>nic</em>, neboli prázdnou hodnotu. Prázdná hodnota existuje v Pythonu jako datový objekt <code>None</code>, což si lze představit jako hodnotu, kterou lze přiřadit libovolné proměnné:</p>
-<pre><code class="python">&gt;&gt;&gt; a = None
+<pre><code class="language-python">&gt;&gt;&gt; a = None
 &gt;&gt;&gt; a
 &gt;&gt;&gt;
 </code></pre>
-
 <p>Po zadání jména proměnné se nevypíše „None“, ale opravdu se nevypíše nic. Proměnná sice existuje, ale nic neobsahuje. Ve skutečnosti je při spuštění Pythonu vytvořen v operační paměti počítače datový objekt <code>None</code>, na který se odkazují všechny proměnné, kterým je hodnota <code>None</code> přiřazena (existuje tedy vždy jen jedno nic, bez ohledu na to, kolik proměnných je obsahuje).</p>
 <p>Pravdivostní hodnota <code>None</code> je <code>False</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; bool(None)
+<pre><code class="language-python">&gt;&gt;&gt; bool(None)
 False
 </code></pre>
-
 <h2 id="shrnuti">Shrnutí</h2>
 <p>V této kapitole jste se seznámili s pravidly práce s proměnnými a se základními datovými typy jazyka Python.</p>
 <h2 id="ulohy">Úlohy</h2>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-neutral float-right" title="Lekce 5: Cykly a podmínky">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="btn btn-neutral" title="Lekce 3: Rozjezd Pythonu"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" class="btn btn-xs btn-link">
-        Lekce 5: Cykly a podmínky
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" class="btn btn-xs btn-link">
-        Lekce 3: Rozjezd Pythonu
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 4 Proměnné a datové typy.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

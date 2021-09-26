@@ -1,93 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 15: Kurzory - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 15: Kurzory - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 15: Proch\u00e1zen\u00ed tabulek pomoc\u00ed kurzor\u016f", url: "#_top", children: [
-              {title: "\u010cten\u00ed \u0159\u00e1dk\u016f pomoc\u00ed Search kurzoru", url: "#cteni-radku-pomoci-search-kurzoru" },
-              {title: "P\u0159eps\u00e1n\u00ed hodnot v \u0159\u00e1dku pomoc\u00ed Update kurzoru", url: "#prepsani-hodnot-v-radku-pomoci-update-kurzoru" },
-              {title: "Smaz\u00e1n\u00ed \u0159\u00e1dku", url: "#smazani-radku" },
-              {title: "P\u0159id\u00e1n\u00ed nov\u00e9ho \u0159\u00e1dku pomoc\u00ed Insert kurzoru", url: "#pridani-noveho-radku-pomoci-insert-kurzoru" },
-              {title: "Star\u00e9 typy kurzor\u016f", url: "#stare-typy-kurzoru" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 15: Kurzory";
+    var mkdocs_page_input_path = "Lekce 15 Proch\u00e1zen\u00ed tabulek pomoc\u00ed kurzor\u016f.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 15: Kurzory</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cteni-radku-pomoci-search-kurzoru">Čtení řádků pomocí Search kurzoru</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prepsani-hodnot-v-radku-pomoci-update-kurzoru">Přepsání hodnot v řádku pomocí Update kurzoru</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#smazani-radku">Smazání řádku</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí Insert kurzoru</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#stare-typy-kurzoru">Staré typy kurzorů</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>ArcPy &raquo;</li>
+        
+      
     
+    <li>Lekce 15: Kurzory</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 15 Procházení tabulek pomocí kurzorů.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" class="btn btn-xs btn-link">
-        Lekce 18: Rastrové analýzy
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 12: Uživatelská rozhraní
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-15-prochazeni-tabulek-pomoci-kurzoru">Lekce 15: Procházení tabulek pomocí kurzorů</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-15-prochazeni-tabulek-pomoci-kurzoru">Lekce 15: Procházení tabulek pomocí kurzorů</h1>
 <p>V této lekci si ukážeme, jak lze procházet atributové tabulky (či jiné tabulky ve formátu <code>.dbf</code>) řádek po řádku a část a zapisovat hodnoty z jednotlivých polí (sloupců). Jednotlivé procedury si budeme zkoušet na <a href="https://owncloud.cesnet.cz/index.php/s/87mECJH9RhNIdVz">datech</a> krajů (polygony) a velkých měst (body) ČR. </p>
 <blockquote>
 <p><strong>Úkol 1.</strong> Obě vrstvy si nahrajte do mapového dokumentu v ArcMap a prohlédněte si je, včetně atributových tabulek.</p>
@@ -101,9 +157,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </ul>
 <h2 id="cteni-radku-pomoci-search-kurzoru">Čtení řádků pomocí <em>Search</em> kurzoru</h2>
 <p>Syntaxe použití kurzoru je následující:</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(in_table, field_names, {where_clause}, ...)
+<pre><code class="language-python">tab = arcpy.da.SearchCursor(in_table, field_names, {where_clause}, ...)
 </code></pre>
-
 <p>V uvedeném kódu ukládáme kurzor do proměnné <code>tab</code>. Část <code>arcpy.da.</code> odkazuje na skutečnost, že kurzory jsou v balíčku <code>arcpy</code> implementovány v samostatném modulu <code>da</code> (zkratka pro "Data Access"). Kurzor se vytváří stejnojmenným konstruktorem dané třídy (funkce <code>SearchCursor</code> v ukázce). Nejdůležitějšími parametry funkce jsou: </p>
 <ul>
 <li><strong>in_table</strong> - tabulka, která se má otevřít (celá cesta jako řetězec, případně relativní cesta vzhledem k pracovnímu adresáři) - může se jednat o shapefile, <code>.dbf</code> tabulku, diskrétní rastr (který má tabulku), vrstvu (pokud jsme ji vytvořili či pokud pracujeme v Python Window v ArcMap) apod.,</li>
@@ -112,14 +167,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </ul>
 <p>Kurzor obsahuje ještě další parametry (znázorněné v ukázce třemi tečkami), ty však zde ponecháme stranou.</p>
 <p>Kurzor je možné přímo procházet <code>for</code> cyklem. Iterační proměnná přitom prochází jednotlivé řádky a nabývá vždy hodnoty <em>n</em>-tice stejné délky, jako je délka řádku (tj. počet otevřených polí). Ukažme si to na příkladu otevření atributů "KATEGORIE" a "NAZEV" vrstvy sídel:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\...&quot;
 tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
 for r in tab:
     print(r)
 del(tab)
 </code></pre>
-
 <p>Po spuštění skriptu obdržíme na konzoli následující výpis:</p>
 <pre><code>(u'Praha', 1)
 (u'Brno', 2)
@@ -140,9 +194,8 @@ del(tab)
 (u'\u010cesk\xe9 Bud\u011bjovice', 3)
 (u'Olomouc', 3)
 </code></pre>
-
 <p>Jelikož je řádek jednoduchou <em>n</em>-ticí, jemožné k jednotlivým položkám (sloupcům) řádku přistupovat pomocí indexů:</p>
-<pre><code class="python"># -*- coding: cp1250 -*-
+<pre><code class="language-python"># -*- coding: cp1250 -*-
 
 import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\...&quot;
@@ -151,9 +204,8 @@ for r in tab:
     print(u&quot;Město kategorie &quot; + str(r[1]) + &quot; se jmenuje &quot; + r[0] + &quot;.&quot;)
 del(tab)
 </code></pre>
-
 <p>Výpis vypadá následovně:</p>
-<pre><code class="python">Město kategorie 1 se jmenuje Praha.
+<pre><code class="language-python">Město kategorie 1 se jmenuje Praha.
 Město kategorie 2 se jmenuje Brno.
 Město kategorie 2 se jmenuje Plzeň.
 Město kategorie 2 se jmenuje Ostrava.
@@ -172,26 +224,23 @@ Město kategorie 3 se jmenuje Liberec.
 Město kategorie 3 se jmenuje České Budějovice.
 Město kategorie 3 se jmenuje Olomouc.
 </code></pre>
-
 <p>Všimněme si, že jsme při otevírání tabulky změnili pořadí sloupců oproti tomu, jak se tabulka zobrazuje v ArcMap. Při otevírání tabulky pomocí kurzoru můžeme zvolit libovolné sloupce v libovolném pořadí, dokonce můžeme jeden sloupec otevřít v několika kopiích (což má zřídka nějaký dobrý důvod). Při čtení hodnot z řádku je přitom pořadí položek přesně takové, v jakém pořadí jsme sloupce seřadili při vytváření kurzoru.</p>
 <p>V předešlé ukázce jsme nevyužili volitelný parametr <em>where_clause</em>, kterým můžeme omezit otvírané řádky. Pokud bychom např. chtěli otevřít pouze záznamy o městech první a druhé kategorie, vypadal by kód takto:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\...&quot;
 tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&quot;KATEGORIE&quot; &lt; 3')
 for r in tab:
     print(r[0])
 del(tab)
 </code></pre>
-
 <p>Výsledek:</p>
 <pre><code>Praha
 Brno
 Plzeň
 Ostrava
 </code></pre>
-
 <p>Procházení pomocí <code>for</code> cyklu není jediný způsob, jak kurzorem procházet tabulku. Chceme-li se v tabulce posunout o jeden řádek, můžeme použít metodu kurzoru <code>next</code>, která vrací aktuální řádek a zároveň posouvá polohu kurzoru na následující řádek. Tímto způsobem je možné např. číst obsah osmnáctého řádku:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\CR_kraje_sidla_toky&quot;
 tab = arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
 for i in range(18):
@@ -199,20 +248,17 @@ for i in range(18):
 print(r)
 del(tab)
 </code></pre>
-
 <pre><code>(u'Olomouc', 3)
 </code></pre>
-
 <p>Při procházení tabulky je možné kurzor posouvat pouze dopředu. Pokud se dostaneme na konec tabulky (ať již <code>for</code> cyklem nebo metodou <code>next</code>), tabulku již znovu procházet nelze. K tomu účelu je nutné kurzor vytvořit znovu.</p>
 <p>Na závěr pojednání o <em>Search</em> kurzoru si ukážeme, jak se lze vyhnout nutnosti kurzor po použití mazat, a to díky klauzuli <code>with</code>, kterou znáte (v podobném kontextu) z lekce o textových souborech:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\...&quot;
 with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&quot;KATEGORIE&quot; &lt; 3') as tab:
     for r in tab:
         print(r[0])
 # Zde následují další příkazy, přičemž kurzor již je zavřený
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 2.</strong> Otevřete tabulku krajů a vypište jejich názvy a počty obyvatel.</p>
 <p><strong>Úkol 3.</strong> Pomocí kurzoru najděte kraj s největší početní převahou žen nad muži.</p>
@@ -220,12 +266,11 @@ with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;], '&qu
 </blockquote>
 <h2 id="prepsani-hodnot-v-radku-pomoci-update-kurzoru">Přepsání hodnot v řádku pomocí <em>Update</em> kurzoru</h2>
 <p>Pokud chceme obsah tabulky nejen číst, ale i měnit, použijeme <em>Update</em> kurzor. Syntaxe je prakticky stejná jako u <em>Search</em> kurzoru:</p>
-<pre><code class="python">tab = arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
+<pre><code class="language-python">tab = arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;])
 </code></pre>
-
 <p>Rozdíl je v tom, jaké metody má příslušný kurzor v nabídce (v předchozí části jsme používali např. metodu <code>next</code>, která je dostupná i v <em>Update</em> kurzoru). U <em>Update</em> kurzoru jde především o metodu <em>updateRow</em>, pomocí které lze daný řádek, na kterém zrovna kurzor je, nahradit jiným řádkem. Ten je třeba metodě předat v podobě <em>n</em>-tice nebo seznamu odpovídající délky, přičemž jednotlivé položky musejí svým datovým typem odpovídat otevřeným sloupcům.</p>
 <p>V následující ukázce změníme kategorii města Brno z 2 na 3 (tím o tomto městu nenaznačujeme nic špatného!):</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 arcpy.env.workspace = r&quot;C:\my_path\CR_kraje_sidla_toky&quot;
 tab = arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;NAZEV&quot;, &quot;KATEGORIE&quot;], 
                             '&quot;NAZEV&quot; = \'Brno\'')
@@ -233,34 +278,30 @@ tab.next()
 tab.updateRow((&quot;Brno&quot;, 3))
 del(tab)
 </code></pre>
-
 <p>Všimněte si, že jsme otevřeli rovnou pouze řádek s Brnem. Přesto jsme museli použít metodu <code>next</code>, abychom se na tento první řádek kurzorem posunuli.</p>
 <blockquote>
 <p><strong>Úkol 5.</strong> Do tabulky krajů přidejte textové pole "STAV" a vyplňte do něj hodnotu "OK" pro ty kraje, kde je zemřelých méně či stejně jako narozených, a "KO" pro ostatní.</p>
 </blockquote>
 <h2 id="smazani-radku">Smazání řádku</h2>
 <p>Dalším použitím <em>Update</em> kurzoru je smazání řádku. Toho nyní využijeme a pokusíme se vymazat město Brno z mapy světa nadobro. Jelikož však následně budeme chtít svůj strašný čin odčinit a pomocí <em>Insert</em> kurzoru Brno opět na mapu světa vrátit, bude vhodné si příslušný záznam někam dopředu uložit, např. takto:</p>
-<pre><code class="python">with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
+<pre><code class="language-python">with arcpy.da.SearchCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
                           '&quot;NAZEV&quot; = \'Brno\'') as tab:
     brno = tab.next()
 </code></pre>
-
 <p>Důležité je zde uchovat i obsah sloupce <em>Shape</em>, což se děje pomocí názvu <code>"SHAPE@"</code> (o tomto poli a jeho použití se důkladně zmíníme v další lekci). V tomto poli je totiž uložena geometrie prvku (v našem případě souřadnice města Brna), které budeme při jeho obnovování potřebovat.</p>
 <p>Nyní již samotná poprava:</p>
-<pre><code class="python">with arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
+<pre><code class="language-python">with arcpy.da.UpdateCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;],
                           '&quot;NAZEV&quot; = \'Brno\'') as tab:
     tab.next()
     tab.deleteRow()
 </code></pre>
-
 <p>O výsledku se v tabulce měst přesvědčte sami...</p>
 <h2 id="pridani-noveho-radku-pomoci-insert-kurzoru">Přidání nového řádku pomocí <em>Insert</em> kurzoru</h2>
 <p>Nyní, jak jsme avizovali, jsme si uvědomili dosah našeho brutálního činu. Naštěstí je zde <em>Insert</em> kurzor, umožňující do tabulky vložit nový řádek. Má jednodušší syntax, neboť neumožňuje filtrování otvíraných řádků pomocí SQL dotazu. Jediné, co můžeme ovlivnit, je, které sloupce otevřeme. Nový řádek se přitom vždy přidává na konec tabulky (i v případě tak významného města, jakým je Brno).</p>
 <p>Pokud pracujeme s atributovou tabulkou vektorové vrstvy, je nutné mít na paměti, že kdykoli přidáváme nový záznam, je třeba v daném řádku mít i geometrii přidávaného prvku, kterou je třeba vložit do pole <em>Shape</em>. Jinak by danému řádku neodpovídal žádný geometrický prvek a celá vrstva by byla poškozena nepoužitelná. My jsme si naštěstí v případě Brna geometrii uložili, takže není problém ji do tabulky opět vrátit:</p>
-<pre><code class="python">with arcpy.da.InsertCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;]) as tab:
+<pre><code class="language-python">with arcpy.da.InsertCursor(&quot;Sidla_body.shp&quot;, [&quot;SHAPE@&quot;, &quot;NAZEV&quot;, &quot;KATEGORIE&quot;]) as tab:
     tab.insertRow(brno)
 </code></pre>
-
 <p>Zbývá než doufat, že jste celou proceduru smazání a opětovné záchrany Brna dělali v rámci jedné session, tj. že jste mezitím nerestartovali konzoli. Proměnná <code>brno</code> by tak byla smazána a město nadobro ztraceno... </p>
 <h2 id="stare-typy-kurzoru">Staré typy kurzorů</h2>
 <h2 id="shrnuti">Shrnutí</h2>
@@ -269,47 +310,61 @@ del(tab)
 <li>Napište skript, který pro polygonovou vrstvu krajinného pokryvu vypočítá průměrný index tvaru pro jednotlivé třídy krajinného pokryvu. Řešte bez kurzorů. </li>
 <li>Řešte předchozí úlohu s pomocí kurzorů, výsledek uložte do tabulky ve formátu <code>.csv</code>.</li>
 </ol>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" class="btn btn-neutral float-right" title="Lekce 18: Rastrové analýzy">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-neutral" title="Lekce 12: Uživatelská rozhraní"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" class="btn btn-xs btn-link">
-        Lekce 18: Rastrové analýzy
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 12: Uživatelská rozhraní
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 15 Procházení tabulek pomocí kurzorů.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

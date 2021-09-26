@@ -1,71 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="//img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Python pro ArcGIS</title>
-    <link href="//css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="//css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="//css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="//css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <title>Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="//js/jquery-3.2.1.min.js"></script>
-    <script src="//js/bootstrap-3.3.7.min.js"></script>
-    <script src="//js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '/';
-      var is_top_frame = false;
-        var page_toc = null;
-
-    </script>
-    <script src="//js/base.js"></script> 
+  <link rel="stylesheet" href="/css/theme.css" />
+  <link rel="stylesheet" href="/css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script src="/js/jquery-2.1.1.min.js" defer></script>
+  <script src="/js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
+  <div class="wy-grid-for-nav">
 
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="/." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
 
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="/.">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="/Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="/about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
 
-  <h2 style="text-align: center">404</h2>
-  <h1 style="text-align: center">Page not found</h1>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="/.">Python pro ArcGIS</a>
+      </nav>
 
-
-  <br>
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="/.">Docs</a> &raquo;</li>
     
-
-    <br>
+    
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
 </div>
 
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/"><i class="fa fa-github"></i>
-GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+          <div role="main">
+            <div class="section">
+              
+
+  <h1 id="404-page-not-found">404</h1>
+
+  <p><strong>Page not found</strong></p>
+
+
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '/';</script>
+    <script src="/js/theme_extra.js" defer></script>
+    <script src="/js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

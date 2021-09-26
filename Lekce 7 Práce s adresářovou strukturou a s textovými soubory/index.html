@@ -1,94 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 7: Adresáře a textové soubory - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 7: Adresáře a textové soubory - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 7: Pr\u00e1ce s adres\u00e1\u0159ovou strukturou a s textov\u00fdmi soubory", url: "#_top", children: [
-              {title: "Z\u00e1pis adres\u00e1\u0159ov\u00fdch cest", url: "#zapis-adresarovych-cest" },
-              {title: "Modul os", url: "#modul-os" },
-              {title: "Modul os.path", url: "#modul-ospath" },
-              {title: "Rozd\u011blen\u00ed \u0159et\u011bzce znakem", url: "#rozdeleni-retezce-znakem" },
-              {title: "\u010cten\u00ed textov\u00fdch soubor\u016f", url: "#cteni-textovych-souboru" },
-              {title: "Z\u00e1pis textov\u00fdch soubor\u016f", url: "#zapis-textovych-souboru" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 7: Adres\u00e1\u0159e a textov\u00e9 soubory";
+    var mkdocs_page_input_path = "Lekce 7 Pr\u00e1ce s adres\u00e1\u0159ovou strukturou a s textov\u00fdmi soubory.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 7: Adresáře a textové soubory</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#zapis-adresarovych-cest">Zápis adresářových cest</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modul-os">Modul os</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modul-ospath">Modul os.path</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rozdeleni-retezce-znakem">Rozdělení řetězce znakem</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cteni-textovych-souboru">Čtení textových souborů</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#zapis-textovych-souboru">Zápis textových souborů</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Python &raquo;</li>
+        
+      
     
+    <li>Lekce 7: Adresáře a textové soubory</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 7 Práce s adresářovou strukturou a s textovými soubory.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-link">
-        Lekce 8: Funkce a moduly
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-link">
-        Lekce 6: Vstupy a náhodná čísla
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-7-prace-s-adresarovou-strukturou-a-s-textovymi-soubory">Lekce 7: Práce s adresářovou strukturou a s textovými soubory</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-7-prace-s-adresarovou-strukturou-a-s-textovymi-soubory">Lekce 7: Práce s adresářovou strukturou a s textovými soubory</h1>
 <p>V této lekci si probereme, jak se v Pythonu dá zacházet s adresářovou strukturou počítače (nastavování pracovního adresáře, tvorba adresářových cest, tvorba a mazání adresářů apod.) a jak lze číst a zapisovat textové soubory. Přitom si zároveň rozšíříme možnosti práce s textovými řetězci.</p>
 <h2 id="zapis-adresarovych-cest">Zápis adresářových cest</h2>
 <p>V Pythonu je výchozím způsobem, jak zapsat adresářovou cestu, klasický styl se zpětnými lomítky, např. <code>C:\Moje_slozka\muj_soubor.txt</code>. Problém je, že zpětné lomítko, jak víme, má v textových řetězcích speciální význam (uvozuje <em>escape</em> sekvenci). To lze obejít třemi způsoby:</p>
@@ -98,7 +155,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Před textový řetězec napíšeme <code>r</code>, čímž z něj vytvoříme "surový" (angl. "raw") řetězec, jehož všechny znaky se interpretují tak, jak jsou (tj. řetězec neobsahuje žádné escape sekvence): <code>r"C:\Moje_slozka\muj_soubor.txt"</code>.</li>
 </ol>
 <p>Přehled všech tří metod:</p>
-<pre><code class="python"># Dopředná lomítka
+<pre><code class="language-python"># Dopředná lomítka
 path = &quot;C:/Moje_slozka/muj_soubor.txt&quot;
 
 # Dvojitá zpětná lomítka
@@ -107,13 +164,11 @@ path = &quot;C:\\Moje_slozka\\muj_soubor.txt&quot;
 # Surový řetězec
 path = r&quot;C:\Moje_slozka\muj_soubor.txt&quot;
 </code></pre>
-
 <h2 id="modul-os">Modul <code>os</code></h2>
 <p>Jméno modulu je zkratkou slov operační systém (anglicky "operating system"). Modul je určen pro správu adresářů a procesů. Z mnoha funkcí modulu budou pro nás užitečné zvláště některé pro správu adresářů. Parametr <code>path</code> (anglicky "cesta") má ve všech ukázkách význam textového řetězce s adresou složky nebo souboru.</p>
 <p>Modul načteme standardním způsobem:</p>
-<pre><code class="python">import os
+<pre><code class="language-python">import os
 </code></pre>
-
 <p>Při operacích s adresářovou strukturou je výhodné mít správně nastaven tzv. <strong>pracovní adresář</strong>  (angl. "workspace direcory"). Je-li nastaven, nemusíme např. při zadávání vstupních souborů do nějakého výpočtu zadávat celou cestu k souboru - pokud je vstupní soubor v pracovním adresáři, interpret Pythonu jej bude hledat tam. Rovněž jakékoli výstupní soubory, pokud neurčíme celou cestu, kam mají být uloženy, se budou ukládat do pracovního adresáře. Výchozí nastavení pracovního adresáře závisí na tom, jak jsme program IDLE spustili:</p>
 <ul>
 <li>
@@ -124,41 +179,35 @@ path = r&quot;C:\Moje_slozka\muj_soubor.txt&quot;
 </li>
 </ul>
 <p>Pro zjištění aktuálního pracovního adresáře slouží funkce <code>getcwd()</code> (z angl. "current workspace directory"):</p>
-<pre><code class="python">&gt;&gt;&gt; os.getcwd()
+<pre><code class="language-python">&gt;&gt;&gt; os.getcwd()
 'C:\\Documents and Settings\\Muj_pocitac'
 </code></pre>
-
 <p>Pokud chceme naopak pracovní adresář změnit, použijeme funkci <code>chdir(path)</code> (z angl. "change directory"). Pozor: příslušné umístění <code>path</code> musí existovat!</p>
-<pre><code class="python">&gt;&gt;&gt; os.chdir(&quot;C:/Moje_slozka&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.chdir(&quot;C:/Moje_slozka&quot;)
 &gt;&gt;&gt; os.getcwd()
 'C:\\Moje_slozka'
 </code></pre>
-
 <p>Často chceme nějaký výpočet provést v cyklu pro všechny soubory v nějaké složce, případně pro všechny složky v nějaké nadřazené složce. Abychom získali seznam položek uvnitř nějaké složky, použijeme funkci <code>listdir(path)</code>. Výstupní seznam je seznamem názvů (tj. řetězců) položek, včetně koncovek:</p>
-<pre><code class="python">&gt;&gt;&gt; os.listdir(&quot;C:/Moje_slozka&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.listdir(&quot;C:/Moje_slozka&quot;)
 ['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
 </code></pre>
-
 <p>Často se potřebujeme v podobných funkcích odkázat na aktuální pracovní adresář (např. vypsat jeho obsah). To je možné pomocí již zmíněné funkce <code>getcwd</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; os.listdir(getcwd())
+<pre><code class="language-python">&gt;&gt;&gt; os.listdir(getcwd())
 ['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
 </code></pre>
-
 <p>Existuje však i jednodušší způsob. V Pythonu se totiž lze odkazovat na pracovní adresář zkratkou <code>"."</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; os.listdir(&quot;.&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.listdir(&quot;.&quot;)
 ['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 1.</strong> Změňte svůj pracovní adresář na nějakou složku, ve které máte větší množství souborů různých typů. Následně vypište její obsah na konzoli.</p>
 </blockquote>
 <p>Další dvě funkce, které si ukážeme, slouží k vytváření nových adresářů. První, funkce <code>mkdir(path)</code>, vytvoří na dané adrese novou složku. Podmínkou je, že celá cesta kromě koncové vytvářené složky existuje. TUto podmínku obchází druhá funkce, <code>makedirs(path)</code>, která vytvoří na dané adrese novou složku, včetně všech případných neexistujících nadřazených složek.</p>
-<pre><code class="python">&gt;&gt;&gt; os.mkdir(&quot;C:/nova_slozka&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.mkdir(&quot;C:/nova_slozka&quot;)
 &gt;&gt;&gt; os.makedirs(&quot;C:/nejaka_nadslozka/nova_slozka&quot;)
 </code></pre>
-
 <p>Pokud naopak chceme nějakou složku či soubor smazat, máme k dispozici následující funkce:</p>
-<pre><code class="python"># Smazání souboru
+<pre><code class="language-python"># Smazání souboru
 &gt;&gt;&gt; os.remove(&quot;C:/Moje_slozka/muj_soubor.doc&quot;)
 
 # Smazání (prázdné!) složky
@@ -167,9 +216,8 @@ path = r&quot;C:\Moje_slozka\muj_soubor.txt&quot;
 # Smazání (prázdné!) složky včetně všech (prázdných!) nadsložek
 &gt;&gt;&gt; os.removedirs(&quot;C:/ nejaka_nadslozka/nova_slozka&quot;)
 </code></pre>
-
 <p>Užitečné jsou rovněž funkce <code>rename(old, new)</code> a <code>renames(old_path, new_path)</code>, pomocí kterých lze přejmenovávat cesty k souborů, a tím nejen měnit jejich název, ale i soubory přesouvat na nová umístění. První z nich, <code>rename</code>, přejmenuje cílový soubor ze staré cesty na novou, složka nového umístění souboru však již musí existovat. Druhá funkce, <code>renames</code>, toto nepožaduje a potřebné neexistující složky v nové cestě nejprve vytvoří (a zároveň odstraní již nepotřebné složky původní cesty).</p>
-<pre><code class="python"># Přejmenování souboru
+<pre><code class="language-python"># Přejmenování souboru
 os.listdir(&quot;C:/nova_slozka&quot;)
 ['Dalsi_soubor.xls', 'Druhy_soubor.txt', 'Prvni_soubor.doc']
 os.rename(&quot;C:/nova_slozka/Prvni_soubor.doc&quot;, &quot;C:/nova_slozka/Treti_soubor.doc&quot;)
@@ -179,59 +227,51 @@ os.listdir(&quot;C:/nova_slozka&quot;)
 # Přesunutí souboru
 os.renames(&quot;C:/nova_slozka/Prvni_soubor.doc&quot;, &quot;C:/uplne/jina/cesta/Treti_soubor.doc&quot;)
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 2.</strong> Uložte všechny textové soubory (nebo soubory jiného určitého typu) z vašeho pracovního adresáře do nově vytvořené podsložky "<code>textove_soubory</code>". Použijte cyklus a podmínku <code>if</code>.</p>
 </blockquote>
 <h2 id="modul-ospath">Modul <code>os.path</code></h2>
 <p>Modul <code>os.path</code> je podmodul modulu <code>os</code>, obsahující funkce pro práci se samotnými adresářovými cestami. Po načtení modulu <code>os</code> jsou funkce podmodulu přístupné přes <code>os.path.nejaka_funkce()</code>, podmodul lze však také načíst samostatně (pak ovšem ostatní funkce z modulu <code>os</code> přístupné nebudou):</p>
-<pre><code class="python">import os.path
+<pre><code class="language-python">import os.path
 </code></pre>
-
 <p>případně:</p>
-<pre><code class="python">from os import path
+<pre><code class="language-python">from os import path
 </code></pre>
-
 <p>Ve druhém případě budou funkce podmodulu dostupné přes <code>path.nejaka_funkce()</code>.</p>
 <p>Z obsahu podmodulu <code>os.path</code> vybíráme pouze některé, pro nás potenciálně užitečné funkce.</p>
 <p>Funkce <code>basename(path)</code> vrací poslední položku názvu cesty <code>path</code>, tj. v případě, že jde o adresu souboru, vrací jméno souboru, v případě, že jde o složku, vrací jméno složky:</p>
-<pre><code class="python">&gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 'Dalsi_soubor.xls'
 &gt;&gt;&gt; os.path.basename(&quot;C:/Moje_slozka&quot;)
 'Moje_slozka'
 </code></pre>
-
 <p>Funkce <code>dirname(path)</code> vrací nadřazenou složku poslední položky cesty:</p>
-<pre><code class="python">&gt;&gt;&gt; os.path.dirname(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.path.dirname(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 'C:/Moje_slozka'
 &gt;&gt;&gt; os.path.dirname(&quot;C:/Moje_slozka&quot;)
 'C:/'
 </code></pre>
-
 <p>Často potřebuju spojit adresu nějakého umístění z jednotlivých částí, např. <code>C:\hlavni_slozka</code>, <code>dalsi_slozka</code> a <code>nazev_souboru.xls</code>, které máme uložené samostatně v nějakých proměnných. To můžeme udělat buď ručně:</p>
-<pre><code class="python">a = &quot;C:/hlavni_slozka&quot;
+<pre><code class="language-python">a = &quot;C:/hlavni_slozka&quot;
 b = &quot;dalsi_slozka&quot;
 c = &quot;nazev_souboru.xls&quot;
 path = a + &quot;/&quot; + b + &quot;/&quot; + c
 path
 &quot;C:/hlavni_slozka/dalsi_slozka/nazev_souboru.xls&quot;
 </code></pre>
-
 <p>nebo trochu stručnějším a bezpečnějším způsobem pomocí funkce <code>join</code>:</p>
-<pre><code class="python">path = os.path.join(a, b, c)
+<pre><code class="language-python">path = os.path.join(a, b, c)
 path
 &quot;C:\\hlavni_slozka\\dalsi_slozka\\nazev_souboru.xls&quot;
 </code></pre>
-
 <p>Chceme-li ověřit, že dané umístění (soubor či složka) existuje, použijeme funkci <code>exists</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; os.path.exists(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; os.path.exists(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 True
 &gt;&gt;&gt; os.path.exists(&quot;C:/Moje_slozka/Dalsi_soubor.txt&quot;)
 False
 </code></pre>
-
 <p>Někdy se také hodí zjistit, zda je dané existující umístění adresou složky či souboru:</p>
-<pre><code class="python"># Ověří, zda je daná cesta cestou k souboru
+<pre><code class="language-python"># Ověří, zda je daná cesta cestou k souboru
 &gt;&gt;&gt; os.path.isfile(&quot;C:/Moje_slozka/Dalsi_soubor.xls&quot;)
 True
 &gt;&gt;&gt; os.path.isfile(&quot;C:/Moje_slozka&quot;)
@@ -243,13 +283,12 @@ False
 &gt;&gt;&gt; os.path.isdir(&quot;C:/Moje_slozka&quot;)
 True
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 3.</strong> Modifikujte řešení úkolu 2 tak, abyste použili funkci <code>os.path.join</code>.</p>
 </blockquote>
 <h2 id="rozdeleni-retezce-znakem">Rozdělení řetězce znakem</h2>
 <p>Pro další část této lekce bude výhodné seznámit se s jednou technikou práce s textovými řetězci, která nebyla probrána v lekci o datových typech. Je jí rozdělení řetězce daným znakem či sérií znaků metodou <code>split</code>, což je funkce, která se volá přímo na daném řetězci či na proměnné obsahující řetězec:</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;anakonda&quot;.split(&quot;a&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; &quot;anakonda&quot;.split(&quot;a&quot;)
 ['', 'n', 'kond', '']
 
 &gt;&gt;&gt; a = &quot;okolo potoka&quot;
@@ -257,10 +296,9 @@ True
 &gt;&gt;&gt; b
 ['', 'k', 'l', ' p', 't', 'ka']
 </code></pre>
-
 <p>Vidíme, že funkce <code>split</code> vrací seznam jednotlivých částí původního řetězce, rozděleného zadaným znakem. Pokud je tento znak na začátku či na konci řetězce, obsahuje výsledný seznam na začátku resp. na konci prázdný řetězec.</p>
 <p>Pokud použijeme funkci <code>split</code> bez argumentu, tj. bez zadání řetězce, kterým se má vstupní řetězec rodělit, rozdělí se všemi tzn. prázdnými znaky, tj. mezerou, tabulátorem (znak <code>\t</code>) či znakem nového řádku (znak <code>\n</code>). V případě, že text obsahuje posloupnost jakýchkoli prázdných znaků za sebou, interpretuje se tato posloupnost, jako by šlo o jeden prázdný znak (tj. řetězec se v tomto místě rozdělí jen jednou):</p>
-<pre><code class="python">&gt;&gt;&gt; zprava = &quot;Ahoj lasko\tje to    jiz dlouho\nco jsme\t\t\tse nevideli&quot;
+<pre><code class="language-python">&gt;&gt;&gt; zprava = &quot;Ahoj lasko\tje to    jiz dlouho\nco jsme\t\t\tse nevideli&quot;
 &gt;&gt;&gt; print(zprava)
 Ahoj lasko  je to    jiz dlouho
 co jsme         se nevideli
@@ -268,7 +306,6 @@ co jsme         se nevideli
 &gt;&gt;&gt; zprava.split()
 ['Ahoj', 'lasko', 'je', 'to', 'jiz', 'dlouho', 'co', 'jsme', 'se', 'nevideli']
 </code></pre>
-
 <p>Tímto způsobem lze snadno nějaký text rozdělit na jednotlivá slova.</p>
 <h2 id="cteni-textovych-souboru">Čtení textových souborů</h2>
 <p>Pro ilustraci si představme textový soubor obsahující následující text:</p>
@@ -276,27 +313,23 @@ co jsme         se nevideli
 Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
 Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu.
 </code></pre>
-
 <p>Dejme tomu, že je soubor s tímto textem uložen na adrese <code>C:\Documents and Settings\user\Dokumenty\babicka.txt.</code></p>
 <p>K otevření souboru pro čtení slouží vestavěná funkce <code>open</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;, &quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;, &quot;r&quot;)
 </code></pre>
-
 <p>Hodnota druhého parametru <code>"r“</code> je odvozena z anglického „read“ a udává, že bude soubor otevřen pro čtení.</p>
 <p>Pokud chceme ze souboru přečíst naráz vše, co obsahuje, použijeme funkci <code>read()</code>. Výsledkem je jediný textový řetězec obsahující celý text:</p>
-<pre><code class="python">&gt;&gt;&gt; a = soubor.read()
+<pre><code class="language-python">&gt;&gt;&gt; a = soubor.read()
 &gt;&gt;&gt; print(a)
 Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!
 Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
 Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu.
 </code></pre>
-
 <p>Důležité je po každé ukončené akci se souborem daný soubor uzavřít:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor.close()
+<pre><code class="language-python">&gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <p>Jinou možností je číst pouze jeden řádek pomocí funkce <code>readline()</code> (pozor: v našem textu je celý odstavec jediným řádkem!). Opakované volání této funkce čte postupně jednotlivé řádky:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
 &gt;&gt;&gt; a = soubor.readline()
 &gt;&gt;&gt; b = soubor.readline()
 &gt;&gt;&gt; print(a)
@@ -305,35 +338,31 @@ Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jse
 Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! - Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <p>Konečně poslední možností je číst celý text po řádcích pomocí funkce <code>readlines()</code>. V takovém případě je výsledkem seznam textových řetězců obsahujících jednotlivé řádky (všimněte si znaků <code>\n</code> na konci každého řádku):</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\babicka.txt&quot;,&quot;r&quot;)
 &gt;&gt;&gt; a = soubor.readlines()
 &gt;&gt;&gt; print(a)
 ['Davno, davno jiz tomu, co jsem posledne se divala do te mile mirne tvare, co jsem zulibala to blede lice, plne vrasku, nahlizela do modreho oka, v nemz se jevilo tolik dobroty a lasky; davno tomu, co mne posledne zehnaly stare jeji ruce! - Neni vice dobre starenky! Davno jiz odpociva v chladne zemi!\n', 'Mne ale neumrela! - Obraz jeji odtisknut v dusi me s veskerou svoji barvitosti, a dokud zdrava zustane, dotud bude zit v ni! Kdybych stetcem mistrne vladnout znala, oslavila bych te, mila babicko, jinak; ale nastin tento, perem kresleny - nevim, nevim, jak se komu zalibi!\n', 'Ty jsi ale vzdy rikala: &quot;Neni na svete clovek ten, aby se zachoval lidem vsem.&quot; Dost na tom, kdyz se najde jen nekolik ctenaru, kteri o tobe s takovou oblibou cisti budou, s jakou ja o tobe pisu. \n']
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 4.</strong> Uložte si ("manuálně", např. pomocí Poznámkového bloku) uvedený text do textového souboru. Následně soubor v Pythonu otevřte a zjistěte počet řádků, počet slov a počet znaků v textu.</p>
 </blockquote>
 <p>V aplikacích často chceme procházet text přečtený z nějakého souboru "řádek po řádku". Např. se může jednat o datovou tabulku ve formátu <code>.csv</code> ("comma-separated values", hodnoty oddělené čárkou), což je jednoduchý textový soubor s tabulkovými daty, který lze nicméně přímo otevírat např. v aplikaci MS Excel. Procházení "řádek po řádku" pak znamená procházení jednotlivých řádků tabulky. Lze k němu využít již zmíněné funkce <code>readlines</code>, která vrací seznam řádků - ten lze samozřejmě následně procházet cyklem:</p>
-<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+<pre><code class="language-python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
 lines = f.readlines()
 f.close()
 for l in lines:
     # Tady bude nějaká akce s proměnnou l
 </code></pre>
-
 <p>Objekt, který vrací funkce <code>open</code>, je nicméně v Pythonu udělán tak, že lze v cyklu procházet přímo jej, chová se tedy sám jako seznam řádků:</p>
-<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+<pre><code class="language-python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
 for l in f:
     # Tady bude nějaká akce s proměnnou l
 f.close()
 </code></pre>
-
 <p>V tomto případě se ovšem procházení děje pomocí tzv. <strong>kurzoru</strong>, což se mimo jiné projeví tím, že projdeme-li celý soubor až do konce, je kurzor na konci souboru a další procházení již nic nevrací:</p>
-<pre><code class="python">&gt;&gt;&gt; f = open(&quot;text.txt&quot;, &quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; f = open(&quot;text.txt&quot;, &quot;r&quot;)
 &gt;&gt;&gt; for l in f: print(l)
 
 prvni radek
@@ -344,55 +373,48 @@ posledni radek
 
 &gt;&gt;&gt; f.close()
 </code></pre>
-
 <p>Abychom soubor mohli procházet znovu, museli bychom soubor znovu načíst.</p>
 <p>Způsob pomocí načtení seznamu řádků metodou <code>readlines</code> má navíc tu výhodu, že lze procházet jen vybrané řádky, např. při čtení tabulky vynechat první řádek, jímž bývá hlavička tabulky:</p>
-<pre><code class="python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
+<pre><code class="language-python">f = open(&quot;tabulka.csv&quot;, &quot;r&quot;)
 lines = f.readlines()
 f.close()
 for l in lines[1:]:
     # Tady bude nějaká akce s proměnnou l
 </code></pre>
-
 <p>Závěrem si ještě ukážeme způsob, jak soubory otevírat, aniž byste museli myslet na jejich následné zavření. Je to možné pomocí klauzule <code>with</code>, která vytváří odsazený blok kódu. Jakmile blok kódu skončí tím, že odsadíme na původní úroveň, otevřený soubor se sám automaticky zavře. Syntax je následující:</p>
-<pre><code class="python">with open(&quot;soubor.txt&quot;) as f:
+<pre><code class="language-python">with open(&quot;soubor.txt&quot;) as f:
     f.readlines()
     ...
 # Tady pokračuje kód a soubor již je uzavřen
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 5.</strong> Otevřte si tabulku <a href="https://owncloud.cesnet.cz/index.php/s/SMwOA7a4evWXRhC">precipitation_2014.csv</a> v aplikaci MS Excel a prozkoumejte, co obsahuje. Pak ji zavřete a otevřete ji v programu Poznámkový blok: čím jsou odděleny jednotlivé sloupce? Napište program, který tabulku otevřte a spočítá průměrný srážkový úhrn v srpnu daného roku. (Poznámka: data pocházejí z ČHMÚ.)</p>
 </blockquote>
 <h2 id="zapis-textovych-souboru">Zápis textových souborů</h2>
 <p>Chceme-li naopak do textového souboru zapisovat, je nutné jej otevřít s parametrem <code>"w"</code> (z anglického „write“):</p>
-<pre><code class="python">soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;w&quot;)
+<pre><code class="language-python">soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;w&quot;)
 </code></pre>
-
 <p>Soubor, který tímto způsobem otvíráme, nemusí ve skutečnosti vůbec existovat a je tímto příkazem vytvořen (musí však existovat příslušná složka). Pokud soubor již existuje, je uvedeným způsobem otevření veškerý jeho obsah vymazán a při následném zapisování nahrazen obsahem novým.</p>
 <p>Zápis se provádí pomocí funkce <code>write(text)</code>. Pokud chceme zapsat text na více řádků, je třeba použít znak pro konec řádku <code>\n</code>. Opět je třeba nezapomenout na konečné uzavření souboru.</p>
-<pre><code class="python">&gt;&gt;&gt; soubor.write(&quot;Ahoj dedo.\n&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor.write(&quot;Ahoj dedo.\n&quot;)
 &gt;&gt;&gt; soubor.write(&quot;Nevis,\nco je s babickou?&quot;)
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <p>Přečteme-li výsledný soubor, obdržíme:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
 &gt;&gt;&gt; print(soubor.read()
 Ahoj dedo.
 Nevis,
 co je s babickou?
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <p>Zbývá vyřešit, jak zapisovat do existujícího souboru, aniž bychom jej při otvírání celý přepsali. To lze provést jeho otevřením s parametrem <code>"a"</code> (z anglického „append“). Následný zápis funkcí <code>write(text)</code> pak způsobí zapsání daného textu na konec za již existující text:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;a&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;a&quot;)
 &gt;&gt;&gt; soubor.write(&quot;\nJo, hochu, to vazne nevim.&quot;)
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <p>Výsledek vypadá následovně:</p>
-<pre><code class="python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; soubor = open(r&quot;C:\Documents and Settings\user\Dokumenty\dedecek.txt&quot;,&quot;r&quot;)
 &gt;&gt;&gt; print(soubor.read())
 Ahoj dedo.
 Nevis,
@@ -400,7 +422,6 @@ co je s babickou?
 Jo, hochu, to vazne nevim.
 &gt;&gt;&gt; soubor.close()
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 6.</strong> Napiště program, který v tabulce <a href="https://owncloud.cesnet.cz/index.php/s/SMwOA7a4evWXRhC">precipitation_2014.csv</a> změní desetinné tečky na desetinné čárky.</p>
 </blockquote>
@@ -411,47 +432,61 @@ Jo, hochu, to vazne nevim.
 <li>Napište program, který spočítá četnost výskytu daného písmene v zadaném vstupním textovém souboru. Řešte nejdříve s použitím metody <code>count</code> seznamů, následně bez této metody.</li>
 <li>Ve složce <a href="https://owncloud.cesnet.cz/index.php/s/C3cV43wNi3ngFiJ">data_teplota</a> najdete textové soubory, v nichž jsou údaje o měření teploty (v desetinách stupně Celsia) na jednotlivých evropských stanicích (každé stanici odpovídá jeden soubor). Napište program, který z těchto textových souborů vyextrahuje hodnoty teplot pro květen 1998, spočítá pro každou stanici z těchto hodnot průměr a výsledek uloží do nové textové tabulky ve formátu <code>.csv</code> (oddělovačem sloupců bude středník). Výstupní tabulka bude obsahovat dva sloupce: "STAID" s identifikátorem stanice a "T" s průměrnou teplotou v květnu 1998.</li>
 </ol>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-neutral float-right" title="Lekce 8: Funkce a moduly">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-neutral" title="Lekce 6: Vstupy a náhodná čísla"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%208%20Funkce%20a%20moduly/" class="btn btn-xs btn-link">
-        Lekce 8: Funkce a moduly
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" class="btn btn-xs btn-link">
-        Lekce 6: Vstupy a náhodná čísla
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 7 Práce s adresářovou strukturou a s textovými soubory.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%208%20Funkce%20a%20moduly/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

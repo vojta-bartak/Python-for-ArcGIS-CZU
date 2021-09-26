@@ -1,93 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 3: Rozjezd Pythonu - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 3: Rozjezd Pythonu - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 3: Jak napsat a spustit program v Pythonu?", url: "#_top", children: [
-              {title: "Pro\u010d Python?", url: "#proc-python" },
-              {title: "Instalace a verze Pythonu", url: "#instalace-a-verze-pythonu" },
-              {title: "Prost\u0159ed\u00ed IDLE a Python Shell", url: "#prostredi-idle-a-python-shell" },
-              {title: "Psan\u00ed a spou\u0161t\u011bn\u00ed skript\u016f", url: "#psani-a-spousteni-skriptu" },
-              {title: "Python Window v ArcMap", url: "#python-window-v-arcmap" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 3: Rozjezd Pythonu";
+    var mkdocs_page_input_path = "Lekce 3 Jak a kde napsat a spustit program v Pythonu.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 3: Rozjezd Pythonu</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#proc-python">Proč Python?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#instalace-a-verze-pythonu">Instalace a verze Pythonu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prostredi-idle-a-python-shell">Prostředí IDLE a Python Shell</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#psani-a-spousteni-skriptu">Psaní a spouštění skriptů</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#python-konzole-v-arcmap">Python konzole v ArcMap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Python &raquo;</li>
+        
+      
     
+    <li>Lekce 3: Rozjezd Pythonu</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 3 Jak a kde napsat a spustit program v Pythonu.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-link">
-        Lekce 4: Proměnné a datové typy
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-link">
-        Lekce 2: Uživatelské rozhraní
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-3-jak-napsat-a-spustit-program-v-pythonu">Lekce 3: Jak napsat a spustit program v Pythonu?</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-3-jak-napsat-a-spustit-program-v-pythonu">Lekce 3: Jak napsat a spustit program v Pythonu?</h1>
 <h2 id="proc-python">Proč Python?</h2>
 <p>Jazyk Python vyvinul nizozemský vývojář Guido van Rossum koncem 80. let 20. století, první verze spatřila světlo světa v roce 1991. Motivací přitom bylo vyvinout opravdu jednoduchý, efektivní, ale také zábavný jazyk. Poslední aspekt se odráží i v samotném jméně jazyka (česky "krajta"), které je reminiscencí na známou britskou komickou skupinu Monty Python.</p>
 <p>Důvodů, proč je Python tou správnou volbou pro pokročilou práci s geografickými informačními systémy, je hned několik:</p>
@@ -101,10 +157,19 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Za sedmé, Python je podporován jako <strong>jazyk pro psaní skriptů v programovém prostředí ArcGIS</strong>. Počínaje verzí ArcGIS Desktop 10 je dokonce výlučným skriptovacím jazykem (dřívější verze umožňovaly sice použití i jiných skriptovacích jazyků, nicméně veškerá dokumentace a příklady byly psány v Pythonu). Tato skutečnost je zvláště podstatná v rámci tohoto kurzu, neboť ten je zaměřen právě na ovládání nástrojů ArcGIS pomocí jazyka Python.</li>
 </ul>
 <h2 id="instalace-a-verze-pythonu">Instalace a verze Pythonu</h2>
-<p>O verzích a jak s instalacemi...</p>
+<p>V současné době existuje Python ve verzi 3.9. Program ArcGIS nicméně dlouhou dobu váhal s integrací Pythonu řady 3.x, neboť mezi řadou 2.x a 3.x byly provedeny v jazyku Python poměrně zásadní změny. Veškeré verze programu ArcGIS Desktop proto stále pracují s verzí Pythonu řady 2.x, u ArcGIS 10.x je to verze Python 2.7. Přechod na aktuální verzi Pythonu se v produktech Esri odehrál až s příchodem nového produktu ArcGIS Pro, který nahrazuje starší ArcGIS Desktop s jeho známou aplikací ArcMap. Jelikož v tomto kurzu budeme pracovat s programem ArcGIS Desktop, budeme vycházet z dnes již neaktuální verze Python 2.7. To by nemělo způsobovat větší problémy, neboť zejména pro začátečníka není v obou verzích jazyka zas takový rozdíl. Tam, kde rozdíl je, na to v patřičné chvíli upozorníme. Navíc není problém mít v počítači nainstalováno více verzí Pythonu, jen je pak třeba dát pozor, s jakou verzí člověk aktuálně pracuje.</p>
+<p>Pokud máte v počítači nainstalovaný software ArcGIS, máte s největší pravděpodobností nainstalovanou i odpovídající verzi jazyka Python, neboť ta je distribuována a automaticky instalována s programem ArcGIS. To snadno zjistíte v seznamu aplikací systému Windows, kde je python buď v samostatné složce, nebo uvnitř složky ArcGIS. V případě, že sice ArcGIS nainstalovaný máte, přesto však nemůžete Python nalézt, je možné, že jste jeho instalaci při instalování programu ArcGIS (zřejmě nechtěně) odmítli. V takovém případě bude pravděpodobně nejsnažším řešením provést instalaci programu ArcGIS znovu. Jde o to, že při instalaci ArcGIS se neinstaluje jen samotný Python, ale i klíčová knihovna (balíček) ArcPy, která zprostředkovává funkcionalitu systému ArcGIS do jazyka Python.</p>
+<p>Instalaci samotného Pythonu lze samozřejmě provést i manuálně, např. chcete-li mít k dispozici i novější verze Pythonu. V takovém případě doporučujeme použít instalaci pomocí distribuční platformy Anaconda či Miniconda.</p>
 <h2 id="prostredi-idle-a-python-shell">Prostředí IDLE a Python Shell</h2>
-<p>Programy napsané v Pythonu lze spouštět různým způsobem</p>
-<p>Program IDLE slouží k interaktivní interpretaci kódů napsaných v Pythonu. To znamená, že je možné v něm spouštět libovolné části kódů a příslušné příkazy jsou ihned vykonány. Existuje řada jiných interpretů či vývojových prostředí pro Python, nicméně vzhledem k tomu, že IDLE je dodáváno spolu s Pythonem v rámci standardní instalace programu ArcGIS, omezíme se v tomto kurzu právě na ně. Je to výhodné i z toho důvodu, že práce v něm je velmi snadná. Na druhou stranu jistou nevýhodou tohoto prostředí jsou omezené možnosti ladění programů (tj. hledání chyb v kódech).</p>
+<p>Programy napsané v Pythonu lze spouštět různým způsobem. Nejjednodušší podobou programu je prostý textový soubor s kódem programu, většinou uložený s koncovkou <code>.py</code>. Ten lze spustit:</p>
+<ul>
+<li>z <strong>příkazového řádku operačního systému</strong>, prostým vepsáním adresy souboru se zdrojovým kódem. V příkazovém řádku lze zároveň přímo spustit interaktivní překladač Pythonovského kódu, čímž příkazový řádek přejde do režimu Python a je možné v něm přímo psát a spouštět jednotlivé příkazy Pythonu.</li>
+<li>z <strong>příkazového řádku Pythonu</strong>, který je k dispozici po instalaci Pythonu jako samostatná aplikace. Je ideální pro psaní a spouštění jednotlivých příkazů.</li>
+<li>z interaktivního grafického rozhraní <strong>IDLE</strong>. Zde je možné na konzoli (příkazovém řádku) spouštět jednolitvé příkazy, zároveň však editovat a spouštět soubory se zdrojovým kódem. Tuto možnost budeme využívat v tomto kurzu. Program IDLE je rovněž standardní součástí základní instalace Pythonu.</li>
+<li>z některého pokročilejšího <strong>integrovaného vývojového prostředí</strong> (IDE, "Integrated Development Environment"). Jedná se o program, umožňující snadnou editaci zdrojového kódu a jeho interaktivní překlad, tedy "spouštění". Zároveň různá prostředí nabízejí např. správu grafických výstupů, náhled obsahu proměnných a objektů, možnost tvorby komentovaného interaktivního kódu, integraci dalších programovacích jazyků apod. Za zmínku jistě stojí prostředí <strong>Jupyter Notebooks</strong>, umožňující kombinovat přímo spustitelné bloky kódu následované výstupem z daného výpočtu (např. grafem), s rozsáhlými komentáři v jazyce Markdown. Dále např. program <strong>Spyder</strong>, který se hodí pro datovou analýzu a v lecčems připomíná známé vývojové prostředí jazyka R RStudio.</li>
+</ul>
+<p>Specifickou možností při použití Pythonu pro práci s programem ArcGIS je speciální příkazový řádek Pythonu přímo integrovaný do programu ArcMap, resp. ArcGIS Pro. Tuto možnost si v tomto kurzu rovněž vyzkoušíte. V dalším textu si představíme vývojové prostředí IDLE, které budeme používat napříč kurzem.</p>
+<p>Program <strong>IDLE</strong> slouží k interaktivní interpretaci kódů napsaných v Pythonu. To znamená, že je možné v něm spouštět libovolné části kódů a příslušné příkazy jsou ihned vykonány. Existuje řada jiných interpretů či vývojových prostředí pro Python (viz výše), nicméně vzhledem k tomu, že IDLE je dodáváno spolu s Pythonem v rámci standardní instalace programu ArcGIS, omezíme se v tomto kurzu právě na ně. Je to výhodné i z toho důvodu, že práce v něm je velmi snadná. Na druhou stranu jistou nevýhodou tohoto prostředí jsou omezené možnosti ladění programů (tj. hledání chyb v kódech).</p>
 <blockquote>
 <p>IDLE vytvořil rovněž Guido van Rossum, a stejně jako samotný Python je zdarma a volně šiřitelný. Název je zkratkou pro integrované vývojové prostředí (anglicky Integrated DeveLopment Environment). Za zmínku stojí, že jelikož se běžně integrované vývojové prostředí označuje zkratkou IDE, přidané „l“ nejspíš odkazuje na jednoho z členů skupiny Monty Python, kterým je Eric Idle.</p>
 </blockquote>
@@ -114,40 +179,36 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p><strong>Úkol 1.</strong> Popsaným způsobem otevřete program IDLE.</p>
 </blockquote>
 <p>Okno Python Shell slouží k vykonávání jednotlivých příkazů a ke spouštění skriptů. Symbol <code>&gt;&gt;&gt;</code> je tzv. <em>výzva příkazového řádku</em>, za kterou je možné psát příkaz. Po stisknutí klávesy <code>Enter</code> je příkaz poslán do <em>překladače</em> a výsledek se vypíše na další řádek:</p>
-<pre><code class="python">&gt;&gt;&gt; 1 + 2
+<pre><code class="language-python">&gt;&gt;&gt; 1 + 2
 3
 &gt;&gt;&gt; &quot;Ahoj svete!&quot;
 'Ahoj svete!'
 </code></pre>
-
 <p>Jak je z uvedeného příkladu patrné, po zapsání jednoduchého (nebo i složitějšího) matematického výrazu je tento výraz vyhodnocen a vrácena hodnota výsledku. Tímto způsobem lze vlastně okno Python Shell používat jako jednoduchou kalkulačku:</p>
-<pre><code class="python">&gt;&gt;&gt; -(2 + 3)*5
+<pre><code class="language-python">&gt;&gt;&gt; -(2 + 3)*5
 -25
 </code></pre>
-
 <p>Pro uchování nějaké hodnoty pro budoucí použití lze vytvořit tzv. <em>proměnnou</em> a hodnotu do ní uložit:</p>
-<pre><code class="python">&gt;&gt;&gt; x = 2
+<pre><code class="language-python">&gt;&gt;&gt; x = 2
 &gt;&gt;&gt; moje_cislo = 3
 &gt;&gt;&gt; -(x + moje_cislo)*5
 -25
 </code></pre>
-
 <p>Do proměnné lze přiřadit i jiný typ hodnoty než číslo, např. text:</p>
-<pre><code class="python">&gt;&gt;&gt; a = &quot;Ahoj svete!&quot;
+<pre><code class="language-python">&gt;&gt;&gt; a = &quot;Ahoj svete!&quot;
 &gt;&gt;&gt; a
 'Ahoj svete!'
 </code></pre>
-
-<p>Okno Python Shell nabízí řadu možností pro usnadnění psaní příkazů. Probereme zde jen některé, další možnosti lze nalézt v hlavním menu pod položkou <em>Edit</em>):
-- <strong>Historie</strong> <strong>příkazů</strong>. Po stisknutí klávesové zkratky <code>Alt</code>+<code>P</code> (z anglického „previous“) vyvoláme poslední spouštěný příkaz, při opakovaném stisknutí této zkratky procházíme historii příkazů dozadu. Obdobně stisknutím klávesové zkratky <code>Alt</code>+<code>N</code> (z anglického „next“) můžeme procházet v historii příkazů směrem dopředu. Jinou možností, jak znovu vyvolat předchozí příkaz, je umístit na něj kurzor a stisknout enter. Tím je daný příkaz automaticky vypsán na aktuální řádek a dalším stisknutím enter je spuštěn.
-- <strong>Ukončení</strong> <strong>překladu</strong>. Chceme-li přerušit aktuální vykonávání příkazu, stiskneme <code>Ctrl</code>+<code>C</code>. (Hodí se tehdy, trvá-li výpočet z nějakého důvodu příliš dlouho.)
+<p>Okno Python Shell nabízí řadu možností pro usnadnění psaní příkazů. Probereme zde jen některé, další možnosti lze nalézt v hlavním menu pod položkou <em>Edit</em>:
+- <strong>Historie příkazů</strong>. Po stisknutí klávesové zkratky <code>Alt</code>+<code>P</code> (z anglického „previous“) vyvoláme poslední spouštěný příkaz, při opakovaném stisknutí této zkratky procházíme historii příkazů dozadu. Obdobně stisknutím klávesové zkratky <code>Alt</code>+<code>N</code> (z anglického „next“) můžeme procházet v historii příkazů směrem dopředu. Jinou možností, jak znovu vyvolat předchozí příkaz, je umístit na něj kurzor a stisknout enter. Tím je daný příkaz automaticky vypsán na aktuální řádek a dalším stisknutím enter je spuštěn.
+- <strong>Ukončení překladu</strong>. Chceme-li přerušit aktuální vykonávání příkazu, stiskneme <code>Ctrl</code>+<code>C</code>. (Hodí se tehdy, trvá-li výpočet z nějakého důvodu příliš dlouho.)
 - <strong>Našeptávání</strong>. Po napsání libovolné posloupnosti znaků a stisknutí klávesové zkratky <code>Ctrl</code>+<code>Space</code> se otevře seznam všech dostupných funkcí, proměnných a slov jazyka začínajících danými písmeny. Z nich je možné vybírat pomocí šipek nahoru a dolu.</p>
 <blockquote>
 <p><strong>Úkol 2.</strong> V okně Python Shell vytvořte několik proměnných a vyzkoušejte jednoduché aritmetické operace. Zkuste procházet historii příkazů.</p>
 </blockquote>
 <h2 id="psani-a-spousteni-skriptu">Psaní a spouštění skriptů</h2>
 <p>Skript je samostatný textový soubor s kódem, který je možné spustit najednou. Skript je možné psát v libovolném textovém editoru, je nicméně nutné jej uložit s koncovkou <code>.py</code>, aby překladač (např. Python Shell) rozeznal, že se jedná o kód v jazyce Python.</p>
-<p>V programu IDLE je možné sát skripty ve speciálně upraveném textovém editoru, který oproti běžným textovým editorům skýtá některé výhody - např. se kód vybarvuje tak, aby se v něm dalo lépe orientovat. Zároveň lze vytvořený skript ihned poslat do překladače a spustit.</p>
+<p>V programu IDLE je možné psát skripty ve speciálně upraveném textovém editoru, který oproti běžným textovým editorům skýtá některé výhody - např. se kód vybarvuje tak, aby se v něm dalo lépe orientovat. Zároveň lze vytvořený skript ihned poslat do překladače a spustit.</p>
 <blockquote>
 <p><strong>Úkol 3.</strong> Otevřete nový skript v programu IDLE pomocí <em>File -&gt; New File</em>, případně pomocí <code>Ctrl</code>+<code>N</code>. Do skriptu napište pod sebe postupně příkazy <code>a = "Ahoj"</code>, <code>b = "Světe"</code> a <code>print(a + " " + b)</code>. Skript uložte a pomocí klávesy <code>F5</code>, případně pomocí <em>Run -&gt; Run Module</em> jej spusťte.</p>
 </blockquote>
@@ -155,55 +216,69 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <blockquote>
 <p><strong>Úkol 4.</strong> Zavřete program IDLE. V prohlížeči souborů vyhledejte vytvořený skript, klikněte na něj pravým tlačítkem myši a zvolte <em>Edit with IDLE</em>.</p>
 </blockquote>
-<h2 id="python-window-v-arcmap">Python Window v ArcMap</h2>
-<p>Python je integrovaný do programu ArcMap několika způsoby. Jedním z nich je i interaktivní okno Python Window, jakási obdoba překladače Python Shell. V tomto okně můžeme volat libovolné příkazy Pythonu, zároveň však (jak uvidíme později) umožňuje integrovat do příkazů vrstvy v dané chvíli nahrané v Table Of Contents. Zároveň se výstupní geodata z analýz, provedených v Python Window, automaticky vkládají jako vrstvy do Table Of Contents.</p>
+<h2 id="python-konzole-v-arcmap">Python konzole v ArcMap</h2>
+<p>Python je integrovaný do programu ArcMap několika způsoby. Jedním z nich je i interaktivní okno Python Window, jakási obdoba překladače Python Shell. V tomto okně můžeme volat (téměř) libovolné příkazy Pythonu, zároveň však (jak uvidíme později) umožňuje integrovat do příkazů vrstvy v dané chvíli nahrané v Table Of Contents. Zároveň se výstupní geodata z analýz, provedených v Python Window, automaticky vkládají jako vrstvy do Table Of Contents.</p>
 <blockquote>
 <p><strong>Úkol 5.</strong> V programu ArcMap otevřete Python Window a vyzkoušejte si spustit jednoduché příkazy, které jste spouštěli v okně Python Shell.</p>
 </blockquote>
 <h2 id="shrnuti">Shrnutí</h2>
 <p>V této lekci jste se seznámili s prostředím programu IDLE, zkusili si napsat a spustit jednoduché příkazy v okně Python Shell a napsat a spustit jednoduchý skript. Zároveň jste se seznámili s oknem Python Window v programu ArcMap.</p>
 <h2 id="ulohy">Úlohy</h2>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-neutral float-right" title="Lekce 4: Proměnné a datové typy">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-neutral" title="Lekce 2: Uživatelské rozhraní"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" class="btn btn-xs btn-link">
-        Lekce 4: Proměnné a datové typy
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%202%20Model%20Builder%20II/" class="btn btn-xs btn-link">
-        Lekce 2: Uživatelské rozhraní
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 3 Jak a kde napsat a spustit program v Pythonu.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%202%20Model%20Builder%20II/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

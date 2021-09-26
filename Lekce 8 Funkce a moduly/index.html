@@ -1,180 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 8: Funkce a moduly - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 8: Funkce a moduly - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 8: Funkce a moduly", url: "#_top", children: [
-              {title: "Definice a vol\u00e1n\u00ed funkce", url: "#definice-a-volani-funkce" },
-              {title: "Jmenn\u00e9 prostory a jejich hierarchie", url: "#jmenne-prostory-a-jejich-hierarchie" },
-              {title: "Pr\u00e1ce s moduly", url: "#prace-s-moduly" },
-              {title: "Jak vytvo\u0159it vlastn\u00ed modul", url: "#jak-vytvorit-vlastni-modul" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 8: Funkce a moduly";
+    var mkdocs_page_input_path = "Lekce 8 Funkce a moduly.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 8: Funkce a moduly</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#definice-a-volani-funkce">Definice a volání funkce</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jmenne-prostory-a-jejich-hierarchie">Jmenné prostory a jejich hierarchie</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prace-s-moduly">Práce s moduly</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jak-vytvorit-vlastni-modul">Jak vytvořit vlastní modul</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Python &raquo;</li>
+        
+      
     
+    <li>Lekce 8: Funkce a moduly</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 8 Funkce a moduly.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" class="btn btn-xs btn-link">
-        Lekce 9: Třídy a objekty
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" class="btn btn-xs btn-link">
-        Lekce 7: Adresáře a textové soubory
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-8-funkce-a-moduly">Lekce 8: Funkce a moduly</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-8-funkce-a-moduly">Lekce 8: Funkce a moduly</h1>
 <h2 id="definice-a-volani-funkce">Definice a volání funkce</h2>
 <p>Často nastává situace, kdy nějakou část kódu chceme používat opakovaně. Například můžeme chtít opakovaně v našem programu počítat faktoriál nějakého čísla (přičemž toto číslo může být pokaždé jiné). Výpočet faktoriálu jsme si ukázali v kapitole o cyklu <code>for</code>, řešení může vypadat třeba takto:</p>
-<pre><code class="python">faktorialn = 1
+<pre><code class="language-python">faktorialn = 1
 for i in range(n): faktorialn = faktorialn * (i+1)
 print faktorialn
 </code></pre>
-
 <p>„Nejprimitivnější“ možností by bylo vložit tento kód všude tam, kde v kódu potřebujeme počítat faktoriál, samozřejmě vždy s patřičně změněnou hodnotou <code>n</code>.</p>
 <p>Problém takového řešení nastává ve chvíli, kdy budeme chtít samotný výpočet faktoriálu změnit – např. pokud bychom zjistili, že jsme v původním kódu udělali chybu a je třeba jej opravit. Máme-li totiž výše uvedený kód v našem programu na mnoha místech, je třeba jej (správně) přepsat na každém takovém místě. To je značně nepohodlné a navíc se při tom snadno dopustíme chyb.</p>
 <p>Elegantnějším řešením je vytvořit (tj. definovat) <strong>funkci</strong>, která bude výpočet faktoriálu provádět, a tuto funkci pak na příslušných místech volat.</p>
 <p>Struktura zápisu definice funkce je následující:</p>
-<pre><code class="python">def nazev_funkce(parametr1, parametr2, ... , parametrN):
+<pre><code class="language-python">def nazev_funkce(parametr1, parametr2, ... , parametrN):
     tělo funkce
 </code></pre>
-
 <p>Definice je uvozena klíčovým slovem <code>def</code>, podle kterého interpret pozná, že se jedná o definici funkce. Následuje libovolný název a v závorkách posloupnost tzv. <strong>parametrů</strong>, tj. proměnných zastupujících hodnoty vstupující do výpočtu, který má funkce provádět. <strong>Tělo funkce</strong> pak obsahuje příkazy (psané na samostatné řádky odsazené o jednu úroveň za slovo <code>def</code>), které obvykle něco provádějí s parametry. Ukažme si funkci na konkrétním příkladu výpočtu faktoriálu:</p>
-<pre><code class="python">def faktorial(n):
+<pre><code class="language-python">def faktorial(n):
     faktorialn = 1
     for i in range(n): faktorialn = faktorialn * (i+1)
     return faktorialn
 </code></pre>
-
 <p>Klíčové slovo <code>return</code> ukončuje definici funkce (není však povinné, jak uvidíme níže), přičemž stanoví, jaká hodnota má být funkcí vrácena při jejím volání.</p>
 <p>Pokud odešleme kód s definicí funkce do překladače (resp. interpretu), není výsledkem provedení příslušných příkazů uvedených v těle funkce, ale pouze je funkce uložena v operační paměti a je ji možné kdykoli tzv. <strong>zavolat</strong>. Volání funkce má strukturu analogickou její definici:</p>
-<pre><code class="python">nazev_funkce(argmunet1, argument2, ... , argumentN)
+<pre><code class="language-python">nazev_funkce(argmunet1, argument2, ... , argumentN)
 </code></pre>
-
 <p>Jednotlivé argumenty přesně odpovídají jednotlivým parametrům funkce, jsou vlastně konkrétními hodnotami, které se při volání funkce za jednotlivé parametry dosadí. Ukažme si volání funkce opět na příkladu faktoriálu, přičemž budeme funkci definovanou výše volat v okně Python Shell:</p>
-<pre><code class="python">&gt;&gt;&gt; faktorial(3)
+<pre><code class="language-python">&gt;&gt;&gt; faktorial(3)
 6
 &gt;&gt;&gt; faktorial(6)
 720
 &gt;&gt;&gt; faktorial(10)
 3628800
 </code></pre>
-
 <p>Výhoda tohoto řešení je zřejmá: kdykoli lze nyní použít funkci <code>faktorial</code> s libovolným celočíselným argumentem, přičemž pokud bychom chtěli funkci nějak změnit, stačí tak učinit pouze jednou, v samotné její definici.</p>
 <p>Uveďme příklad funkce s více než jedním parametrem, např. funkci, která počítá zadanou celočíselnou mocninu zadaného čísla:</p>
-<pre><code class="python">def mocnina(x,y):
+<pre><code class="language-python">def mocnina(x,y):
     vysledek = 1
     for i in range(y): vysledek = vysledek * x
     return vysledek
 </code></pre>
-
 <p>(Samozřejmě jsme mohli funkci definovat i jednodušeji: <code>def mocnina(x,y): return x**y</code>. Prozkoumejte nicméně uvedenou složitější definici a uvědomte si, že bude pro celočíselnou mocninu fungovat.)</p>
 <p>Při volání funkce je nutné zapsat argumenty ve stejném pořadí, v jakém jsou definovány příslušné parametry:</p>
-<pre><code class="python">&gt;&gt;&gt; mocnina(3,4)
+<pre><code class="language-python">&gt;&gt;&gt; mocnina(3,4)
 81
 &gt;&gt;&gt; mocnina(4,3)
 64
 </code></pre>
-
 <p>Pokud bychom chtěli z nějakého důvodu zadat argumenty v jiném pořadí, než jak jsou definovány argumenty, je možné použít při volání funkce explicitně jména příslušných parametrů a operátor <code>=</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; mocnina(y=4, x=3)
+<pre><code class="language-python">&gt;&gt;&gt; mocnina(y=4, x=3)
 81
 </code></pre>
-
 <p>Zadávání argumentů jménem parametru je výhodné u funkcí s velkým počtem parametrů: muset si pamatovat jejich pořadí by bylo nepraktické. </p>
 <p>Parametry mohou mít tzv. <strong>implicitní</strong> neboli <strong>výchozí hodnotu</strong>, takže je pak není nutné při volání funkce zadávat. Pokud příslušný argument nezadáme, použije se tato výchozí hodnota. Parametry s implicitní hodnotou je však nutné umístit v definici funkce na konec, tj. až za parametry bez implicitních hodnot. Důvodem je, aby parametrům bez implicitních hodnot bylo možné zadávat hodnoty na základě pořadí.</p>
 <p>Ukažme si definování implicitní hodnoty na příkladu funkce mocnina. Pokud definujeme implicitní hodnotu parametru <code>y</code> jako 2, bude funkce při zadání pouze jednoho argumentu počítat jeho druhou mocninu:</p>
-<pre><code class="python">def mocnina(x, y = 2):
+<pre><code class="language-python">def mocnina(x, y = 2):
     vysledek = 1
     for i in range(y): vysledek = vysledek * x
     return vysledek
 </code></pre>
-
 <p>Po zavolání v okně Python Shell:</p>
-<pre><code class="python">&gt;&gt;&gt; mocnina(4) # Zde bude použita implicitní hodnota parametru y
+<pre><code class="language-python">&gt;&gt;&gt; mocnina(4) # Zde bude použita implicitní hodnota parametru y
 16
 &gt;&gt;&gt; mocnina(4, 3) # Zde bude použita uživatelem specifikovaná hodnota parametru y
 64
 </code></pre>
-
 <p>Samozřejmě výsledek volání funkce lze uložit do proměnné, tak jak to znáte při používání vestavěných funkcí Pythonu (např. <code>input</code>, <code>range</code> či konverzní funkce <code>int</code> apod.):</p>
-<pre><code class="python">&gt;&gt;&gt; a = mocnina(4)
+<pre><code class="language-python">&gt;&gt;&gt; a = mocnina(4)
 &gt;&gt;&gt; print a
 16
 </code></pre>
-
 <p>Stejně tak argumenty funkce mohou být zadávány přímo pomocí hodnot (viz ukázky výše), nebo pomocí proměnných:</p>
-<pre><code class="python">&gt;&gt;&gt; a = 4
+<pre><code class="language-python">&gt;&gt;&gt; a = 4
 &gt;&gt;&gt; b = 5
 &gt;&gt;&gt; mocnina(a, b)
 1024
 </code></pre>
-
 <p>Jak jsme se již zmínili, funkce mohou, ale nemusí mít návratovou hodnotu. Pokud funkce pouze něco vykoná, ale nic nevrátí, říká se jít někdy <em>procedura</em>. Pozná se podle toho, že v definici neobsahuje klíčové slovo <code>return</code>. Příkladem může být funkce, která výsledek výpočtu zapíše do textového souboru:</p>
-<pre><code class="python"># funkce, která otevře textový soubor a vytvoří nový, se zrcadlově obráceným textem
+<pre><code class="language-python"># funkce, která otevře textový soubor a vytvoří nový, se zrcadlově obráceným textem
 def prevrat_text(txt_in, txt_out):
 
     # přečtení vstupního textového souboru
@@ -188,7 +231,6 @@ def prevrat_text(txt_in, txt_out):
         out_file.write(in_text[i-1])
     out_file.close()
 </code></pre>
-
 <p>Pokud volání takové funkce (procedury) uložíme do nějaké proměnné, nebude tato proměnná nic obsahuje (bude odkazovat na objekt <code>None</code>). Přesto funkce (procedura) svou práci odvede.</p>
 <blockquote>
 <p><strong>Úkol 1.</strong> Napište funkci pro výpočet <em>n</em>-tého členu Fibonacciho posloupnosti.</p>
@@ -196,21 +238,19 @@ def prevrat_text(txt_in, txt_out):
 </blockquote>
 <h2 id="jmenne-prostory-a-jejich-hierarchie">Jmenné prostory a jejich hierarchie</h2>
 <p>Pokud zadáváme argumenty funkce pomocí proměnných, je otázkou, zda lze tuto proměnnou uvnitř funkce měnit tak, aby se změna projevila i mimo funkci. Zkusme si to na příkladu funkce, která pouze změní hodnotu vstupní proměnné:</p>
-<pre><code class="python">def zmen_hodnotu(a):
+<pre><code class="language-python">def zmen_hodnotu(a):
     a = a + 1
 </code></pre>
-
 <p>Nyní ověříme, zda bude mít funkce vliv na původní proměnnou, zadanou do funkce jako argument:</p>
-<pre><code class="python">&gt;&gt;&gt; a = 5
+<pre><code class="language-python">&gt;&gt;&gt; a = 5
 &gt;&gt;&gt; zmen_hodnotu(a)
 &gt;&gt;&gt; a
 5
 </code></pre>
-
 <p>Jak je vidět, funkce původní proměnnou neovlivní. Jak to? Je to proto, že příkaz <code>a = a + 1</code>v těle funkce ve skutečnosti vytvoří novou proměnnou <code>a</code>, jejíž hodnota se nastaví s využitím parametru <code>a</code> (na pravé straně výrazu). Tato nová proměnná je nicméně "vidět" pouze v rámci funkce, neboť je v jejím <strong>jmenném prostoru</strong>.</p>
 <p>Jmenný prostor (angl. <em>namespace</em>) je jakýsi virtuální prostor, ve kterém jsou definována různá <em>jména</em>, typicky právě jména proměnných a funkcí. Jmenných prostorů může být více, přičemž jsou hierarchicky uspořádány. Základním jmenným prostorem je tzv. <em>vestavěný jmenný prostor</em>, obsahující např. jména vestavěných funkcí jako <code>range</code> či <code>print</code>. Jelikož jsou tato jména definována ve vestavěném prostoru, jsou dostupná v jakékoli části kódu v jazyce Python. </p>
 <p>Dalším jmenným prostorem, který je o jednu hierarchickou úroveň níže, je tzv. <em>globální jmenný prostor</em>. Ten vzniká automaticky při otevření konzole Python Shell (resp. při spuštění skriptu). Pokud konzoli otevřeme  spuštěním programu IDLE z nabídky programů, případně ji restartujeme pomocí <em>Shell</em> -&gt; <em>Restart Shell</em>, globální jmenný prostor se nastaví jako prázdný. Při jakémkoli vytvoření proměnné či funkce se následně dané jméno přidá do globálního prostoru, díky čemuž s ním nadále můžeme v tomto prostoru pracovat. Opětovné restartování konzole však globální jmenný prostor opět vyprázdní: </p>
-<pre><code class="python">&gt;&gt;&gt; a = 5 # Vytvoření proměnné v globálním jmenném prostoru
+<pre><code class="language-python">&gt;&gt;&gt; a = 5 # Vytvoření proměnné v globálním jmenném prostoru
 &gt;&gt;&gt; a # Proměnná existuje...
 5
 &gt;&gt;&gt; 
@@ -222,10 +262,9 @@ Traceback (most recent call last):
     a
 NameError: name 'a' is not defined
 </code></pre>
-
 <p>Vedle globálního jmenného prostoru můžeme v rámci skriptu vytvořit libovolné množství vzájemně hierarchicky zanořených tzv. <em>lokálních jmenných prostorů</em>. Jakékoli jméno vytvořené v daném lokálním prostoru existuje (tj. je "dostupné" či "viditelné") pouze v rámci tohoto prostoru. </p>
 <p>Lokální jmenný prostor je vždy automaticky vytvořen v rámci těla funkce. Pokud tedy v těle funkce vytvoříme proměnnou <code>a</code>, s touto proměnnou můžeme zacházet uvnitř těla této funkce, nikoli však mimo ně:</p>
-<pre><code class="python">&gt;&gt;&gt; def nejaka_funkce(parametr): a = parametr + 1
+<pre><code class="language-python">&gt;&gt;&gt; def nejaka_funkce(parametr): a = parametr + 1
 
 &gt;&gt;&gt; nejaka_funkce(5)
 &gt;&gt;&gt; a
@@ -235,10 +274,9 @@ Traceback (most recent call last):
     a
 NameError: name 'a' is not defined
 </code></pre>
-
 <p>Při vyhodnocování jmen použitých v kódu se nejprve prohledává jmenný prostor nejnižší hierarchické úrovně. Pokud se zde dané jméno nenajde, postupuje se hierarchií jmenných prostorů výše.</p>
 <p>Tímto způsobem můžeme např. lokálně změnit některá globální či vestavěná jména:</p>
-<pre><code class="python">&gt;&gt;&gt; range = &quot;ahoj&quot;
+<pre><code class="language-python">&gt;&gt;&gt; range = &quot;ahoj&quot;
 &gt;&gt;&gt; range(5)
 
 Traceback (most recent call last):
@@ -246,44 +284,37 @@ Traceback (most recent call last):
     range(5)
 TypeError: 'str' object is not callable
 </code></pre>
-
 <p>Nyní se znovu podíváme na funkci, kterou jsme definovali na začátku této sekce, z hlediska jmenných prostorů:</p>
-<pre><code class="python">def zmen_hodnotu(a):
+<pre><code class="language-python">def zmen_hodnotu(a):
     a = a + 1
 </code></pre>
-
 <p>V první řadě jsme touto definicí vytvořili (resp. vytvoří se, až se kód s definicí spustí) jméno <code>zmen_hodnotu</code> v globálním jmenném prostoru. Díky tomu budeme schopni funkci volat. Dále parametr <code>a</code> v hlavičce funkce vytváří jméno <code>a</code>, které bude existovat v lokálním jmenném prostoru této funkce. Díky tomu můžeme v těle funkce použít jméno <code>a</code> na pravé straně příkazu <code>a = a + 1</code>. Jméno <code>a</code> z levé strany </p>
 <h2 id="prace-s-moduly">Práce s moduly</h2>
 <p>Modul je soubor se zdrojovým kódem, obsahujícím především definice nejrůznějších funkcí (ale i jiných objektů, jako jsou proměnné, třídy ad.). Význam modulu je v tom, že umožňuje použití v něm definovaných funkcí (či jiných objektů) v libovolném kódu, aniž bychom museli tyto funkce v daném kódu definovat. V modulu jsou tyto funkce již definovány a nám stačí je z daného modulu načíst.</p>
 <p>Modul se vlastně formálně nijak neliší od jakéhokoli skriptu. Není to nic jiného než textový soubor s příponou <code>.py</code>. Ve skutečnosti je možné to chápat i opačně a považovat jakýkoli skript za modul. V praxi se však pojmenování <em>modul</em> používá pro skripty obsahující téměř výhradně definice funkcí (či tříd). Moduly tak často hrají roli jakýchsi <strong>knihoven funkcí</strong>, použitelných v jakémkoli jiném skriptu či přímo v interaktivním okně Python Shell.</p>
 <p>Vedle modulů existují v terminologii Pythonu ještě tzv. <strong>balíčky</strong> (<strong>site-packages</strong>). Jejich význam je stejný jako u modulů, rozdíl je pouze v tom, že mají složitější strukturu, díky níž může jeden balíček obsahovat řadu modulů. Vzhledem k tomu, že používání balíčků se formálně nijak neliší od používání modulů, nebudeme v tomto textu mezi balíčky a moduly rozlišovat a zůstaneme u souhrnného označení modul. Moduly obsažené uvnitř balíčků pak budeme v případě potřeby označovat jako pod-moduly.</p>
 <p>Jak již víte, pokud chceme použít funkce nějakého modulu, je třeba modul načíst pomocí příkazu <code>import</code>. Syntaxe je tedy:</p>
-<pre><code class="python">import nazev_modulu
+<pre><code class="language-python">import nazev_modulu
 </code></pre>
-
 <p>Název modulu se uvádí bez koncovky <code>.py</code> a bez udání jeho umístění na disku. Příslušný modul samozřejmě musí existovat a musí být umístěn v některé ze složek, v nichž jsou moduly při použití příkazu <code>import</code> vyhledávány. (Jak zjistit či ovlivnit, které složky v počítači jsou při načítání modulů prohledávány, si povíme v další části.)</p>
 <p>Po načtení modulu máme k dispozici veškeré funkce, které jsou v něm definovány. Jinými slovy, příslušná jména jsou přidána do globálního jmenného prostoru, ovšem s předponou <code>nazev_modulu.</code>. K příslušným funkcím (či proměnným a jiným objektům) tak musíme přistupovat následovně:</p>
-<pre><code class="python">nazev_modulu.nazev_funkce(argumenty)
+<pre><code class="language-python">nazev_modulu.nazev_funkce(argumenty)
 </code></pre>
-
 <p>Příklad modulu <code>os</code>:</p>
-<pre><code class="python">import os
+<pre><code class="language-python">import os
 os.getcwd()
 'C:\\my_path\\pracovni_adresar'
 </code></pre>
-
 <p>Chceme-li z nějakého modulu použít jen nějakou jeho část, např. jen jednu funkci, můžeme namísto celého modulu načíst jen tuto jeho část:</p>
-<pre><code class="python">from nazev_modulu import nazev_funkce
+<pre><code class="language-python">from nazev_modulu import nazev_funkce
 </code></pre>
-
 <p>Načtenou funkci pak mámek dispozici přímo, tj. nemusíme (a ani nemůžeme) k ní přistupovat pomocí uvedení názvu modulu a tečky. Příslušné jméno je přidáno přímo do globálního jmenného prostoru:</p>
-<pre><code class="python">&gt;&gt;&gt; from os import getcwd
+<pre><code class="language-python">&gt;&gt;&gt; from os import getcwd
 &gt;&gt;&gt; getcwd()
 'C:\\my_path\\pracovni_adresar'
 </code></pre>
-
 <p>Stejnou syntax můžeme použít i pro načtení pod-modulů, jak jsme již uvedli v lekci 7 na příkladu modulu <code>path</code> z balíčku <code>os</code>:</p>
-<pre><code class="python"># Varianta s načtením celého balíčku os
+<pre><code class="language-python"># Varianta s načtením celého balíčku os
 &gt;&gt;&gt; import os
 &gt;&gt;&gt; os.path.join(&quot;C:&quot;, &quot;my_path&quot;, &quot;my_file.txt&quot;)
 'C:my_path\\my_file.txt'
@@ -293,11 +324,9 @@ os.getcwd()
 &gt;&gt;&gt; path.join(&quot;C:&quot;, &quot;my_path&quot;, &quot;my_file.txt&quot;)
 'C:my_path\\my_file.txt'
 </code></pre>
-
 <p>Podobně můžeme načíst všechny funkce z daného modulu naráz, ale způsobem uvedeným výše, tj. vlastně každou zvlášť:</p>
-<pre><code class="python">from nazev_modulu import *
+<pre><code class="language-python">from nazev_modulu import *
 </code></pre>
-
 <p>Všechny funkce či pod-moduly daného modulu jsou pak přístupné přímo přes své jméno, aniž bychom uváděli jméno modulu. Jsou totiž přidány přímo do globálního jmenného prostoru. Tato praxe však není doporučována, a to z následujících důvodů:</p>
 <ol>
 <li>Ztrácíme přehled o tom, kde se vlastně jednotlivé funkce vzaly, tj. zda jsme je definovali sami, případně z jakého modulu je načítáme.</li>
@@ -305,19 +334,17 @@ os.getcwd()
 <li>Jména načtených funkcí (či jiných objektů) se smíchají s ostatními jmény globálního jmenného prostoru, takže může dojít ke konfliktu jmen z modulu a jmen, která jsme sami vytvořili (např. nějaká naše proměnná se může jmenovat stejně jako nějaká funkce z daného modulu).</li>
 </ol>
 <p>Jméno modulu můžeme při načtení nahradit nějakým vlastním, zpravidla kratším jménem:</p>
-<pre><code class="python">import nazev_modulu as vlastni_kratsi_nazev
+<pre><code class="language-python">import nazev_modulu as vlastni_kratsi_nazev
 vlastni_kratsi_nazev.funkce_modulu()
 </code></pre>
-
 <p>Příklad:</p>
-<pre><code class="python">&gt;&gt;&gt; import random as rnd
+<pre><code class="language-python">&gt;&gt;&gt; import random as rnd
 &gt;&gt;&gt; rnd.random()
 0.5218355675703937
 </code></pre>
-
 <h2 id="jak-vytvorit-vlastni-modul">Jak vytvořit vlastní modul</h2>
 <p>Vytvořit vlastní modul je stejně jednoduché, jako napsat skript. Je to vlastně totéž. Pro ukázku si vytvořme jednoduchý modul, nazvaný <code>matematika</code>, který bude obsahovat dvě funkce, <code>obsah_kruhu</code> a <code>obvod_kruhu</code>. Vytvořte skript s následujícím kódem:</p>
-<pre><code class="python">&quot;&quot;&quot;Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.&quot;&quot;&quot;
+<pre><code class="language-python">&quot;&quot;&quot;Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.&quot;&quot;&quot;
 pi = 3.1416
 
 def obvod_kruhu(r):
@@ -328,15 +355,13 @@ def obsah_kruhu(r):
     &quot;&quot;&quot;Tato funkce pocita obsah kruhu o polomeru r.&quot;&quot;&quot;
     return pi*r*r
 </code></pre>
-
 <p>Následně skript uložte do pracovního adresáře pod názvem <code>matematika.py</code>. (Připomínáme, že aktuální pracovní adresář zjistíte pomocí funkce <code>getcwd</code> z modulu <code>os</code>, případně jej můžete změnit funkcí <code>chdir</code> ze stejného modulu.)</p>
 <p>Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5) tak, jak jsme zvyklí spouštět skripty. Výsledkem je, že se obsah skriptu nahraje do okna Python Shell (a je tudíž přístupný pomocí procházení paměti příkazů), takže jednotlivé funkce ve skriptu definované jsou přímo přístupné pod svým názvem (naopak ale nebudou přístupné pod názvem modulu, protože ve skutečnosti nedošlo k jeho načtení).</p>
 <p>Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu <code>import</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; import matematika
+<pre><code class="language-python">&gt;&gt;&gt; import matematika
 </code></pre>
-
 <p>Nyní lze k funkcím a proměnným modulu přistupovat přes název modulu:</p>
-<pre><code class="python">&gt;&gt;&gt; import matematika
+<pre><code class="language-python">&gt;&gt;&gt; import matematika
 &gt;&gt;&gt; matematika.pi
 3.1416
 &gt;&gt;&gt; matematika.obvod_kruhu(4)
@@ -344,32 +369,27 @@ def obsah_kruhu(r):
 &gt;&gt;&gt; matematika.obsah_kruhu(4)
 50.2656
 </code></pre>
-
 <p>Zbývá vysvětlit, k čemu jsou dobré textové řetězce na začátku výše uvedeného skriptu a uvnitř definic obou uvedených funkcí. Tyto textové řetězce jsou nepovinné, tj. modul i funkce by stejně dobře fungovaly i bez nich. Uvedli jsme je v této ukázce proto, abychom ukázali možnost psát dokumentační řetězce, v nichž je zpravidla uvedena popisná informace o účelu daného modulu či funkce. Dokumentační řetězec, pokud existuje, je možné vyvolat zavolání jména modulu či funkce, tečky a řetězce <code>__doc__</code> (pozor: před i za slovem doc jsou vždy dvě podtržítka):</p>
-<pre><code class="python">&gt;&gt;&gt; matematika.__doc__
+<pre><code class="language-python">&gt;&gt;&gt; matematika.__doc__
 'Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.'
 &gt;&gt;&gt; matematika.obsah_kruhu.__doc__
 'Tato funkce pocita obsah kruhu o polomeru r.'
 </code></pre>
-
 <p>Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem <code>import</code>, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz <code>import</code> totiž nejprve zkontroluje, zda příslušný modul již není načtený, a pokud ne načte jej. Pokud ano, neudělá nic. K tomu, abychom již načtený modul načetly znovu, je třeba použít vestavěnou funkci <code>reload</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; reload(matematika)
+<pre><code class="language-python">&gt;&gt;&gt; reload(matematika)
 &lt;module 'matematika' from 'C:\Python25\matematika.pyc'&gt;
 </code></pre>
-
 <p>Nyní zbývá vyřešit, kam vlastně moduly ukládat, abychom je mohli načítat příkazem <code>import</code>. Pokud zavoláme příkaz <code>import</code> a uvedeme název nějakého modulu, interpret načte první modul zadaného jména, který nalezne ve složkách, v nichž moduly hledá. Jaké složky to jsou, lze zjistit pomocí proměnné <code>path</code> definované v modulu <code>sys</code>. Tato proměnná obsahuje seznam adres, které se mají při načítání modulů prohledávat. K jejímu zavolání je třeba samozřejmě nejprve načíst modul <code>sys</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; import sys
+<pre><code class="language-python">&gt;&gt;&gt; import sys
 &gt;&gt;&gt; sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages']
 </code></pre>
-
 <p>Konkrétní obsah seznamu bude samozřejmě záviset na konkrétním počítači.</p>
 <p>Pokud budeme chtít k tomuto seznamu nějakou složku přidat, je možné proměnnou <code>path</code> změnit standardním způsobem, jakým se pracuje se seznamy:</p>
-<pre><code class="python">&gt;&gt;&gt; sys.path.append(&quot;C:\\Moje_slozka&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; sys.path.append(&quot;C:\\Moje_slozka&quot;)
 &gt;&gt;&gt; sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages', 'C:\\Moje_slozka']
 </code></pre>
-
 <p>Tímto způsobem můžeme do proměnné <code>path</code> přidat složky, v nichž máme uložené moduly. Tuto akci však budeme muset udělat vždy znovu, kdykoli spustíme Python. Jinou možností je ukládat moduly do složky, která již v seznamu proměnné <code>path</code> je. Tento způsobe však není vhodný, neboť při přeinstalování Pythonu jsou tyto složky většinou smazány a s nimi i vše, co obsahují. Vhodnější je proto např. do kódu programu, v němž budeme chtít načítat nějaké vlastní moduly, rovnou vložit příkaz s aktualizací proměnné <code>path</code>.</p>
 <p>Jinou možností je ukládat moduly do stejné složky, v níž je uložen samotný program (či „hlavní skript“), neboť do proměnné <code>path</code> je vždy automaticky přidána aktuální pracovní složka (tj. např. složka, z níž je spouštěn nějaký skript). </p>
 <p>Jiný způsob, jak prohlížet složky s moduly, je pomocí prohlížeče <em>Path Browser</em>, umístěného v hlavní nabídce okna Python Shell pod <em>File -&gt; Path Browser</em>. Okno prohlížeče vypadá následovně:</p>
@@ -380,47 +400,61 @@ def obsah_kruhu(r):
 <li>Napište funkci, která vrátí maximum resp. minimum ze zadaného seznamu čísel (řešte bez použití vestavěné funkce <code>max</code> resp. <code>min</code>).</li>
 <li>Napište funkci, která seřadí vzestupně (sestupně) zadaný seznam čísel (řešte bez použití metody seznamu <code>sort</code>). (Nápověda: můžete použít např. algoritmus "řazení výběrem", "řazení vkládáním" či "bublinkové řazení". Pro přehled různých přístupů viz např. tento <a href="https://cs.wikipedia.org/wiki/%C5%98adic%C3%AD_algoritmus">odkaz na wikipedii</a>.)</li>
 </ol>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" class="btn btn-neutral float-right" title="Lekce 9: Třídy a objekty">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" class="btn btn-neutral" title="Lekce 7: Adresáře a textové soubory"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" class="btn btn-xs btn-link">
-        Lekce 9: Třídy a objekty
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" class="btn btn-xs btn-link">
-        Lekce 7: Adresáře a textové soubory
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 8 Funkce a moduly.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

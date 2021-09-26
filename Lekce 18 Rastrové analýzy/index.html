@@ -1,95 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 18: Rastrové analýzy - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 18: Rastrové analýzy - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 18: Rastrov\u00e9 anal\u00fdzy", url: "#_top", children: [
-              {title: "Nastaven\u00ed prost\u0159ed\u00ed a parametr\u016f", url: "#nastaveni-prostredi-a-parametru" },
-              {title: "Topo to Raster", url: "#topo-to-raster" },
-              {title: "Slope a Aspect", url: "#slope-a-aspect" },
-              {title: "Lok\u00e1ln\u00ed mapov\u00e1 algebra", url: "#lokalni-mapova-algebra" },
-              {title: "Reklasifikace", url: "#reklasifikace" },
-              {title: "Anal\u00fdza viditelnosti", url: "#analyza-viditelnosti" },
-              {title: "Spojen\u00ed podm\u00ednek", url: "#spojeni-podminek" },
-              {title: "V\u00fdpo\u010det plochy", url: "#vypocet-plochy" },
-              {title: "\u0158e\u0161en\u00ed zvl\u00e1\u0161\u0165 pro jednotliv\u00e9 okresy", url: "#reseni-zvlast-pro-jednotlive-okresy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 18: Rastrov\u00e9 anal\u00fdzy";
+    var mkdocs_page_input_path = "Lekce 18 Rastrov\u00e9 anal\u00fdzy.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 18: Rastrové analýzy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#nastaveni-prostredi-a-parametru">Nastavení prostředí a parametrů</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#topo-to-raster">Topo to Raster</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slope-a-aspect">Slope a Aspect</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lokalni-mapova-algebra">Lokální mapová algebra</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reklasifikace">Reklasifikace</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#analyza-viditelnosti">Analýza viditelnosti</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#spojeni-podminek">Spojení podmínek</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vypocet-plochy">Výpočet plochy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>ArcPy &raquo;</li>
+        
+      
     
+    <li>Lekce 18: Rastrové analýzy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 18 Rastrové analýzy.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../about_me/" class="btn btn-xs btn-link">
-        O mně...
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 15: Kurzory
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-18-rastrove-analyzy">Lekce 18: Rastrové analýzy</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-18-rastrove-analyzy">Lekce 18: Rastrové analýzy</h1>
 <p>Budeme řešit následující úlohu:</p>
 <blockquote>
 <p>Jako vášnivý milovník vína toužíte po vlastní vinici. Nejprve je pro ni však třeba vybrat vhodné území, splňující následující kritéria: bude na svazích se sklonem menším než 20%, s jihovýchodní až jihozápadní orientací a zároveň skryta před zraky nenechavých turistů, kteří by ji mohli z okolních vyhlídek vidět a přijít na ochutnávku hroznů. Jakou rozlohu má vhodné území pro založení vinice?</p>
@@ -104,7 +162,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Úlohu budeme řešit nejprve pro celou ČR, následně řešení upravíme tak, aby proběhlo postupně pro jednotlivé okresy ČR.</p>
 <h2 id="nastaveni-prostredi-a-parametru">Nastavení prostředí a parametrů</h2>
 <p>Prvním krokem bude načtení modulů, nastavení prostředí a definování proměnných se vstupními parametry výpočtu:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 
 # Vstupní vrstvy a další parametry
 in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
@@ -121,109 +179,89 @@ arcpy.env.overwriteOutput = True
 arcpy.env.mask = in_okre
 arcpy.CheckOutExtension(&quot;Spatial&quot;)
 </code></pre>
-
 <p>Příkaz <code>arcpy.CheckOutExtension('Spatial')</code> zajišťuje zpřístupnění licence extenze <em>Spatial Analyst</em>, kterou budeme pro výpočet potřebovat. Zapnutí extenze v ArcMap je součástí nastavení mapového dokumentu, proto při práci s extenzemi pomocí Pythonu je třeba toto nastavení vždy explicitně udělat. Výraz <code>CheckOut</code> může být matoucí - opravdu se jím extenze zapíná, a nikoli vypíná. Naopak příkazem <code>CheckInExtension</code> se extenze vypíná.</p>
 <h2 id="topo-to-raster">Topo to Raster</h2>
 <p>Jelikož podmínky pro vinici zahrnují sklon, orientaci svahu a viditelnost, bude prvním krokem naší analýzy vytvoření digitálního modelu terénu. Protože informaci o terénu máme v podobě vrstevnic, nezbývá než použít nástroj <em>TopoToRaster</em>. Ten je z hlediska volání v Pythonu poněkud složitější (viz nápovědu!).</p>
 <p>Jak víte, do nástroje <em>TopoToRaster</em> může vstupovat více různých vstupních vrstev, přičemž každá může být jiného typu. Základním vstupem je zpravidla vrstva vrstevnic (typ <em>Contour</em>), doplňkovými vstupy v našem případě budou vrstva vrcholů (typ <em>Point Elevation</em>) a vrstva okresů (typ <em>Boundary</em>). Odpovídá to následujícímu nastavení v okně nástroje:</p>
 <p><img alt="image-20201214124258717" src="../images/image-20201214124258717.png" /></p>
 <p>Každému z typů vstupů odpovídá v balíčku <code>arcpy</code> samostatná třída, která tento typ vstupu reprezentuje. Pro typ <em>Contour</em> je zde třída <code>TopoContour</code>, pro typ <em>PointElevation</em> třída <code>TopoPointElevation</code> a pro typ <em>Boundary</em> třída <code>TopoBoundary</code> (obdobně i pro ostatní typy vstupů). To znamená, že každý ze vstupů je třeba reprezentovat objektem příslušné třídy. Tyto třídy, stejně jako samotný nástroj <em>TopoToRaster</em>, jsou přitom přístupné přes modul <code>sa</code> ("Spatial Analyst"). Vytvoření jednotlivých vstupů bude tedy vypadat následovně:</p>
-<pre><code class="python">inContours = arcpy.sa.TopoContour([[in_vrst, vrst_field]])
+<pre><code class="language-python">inContours = arcpy.sa.TopoContour([[in_vrst, vrst_field]])
 inPoints = arcpy.sa.TopoPointElevation([[in_vrch, vrch_field]])
 inBoundary = arcpy.sa.TopoBoundary([in_okre])
 </code></pre>
-
 <p>U vrstevnic a vrcholů se vstup zadává jako seznam seznamů: vnější seznam je zde proto, že vrstev s vrstevnicemi (či vrcholy) může být teoreticky více, přičemž všechny se společně zadávají do jediného objektu <code>TopoContour</code>. Vnitřní seznam je zde proto, že ke každé vrstvě vrstevnic či vrcholů je třeba připojit informaci, ve kterém poli jsou hodnoty nadmořské výšky. Vstup <em>Boundary</em> se zadává jako jednoduchý seznam, neboť i vrstev s hranicemi zájmového území by teoreticky mohlo být více.</p>
 <p>Z jednotlivých objektů <code>Topo*</code> se následně vytvoří seznam, a ten se předá jako vstup do nástroje <em>TopoToRaster</em>:</p>
-<pre><code class="python">dtm = arcpy.sa.TopoToRaster([inContours, inPoints, inBoundary], enforce = &quot;NO_ENFORCE&quot;)
+<pre><code class="language-python">dtm = arcpy.sa.TopoToRaster([inContours, inPoints, inBoundary], enforce = &quot;NO_ENFORCE&quot;)
 </code></pre>
-
 <p>Zde je třeba upozornit na základní rozdíl mezi tím, jak v Pythonu funguje většina nástrojů z ArcToolboxu a jak fungují rastrové nástroje z extenze Spatial Analyst. Zatímco návratovou hodnotou většiny ostatních nástrojů je objekt třídy <em>Result</em>, u nástrojů, jejichž výstupem je rastr, je návratovou hodnotou objekt třídy <code>Raster</code>, což je přímo výstupní rastr, nicméně pouze jako vrstva v operační paměti. Výstup se tedy nezapisuje automaticky na disk, a chceme-li jej uchovat (tj. uložit na disk), je třeba tak učinit explicitně v samostatném kroku pomocí metody <code>save</code>, kterou třída <code>Raster</code> disponuje:</p>
-<pre><code class="python">dtm.save(&quot;C\:cesta\kde\má\být\uložen\rastr\dtm.tif&quot;)
+<pre><code class="language-python">dtm.save(&quot;C\:cesta\kde\má\být\uložen\rastr\dtm.tif&quot;)
 </code></pre>
-
 <p>Toto chování je ve skutečnosti velmi výhodné: umožňuje nám vykonat při výpočtu celou řadu mezikroků, jejichž výstupy není třeba ukládat na disk. Tam nakonec uložíme až finální výsledek analýzy.</p>
 <h2 id="slope-a-aspect">Slope a Aspect</h2>
 <p>Dalším krokem analýzy je výpočet sklonu nástrojem <em>Slope</em> (opět bude výstupem pouze vrstva třídy <code>Raster</code> neuložená na disk):</p>
-<pre><code class="python">slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
+<pre><code class="language-python">slp = arcpy.sa.Slope(dtm, &quot;PERCENT_RISE&quot;)
 </code></pre>
-
 <p>Podobným způsobem vypočítáme aspekt:</p>
-<pre><code class="python">aspect = arcpy.sa.Aspect(dtm)
+<pre><code class="language-python">aspect = arcpy.sa.Aspect(dtm)
 </code></pre>
-
 <p>Pokud bychom chtěli některý z rastrů uložit na disk (což nyní nepotřebujeme), můžeme opět použít metodu <code>save</code>:</p>
-<pre><code class="python">slp.save(&quot;path\to\slope.tif&quot;)
+<pre><code class="language-python">slp.save(&quot;path\to\slope.tif&quot;)
 aspect.save(&quot;path\to\aspect.tif&quot;)
 </code></pre>
-
 <h2 id="lokalni-mapova-algebra">Lokální mapová algebra</h2>
 <p>Podmínka týkající se vyhovujícího sklonu říká, že by měl být menší než 20%. K tomu můžeme buď použít nástroj <em>LessThan</em>:</p>
-<pre><code class="python">slp_ok = arcpy.sa.LessThan(slp, 20)
+<pre><code class="language-python">slp_ok = arcpy.sa.LessThan(slp, 20)
 </code></pre>
-
 <p>mnohem elegantnější a jednodušší je však využít toho, že modul <code>sa</code> definuje pro standardní matematické operátory speciální význam při použití na objekty <code>Raster</code>. Díky tomu můžeme s rastry provádět výpočty na způsob, jaký dobře znáte z <em>RasterCalculatoru</em>:</p>
-<pre><code class="python">slp_ok = slp &lt; 20
+<pre><code class="language-python">slp_ok = slp &lt; 20
 </code></pre>
-
 <p>Výsledkem je opět vrstva třídy <code>Raster</code>, kterou je v případě potřeby metodou <code>save</code> možné uložit na disk jako rastr v požadovaném formátu.</p>
 <p>V případě aspektu máme najít místa, kde je orientace svahu zhruba jižní, tj. mezi jihovýchodem (azimut 135°) a jihozápadem (azimut 225°). Jednou možností by bylo využít matematických a logických operátorů a složit výslednou podmínku průnikem dílčích podmínek: vyhovující aspekt je větší než 135 <em>a zároveň</em> menší než 225:</p>
-<pre><code class="python">aspect_ok = (aspect &gt; 135) &amp; (aspect &lt; 225)
+<pre><code class="language-python">aspect_ok = (aspect &gt; 135) &amp; (aspect &lt; 225)
 </code></pre>
-
 <h2 id="reklasifikace">Reklasifikace</h2>
 <p>Jinou možností, jak najít místa s vyhovujícím aspektem, je reklasifikace. Jak známo, základem reklasifikace je tzv. reklasifikační tabulka, což je tabulka o dvou sloupcích, kde levý sloupec definuje původní hodnoty či jejich rozsah, pravý sloupec definuje odpovídající hodnoty v novém, reklasifikovaném rastru. V naší úloze by reklasifikační tabulka vypadala nějak takto:</p>
 <p><img alt="image-20201214133547673" src="../images/image-20201214133547673.png" /></p>
 <p>(Připomeňme, že zahrnutí hodnoty -1 je proto, že touto hodnotou jsou v rastru aspektu kódována plochá území.)</p>
 <p>Podobně jako u nástroje <em>TopoToRaster</em>, i do nástroje <em>Reclassify</em> se vstupní reklasifikační tabulka zadává pomocí objektu speciální třídy. Pokud jsou v levém sloupci tabulky jednotlivé hodnoty, použije se objekt třídy <code>RemapValue</code>. Pokud jsou "staré" hodnoty definovány rozsahem hodnot (jako v našem případě), použije se objekt třídy <code>RemapRange</code>, a to následujícím způsobem:</p>
-<pre><code class="python">reclass_table = arcpy.sa.RemapRange([[-1, 135, 0], [135, 225, 1], [225, 360, 0]])
+<pre><code class="language-python">reclass_table = arcpy.sa.RemapRange([[-1, 135, 0], [135, 225, 1], [225, 360, 0]])
 </code></pre>
-
 <p>Vidíme, že reklasifikační tabulka je do tohoto objektu poslána ve formě seznamu seznamů, kdy vnější seznam je seznamem řádků, vnitřní seznamy reprezentují jednotlivé řádky tabulky. První a druhá hodnota těchto seznamů reprezentují meze daného rozsahu ("Old values"), třetí hodnota reprezentuje novou hodnotu ("New values").</p>
 <p>Takto vytvořenou reklasifikační tabulku je možné použít jako vstup do nástroje <em>Reclassify</em>:</p>
-<pre><code class="python">aspect_ok = arcpy.sa.Reclassify(aspect, &quot;Value&quot;, reclass_table)
+<pre><code class="language-python">aspect_ok = arcpy.sa.Reclassify(aspect, &quot;Value&quot;, reclass_table)
 </code></pre>
-
 <h2 id="analyza-viditelnosti">Analýza viditelnosti</h2>
 <p>Dalším krokem je zjistit, která místa <em>nejsou</em> vidět ani z jednoho z vrcholů. Použijeme nástroj <em>Visibility</em> (mohli bychom však stejně dobře použít i starší nástroj <em>Viewshed</em>, který provádí stejný výpočet, jen mí trochu jiné rozhraní). Jak snadno zjistíme v nápovědě, nástroj <em>Visibility</em> má velké množství parametrů. Z nich budeme chtít většinu ponechat ve výchozím nastavení. Budeme však potřebovat nastavit parametr <em>Observation offset</em>, neboť je třeba uvažovat výšku pozorovatele, stojícího vždy na daném vrcholu (uvažujme např. výšku 1,7 m). Jelikož je parametr <em>Observation offset</em> až jedenáctým parametrem v pořadí, je možné nepovinné parametry umístěné před ním, u nichž chceme ponechat výchozí hodnoty, nahradit prázdnými řetězci (prozkoumejte ostatní parametry v nápovědě k nástroji!):</p>
-<pre><code class="python">visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
+<pre><code class="language-python">visibility = arcpy.sa.Visibility(dtm, in_vrch, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1.7)
 </code></pre>
-
 <p>Jelikož jsme typ analýzy ponechali ve výchozím nastavení jako "FREQUENCY", je výsledkem analýzy viditelnosti rastr, kde je v každé buňce informace o počtu viditelných vrcholů (resp. počtu vrcholů, z nichž je daná buňka vidět). Kdybychom typ analýzy změnily na "OBSERVERS", pak by se ve výsledku daly odlišit jednotlivé vrcholy od sebe.</p>
 <p>Jelikož my chceme zjistit, které buňky <em>nejsou</em> vidět zni z jednoho vrcholu, potřebujeme změnit hodnoty 0 (není vidět ani z jednoho vrcholu) na 1 a ostatní hodnoty na 0. To lze buď reklasifikací, </p>
-<pre><code class="python">reclass_table = arcpy.sa.RemapRange([[0,0,1], [1,1000,0]])
+<pre><code class="language-python">reclass_table = arcpy.sa.RemapRange([[0,0,1], [1,1000,0]])
 visibility_ok = arcpy.sa.Reclassify(visibility, &quot;Value&quot;, reclass_table)
 </code></pre>
-
 <p>nebo pomocí nástroje <em>Equal To</em>,</p>
-<pre><code class="python">visibility_ok = arcpy.sa.EqualTo(visibility, 0)
+<pre><code class="language-python">visibility_ok = arcpy.sa.EqualTo(visibility, 0)
 </code></pre>
-
 <p>nebo pomocí operátoru <code>==</code>:</p>
-<pre><code class="python">visibility_ok = visbility == 0
+<pre><code class="language-python">visibility_ok = visbility == 0
 </code></pre>
-
 <p>Poslední způsob je zjevně nejjednodušší.</p>
 <h2 id="spojeni-podminek">Spojení podmínek</h2>
 <p>Výsledné spojení (průnik) podmínek je možné realizovat opakovaným použitím nástroje <em>Boolean And</em>:</p>
-<pre><code class="python">plochy_1 = arcpy.sa.BooleanAnd(slp_ok, aspect_ok)
+<pre><code class="language-python">plochy_1 = arcpy.sa.BooleanAnd(slp_ok, aspect_ok)
 plochy_ok = arcpy.sa.BooleanAnd(plochy_1, visibility_ok)
 </code></pre>
-
 <p>Nahradíme-li nástroj <em>Boolean And</em> operátorem <code>&amp;</code>, je navíc možné oba kroky spojit do jednoho:</p>
-<pre><code class="python">plochy_ok = slp_ok &amp; aspect_ok &amp; visibility_ok
+<pre><code class="language-python">plochy_ok = slp_ok &amp; aspect_ok &amp; visibility_ok
 </code></pre>
-
 <p>Pochopitelně stejného výsledku dosáhneme i pouhým vynásobením rastrů (kontrolní otázka: proč?):</p>
-<pre><code class="python">plochy_ok = slp_ok * aspect_ok * visibility_ok
+<pre><code class="language-python">plochy_ok = slp_ok * aspect_ok * visibility_ok
 </code></pre>
-
 <p>Do jednoho kroku bychom případně mohli sloučit nejen toto finální spojení podmínek, ale i jednotlivé dílčí podmínky, asi takto:</p>
-<pre><code class="python">plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
+<pre><code class="language-python">plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; (visibility == 0)
 </code></pre>
-
 <p>Celé řešení by tedy mohlo vypadat např. nějak takto (rozhodně to není jediná správná možnost!):</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 
 # Vstupní vrstvy a další parametry
 in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
@@ -256,38 +294,30 @@ plochy_ok = (slp &lt; 20) &amp; (aspect &gt; 135) &amp; (aspect &lt; 225) &amp; 
 # Uložení výsledku
 plochy_ok.save(out_plochy)
 </code></pre>
-
 <h2 id="vypocet-plochy">Výpočet plochy</h2>
 <p>Zbývá ještě vypočítat plochu. K tomu můžeme použít údaj o počtu buněk s danou hodnotou, který najdeme v atributové tabulce výsledného rastru <code>plochy_ok</code>. Vyhovující plochy jsou kódované hodnotou <code>1</code>. Tabulku rastru můžeme standardním způsobem otevřít kurzorem, do něj však není možné dát jako vstup přímo objekt <code>Raster</code>. Můžeme však využít toho, že jsem výsledný rastr již uložili na disk, a otevřít tak kurzorem tento uložený rastr, jehož adresu máme v proměnné <code>out_plochy</code>:</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value&quot; = 1')
+<pre><code class="language-python">tab = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value&quot; = 1')
 </code></pre>
-
 <p>Otevíráme pole <code>Count</code>, obsahující počty buněk pro jednotlivé hodnoty rastru. Zároveň otevíráme pouze řádek, odpovídající hodnotě 1, což je zajištěno SQL dotazem <code>"Value" = 1</code>. Otevíraná tabulka má tedy jen jeden řádek, na který se dostaneme metodu <code>next</code>:</p>
-<pre><code class="python">radek = tab.next()
+<pre><code class="language-python">radek = tab.next()
 </code></pre>
-
 <p>Počet buněk s hodnotou 1 je tedy první položkou (otevíráme jen jeden sloupec: <code>Count</code>) tohoto řádku:</p>
-<pre><code class="python">pocet_bunek = radek[0]
+<pre><code class="language-python">pocet_bunek = radek[0]
 </code></pre>
-
 <p>Rozlohu vyhovujících ploch dostaneme vynásobením tohoto počtu buněk druhou mocninou velikosti buňky:</p>
-<pre><code class="python">cs = arcpy.env.cellSize
+<pre><code class="language-python">cs = arcpy.env.cellSize
 area = pocet_bunek*cs*cs
 </code></pre>
-
 <p>Zde předpokládáme, že velikost buňky nastavená v Environments odpovídá velikosti buňky našeho výstupního rastru. Alternativně bychom mohlo velikost buňky daného rastru zjistit pomocí funkce <code>Describe</code>:</p>
-<pre><code class="python">cs = arcpy.Describe(out_plochy).meanCellWidth
+<pre><code class="language-python">cs = arcpy.Describe(out_plochy).meanCellWidth
 </code></pre>
-
 <p>případně pomocí nástroje <em>GetRasterProperties</em> ze sady <em>Data Management Tools</em>:</p>
-<pre><code class="python">result = arcpy.GetRasterProperties_management(out_plochy, &quot;CELLSIZEX&quot;)
+<pre><code class="language-python">result = arcpy.GetRasterProperties_management(out_plochy, &quot;CELLSIZEX&quot;)
 cs = float(result.getOutput(0))
 </code></pre>
-
 <p>Ať již získáme hodnotu <code>cs</code> (cellsize) tak či tak, následný výpočet plochy můžeme stručně napsat na jeden řádek:</p>
-<pre><code class="python">area = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
+<pre><code class="language-python">area = arcpy.da.SearchCursor(out_plochy, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
 </code></pre>
-
 <h2 id="reseni-zvlast-pro-jednotlive-okresy">Řešení zvlášť pro jednotlivé okresy</h2>
 <p>Nyní celé řešení upravíme tak, aby se výpočet provedl pro každý okres zvlášť. Principem řešení bude pochopitelně cyklus přes všechny okresy. Výstupem budou jednak jednotlivé vrstvy vyhovujících ploch (pojmenované názvy okresů), jednak souhrnná tabulka <code>csv</code> s názvy okresů a rozlohami vyhovujících ploch. </p>
 <p>Možných řešení je více, zde si ukážeme následující:</p>
@@ -298,7 +328,7 @@ cs = float(result.getOutput(0))
 <li>Zjištěnou plochu uložíme společně s názvem okresu do výstupní tabulky.</li>
 </ol>
 <p>Nejprve upravíme začátek skriptu tak, že adresu výstupního rastru nahradíme výstupní složkou a přidáme adresu výstupní tabulky. Dále také změníme velikost buňky, neboť nyní může v rámci každého okresu analýza proběhnout podrobněji. Dále vypustíme nastavení masky, neboť masku budeme nastavovat pro každý okres zvlášť.</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 
 # Vstupní vrstvy a další parametry
 in_vrst = r&quot;C:\cesta\k\souboru\vrstevnice_25.shp&quot;
@@ -315,42 +345,35 @@ arcpy.env.cellSize = 50
 arcpy.env.overwriteOutput = True
 arcpy.CheckOutExtension(&quot;Spatial&quot;)
 </code></pre>
-
 <p>Než začneme procházet v cyklu jednotlivé okresy, otevřeme si výstupní tabulky pro zápis a přidáme hlavičku:</p>
-<pre><code class="python">csv = open(out_csv, &quot;w&quot;)
+<pre><code class="language-python">csv = open(out_csv, &quot;w&quot;)
 csv.write(&quot;OKRES;ROZLOHA_VINIC\n&quot;)
 </code></pre>
-
 <p>Nyní můžeme přistoupit k samotnému cyklu. Otevřeme si kurzorem okresy a zahájíme cyklus. Budeme přitom potřebovat jednak název okresu, jednak samotnou geometrii okresu, abychom ji použili jako masku:</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
+<pre><code class="language-python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
 for r in tab:
 </code></pre>
-
 <p>Hned na začátku si v každém kole cyklu "vytáhneme" z řádku název zpracovávaného okresu a jeho geometrii (toto není nutné, jen pak bude další část přehlednější).</p>
-<pre><code class="python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
+<pre><code class="language-python">tab = arcpy.da.SearchCursor(in_okre, [&quot;NAZOK&quot;, &quot;SHAPE@&quot;])
 for r in tab:
     nazev_okresu = r[0]
     okres = r[1]
 </code></pre>
-
 <p>Nyní okres využijeme k nastavení prostorového rozsahu (pochopitelně stále zůstáváme odsazeni na úroveň těla cyklu, tj. jednu úroveň za hlavičku <code>for</code> cyklu):</p>
-<pre><code class="python">    arcpy.env.extent = okres.extent
+<pre><code class="language-python">    arcpy.env.extent = okres.extent
 </code></pre>
-
 <p>Jak vidíme, k tomuto nastavením můžeme použít přímo objekt třídy <code>Polygon</code> a jeho vlastnost <code>extent</code>, reprezentující jeden prvek vrstvy okresů. Podobně bychom mohli tento objekt použít i ve většině analýz. Bohužel nastavení masky takto provést nelze, stejně jako nelze použít objekt <code>Polygon</code> jako vstup <code>TopoBoundary</code> v nástroji <em>TopoToRaster</em>. Proto nám nezbyde, než polygon uložit jako samostatný shapefile. To lze např. takto:</p>
-<pre><code class="python">    okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
+<pre><code class="language-python">    okres_shp = arcpy.CopyFeatures_management([okres], &quot;okres.shp&quot;)
 </code></pre>
-
 <p>případně složitěji:</p>
-<pre><code class="python">    okres_shp = arcpy.CreateFeatureclass_management(arcpy.env.workspace, 
+<pre><code class="language-python">    okres_shp = arcpy.CreateFeatureclass_management(arcpy.env.workspace, 
                                                     &quot;okres.shp&quot;, 
                                                     &quot;POLYGON&quot;)
     arcpy.da.InsertCursor(&quot;okres.shp&quot;, [&quot;SHAPE@&quot;]).insertRow((okres,))
 </code></pre>
-
 <p>Masku nastavovat nemusíme, neboť oříznutí na daný okres vyřešíme v nástroji <em>TopoToRaster</em> pomocí vstupu typu <code>TopoBoundary</code>.</p>
 <p>Dále můžeme do těla cyklu (s odpovídajícím odsazení) vložit celou analýzu tak, jak jsme ji vytvořili pro celou ČR, takže celý cyklus bude nyní vypadat nějak takto:</p>
-<pre><code class="python">for r in tab:
+<pre><code class="language-python">for r in tab:
 
     nazev_okresu = r[0]
     okres = r[1]
@@ -383,7 +406,6 @@ for r in tab:
     cs = arcpy.env.cellSize
     area = arcpy.da.SearchCursor(out_name, [&quot;Count&quot;], '&quot;Value = 1&quot;').next()[0]*cs*cs
 </code></pre>
-
 <p>Oproti původnímu kódu jsme provedli následující úpravy:</p>
 <ul>
 <li>Trochu jinak jsme napsali vstupy do nástroje <em>TopoToRaster</em>: předtím jsme si jednotlivé vstupy vytvořili předem do zvláštních proměnných, nyní jsme je vytvořili přímo uvnitř volání nástroje. (Tato úprava nebyla nijak nutná, slouží jen k ukázce různých způsobů, jak danou věc zapsat.)</li>
@@ -392,16 +414,14 @@ for r in tab:
 <li>Název výstupního rastru (viz předchozí bod) uložený do proměnné <code>out_name</code> jsme použili při výpočtu plochy pomocí kurzoru.</li>
 </ul>
 <p>Poslední věc, kterou je třeba v rámci cyklu udělat, je zapsat název okresu a rozlohu vyhovujících ploch do výstupní tabulky:</p>
-<pre><code class="python">    csv.write(nazev_okresu + &quot;;&quot; + str(area) + &quot;\n&quot;)
+<pre><code class="language-python">    csv.write(nazev_okresu + &quot;;&quot; + str(area) + &quot;\n&quot;)
 </code></pre>
-
 <p>Nakonec, na závěr celého skriptu (tj. až po skončení cyklu), je třeba zavřít otevřenou tabulku a kurzor:</p>
-<pre><code class="python">csv.close()
+<pre><code class="language-python">csv.close()
 del(tab)
 </code></pre>
-
 <p>A to je vše. Přidáme-li ještě průběžné hlášení, jaký okres se zrovna zpracovává, bude skript vypadat takto:</p>
-<pre><code class="python"># -*- coding: cp1250 -*-
+<pre><code class="language-python"># -*- coding: cp1250 -*-
 import arcpy, os.path, sys
 
 # Vstupní vrstvy a další parametry
@@ -468,47 +488,61 @@ for r in tab:
 csv.close()
 del(tab)
 </code></pre>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../about_me/" class="btn btn-neutral float-right" title="O mně...">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-neutral" title="Lekce 15: Kurzory"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../about_me/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../about_me/" class="btn btn-xs btn-link">
-        O mně...
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 15: Kurzory
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 18 Rastrové analýzy.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../about_me/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

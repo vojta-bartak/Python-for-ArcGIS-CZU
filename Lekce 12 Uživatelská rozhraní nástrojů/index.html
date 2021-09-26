@@ -1,98 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <meta name="author" content="Vojta Barták">
   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="author" content="Vojta Barták">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Lekce 12: Uživatelská rozhraní - Python pro ArcGIS</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 12: Uživatelská rozhraní - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Lekce 12: U\u017eivatelsk\u00e1 rozhran\u00ed n\u00e1stroj\u016f", url: "#_top", children: [
-              {title: "Jednoduch\u00e9 rozhran\u00ed", url: "#jednoduche-rozhrani" },
-              {title: "Zpr\u00e1vy o pr\u016fb\u011bhu v\u00fdpo\u010dtu", url: "#zpravy-o-prubehu-vypoctu" },
-              {title: "V\u00edcen\u00e1sobn\u00e9 a v\u00fdstupn\u00ed parametry", url: "#vicenasobne-a-vystupni-parametry" },
-              {title: "Odvozen\u00e9 parametry", url: "#odvozene-parametry" },
-              {title: "N\u00e1pov\u011bda", url: "#napoveda" },
-              {title: "Z\u00e1v\u011bre\u010dn\u00e9 pozn\u00e1mky", url: "#zaverecne-poznamky" },
-              {title: "Shrnut\u00ed", url: "#shrnuti" },
-              {title: "\u00dalohy", url: "#ulohy" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script> 
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 12: U\u017eivatelsk\u00e1 rozhran\u00ed";
+    var mkdocs_page_input_path = "Lekce 12 U\u017eivatelsk\u00e1 rozhran\u00ed n\u00e1stroj\u016f.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
-<body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
+<body class="wy-body-for-nav" role="document">
 
-
-
-<div class="container-fluid wm-page-content">
-  <a name="_top"></a>
-    
+  <div class="wy-grid-for-nav">
 
     
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 12: Uživatelská rozhraní</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#jednoduche-rozhrani">Jednoduché rozhraní</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#zpravy-o-prubehu-vypoctu">Zprávy o průběhu výpočtu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vicenasobne-a-vystupni-parametry">Vícenásobné a výstupní parametry</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#odvozene-parametry">Odvozené parametry</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#napoveda">Nápověda</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#zaverecne-poznamky">Závěrečné poznámky</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>ArcPy &raquo;</li>
+        
+      
     
+    <li>Lekce 12: Uživatelská rozhraní</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 12 Uživatelská rozhraní nástrojů.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 15: Kurzory
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" class="btn btn-xs btn-link">
-        Lekce 11: Procházení a prohlížení geodat
-      </a>
-    </div>
-    
-  </div>
-
-    
-
-    <h1 id="lekce-12-uzivatelska-rozhrani-nastroju">Lekce 12: Uživatelská rozhraní nástrojů</h1>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-12-uzivatelska-rozhrani-nastroju">Lekce 12: Uživatelská rozhraní nástrojů</h1>
 <p>V této kapitole si předvedeme, jak lze ke skriptu, využívajícímu nástroje ArcGIS, vytvořit uživatelské rozhraní tak, aby nástroj vypadal a choval se podobně jako ostatní vestavěné nástroje v ArcToolbox. Jde o podobnou věc, jakou již znáte z lekce 2, kde jste vytvářeli uživatelská rozhraní k modelům z Model Builderu.</p>
 <h2 id="jednoduche-rozhrani">Jednoduché rozhraní</h2>
 <p>Tvorbu nástroje si předvedeme na jednoduchém příkladu nástroje <em>BatchClip</em>, který jste vytvářeli v lekci 10 (viz úlohu X). Příslušný skript může vypadat např. takto:</p>
-<pre><code class="python">import arcpy, os.path
+<pre><code class="language-python">import arcpy, os.path
 
 # Vstupní parametry
 input_folder = r&quot;C:\cesta\ke\slozce\se\vstupnimi\daty&quot;
@@ -109,7 +166,6 @@ for shp in shps:
     output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
     arcpy.Clip_analysis(shp, clip_features, output)
 </code></pre>
-
 <blockquote>
 <p><strong>Úkol 1.</strong> Rozeberte si skript tak, aby vám byl jasný smysl každého řádku. Vyzkoušejte v praxi, že skript funguje.</p>
 </blockquote>
@@ -134,7 +190,7 @@ for shp in shps:
 <p><img alt="image-20201116135503743" src="../images/image-20201116135503743.png" /></p>
 <p>Zbývá zařídit, aby se hodnoty parametrů zadané uživatelem v grafickém rozhraní předaly do skriptu pro výpočet. K tomu je slouží funkce <code>GetParameterAsText</code> z balíčku <code>arcpy</code>. Při spuštění nástroje tato funkce přečte hodnotu z uživatelského rozhraní a vrátí jí v podobě textového řetězce. (<em>Poznámka: V našem případě jsou všechny parametry textové - viz skript na začátku lekce - proto jejich předání ve formě textu je to, co potřebujeme. Pokud bychom však chtěli např. zadávat v některých parametrech čísla či jiné datové typy, je nutné je po obdržení hodnoty parametru z funkce</em> <code>GetParamaterAsText</code> <em>zkonvertovat na příslušný datový typ.</em>)</p>
 <p>Jediným argumentem funkce <code>GetParameterAsText</code> je index neboli pořadí parametru, který se má číst. Pořadí parametrů přitom odpovídá tomu, jak jsme je seřadili v grafickém rozhraní. Hlavička našeho skriptu proto bude vypadat nyní takto:</p>
-<pre><code class="python">import arcpy, os.path
+<pre><code class="language-python">import arcpy, os.path
 
 # Vstupní parametry
 input_folder = arcpy.GetParameterAsText(0)
@@ -151,7 +207,6 @@ for shp in shps:
     output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
     arcpy.Clip_analysis(shp, clip_features, output)
 </code></pre>
-
 <p>Nyní je nástroj připraven a můžeme jej spustit.</p>
 <blockquote>
 <p><strong>Úkol 2.</strong> Popsaným způsobem vytvořte rozhraní k nástroji <em>BatchClip</em> a nástroj vyzkoušejte.</p>
@@ -163,7 +218,7 @@ for shp in shps:
 <li>Druhou situací je, pokud náš program nefunguje správně a my nevíme, kde je chyba. Máme-li např. podezření, že v určité fázi nějaká proměnná neobsahuje hodnotu, kterou by měla, můžeme si nechat obsah této proměnné v dané fázi výpočtu vypsat. To nám může velmi pomoct při hledání, kde jsme udělali chybu.</li>
 </ul>
 <p>V případě našeho jednoduchého nástroje <em>BatchClip</em> bychom mohli např. chtít, aby se v každém kole cyklu vypsala na výstup informace o tom, jakou vrstvu program zrovna zpracovává. Výpis na standardní výstup (např. konzoli Python Shell) se provede jednoduše pomocí funkce <code>print</code>:</p>
-<pre><code class="python">import arcpy, os.path, sys
+<pre><code class="language-python">import arcpy, os.path, sys
 
 # Vstupní parametry
 input_folder = r&quot;C:\cesta\ke\slozce\se\vstupnimi\daty&quot;
@@ -184,10 +239,9 @@ for shp in shps:
     output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
     arcpy.Clip_analysis(shp, clip_features, output)
 </code></pre>
-
 <p>Podivný řádek <code>sys.__stdout__.flush()</code> zajišťuje, že se výpis provede opravdu ihned. Pokud jej neuvedeme, často se nic špatného nestane a výpisy budou fungovat jak mají. Někdy však dochází ke zpoždění výpisů, takže se veškeré výpočty nejprve provedou, a až pak se na konzoli vypíší všechna hlášení najednou. Tím ovšem průběžná hlášení přestávají být průběžná a ztrácí smysl. Objekt <code>__stdout__</code> z modulu <code>sys</code> (všimněte si, že tento modul musel být na začátku skriptu načten!) reprezentuje tzv. <em>standardní výstup</em>, kterým je v našem případě konzole Python Shell. Jeho metoda <code>flush</code> pak tzv. "vyleje" či "spláchne" vše, co čeká aktuálně ve frontě na vypsání.</p>
 <p>Jak je možné podobné zprávy posílat do okna výpočtu nástroje v ArcMap? Zde již klasický <code>print</code> nefunguje, nicméně podobnou práci udělá funkce <code>AddMessage</code> balíčku <code>arcpy</code>. Skript nástroje tedy upravíme následovně:</p>
-<pre><code class="python">import arcpy, os.path
+<pre><code class="language-python">import arcpy, os.path
 
 # Vstupní parametry
 input_folder = arcpy.GetParameterAsText(0)
@@ -207,7 +261,6 @@ for shp in shps:
     output = os.path.join(output_folder, shp[:-4] + &quot;_clipped.shp&quot;)
     arcpy.Clip_analysis(shp, clip_features, output)
 </code></pre>
-
 <p>Průběžný výpis při výpočtu nyní vypadá takto:</p>
 <p><img alt="image-20201116144325079" src="../images/image-20201116144325079.png" /></p>
 <blockquote>
@@ -220,7 +273,7 @@ for shp in shps:
 <p>měla by výstupní vrstva vypadat nějak takto:</p>
 <p><img alt="" src="../images/super_buffer_output.png" /></p>
 <p>Skript, který by tuto úlohu zpracovával, by mohl vypadat nějak takto:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 
 # Vstupní parametry
 feature_list = [r&quot;C:\vrstva1.shp&quot;, r&quot;C:\vrstva2.shp&quot;, ...]
@@ -241,7 +294,6 @@ for fc in feature_list:
 u = arcpy.Union_analysis(buffers, &quot;union&quot;)
 arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
 </code></pre>
-
 <p>Všimněme si zde několika věcí:</p>
 <ul>
 <li>Pracovní adresář byl na začátku nastaven na <code>"in_memory"</code>. Díky tomu se veškeré průběžné výstupy (tj. všechny výstupy z nástroje <em>Buffer</em> a výstup z nástroje <em>Union</em>) budou dočasně ukládat do operační paměti a nikoli na pevný disk. Pouze konečný výstup z nástroje <em>Dissolve</em> se uloží do umístění specifikovaného v parametru <code>output_features</code>.</li>
@@ -261,7 +313,7 @@ arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;
 <p>Uživatelské rozhraní nástroje nyní vypadá takto:</p>
 <p><img alt="image-20201116160340309" src="../images/image-20201116160340309.png" /></p>
 <p>Nyní je ještě třeba upravit skript a pomocí funkce <code>GetParameterAsText</code> předat parametry do skriptu:</p>
-<pre><code class="python">import arcpy
+<pre><code class="language-python">import arcpy
 
 # Vstupní parametry
 feature_list = arcpy.GetParameterAsText(0).split(&quot;;&quot;)
@@ -282,7 +334,6 @@ for fc in feature_list:
 u = arcpy.Union_analysis(buffers, &quot;union&quot;)
 arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;SINGLE_PART&quot;)
 </code></pre>
-
 <p>Všimněme si dvou věcí:</p>
 <ul>
 <li>Do parametru <code>feature_list</code> předá funkce <code>GetParameterAsText</code> jednotlivé vstupní vrstvy jako jeden textový řetězec, ve kterém jsou adresy jednotlivých vstupních vrstev za sebou oddělené středníky. (To je díky tomu, že jsme v grafickém rozhraní u příslušného parametru nastavili jeho vlastnost <em>MultiValue</em> na "Yes".) Metoda <code>split(";")</code> zavolaná na tomto řetězci z něj vytvoří pythonovský seznam, který je možné následně v cyklu procházet a vytvářet obalové zóny. </li>
@@ -303,47 +354,61 @@ arcpy.Dissolve_management(u, output_features, &quot;&quot;, &quot;&quot;, &quot;
 <ol>
 <li>Vytvořte uživatelské rozhraní k nástroji MultiBuffer.</li>
 </ol>
-
-  <br>
-    
-
-    
-    
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-    
+        <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-neutral float-right" title="Lekce 15: Kurzory">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" class="btn btn-neutral" title="Lekce 11: Procházení a prohlížení geodat"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-xs btn-link">
-        Lekce 15: Kurzory
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" class="btn btn-xs btn-link">
-        Lekce 11: Procházení a prohlížení geodat
-      </a>
-    </div>
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
     
   </div>
 
-    <br>
-</div>
-
-<footer class="container-fluid wm-page-content">
-      <p>
-        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 12 Uživatelská rozhraní nástrojů.md"><i class="fa fa-github"></i>
-Edit on GitHub</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
