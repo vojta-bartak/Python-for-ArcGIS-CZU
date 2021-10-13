@@ -71,7 +71,11 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#definice-tridy">Definice třídy</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vlastnosti-objektu-vs-vlastnosti-tridy">Vlastnosti objektu vs vlastnosti třídy</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#dedicnost">Dědičnost</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
     </li>
     </ul>
                     </li>
@@ -91,6 +95,10 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../testy_upload/">Odevzdávání testů</a>
                     </li>
                 </ul>
       </div>
@@ -134,8 +142,75 @@
             <div class="section">
               
                 <h1 id="lekce-9-tridy-a-objekty">Lekce 9: Třídy a objekty</h1>
+<p>Třídy a objekty jsou základem většiny moderních programovacích jazyků. Snad každý už někdy slyšel o "objektovém programování" či o "objektově orientovaných jazycích". V této kapitole si vysvětlíme a na malé ukázce předvedeme, o co jde. Nepůjde nám přitom o zvládnutí samotného objektového programování, to by přesahovalo časové možnosti tohoto kurzu. Půjde spíš o to pochopit základní strikturu objektů a tříd tak, abyste byli schopni pracovat s objekty a třídami, které již někdo naprogramoval před vámi. Jak uvidíte v další části kurzu, při práci s funkcionalitou ArcGIS pomocí Pythonu jsou objekty všudypřítomné.</p>
+<p>Třídu si lze představit jako jakýsi složitý datový typ. Objekt je pak konkrétní realizace (tzv. <em>instance</em>) této třídy, podobně jako konkrétní seznam je instancí obecného datového typu <code>list</code>. Příkladem může být třída "Pes". V rámci definice této třídy můžeme určit, co bude každý konkrétní objekt této třídy, neboli každý konkrétní "pes", obsahovat. Každá třída může obsahovat:</p>
+<ul>
+<li><strong>vlastnosti</strong>, neboli proměnné. Stejně jako každá jiná proměnná, i každá vlastnost je určitého datového typu. V případě naší třídy "Pes" to může být: věk (číslo), jméno (text) apod.</li>
+<li><strong>metody</strong>, neboli funkce. V rámci třídy můžeme definovat funkce, které bude mít každá konkrétní instance této třídy k dispozici. Metody objektu často něco dělají s jeho vlastnostmi. Např. naše třída "Pes" by mohla obsahovat metodu "štěkni", která by po zavolání vypsala na konzoli text "Haf", případně "Haf haf, já jsem ...", kde místo tří teček by bylo jméno daného psa, uložené v té chvíli ve vlastnosti "jméno". Dále by mohla obsahovat metodu "zestárni", která by zvýšila hodnotu vlastnosti "věk" o jedna.</li>
+</ul>
 <h2 id="definice-tridy">Definice třídy</h2>
+<p>Pojďme si třídu pes vytvořit. Definice třídy začíná klíčovým slovem <code>class</code>, následuje <em>tělo třídy</em> odsazené o jednu úroveň doprava:</p>
+<pre><code class="language-python">class Dog:
+
+    def __init__(self, name):
+        self.name = name
+        self.age = 0
+
+    def woof(self):
+        print(&quot;Woof woof, I'm &quot; + self.name)
+
+    def get_older(self):
+        self.age = self.age + 1
+</code></pre>
+<p>Vidíme, že tělo třídy obsahuje postupně definice třech funkcí. První z nich je tzv. <em>konstruktor</em> třídy a budeme se mu věnuvat níže. Druhé dvě funkce, tedy <code>woof</code> a <code>get_older</code>, jsou metody, které bude mít každá instance této třídy k dispozici. Jediným parametrem obou funkcí je parametr <code>self</code>, pomocí kterého se lze uvnitř funkcí odkazovat na vlastnosti daného objektu (<code>self.name</code> a <code>self.age</code>). Parametr <code>self</code> je u všech metod povinný, vedle něj mohou metody obsahovat i další parametry (což není náš případ).</p>
+<p>Vidíme, že metoda <code>woof</code> pouze vytiskne text, ve kterém se použije jméno daného psa, na němž se bude metoda volat (toto jméno bude totiž uloženo ve vlastnosti <code>self.name</code>). Metoda <code>get_older</code> zvýší hodnotu vlastnosti <code>self.age</code> o jedna.</p>
+<p><strong>Konstruktor třídy</strong> se jmenuje vždy stejně, a to <code>__init__</code> (před a po slově <code>init</code> jsou dvě podtržítka za sebou). Je to funkce, která se automaticky volá při vytváření každé nové instance (tj. objektu) třídy. V této funkci jsou také definovány vlastnosti, které bude každý pes mít k dispozici. Jsou to proměnné <code>self.name</code> a <code>self.age</code>. Slovo <code>self</code> zde vždy odkazuje k budoucí instanci třídy a je povinným (prvním) parametrem každé metody.</p>
+<p>Co tedy bude dělat konstruktor třídy <code>Dog</code>? Nastaví hodnotu vlastnosti <code>self.name</code> na hodnotu parametru <code>name</code> a hodnotu vlastnosti <code>self.age</code> na hodnotu 0. Parametr <code>name</code> konstruktoru bude muset uživatel při vytváření objektu zadat (nebude tedy možné vytvořit bezejmenného psa).</p>
+<blockquote>
+<p><strong>Úkol 1.</strong> Napište zhora uvedenou definici třídy <code>Dog</code> do skriptu a skript spusťte.</p>
+</blockquote>
+<p>Vytvoření konkrétního objektu třídy se provádí voláním funkce, která má stejný název jako daná třída. Ve skutečnosti se tím volá konstruktor třídy. Při volání této funkce je třeba určit hodnoty parametrů v tom pořadí, jak jsou definovány v konstruktoru (ovšem s vynecháním parametru <code>self</code>). Funkce vrací objekt dané třídy, který je zpravidla žádoucí uložit do nějaké proměnné.</p>
+<p>V našem případě se bude tedy funkce jmenovat <code>Dog</code> a jejím jediným parametrem bude <code>name</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; alik = Dog(&quot;Alik&quot;)
+</code></pre>
+<p>Proměnná <code>Alik</code> teď obsahuje objekt (neboli instanci) třídy <code>Dog</code> (objekty jsou ve výpisech na konzoli vždy poznatelné podle špičatých závorek):</p>
+<pre><code class="language-python">&gt;&gt;&gt; alik
+&lt;__main__.Dog instance at 0x02EBE8F0&gt;
+</code></pre>
+<p>K vlastnostem a metodám objektu lze přistupovat pomocí názvu objektu a tečky (metody se od vlastností rozeznají tím, že mají za sebou kulaté závorky: jsou to totiž funkce):</p>
+<pre><code class="language-python">&gt;&gt;&gt; alik.name
+'Alik'
+&gt;&gt;&gt; alik.woof()
+Woof woof, I'm Alik
+&gt;&gt;&gt; alik.age
+0
+&gt;&gt;&gt; alik.get_older()
+&gt;&gt;&gt; alik.age
+1
+</code></pre>
+<p>Objektů určité třídy lze vytvářet prakticky neomezené množství, každý bude mít přitom své vlastní instance všech vlastností a metod, tak jak jsou v dané třídě definovány:</p>
+<pre><code class="language-python">&gt;&gt;&gt; zeryk = Dog(&quot;Zeryk&quot;)
+&gt;&gt;&gt; zeryk.woof()
+Woof woof, I'm Zeryk
+&gt;&gt;&gt; zeryk.age
+0
+&gt;&gt;&gt; zeryk.get_older()
+&gt;&gt;&gt; zeryk.get_older()
+&gt;&gt;&gt; zeryk.age
+2
+&gt;&gt;&gt; alik.age
+1
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+<p>V Pythonu jsou všechno objekty..</p>
+<h2 id="vlastnosti-objektu-vs-vlastnosti-tridy">Vlastnosti objektu vs vlastnosti třídy</h2>
 <h2 id="dedicnost">Dědičnost</h2>
+<h2 id="ulohy">Úlohy</h2>
               
             </div>
           </div>
