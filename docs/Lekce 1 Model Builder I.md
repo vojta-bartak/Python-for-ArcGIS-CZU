@@ -39,7 +39,7 @@ Než se pustíme do analýzy, je třeba:
 - **Oříznout rastr krajinného pokryvu na území ČR.** Můžeme použít nástroj *Clip* (pozor: máme na mysli nástroj ze sady Data Management Tools -> Raster -> Raster Processing, nikoli stejnojmenný nástroj ze sady Analysis Tools -> Extract) a polygony okresů vzniklé transformací v předchozím kroku.
 - **Reklasifikovat rastr krajinného pokryvu do základních kategorií**. Jak známo, krajinný pokryv Corine Land Cover je kódován třímístnými kódy, přičemž první číslice vyjadřuje základní kategorie, druhá číslice podrobnější členění a třetí číslice nejpodrobnější. My budeme pracovat se základními kategoriemi 1 - městské plochy, 2 - zemědělské plochy, 3 - lesy, 4 - mokřady a 5 - vodní plochy. Potřebujeme tedy rastr, který bude mít namísto třímístných kódů pouze těchto pět hodnot (nástroj *Reclassify*).
 
-Pokud se nechcete stahováním a úpravou dat zabývat nebo nevíte, jak na to, můžete si připravená data stáhnout [zde](https://owncloud.cesnet.cz/index.php/s/FCqiKR1zvimaIDz).
+Pokud se nechcete stahováním a úpravou dat zabývat nebo nevíte, jak na to, můžete si připravená data stáhnout [zde](https://owncloud.cesnet.cz/index.php/s/oitTa20dvKXX65n).
 
 ## A. Řešení pro pevně daný okres
 

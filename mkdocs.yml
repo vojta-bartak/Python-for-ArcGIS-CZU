@@ -1,7 +1,7 @@
 site_name: Python pro ArcGIS
 site_author: Vojta Barták
 repo_url: https://github.com/vojta-bartak/Python-for-ArcGIS-CZU
-theme: windmill
+theme: readthedocs
 plugins: []
 nav:
     - Home: index.md
@@ -12,4 +12,15 @@ nav:
         - 'Lekce 3: Rozjezd Pythonu': 'Lekce 3 Jak a kde napsat a spustit program v Pythonu.md'
         - 'Lekce 4: Proměnné a datové typy': 'Lekce 4 Proměnné a datové typy.md'
         - 'Lekce 5: Cykly a podmínky': 'Lekce 5 Řídící struktury programu - cykly a podmínky.md'
+        - 'Lekce 6: Vstupy a náhodná čísla': 'Lekce 6 Interaktivní vstupy do programu a náhodná čísla.md'
+        - 'Lekce 7: Adresáře a textové soubory': 'Lekce 7 Práce s adresářovou strukturou a s textovými soubory.md'
+        - 'Lekce 8: Funkce a moduly': 'Lekce 8 Funkce a moduly.md'
+        - 'Lekce 9: Třídy a objekty': 'Lekce 9 Třídy a objekty.md'
+    - ArcPy:
+        - 'Lekce 10: Spouštění nástrojů': 'Lekce 10 Spouštění nástrojů ArcGIS pomocí balíčku ArcPy.md'
+        - 'Lekce 11: Procházení a prohlížení geodat': 'Lekce 11 Procházení geodat a jejich vlastností pomocí balíčku ArcPy.md'
+        - 'Lekce 12: Uživatelská rozhraní': 'Lekce 12 Uživatelská rozhraní nástrojů.md'
+        - 'Lekce 15: Kurzory': 'Lekce 15 Procházení tabulek pomocí kurzorů.md'
+        - 'Lekce 18: Rastrové analýzy': 'Lekce 18 Rastrové analýzy.md'
     - O mně...: about_me.md
+    - Odevzdávání testů: testy_upload.md

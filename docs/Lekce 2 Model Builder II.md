@@ -81,7 +81,7 @@ Když takto přejmenujeme všechny parametry modelu, dostane naše uživatelské
 
 ![](images/image-20200919170007626.png)
 
-Dalším krokem je úprava pořadí parametrů. Současné pořadí je do značné míry dílem náhody: parametry jsou v tom pořadí, v jakém jsme je při editaci modelu vytvářeli. Změnit pořadí parametrů je možné ve vlastnostech modelu, které jsou dostupné buď přes pravý klik na model v Catalogu -> *Properties*, nebo z editace modelu přes *Model *-> Model Properties*. Na kartě vlastností přejdeme na záložku *Parameters*, kde je možné pořadí parametrů upravit pomocí šipek.
+Dalším krokem je úprava pořadí parametrů. Současné pořadí je do značné míry dílem náhody: parametry jsou v tom pořadí, v jakém jsme je při editaci modelu vytvářeli. Změnit pořadí parametrů je možné ve vlastnostech modelu, které jsou dostupné buď přes pravý klik na model v Catalogu -> *Properties*, nebo z editace modelu přes *Model -> Model Properties*. Na kartě vlastností přejdeme na záložku *Parameters*, kde je možné pořadí parametrů upravit pomocí šipek.
 
 ![](images/image-20200919170646814.png)
 
@@ -129,7 +129,7 @@ První možnost již známe. Nyní si ukážeme druhou možnost, vnoření model
 
 Vnoření modelu do jiného modelu si ukážeme na příkladu, kdy chceme náš nový nástroj použít v cyklu, např. postupně pro všechny datové sady z nějaké složky. Budeme řešit situaci, kdy nemáme jednotlivé okresy v jedné vrstvě, ale v samostatných shapefilech pro jednotlivé kraje uložených ve společné složce. Namísto vkládání iterátoru přímo do již vytvořeného nástroje, což by vyžadovalo jeho značnou úpravu včetně úpravy uživatelského rozhraní (viz [úloha 2](#Úlohy) na konci cvičení), vytvoříme nový model (nástroj), do kterého vložíme iterátor a propojíme ho s naším již vytvořeným nástrojem.
 
-Popsanou výchozí situaci si nejprve musíme vytvořit: tedy musíme rozdělit okresy do samostatných shapefilů pro jednotlivé kraje. K tomu nejlépe poslouží nástroj *Split* *By Attributes* ze sady *Analysis Tools -> Extract*. V nástroji je třeba zadat pole, které se použije pro rozdělení prvků do jednotlivých nových datových sad. Hodnoty tohoto pole se zároveň použijí k jejich pojmenování. V našem případě půjde o pole s názvy krajů, což je *NAZ_CZNUTS*.
+Popsanou výchozí situaci si nejprve musíme vytvořit: tedy musíme rozdělit okresy do samostatných shapefilů pro jednotlivé kraje. K tomu nejlépe poslouží nástroj *Split By Attributes* ze sady *Analysis Tools -> Extract*. V nástroji je třeba zadat pole, které se použije pro rozdělení prvků do jednotlivých nových datových sad. Hodnoty tohoto pole se zároveň použijí k jejich pojmenování. V našem případě půjde o pole s názvy krajů, což je *NAZ_CZNUTS*.
 
 > Možná jste si všimli odlišné ikony nástroje *Split By Attributes* v ArcToolbox. Tento nástroj je totiž vytvořený v Pythonu. Stejné ikony se budou zobrazovat i u nástrojů, které budete vytvářet v tomto kurzu.
 
