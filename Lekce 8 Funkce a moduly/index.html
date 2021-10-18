@@ -69,7 +69,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#definice-a-volani-funkce">Definice a volání funkce</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#jmenne-prostory-a-jejich-hierarchie">Jmenné prostory a jejich hierarchie</a>
+    <li class="toctree-l2"><a class="reference internal" href="#jmenne-prostory-a-predavani-argumentu-funkci">Jmenné prostory a předávání argumentů funkcí</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#prace-s-moduly">Práce s moduly</a>
     </li>
@@ -170,7 +170,7 @@ print faktorialn
 <pre><code class="language-python">nazev_funkce(argmunet1, argument2, ... , argumentN)
 </code></pre>
 <p>Jednotlivé argumenty přesně odpovídají jednotlivým parametrům funkce, jsou vlastně konkrétními hodnotami, které se při volání funkce za jednotlivé parametry dosadí. Ukažme si volání funkce opět na příkladu faktoriálu, přičemž budeme funkci definovanou výše volat v okně Python Shell:</p>
-<pre><code class="language-python">&gt;&gt;&gt; faktorial(3)
+<pre><code class="language-console">&gt;&gt;&gt; faktorial(3)
 6
 &gt;&gt;&gt; faktorial(6)
 720
@@ -186,13 +186,13 @@ print faktorialn
 </code></pre>
 <p>(Samozřejmě jsme mohli funkci definovat i jednodušeji: <code>def mocnina(x,y): return x**y</code>. Prozkoumejte nicméně uvedenou složitější definici a uvědomte si, že bude pro celočíselnou mocninu fungovat.)</p>
 <p>Při volání funkce je nutné zapsat argumenty ve stejném pořadí, v jakém jsou definovány příslušné parametry:</p>
-<pre><code class="language-python">&gt;&gt;&gt; mocnina(3,4)
+<pre><code class="language-console">&gt;&gt;&gt; mocnina(3,4)
 81
 &gt;&gt;&gt; mocnina(4,3)
 64
 </code></pre>
 <p>Pokud bychom chtěli z nějakého důvodu zadat argumenty v jiném pořadí, než jak jsou definovány argumenty, je možné použít při volání funkce explicitně jména příslušných parametrů a operátor <code>=</code>:</p>
-<pre><code class="language-python">&gt;&gt;&gt; mocnina(y=4, x=3)
+<pre><code class="language-console">&gt;&gt;&gt; mocnina(y=4, x=3)
 81
 </code></pre>
 <p>Zadávání argumentů jménem parametru je výhodné u funkcí s velkým počtem parametrů: muset si pamatovat jejich pořadí by bylo nepraktické. </p>
@@ -204,18 +204,18 @@ print faktorialn
     return vysledek
 </code></pre>
 <p>Po zavolání v okně Python Shell:</p>
-<pre><code class="language-python">&gt;&gt;&gt; mocnina(4) # Zde bude použita implicitní hodnota parametru y
+<pre><code class="language-console">&gt;&gt;&gt; mocnina(4) # Zde bude použita implicitní hodnota parametru y
 16
 &gt;&gt;&gt; mocnina(4, 3) # Zde bude použita uživatelem specifikovaná hodnota parametru y
 64
 </code></pre>
 <p>Samozřejmě výsledek volání funkce lze uložit do proměnné, tak jak to znáte při používání vestavěných funkcí Pythonu (např. <code>input</code>, <code>range</code> či konverzní funkce <code>int</code> apod.):</p>
-<pre><code class="language-python">&gt;&gt;&gt; a = mocnina(4)
+<pre><code class="language-console">&gt;&gt;&gt; a = mocnina(4)
 &gt;&gt;&gt; print a
 16
 </code></pre>
 <p>Stejně tak argumenty funkce mohou být zadávány přímo pomocí hodnot (viz ukázky výše), nebo pomocí proměnných:</p>
-<pre><code class="language-python">&gt;&gt;&gt; a = 4
+<pre><code class="language-console">&gt;&gt;&gt; a = 4
 &gt;&gt;&gt; b = 5
 &gt;&gt;&gt; mocnina(a, b)
 1024
@@ -240,21 +240,13 @@ def prevrat_text(txt_in, txt_out):
 <p><strong>Úkol 1.</strong> Napište funkci pro výpočet <em>n</em>-tého členu Fibonacciho posloupnosti.</p>
 <p><strong>Úkol 2.</strong> Napište funkci, která otevře daný textový soubor a vrátí počet jeho slov (parametrem funkce bude textový řetězec s adresou souboru).</p>
 </blockquote>
-<h2 id="jmenne-prostory-a-jejich-hierarchie">Jmenné prostory a jejich hierarchie</h2>
-<p>Pokud zadáváme argumenty funkce pomocí proměnných, je otázkou, zda lze tuto proměnnou uvnitř funkce měnit tak, aby se změna projevila i mimo funkci. Zkusme si to na příkladu funkce, která pouze změní hodnotu vstupní proměnné:</p>
-<pre><code class="language-python">def zmen_hodnotu(a):
-    a = a + 1
-</code></pre>
-<p>Nyní ověříme, zda bude mít funkce vliv na původní proměnnou, zadanou do funkce jako argument:</p>
-<pre><code class="language-python">&gt;&gt;&gt; a = 5
-&gt;&gt;&gt; zmen_hodnotu(a)
-&gt;&gt;&gt; a
-5
-</code></pre>
-<p>Jak je vidět, funkce původní proměnnou neovlivní. Jak to? Je to proto, že příkaz <code>a = a + 1</code>v těle funkce ve skutečnosti vytvoří novou proměnnou <code>a</code>, jejíž hodnota se nastaví s využitím parametru <code>a</code> (na pravé straně výrazu). Tato nová proměnná je nicméně "vidět" pouze v rámci funkce, neboť je v jejím <strong>jmenném prostoru</strong>.</p>
-<p>Jmenný prostor (angl. <em>namespace</em>) je jakýsi virtuální prostor, ve kterém jsou definována různá <em>jména</em>, typicky právě jména proměnných a funkcí. Jmenných prostorů může být více, přičemž jsou hierarchicky uspořádány. Základním jmenným prostorem je tzv. <em>vestavěný jmenný prostor</em>, obsahující např. jména vestavěných funkcí jako <code>range</code> či <code>print</code>. Jelikož jsou tato jména definována ve vestavěném prostoru, jsou dostupná v jakékoli části kódu v jazyce Python. </p>
-<p>Dalším jmenným prostorem, který je o jednu hierarchickou úroveň níže, je tzv. <em>globální jmenný prostor</em>. Ten vzniká automaticky při otevření konzole Python Shell (resp. při spuštění skriptu). Pokud konzoli otevřeme  spuštěním programu IDLE z nabídky programů, případně ji restartujeme pomocí <em>Shell</em> -&gt; <em>Restart Shell</em>, globální jmenný prostor se nastaví jako prázdný. Při jakémkoli vytvoření proměnné či funkce se následně dané jméno přidá do globálního prostoru, díky čemuž s ním nadále můžeme v tomto prostoru pracovat. Opětovné restartování konzole však globální jmenný prostor opět vyprázdní: </p>
-<pre><code class="language-python">&gt;&gt;&gt; a = 5 # Vytvoření proměnné v globálním jmenném prostoru
+<h2 id="jmenne-prostory-a-predavani-argumentu-funkci">Jmenné prostory a předávání argumentů funkcí</h2>
+<p>Jména proměnných a funkcí existují vždy v nějaké <strong>jmenném prostoru</strong> (angl. <strong>namespace</strong>), někdy též <strong>oboru platnosti</strong> (angl. <strong>scope</strong>), podle toho, kde byly definovány. Uvnitř tohoto jmenného prostoru je pak proměnná či funkce "vidět", tj. lze se na tam na ně odkazovat. Jmenné prostory jsou hierarchisky uspořádány:</p>
+<ol>
+<li>Základním jmenným prostorem je tzv. <em>vestavěný jmenný prostor</em>, obsahující např. jména vestavěných funkcí jako <code>range</code> či <code>print</code>. Jelikož jsou tato jména definována ve vestavěném prostoru, jsou dostupná v jakékoli části kódu v jazyce Python (tj. ve všech hierarchicky nižších jmenných prostorech).</li>
+<li>O jednu hierarchickou úroveň níže je tzv. <em>globální jmenný prostor</em>. Ten vzniká automaticky při otevření konzole Python Shell (resp. při spuštění skriptu). Pokud konzoli otevřeme spuštěním programu IDLE z nabídky programů, případně ji restartujeme pomocí <em>Shell</em> -&gt; <em>Restart Shell</em>, globální jmenný prostor se nastaví jako prázdný. Při jakémkoli vytvoření proměnné či funkce se následně dané jméno přidá do globálního prostoru, díky čemuž s ním nadále můžeme v tomto prostoru pracovat. Opětovné restartování konzole však globální jmenný prostor opět vyprázdní:</li>
+</ol>
+<pre><code class="language-console">&gt;&gt;&gt; a = 5 # Vytvoření proměnné v globálním jmenném prostoru
 &gt;&gt;&gt; a # Proměnná existuje...
 5
 &gt;&gt;&gt; 
@@ -266,33 +258,70 @@ Traceback (most recent call last):
     a
 NameError: name 'a' is not defined
 </code></pre>
-<p>Vedle globálního jmenného prostoru můžeme v rámci skriptu vytvořit libovolné množství vzájemně hierarchicky zanořených tzv. <em>lokálních jmenných prostorů</em>. Jakékoli jméno vytvořené v daném lokálním prostoru existuje (tj. je "dostupné" či "viditelné") pouze v rámci tohoto prostoru. </p>
-<p>Lokální jmenný prostor je vždy automaticky vytvořen v rámci těla funkce. Pokud tedy v těle funkce vytvoříme proměnnou <code>a</code>, s touto proměnnou můžeme zacházet uvnitř těla této funkce, nikoli však mimo ně:</p>
-<pre><code class="language-python">&gt;&gt;&gt; def nejaka_funkce(parametr): a = parametr + 1
-
-&gt;&gt;&gt; nejaka_funkce(5)
-&gt;&gt;&gt; a
+<ol>
+<li>Poslední hierarchickou úrovní jsou tzv. <em>lokální jmenné prostory</em>, které jsou přiřazeny funkcím. V praxi to znamená, že pokud v těle funkce definuji nějakou proměnnou, tato proměnná existuje ("je vidět") pouze v lokálním jmenném prostoru této funkce. Uvnitř funkce se proto na tuto proměnnou mohu odkazovat, vně funkce však nikoli:</li>
+</ol>
+<pre><code class="language-console">&gt;&gt;&gt; def my_function(): a = 5 # Zde jsme definovali lokální proměnnou ve jmenném prostoru funkce
+&gt;&gt;&gt; a # Zde vidíme, že vně funkce tato proměnná neexistuje
 
 Traceback (most recent call last):
-  File &quot;&lt;pyshell#4&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;&lt;pyshell#17&gt;&quot;, line 1, in &lt;module&gt;
     a
 NameError: name 'a' is not defined
 </code></pre>
-<p>Při vyhodnocování jmen použitých v kódu se nejprve prohledává jmenný prostor nejnižší hierarchické úrovně. Pokud se zde dané jméno nenajde, postupuje se hierarchií jmenných prostorů výše.</p>
-<p>Tímto způsobem můžeme např. lokálně změnit některá globální či vestavěná jména:</p>
-<pre><code class="language-python">&gt;&gt;&gt; range = &quot;ahoj&quot;
+<p>Pokud se kdekoli v kódu odkazujeme na nějaké jméno (tj. proměnnou či funkci), překladač nejprve jméno hledá v příslušném lokálním jmenném prostoru. Pokud tam takové jméno nenajde, pokračuje prohledáváním globálního jmenného prostoru. Pokud ani tam neuspěje, prohledává vestavěný jmenný prostor. Pokud neuspěje ani tam, výsledkem je chybové hlášení <code>NameError: name is not defined</code> (viz předchozí ukázku).</p>
+<p>Popsaná hierarchie se mimo jiné projevuje v tom, že pokud v lokálním prostoru definujeme nějaké jméno, které je shodné s jiným jméněm definovaným v globálním či vestavěném prostoru, bude mít toto lokální jméno vždy přednost. V následujícím kódu používáme jméno <code>range</code> k vytvoření proměnné, do které ukládáme textový řetězec. Víme, že ve vestavěnném jmenném prostoru jde o jméno funkce, vytvářející posloupnost čísel. Pokud nicméně následně chceme tuto funkci volat, jméno <code>range</code> je nejprve nalezeno v lokálním jmenném prostoru, kde jde ovšem o proměnnou a nikoli o funkci. Výsledkem je tedy chybové hlášení, že textový řetězec nelze volat jako funkci (<code>TypeError: 'str' object is not callable</code>):</p>
+<pre><code class="language-console">&gt;&gt;&gt; range = &quot;Some text.&quot;
 &gt;&gt;&gt; range(5)
 
 Traceback (most recent call last):
-  File &quot;&lt;pyshell#7&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;&lt;pyshell#26&gt;&quot;, line 1, in &lt;module&gt;
     range(5)
 TypeError: 'str' object is not callable
 </code></pre>
-<p>Nyní se znovu podíváme na funkci, kterou jsme definovali na začátku této sekce, z hlediska jmenných prostorů:</p>
-<pre><code class="language-python">def zmen_hodnotu(a):
-    a = a + 1
+<p>Při vytváření jmen je tedy nutné dávat pozor, abychom "nepřepsali" nějaké jméno z některého nadřazeného jmenného prostoru.</p>
+<p>Lokálních jmenných prostorů může být více do sebe vnořených: můžeme totiž definovat funkci uvnitř jiné funkce. Taková vnořená funkce pak bude použitelná (tj. volatelná) pouze v rámci této nadřazené funkce. (Příklad neuvádíme.)</p>
+<blockquote>
+<p>Ve skutečnosti jsme v hierarchii jmenných prostorů vynechali jmenné prostory objektů a tříd. K těm se ale vrátíme až v příslušné kapitole, pojednávající o objektovém programování v Pythonu. </p>
+</blockquote>
+<p>Co když při volání funkce zadáme její argument pomocí nějaké již existující proměnné? V jakém jmenném prostoru bude tato proměnná existovat? Změní se hodnota této původní proměnné, pokud funkce obsahuje kód, který nějak mění odpovídající parametr? Ilustrujme si otázku na příkladu: máme funkci, do které vstupuje nějaký seznam, přičemž funkce do něj přidá další prvek s hodnotou 1 (metodou <code>append</code>), aniž by tento změněný seznam vrátila příkazem <code>return</code>:</p>
+<pre><code class="language-python">def add_one(my_list):
+    my_list.append(1)
 </code></pre>
-<p>V první řadě jsme touto definicí vytvořili (resp. vytvoří se, až se kód s definicí spustí) jméno <code>zmen_hodnotu</code> v globálním jmenném prostoru. Díky tomu budeme schopni funkci volat. Dále parametr <code>a</code> v hlavičce funkce vytváří jméno <code>a</code>, které bude existovat v lokálním jmenném prostoru této funkce. Díky tomu můžeme v těle funkce použít jméno <code>a</code> na pravé straně příkazu <code>a = a + 1</code>. Jméno <code>a</code> z levé strany </p>
+<p>Zavoláme-li funkci na nějaký konkrétní seznam, ovlivní ho to, nebo ne?</p>
+<p>V programovacích jazycích obecně existují dva způsoby, jak funkce nakládají se svými argumenty, tj. s hodnotami parametrů zadanými při volání funkce:</p>
+<ul>
+<li><strong>argumenty předávané hodnotou</strong> - při volání funkce se v jejím lokálním jmenném prostoru vytvoří nová proměnná, do které se zkopíruje pouze <em>hodnota</em> argumentu. Tato lokální proměnná je tedy nezávislá na původní proměnné, která byla použita jako argument. Případná změna této proměnné se proto neprojeví vně funkce. V tomto případě by tedy naše funkce <code>add_one</code> původní seznam nezměnila.</li>
+<li><strong>argumenty předávané odkazem</strong> - při volání funkce se v jejím lokálním jmenném prostoru vytvoří nová proměnná, která <em>odkazuje na stejné místo v paměti</em> jako původní proměnná, která byla použita jako argument. To znamená, že pokud nějak změníme hodnotu této lokální proměnné, dotkne se změna i původní proměnné vně funkce. Volání funkce <code>add_one</code> by tedy opravdu změnilo původní seznam.</li>
+</ul>
+<p>V Pythonu jsou argumenty vždy předávané <strong>odkazem</strong>, platí tedy rozhodně druhá možnost (pozor: v jiným jazycích to může být jinak!):</p>
+<pre><code class="language-console">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; add_one(a)
+&gt;&gt;&gt; a
+[1, 2, 3, 1]
+</code></pre>
+<p>Mohli bychom však snadno vymyslet příklad, který se zdánlivě chová opačně. Např. následující funkce dělá prakticky totéž, jako funkce <code>add_one</code>:</p>
+<pre><code class="language-python">def add_one2(my_list):
+    my_list = my_list + [1]
+</code></pre>
+<p>Pokud vyzkoušíme její chování, zjistíme, že vnější seznam, předaný jako argument této funkci, zůstane voláním funkce nedotčen:</p>
+<pre><code class="language-console">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; add_one2(a)
+&gt;&gt;&gt; a
+[1, 2, 3]
+</code></pre>
+<p>Ve skutečnosti pořád platí, co jsme uvedli výše: seznam <code>a</code> je předán odkazem, a pokud by byl ve funkci opravdu změněn, tato změna by se projevila i vně funkce, tj. změnou tohoto původního seznamu <code>a</code>. Problém je v tom, že funkce <code>add_one2</code> ve skutečnosti původní seznam nemění, ale namísto toho vytváří seznam nový, na původním nezávislý. Na řádku <code>my_list = my_list + [1]</code> je vytvořena nová proměnná <code>my_list</code>, jejíž hodnota je odvozena od hodnoty původní proměnné <code>my_list</code> (na pravé straně výrazu), která je na ní však již nezávislá (tj. odkazuje na jiné místo v paměti). Tato nová proměnná, jelikož je vytvořena uvnitř funkce, existuje pouze v lokálním jmenném prostoru této funkce. Původní seznam tak zůstává nezměněn.</p>
+<p>Pokud bychom chtěli, aby se změna, provedená způsobem <code>my_list = my_list + [1]</code>, projevila ve "vnější" proměnné s původním seznamem, mohli bychom výsledek výpočtu funkce předat "ven" pomocí příkazu <code>return</code>:</p>
+<pre><code class="language-python">def add_one3(my_list):
+    my_list = my_list + [1]
+    return my_list
+</code></pre>
+<p>Následně bychom výsledek funkce uložili do původní proměnné:</p>
+<pre><code class="language-console">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; a = add_one3(a)
+&gt;&gt;&gt; a
+[1, 2, 3, 1]
+</code></pre>
 <h2 id="prace-s-moduly">Práce s moduly</h2>
 <p>Modul je soubor se zdrojovým kódem, obsahujícím především definice nejrůznějších funkcí (ale i jiných objektů, jako jsou proměnné, třídy ad.). Význam modulu je v tom, že umožňuje použití v něm definovaných funkcí (či jiných objektů) v libovolném kódu, aniž bychom museli tyto funkce v daném kódu definovat. V modulu jsou tyto funkce již definovány a nám stačí je z daného modulu načíst.</p>
 <p>Modul se vlastně formálně nijak neliší od jakéhokoli skriptu. Není to nic jiného než textový soubor s příponou <code>.py</code>. Ve skutečnosti je možné to chápat i opačně a považovat jakýkoli skript za modul. V praxi se však pojmenování <em>modul</em> používá pro skripty obsahující téměř výhradně definice funkcí (či tříd). Moduly tak často hrají roli jakýchsi <strong>knihoven funkcí</strong>, použitelných v jakémkoli jiném skriptu či přímo v interaktivním okně Python Shell.</p>
@@ -305,23 +334,23 @@ TypeError: 'str' object is not callable
 <pre><code class="language-python">nazev_modulu.nazev_funkce(argumenty)
 </code></pre>
 <p>Příklad modulu <code>os</code>:</p>
-<pre><code class="language-python">import os
-os.getcwd()
+<pre><code class="language-console">&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.getcwd()
 'C:\\my_path\\pracovni_adresar'
 </code></pre>
 <p>Chceme-li z nějakého modulu použít jen nějakou jeho část, např. jen jednu funkci, můžeme namísto celého modulu načíst jen tuto jeho část:</p>
 <pre><code class="language-python">from nazev_modulu import nazev_funkce
 </code></pre>
 <p>Načtenou funkci pak mámek dispozici přímo, tj. nemusíme (a ani nemůžeme) k ní přistupovat pomocí uvedení názvu modulu a tečky. Příslušné jméno je přidáno přímo do globálního jmenného prostoru:</p>
-<pre><code class="language-python">&gt;&gt;&gt; from os import getcwd
+<pre><code class="language-console">&gt;&gt;&gt; from os import getcwd
 &gt;&gt;&gt; getcwd()
 'C:\\my_path\\pracovni_adresar'
 </code></pre>
 <p>Stejnou syntax můžeme použít i pro načtení pod-modulů, jak jsme již uvedli v lekci 7 na příkladu modulu <code>path</code> z balíčku <code>os</code>:</p>
-<pre><code class="language-python"># Varianta s načtením celého balíčku os
+<pre><code class="language-console"># Varianta s načtením celého balíčku os
 &gt;&gt;&gt; import os
 &gt;&gt;&gt; os.path.join(&quot;C:&quot;, &quot;my_path&quot;, &quot;my_file.txt&quot;)
-'C:my_path\\my_file.txt'
+'C:\\my_path\\my_file.txt'
 
 # Varianta s načtením pouze modulu path
 &gt;&gt;&gt; from os import path
@@ -342,7 +371,7 @@ os.getcwd()
 vlastni_kratsi_nazev.funkce_modulu()
 </code></pre>
 <p>Příklad:</p>
-<pre><code class="language-python">&gt;&gt;&gt; import random as rnd
+<pre><code class="language-console">&gt;&gt;&gt; import random as rnd
 &gt;&gt;&gt; rnd.random()
 0.5218355675703937
 </code></pre>
@@ -362,10 +391,10 @@ def obsah_kruhu(r):
 <p>Následně skript uložte do pracovního adresáře pod názvem <code>matematika.py</code>. (Připomínáme, že aktuální pracovní adresář zjistíte pomocí funkce <code>getcwd</code> z modulu <code>os</code>, případně jej můžete změnit funkcí <code>chdir</code> ze stejného modulu.)</p>
 <p>Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5) tak, jak jsme zvyklí spouštět skripty. Výsledkem je, že se obsah skriptu nahraje do okna Python Shell (a je tudíž přístupný pomocí procházení paměti příkazů), takže jednotlivé funkce ve skriptu definované jsou přímo přístupné pod svým názvem (naopak ale nebudou přístupné pod názvem modulu, protože ve skutečnosti nedošlo k jeho načtení).</p>
 <p>Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu <code>import</code>:</p>
-<pre><code class="language-python">&gt;&gt;&gt; import matematika
+<pre><code class="language-console">&gt;&gt;&gt; import matematika
 </code></pre>
 <p>Nyní lze k funkcím a proměnným modulu přistupovat přes název modulu:</p>
-<pre><code class="language-python">&gt;&gt;&gt; import matematika
+<pre><code class="language-console">&gt;&gt;&gt; import matematika
 &gt;&gt;&gt; matematika.pi
 3.1416
 &gt;&gt;&gt; matematika.obvod_kruhu(4)
@@ -374,23 +403,23 @@ def obsah_kruhu(r):
 50.2656
 </code></pre>
 <p>Zbývá vysvětlit, k čemu jsou dobré textové řetězce na začátku výše uvedeného skriptu a uvnitř definic obou uvedených funkcí. Tyto textové řetězce jsou nepovinné, tj. modul i funkce by stejně dobře fungovaly i bez nich. Uvedli jsme je v této ukázce proto, abychom ukázali možnost psát dokumentační řetězce, v nichž je zpravidla uvedena popisná informace o účelu daného modulu či funkce. Dokumentační řetězec, pokud existuje, je možné vyvolat zavolání jména modulu či funkce, tečky a řetězce <code>__doc__</code> (pozor: před i za slovem doc jsou vždy dvě podtržítka):</p>
-<pre><code class="language-python">&gt;&gt;&gt; matematika.__doc__
+<pre><code class="language-console">&gt;&gt;&gt; matematika.__doc__
 'Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.'
 &gt;&gt;&gt; matematika.obsah_kruhu.__doc__
 'Tato funkce pocita obsah kruhu o polomeru r.'
 </code></pre>
 <p>Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem <code>import</code>, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz <code>import</code> totiž nejprve zkontroluje, zda příslušný modul již není načtený, a pokud ne načte jej. Pokud ano, neudělá nic. K tomu, abychom již načtený modul načetly znovu, je třeba použít vestavěnou funkci <code>reload</code>:</p>
-<pre><code class="language-python">&gt;&gt;&gt; reload(matematika)
+<pre><code class="language-console">&gt;&gt;&gt; reload(matematika)
 &lt;module 'matematika' from 'C:\Python25\matematika.pyc'&gt;
 </code></pre>
 <p>Nyní zbývá vyřešit, kam vlastně moduly ukládat, abychom je mohli načítat příkazem <code>import</code>. Pokud zavoláme příkaz <code>import</code> a uvedeme název nějakého modulu, interpret načte první modul zadaného jména, který nalezne ve složkách, v nichž moduly hledá. Jaké složky to jsou, lze zjistit pomocí proměnné <code>path</code> definované v modulu <code>sys</code>. Tato proměnná obsahuje seznam adres, které se mají při načítání modulů prohledávat. K jejímu zavolání je třeba samozřejmě nejprve načíst modul <code>sys</code>:</p>
-<pre><code class="language-python">&gt;&gt;&gt; import sys
+<pre><code class="language-console">&gt;&gt;&gt; import sys
 &gt;&gt;&gt; sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages']
 </code></pre>
 <p>Konkrétní obsah seznamu bude samozřejmě záviset na konkrétním počítači.</p>
 <p>Pokud budeme chtít k tomuto seznamu nějakou složku přidat, je možné proměnnou <code>path</code> změnit standardním způsobem, jakým se pracuje se seznamy:</p>
-<pre><code class="language-python">&gt;&gt;&gt; sys.path.append(&quot;C:\\Moje_slozka&quot;)
+<pre><code class="language-console">&gt;&gt;&gt; sys.path.append(&quot;C:\\Moje_slozka&quot;)
 &gt;&gt;&gt; sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages', 'C:\\Moje_slozka']
 </code></pre>
