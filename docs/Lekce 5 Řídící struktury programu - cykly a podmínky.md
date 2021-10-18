@@ -239,7 +239,7 @@ fakt = 1
 i = 2
 while i <= n:
     fakt = fakt * i
-	i = i + 1
+    i = i + 1
 print(fakt)
 ```
 
@@ -356,7 +356,7 @@ Výše uvedený výpočet faktoriálu by tedy mohl vypadat i takto:
 ```python
 n = 20
 fakt = 1
-for i in range(n):
+for i in range(1, n+1):
     fakt = fakt * i
 print(fakt)
 ```
