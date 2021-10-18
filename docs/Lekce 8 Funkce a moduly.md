@@ -42,7 +42,7 @@ nazev_funkce(argmunet1, argument2, ... , argumentN)
 
 Jednotlivé argumenty přesně odpovídají jednotlivým parametrům funkce, jsou vlastně konkrétními hodnotami, které se při volání funkce za jednotlivé parametry dosadí. Ukažme si volání funkce opět na příkladu faktoriálu, přičemž budeme funkci definovanou výše volat v okně Python Shell:
 
-```python
+```console
 >>> faktorial(3)
 6
 >>> faktorial(6)
@@ -66,7 +66,7 @@ def mocnina(x,y):
 
 Při volání funkce je nutné zapsat argumenty ve stejném pořadí, v jakém jsou definovány příslušné parametry:
 
-```python
+```console
 >>> mocnina(3,4)
 81
 >>> mocnina(4,3)
@@ -75,7 +75,7 @@ Při volání funkce je nutné zapsat argumenty ve stejném pořadí, v jakém j
 
 Pokud bychom chtěli z nějakého důvodu zadat argumenty v jiném pořadí, než jak jsou definovány argumenty, je možné použít při volání funkce explicitně jména příslušných parametrů a operátor `=`:
 
-```python
+```console
 >>> mocnina(y=4, x=3)
 81
 ```
@@ -95,7 +95,7 @@ def mocnina(x, y = 2):
 
 Po zavolání v okně Python Shell:
 
-```python
+```console
 >>> mocnina(4) # Zde bude použita implicitní hodnota parametru y
 16
 >>> mocnina(4, 3) # Zde bude použita uživatelem specifikovaná hodnota parametru y
@@ -104,7 +104,7 @@ Po zavolání v okně Python Shell:
 
 Samozřejmě výsledek volání funkce lze uložit do proměnné, tak jak to znáte při používání vestavěných funkcí Pythonu (např. `input`, `range` či konverzní funkce `int` apod.):
 
-```python
+```console
 >>> a = mocnina(4)
 >>> print a
 16
@@ -112,7 +112,7 @@ Samozřejmě výsledek volání funkce lze uložit do proměnné, tak jak to zn�
 
 Stejně tak argumenty funkce mohou být zadávány přímo pomocí hodnot (viz ukázky výše), nebo pomocí proměnných:
 
-```python
+```console
 >>> a = 4
 >>> b = 5
 >>> mocnina(a, b)
@@ -143,31 +143,14 @@ Pokud volání takové funkce (procedury) uložíme do nějaké proměnné, nebu
 
 > **Úkol 2.** Napište funkci, která otevře daný textový soubor a vrátí počet jeho slov (parametrem funkce bude textový řetězec s adresou souboru).
 
-## Jmenné prostory a jejich hierarchie
+## Jmenné prostory a předávání argumentů funkcí
 
-Pokud zadáváme argumenty funkce pomocí proměnných, je otázkou, zda lze tuto proměnnou uvnitř funkce měnit tak, aby se změna projevila i mimo funkci. Zkusme si to na příkladu funkce, která pouze změní hodnotu vstupní proměnné:
+Jména proměnných a funkcí existují vždy v nějaké **jmenném prostoru** (angl. **namespace**), někdy též **oboru platnosti** (angl. **scope**), podle toho, kde byly definovány. Uvnitř tohoto jmenného prostoru je pak proměnná či funkce "vidět", tj. lze se na tam na ně odkazovat. Jmenné prostory jsou hierarchisky uspořádány:
 
-```python
-def zmen_hodnotu(a):
-    a = a + 1
-```
+1. Základním jmenným prostorem je tzv. *vestavěný jmenný prostor*, obsahující např. jména vestavěných funkcí jako `range` či `print`. Jelikož jsou tato jména definována ve vestavěném prostoru, jsou dostupná v jakékoli části kódu v jazyce Python (tj. ve všech hierarchicky nižších jmenných prostorech).
+2. O jednu hierarchickou úroveň níže je tzv. *globální jmenný prostor*. Ten vzniká automaticky při otevření konzole Python Shell (resp. při spuštění skriptu). Pokud konzoli otevřeme spuštěním programu IDLE z nabídky programů, případně ji restartujeme pomocí *Shell* -> *Restart Shell*, globální jmenný prostor se nastaví jako prázdný. Při jakémkoli vytvoření proměnné či funkce se následně dané jméno přidá do globálního prostoru, díky čemuž s ním nadále můžeme v tomto prostoru pracovat. Opětovné restartování konzole však globální jmenný prostor opět vyprázdní:
 
-Nyní ověříme, zda bude mít funkce vliv na původní proměnnou, zadanou do funkce jako argument:
-
-```python
->>> a = 5
->>> zmen_hodnotu(a)
->>> a
-5
-```
-
-Jak je vidět, funkce původní proměnnou neovlivní. Jak to? Je to proto, že příkaz `a = a + 1`v těle funkce ve skutečnosti vytvoří novou proměnnou `a`, jejíž hodnota se nastaví s využitím parametru `a` (na pravé straně výrazu). Tato nová proměnná je nicméně "vidět" pouze v rámci funkce, neboť je v jejím **jmenném prostoru**.
-
-Jmenný prostor (angl. *namespace*) je jakýsi virtuální prostor, ve kterém jsou definována různá *jména*, typicky právě jména proměnných a funkcí. Jmenných prostorů může být více, přičemž jsou hierarchicky uspořádány. Základním jmenným prostorem je tzv. *vestavěný jmenný prostor*, obsahující např. jména vestavěných funkcí jako `range` či `print`. Jelikož jsou tato jména definována ve vestavěném prostoru, jsou dostupná v jakékoli části kódu v jazyce Python. 
-
-Dalším jmenným prostorem, který je o jednu hierarchickou úroveň níže, je tzv. *globální jmenný prostor*. Ten vzniká automaticky při otevření konzole Python Shell (resp. při spuštění skriptu). Pokud konzoli otevřeme  spuštěním programu IDLE z nabídky programů, případně ji restartujeme pomocí *Shell* -> *Restart Shell*, globální jmenný prostor se nastaví jako prázdný. Při jakémkoli vytvoření proměnné či funkce se následně dané jméno přidá do globálního prostoru, díky čemuž s ním nadále můžeme v tomto prostoru pracovat. Opětovné restartování konzole však globální jmenný prostor opět vyprázdní: 
-
-```python
+```console
 >>> a = 5 # Vytvoření proměnné v globálním jmenném prostoru
 >>> a # Proměnná existuje...
 5
@@ -181,44 +164,95 @@ Traceback (most recent call last):
 NameError: name 'a' is not defined
 ```
 
-Vedle globálního jmenného prostoru můžeme v rámci skriptu vytvořit libovolné množství vzájemně hierarchicky zanořených tzv. *lokálních jmenných prostorů*. Jakékoli jméno vytvořené v daném lokálním prostoru existuje (tj. je "dostupné" či "viditelné") pouze v rámci tohoto prostoru. 
+3. Poslední hierarchickou úrovní jsou tzv. *lokální jmenné prostory*, které jsou přiřazeny funkcím. V praxi to znamená, že pokud v těle funkce definuji nějakou proměnnou, tato proměnná existuje ("je vidět") pouze v lokálním jmenném prostoru této funkce. Uvnitř funkce se proto na tuto proměnnou mohu odkazovat, vně funkce však nikoli:
 
-Lokální jmenný prostor je vždy automaticky vytvořen v rámci těla funkce. Pokud tedy v těle funkce vytvoříme proměnnou `a`, s touto proměnnou můžeme zacházet uvnitř těla této funkce, nikoli však mimo ně:
-
-```python
->>> def nejaka_funkce(parametr): a = parametr + 1
-
->>> nejaka_funkce(5)
->>> a
+```console
+>>> def my_function(): a = 5 # Zde jsme definovali lokální proměnnou ve jmenném prostoru funkce
+>>> a # Zde vidíme, že vně funkce tato proměnná neexistuje
 
 Traceback (most recent call last):
-  File "<pyshell#4>", line 1, in <module>
+  File "<pyshell#17>", line 1, in <module>
     a
 NameError: name 'a' is not defined
 ```
 
-Při vyhodnocování jmen použitých v kódu se nejprve prohledává jmenný prostor nejnižší hierarchické úrovně. Pokud se zde dané jméno nenajde, postupuje se hierarchií jmenných prostorů výše.
+Pokud se kdekoli v kódu odkazujeme na nějaké jméno (tj. proměnnou či funkci), překladač nejprve jméno hledá v příslušném lokálním jmenném prostoru. Pokud tam takové jméno nenajde, pokračuje prohledáváním globálního jmenného prostoru. Pokud ani tam neuspěje, prohledává vestavěný jmenný prostor. Pokud neuspěje ani tam, výsledkem je chybové hlášení `NameError: name is not defined` (viz předchozí ukázku).
 
-Tímto způsobem můžeme např. lokálně změnit některá globální či vestavěná jména:
+Popsaná hierarchie se mimo jiné projevuje v tom, že pokud v lokálním prostoru definujeme nějaké jméno, které je shodné s jiným jméněm definovaným v globálním či vestavěném prostoru, bude mít toto lokální jméno vždy přednost. V následujícím kódu používáme jméno `range` k vytvoření proměnné, do které ukládáme textový řetězec. Víme, že ve vestavěnném jmenném prostoru jde o jméno funkce, vytvářející posloupnost čísel. Pokud nicméně následně chceme tuto funkci volat, jméno `range` je nejprve nalezeno v lokálním jmenném prostoru, kde jde ovšem o proměnnou a nikoli o funkci. Výsledkem je tedy chybové hlášení, že textový řetězec nelze volat jako funkci (`TypeError: 'str' object is not callable`):
 
-```python
->>> range = "ahoj"
+```console
+>>> range = "Some text."
 >>> range(5)
 
 Traceback (most recent call last):
-  File "<pyshell#7>", line 1, in <module>
+  File "<pyshell#26>", line 1, in <module>
     range(5)
 TypeError: 'str' object is not callable
 ```
 
-Nyní se znovu podíváme na funkci, kterou jsme definovali na začátku této sekce, z hlediska jmenných prostorů:
+Při vytváření jmen je tedy nutné dávat pozor, abychom "nepřepsali" nějaké jméno z některého nadřazeného jmenného prostoru.
+
+Lokálních jmenných prostorů může být více do sebe vnořených: můžeme totiž definovat funkci uvnitř jiné funkce. Taková vnořená funkce pak bude použitelná (tj. volatelná) pouze v rámci této nadřazené funkce. (Příklad neuvádíme.)
+
+> Ve skutečnosti jsme v hierarchii jmenných prostorů vynechali jmenné prostory objektů a tříd. K těm se ale vrátíme až v příslušné kapitole, pojednávající o objektovém programování v Pythonu. 
+
+Co když při volání funkce zadáme její argument pomocí nějaké již existující proměnné? V jakém jmenném prostoru bude tato proměnná existovat? Změní se hodnota této původní proměnné, pokud funkce obsahuje kód, který nějak mění odpovídající parametr? Ilustrujme si otázku na příkladu: máme funkci, do které vstupuje nějaký seznam, přičemž funkce do něj přidá další prvek s hodnotou 1 (metodou `append`), aniž by tento změněný seznam vrátila příkazem `return`:
 
 ```python
-def zmen_hodnotu(a):
-    a = a + 1
+def add_one(my_list):
+    my_list.append(1)
 ```
 
-V první řadě jsme touto definicí vytvořili (resp. vytvoří se, až se kód s definicí spustí) jméno `zmen_hodnotu` v globálním jmenném prostoru. Díky tomu budeme schopni funkci volat. Dále parametr `a` v hlavičce funkce vytváří jméno `a`, které bude existovat v lokálním jmenném prostoru této funkce. Díky tomu můžeme v těle funkce použít jméno `a` na pravé straně příkazu `a = a + 1`. Jméno `a` z levé strany 
+Zavoláme-li funkci na nějaký konkrétní seznam, ovlivní ho to, nebo ne?
+
+V programovacích jazycích obecně existují dva způsoby, jak funkce nakládají se svými argumenty, tj. s hodnotami parametrů zadanými při volání funkce:
+
+- **argumenty předávané hodnotou** - při volání funkce se v jejím lokálním jmenném prostoru vytvoří nová proměnná, do které se zkopíruje pouze *hodnota* argumentu. Tato lokální proměnná je tedy nezávislá na původní proměnné, která byla použita jako argument. Případná změna této proměnné se proto neprojeví vně funkce. V tomto případě by tedy naše funkce `add_one` původní seznam nezměnila.
+- **argumenty předávané odkazem** - při volání funkce se v jejím lokálním jmenném prostoru vytvoří nová proměnná, která *odkazuje na stejné místo v paměti* jako původní proměnná, která byla použita jako argument. To znamená, že pokud nějak změníme hodnotu této lokální proměnné, dotkne se změna i původní proměnné vně funkce. Volání funkce `add_one` by tedy opravdu změnilo původní seznam.
+
+V Pythonu jsou argumenty vždy předávané **odkazem**, platí tedy rozhodně druhá možnost (pozor: v jiným jazycích to může být jinak!):
+
+```console
+>>> a = [1,2,3]
+>>> add_one(a)
+>>> a
+[1, 2, 3, 1]
+```
+
+Mohli bychom však snadno vymyslet příklad, který se zdánlivě chová opačně. Např. následující funkce dělá prakticky totéž, jako funkce `add_one`:
+
+```python
+def add_one2(my_list):
+    my_list = my_list + [1]
+```
+
+Pokud vyzkoušíme její chování, zjistíme, že vnější seznam, předaný jako argument této funkci, zůstane voláním funkce nedotčen:
+
+```console
+>>> a = [1,2,3]
+>>> add_one2(a)
+>>> a
+[1, 2, 3]
+```
+
+Ve skutečnosti pořád platí, co jsme uvedli výše: seznam `a` je předán odkazem, a pokud by byl ve funkci opravdu změněn, tato změna by se projevila i vně funkce, tj. změnou tohoto původního seznamu `a`. Problém je v tom, že funkce `add_one2` ve skutečnosti původní seznam nemění, ale namísto toho vytváří seznam nový, na původním nezávislý. Na řádku `my_list = my_list + [1]` je vytvořena nová proměnná `my_list`, jejíž hodnota je odvozena od hodnoty původní proměnné `my_list` (na pravé straně výrazu), která je na ní však již nezávislá (tj. odkazuje na jiné místo v paměti). Tato nová proměnná, jelikož je vytvořena uvnitř funkce, existuje pouze v lokálním jmenném prostoru této funkce. Původní seznam tak zůstává nezměněn.
+
+Pokud bychom chtěli, aby se změna, provedená způsobem `my_list = my_list + [1]`, projevila ve "vnější" proměnné s původním seznamem, mohli bychom výsledek výpočtu funkce předat "ven" pomocí příkazu `return`:
+
+```python
+def add_one3(my_list):
+    my_list = my_list + [1]
+    return my_list
+```
+
+Následně bychom výsledek funkce uložili do původní proměnné:
+
+```console
+>>> a = [1,2,3]
+>>> a = add_one3(a)
+>>> a
+[1, 2, 3, 1]
+```
 
 ## Práce s moduly
 
@@ -244,9 +278,9 @@ nazev_modulu.nazev_funkce(argumenty)
 
 Příklad modulu `os`:
 
-```python
-import os
-os.getcwd()
+```console
+>>> import os
+>>> os.getcwd()
 'C:\\my_path\\pracovni_adresar'
 ```
 
@@ -258,7 +292,7 @@ from nazev_modulu import nazev_funkce
 
 Načtenou funkci pak mámek dispozici přímo, tj. nemusíme (a ani nemůžeme) k ní přistupovat pomocí uvedení názvu modulu a tečky. Příslušné jméno je přidáno přímo do globálního jmenného prostoru:
 
-```python
+```console
 >>> from os import getcwd
 >>> getcwd()
 'C:\\my_path\\pracovni_adresar'
@@ -266,11 +300,11 @@ Načtenou funkci pak mámek dispozici přímo, tj. nemusíme (a ani nemůžeme) 
 
 Stejnou syntax můžeme použít i pro načtení pod-modulů, jak jsme již uvedli v lekci 7 na příkladu modulu `path` z balíčku `os`:
 
-```python
+```console
 # Varianta s načtením celého balíčku os
 >>> import os
 >>> os.path.join("C:", "my_path", "my_file.txt")
-'C:my_path\\my_file.txt'
+'C:\\my_path\\my_file.txt'
 
 # Varianta s načtením pouze modulu path
 >>> from os import path
@@ -299,7 +333,7 @@ vlastni_kratsi_nazev.funkce_modulu()
 
 Příklad:
 
-```python
+```console
 >>> import random as rnd
 >>> rnd.random()
 0.5218355675703937
@@ -328,13 +362,13 @@ Nyní je možné skript normálně spustit (např. klávesovou zkratkou F5) tak,
 
 Jinou možností, o kterou nám v tuto chvíli jde, je načtení modulu z okna Python Shell pomocí příkazu `import`:
 
-```python
+```console
 >>> import matematika
 ```
 
 Nyní lze k funkcím a proměnným modulu přistupovat přes název modulu:
 
-```python
+```console
 >>> import matematika
 >>> matematika.pi
 3.1416
@@ -346,7 +380,7 @@ Nyní lze k funkcím a proměnným modulu přistupovat přes název modulu:
 
 Zbývá vysvětlit, k čemu jsou dobré textové řetězce na začátku výše uvedeného skriptu a uvnitř definic obou uvedených funkcí. Tyto textové řetězce jsou nepovinné, tj. modul i funkce by stejně dobře fungovaly i bez nich. Uvedli jsme je v této ukázce proto, abychom ukázali možnost psát dokumentační řetězce, v nichž je zpravidla uvedena popisná informace o účelu daného modulu či funkce. Dokumentační řetězec, pokud existuje, je možné vyvolat zavolání jména modulu či funkce, tečky a řetězce `__doc__` (pozor: před i za slovem doc jsou vždy dvě podtržítka):
 
-```python
+```console
 >>> matematika.__doc__
 'Toto je modul s funkcemi pro vypocet obsahu a objemu kruhu.'
 >>> matematika.obsah_kruhu.__doc__
@@ -355,14 +389,14 @@ Zbývá vysvětlit, k čemu jsou dobré textové řetězce na začátku výše u
 
 Budeme-li již načtený modul upravovat a následně jej znovu načteme příkazem `import`, modul ve skutečnosti znovu načten nebude a provedené změny se tudíž neprojeví. Příkaz `import` totiž nejprve zkontroluje, zda příslušný modul již není načtený, a pokud ne načte jej. Pokud ano, neudělá nic. K tomu, abychom již načtený modul načetly znovu, je třeba použít vestavěnou funkci `reload`:
 
-```python
+```console
 >>> reload(matematika)
 <module 'matematika' from 'C:\Python25\matematika.pyc'>
 ```
 
 Nyní zbývá vyřešit, kam vlastně moduly ukládat, abychom je mohli načítat příkazem `import`. Pokud zavoláme příkaz `import` a uvedeme název nějakého modulu, interpret načte první modul zadaného jména, který nalezne ve složkách, v nichž moduly hledá. Jaké složky to jsou, lze zjistit pomocí proměnné `path` definované v modulu `sys`. Tato proměnná obsahuje seznam adres, které se mají při načítání modulů prohledávat. K jejímu zavolání je třeba samozřejmě nejprve načíst modul `sys`:
 
-```python
+```console
 >>> import sys
 >>> sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages']
@@ -372,7 +406,7 @@ Konkrétní obsah seznamu bude samozřejmě záviset na konkrétním počítači
 
 Pokud budeme chtít k tomuto seznamu nějakou složku přidat, je možné proměnnou `path` změnit standardním způsobem, jakým se pracuje se seznamy:
 
-```python
+```console
 >>> sys.path.append("C:\\Moje_slozka")
 >>> sys.path
 ['C:\\Python25\\Lib\\idlelib', 'C:\\Program Files\\ArcGIS\\bin', 'C:\\WINDOWS\\system32\\python25.zip', 'C:\\Python25\\DLLs', 'C:\\Python25\\lib', 'C:\\Python25\\lib\\plat-win', 'C:\\Python25\\lib\\lib-tk', 'C:\\Python25', 'C:\\Python25\\lib\\site-packages', 'C:\\Moje_slozka']
