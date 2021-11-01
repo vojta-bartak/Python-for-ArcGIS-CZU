@@ -25,7 +25,7 @@ class Dog:
         self.age = self.age + 1
 ```
 
-Vidíme, že tělo třídy obsahuje postupně definice třech funkcí. První z nich je tzv. *konstruktor* třídy a budeme se mu věnuvat níže. Druhé dvě funkce, tedy `woof` a `get_older`, jsou metody, které bude mít každá instance této třídy k dispozici. Jediným parametrem obou funkcí je parametr `self`, pomocí kterého se lze uvnitř funkcí odkazovat na vlastnosti daného objektu (`self.name` a `self.age`). Parametr `self` je u všech metod povinný, vedle něj mohou metody obsahovat i další parametry (což není náš případ).
+Vidíme, že tělo třídy obsahuje postupně definice třech funkcí. První z nich je tzv. *konstruktor* třídy a budeme se mu věnuvat níže. Druhé dvě funkce, tedy `woof` a `get_older`, jsou metody, které bude mít každá instance této třídy k dispozici. Jediným parametrem obou funkcí je parametr `self`, pomocí kterého se lze uvnitř funkcí odkazovat na vlastnosti daného objektu (`self.name` a `self.age`). Parametr `self` je u všech metod povinný, vedle něj mohou metody obsahovat i další parametry.
 
 Vidíme, že metoda `woof` pouze vytiskne text, ve kterém se použije jméno daného psa, na němž se bude metoda volat (toto jméno bude totiž uloženo ve vlastnosti `self.name`). Metoda `get_older` zvýší hodnotu vlastnosti `self.age` o jedna.
 
@@ -33,7 +33,7 @@ Vidíme, že metoda `woof` pouze vytiskne text, ve kterém se použije jméno da
 
 Co tedy bude dělat konstruktor třídy `Dog`? Nastaví hodnotu vlastnosti `self.name` na hodnotu parametru `name` a hodnotu vlastnosti `self.age` na hodnotu 0. Parametr `name` konstruktoru bude muset uživatel při vytváření objektu zadat (nebude tedy možné vytvořit bezejmenného psa).
 
-> **Úkol 1.** Napište zhora uvedenou definici třídy `Dog` do skriptu a skript spusťte.
+> **Úkol 1.** Napište shora uvedenou definici třídy `Dog` do skriptu a skript spusťte.
 
 Vytvoření konkrétního objektu třídy se provádí voláním funkce, která má stejný název jako daná třída. Ve skutečnosti se tím volá konstruktor třídy. Při volání této funkce je třeba určit hodnoty parametrů v tom pořadí, jak jsou definovány v konstruktoru (ovšem s vynecháním parametru `self`). Funkce vrací objekt dané třídy, který je zpravidla žádoucí uložit do nějaké proměnné.
 
@@ -80,20 +80,20 @@ Woof woof, I'm Zeryk
 1
 ```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
-
-
 V Pythonu jsou všechno objekty..
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
 
 ## Vlastnosti objektu vs vlastnosti třídy
 
