@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Vojta Barták">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lekce 13: Atributové operace - Python pro ArcGIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lekce 13: Atributov\u00e9 operace";
+    var mkdocs_page_input_path = "Lekce 13 Atributov\u00e9 operace.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python pro ArcGIS</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Builder</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%201%20Model%20Builder%20I/">Lekce 1: Tvorba modelu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%202%20Model%20Builder%20II/">Lekce 2: Uživatelské rozhraní</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%203%20Jak%20a%20kde%20napsat%20a%20spustit%20program%20v%20Pythonu/">Lekce 3: Rozjezd Pythonu</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%204%20Prom%C4%9Bnn%C3%A9%20a%20datov%C3%A9%20typy/">Lekce 4: Proměnné a datové typy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%205%20%C5%98%C3%ADd%C3%ADc%C3%AD%20struktury%20programu%20-%20cykly%20a%20podm%C3%ADnky/">Lekce 5: Cykly a podmínky</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%206%20Interaktivn%C3%AD%20vstupy%20do%20programu%20a%20n%C3%A1hodn%C3%A1%20%C4%8D%C3%ADsla/">Lekce 6: Vstupy a náhodná čísla</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%207%20Pr%C3%A1ce%20s%20adres%C3%A1%C5%99ovou%20strukturou%20a%20s%20textov%C3%BDmi%20soubory/">Lekce 7: Adresáře a textové soubory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%208%20Funkce%20a%20moduly/">Lekce 8: Funkce a moduly</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%209%20T%C5%99%C3%ADdy%20a%20objekty/">Lekce 9: Třídy a objekty</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ArcPy</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2010%20Spou%C5%A1t%C4%9Bn%C3%AD%20n%C3%A1stroj%C5%AF%20ArcGIS%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 10: Spouštění nástrojů</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2011%20Proch%C3%A1zen%C3%AD%20geodat%20a%20jejich%20vlastnost%C3%AD%20pomoc%C3%AD%20bal%C3%AD%C4%8Dku%20ArcPy/">Lekce 11: Procházení a prohlížení geodat</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Lekce 13: Atributové operace</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#motivacni-uloha">Motivační úloha</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pridani-a-smazani-pole">Přidání a smazání pole</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#propojovani-tabulek">Propojování tabulek</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#docasne-propojeni">Dočasné propojení</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trvale-propojeni">Trvalé propojení</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vypocet-hodnot-pole">Výpočet hodnot pole</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_me/">O mně...</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../testy_upload/">Testy a úkoly</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python pro ArcGIS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>ArcPy &raquo;</li>
+        
+      
+    
+    <li>Lekce 13: Atributové operace</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/edit/master/docs/Lekce 13 Atributové operace.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lekce-13-atributove-operace">Lekce 13: Atributové operace</h1>
+<p>V této lekci probereme operace, které jste většinou zvyklí v grafickém prostředí ArcGIS provádět "ručně", často kliknutím pravým tlačítkem myši na pole atributové tabulky či vrstvu a výběrem nástroje z kontextového menu. Tyto operace zahrnují např.:</p>
+<ul>
+<li>Přidání nového pole do atributové tabulky.</li>
+<li>Smazání existujícího pole atributové tabulky.</li>
+<li>Výpočet hodnot pole atributové tabulky pomocí nástroje <em>Field calculator</em>, případně <em>Calculate geometry</em>.</li>
+<li>Sumarizace hodnot nějakého pole/polí atributové tabulky.</li>
+<li>Propojení tabulek pomocí <em>Join</em> nebo <em>Relate</em>.</li>
+<li>Atributový výběr prvků (řádků tabulky) pomocí SQL dotazu.</li>
+</ul>
+<p>Ke všem těmto "ručním" operacím ve skutečnosti existují odpovídající geoprocessingové nástroje z ArcToolboxu, které umožňují jejich provádění v rámci modelů z Model Builderu či v rámci skriptů v Pythonu. Většina z nich je umístěná v nástrojovém balíčku <em>Data Management Tools</em>.</p>
+<h2 id="motivacni-uloha">Motivační úloha</h2>
+<p>Jednotlivé operace si ukážeme při řešení následující komplexní úlohy:</p>
+<blockquote>
+<p>Vypočtěte objem povrchového odtoku pro jednotlivé katastry na Liberecku. Povrchový odtok (v litrech za sekundu) se počítá dle vzorce $Q = S * \Psi * q$, kde $S$ je velikost odvodňované plochy v metrech čtverečních, $\Psi $ je bezrozměrný součinitel odtoku dle Nyplta a Viessmanna (odráží typ, úpravu a drsnost povrchu) a $q$ je roční úhrn srážek v milimetrech.</p>
+</blockquote>
+<p>Nejprve si stáhněte a prohlédněte potřebná <a href="https://owncloud.cesnet.cz/index.php/s/R9f1NAoQBbXtMrd">data</a>. Popis dat...</p>
+<p>Nástin řešení...</p>
+<h2 id="pridani-a-smazani-pole">Přidání a smazání pole</h2>
+<p>Nástroje pro práci s poli atributových tabulek, jako je přidání pole, smazání pole, či výpočet hodnot pole, nalezneme v nástrojové sadě <em>Data Management Tools -&gt; Fields</em>.</p>
+<p><strong>Přidání pole</strong> se provádí nástrojem <em>Add Field</em>. Jeho použití si předvedeme na příkladu přidání textového pole "NEWFIELD" do tabulky vrstvy "obce_LK". Operaci můžeme provést např. v okně <em>Python</em> v mapovém dokumentu ArcMap, abychom si mohli okamžitě prohlédnout výsledek. </p>
+<pre><code class="language-python">arcpy.management.AddField(&quot;obce_LK&quot;, &quot;NEWFIELD&quot;, &quot;TEXT&quot;)
+</code></pre>
+<blockquote>
+<p><strong>Úkol 1.</strong> Zadejte do příkazového řádku okna <em>Python</em> výše uvedený příkaz a prohlédněte si výsledek v atributové tabulce.</p>
+</blockquote>
+<p>Jak je z ukázky patrno, prvním parametrem nástroje je název vstupní tabulky (je možné zadat jak vektorovou třídu prvků - pak se použije její atributová tabulka, nebo samostatnou tabulku ve formátu DBF). Druhým parametrem je název přidávaného pole. Třetím parametrem je datový typ pole (kompletní výčet typů, které je možné použít, naleznete v nápovědě k nástroji). Dalšími nepovinnými parametry bychom mohli nastavit omezení pro daný formát, jako je např. maximální délka textového řetězce (v případě textového pole), počet platných číslic (<em>scale</em>) a desetinných míst (<em>precision</em>) v případě číselného typu apod. (V ukázce se spokojujeme s výchozím nastavením těchto parametrů.)</p>
+<p>Pokus přidat pole stejného názvu ještě jednou... </p>
+<p>Smazání pole</p>
+<blockquote>
+<p><strong>Úkol 2.</strong> Napište funkci <code>AddNewField</code>, která do zadané tabulky/třídy prvků přidá nové pole zadaného názvu. Funkce však nejprve vyhodnotí, zda pole s tímto názvem již v tabulce není, a pokud ano, toto původní pole smaže a nahradí je polem novým. </p>
+</blockquote>
+<h2 id="propojovani-tabulek">Propojování tabulek</h2>
+<p>Propojení tabulek pomocí metody <em>join</em> má za následek přidání pole (či polí) z připojované tabulky do cílové tabulky, a to na základě nějakého společného atributu (tzv. <em>klíče</em>). Tento typ propojení je možný v případě, kdy jednomu řádku cílové tabulky odpovídá max. jeden řádek připojované tabulky (jinak by totiž nebylo možné rozhodnout, který řádek připojované tabulky se má k danému řádku cílové tabulky připojit). Zároveň platí, že jednomu řádku připojované tabulky může odpovídat jeden či více řádků cílové tabulky. Jeden řádek připojované tabulky se totiž může zkopírovat do libovolného množství řádků cílové tabulky.</p>
+<p>Vedle metody <em>join</em> je v ArcGIS k dispozici ještě metoda <em>relate</em>, která umožňuje definovat i propojení v případě, kdy jednomu řádku cílové tabulky odpovídá více řádků připojované tabulky. Tuto metodu nicméně nelze použít pomocí Pythonu, resp. balíčku ArcPy. Zaměříme se proto pouze na metodu <em>join</em>.</p>
+<p>Propojení metodou <em>join</em> lze vpraxi provést dvěma způsoby:</p>
+<ul>
+<li>jako dočasné propojení, které je definované pouze v rámci vrstev,</li>
+<li>jako permanentní rozšíření cílové tabulky o nové řádky, zkopírované z připojované tabulky.</li>
+</ul>
+<h3 id="docasne-propojeni">Dočasné propojení</h3>
+<p>Dočasné propojení je právě ten způsob, který jste pravděpodobně zvyklí provádět v prostředí ArcGIS "ručně".</p>
+<p>Jelikož je dočasné propojení definováno na úrovni vrstvy, nikoli datové sady, je pro jeho použití pomocí Pythonu třeba nejprve vytvořit ze zdrojové sady vrstvu. I to je v Pythonu možné, vrstva se vutvoří v operační paměti a bude uložena do proměnné, pomocí které s ní bude možné pracovat. Zároveň bude mít svůj uživatelem zvolený název, pod kterým se na ni lze dále v kódu odkazovat.</p>
+<p>Vrstva se vytváří nástrojem <strong>Make Feature Layer</strong> z balíčku <em>Data Management Tools</em>. Jejím prvním parametrem je cesta k datové sadě, z níž chceme vrstvu vytvořit, druhým parametrem je název vrstvy. Výsledek volání nástroje (objekt třídy <em>Result</em>) můžeme uložit do proměnné, která bude následně vrstvu zastupovat v dalších nástrojích.</p>
+<pre><code class="language-python">lyr = arcpy.management.MakeFeatureLayer(r&quot;C:\...\UrbanAtlas_LK.shp&quot;, &quot;lyr&quot;)
+</code></pre>
+<p>Máme-li vytvořenu vrstvu, můžeme v ní definovat propojení s nějakou jinou tabulkou pomocí nástroje <strong>Add Join</strong> z <em>Data Management Tools -&gt; Joins</em>. V následující ukázce je k atributové tabulce polygonů krajinného pokryvu z databáze Urban Atlas (viz motivační úloha na začátku lekce) připojena tabulka hodnot součinitelů odtoku pro jednotlivé typy povrchu. Společným sloupcem (klíčem), pomocí kterého se propojení provádí, je atribut "CODE", což je kód třídy krajinného pokryvu. Po připojení je vypsán seznam názvů sloupců vytvořené vrstvy, k níž byla tabulka připojena:</p>
+<pre><code class="language-python">import arcpy
+
+# inputs
+land_cover = &quot;UrbanAtlas_LK.shp&quot;
+coef_infil = &quot;coef.dbf&quot;
+
+# create a layer from the dataset
+lyr = arcpy.management.MakeFeatureLayer(land_cover, &quot;lyr&quot;)
+
+# join
+arcpy.management.AddJoin(lyr, &quot;CODE&quot;, coef_infil, &quot;CODE&quot;)
+
+# print fields of the newly created layer
+for field in arcpy.ListFields(lyr):
+    print(field.name)
+
+</code></pre>
+<p>Výsledek je následující:</p>
+<pre><code class="language-console">UrbanAtlas_LK.FID
+UrbanAtlas_LK.Shape
+UrbanAtlas_LK.CITIES
+UrbanAtlas_LK.LUZ_OR_CIT
+UrbanAtlas_LK.CODE
+UrbanAtlas_LK.ITEM
+UrbanAtlas_LK.PROD_DATE
+UrbanAtlas_LK.SHAPE_LEN
+UrbanAtlas_LK.SHAPE_AREA
+UrbanAtlas_LK.srazky
+coef.OID
+coef.kod
+coef.nazev
+coef.cesky
+coef.ko_vsak
+coef.CODE
+</code></pre>
+<p>Jak je vidět, v tabulce vrstvy jsou názvy sloupců doplněny názvem tabulky, z níž sloupce pochází. Díky tomu se v této vrstvě můžeme odkazovat na sloupce z připojené tabulky.</p>
+<blockquote>
+<p><strong>Úkol  3.</strong>  Spusťte skript s výše uvedeným kódem. <em>Pozor</em>: Skript předpokládá, že pracovní adresář ArcGIS je nastaven na složku, ve které máme data. Pokud tomu tak ve vašem případě není, je třeba přidat do skriptu odpovídající příkaz.</p>
+</blockquote>
+<p>Jak bylo již uvedeno, propojení pomocí <em>Add Join</em> je pouze dočasné, neboť se děje ve vrstvě, nikoli ve zdrojové datové sadě. Pokud již propojení tabulek dále nepotřebujeme, je třeba je z vrstvy odstranit nástrojem <strong>Remove Join</strong> (<em>Data Management Tools -&gt; Joins</em>). Níže uvádíme jeho použití a následné vypsání polí vrstvy, ze které bylo propojení odstraněno:</p>
+<pre><code class="language-console">&gt;&gt;&gt; arcpy.management.RemoveJoin(lyr)
+&lt;Result 'lyr'&gt;
+&gt;&gt;&gt; for f in arcpy.ListFields(lyr): print(f.name)
+
+FID
+Shape
+CITIES
+LUZ_OR_CIT
+CODE
+ITEM
+PROD_DATE
+SHAPE_LEN
+SHAPE_AREA
+srazky
+</code></pre>
+<p>Je vidět, že návratovou hodnotou nástroje je opět objekt třídy <em>Result</em>, reprezentující danou vrstvu. Tuto vrstvu však již máme uloženou v proměnné <code>lyr</code>.</p>
+<p>Namísto odstranění propojení je možné také vrstvu smazat. Nestačí ovšem použít pythonovský příkaz <code>del</code>, je nutné vrstvu smazat nástrojem <strong>Delete</strong> z balíčku ArcPy: </p>
+<pre><code class="language-console">&gt;&gt;&gt; arcpy.management.Delete(lyr)
+&lt;Result 'true'&gt;
+</code></pre>
+<p>Smazání vrstvy je důležité proto, že při vytvoření vrstvy z nějaké datové sady se vždy tato datová sada "zamkne", tj. vytvoří se k ní soubor zámku, zamezující jakémukoli programu provádět v datové sadě změny. Pokud bychom např. chtěli v datové sadě přidávat či mazat pole, nebude to možné, pokud je z ní vytvořena vrstva. Po smazání vrstvy se soubor zámku smaže rovněž a datová sada se odemkne pro úpravy.</p>
+<h3 id="trvale-propojeni">Trvalé propojení</h3>
+<p>Pokud chceme připojit pole trvale, máme dvě možnosti:</p>
+<ul>
+<li>Provedeme nejprve dočasné propojení výše uvedeným způsobem, a pak výslednou vrstvu uložíme do nové datové sady, např. nástrojem <strong>Copy Features</strong> (<em>Data Management Tools</em> <em>-&gt;</em> <em>General</em>).</li>
+<li>Připojíme pole přímo do tabulky zdrojové datové sady pomocí nástroje <strong>Join Field</strong> (<em>Data Management Tools -&gt; Joins</em>). Zde je možné připojit buď všechna pole, nebo jen vybraná. Připojená pole se stanou trvalou součástí zdrojové tabulky.</li>
+</ul>
+<blockquote>
+<p><strong>Úkol 4.</strong> Pomocí nástroje <em>Join Field</em> připojte z tabulky součinitelů odtoku pole s hodnotami součinitele ("ko_vsak") jako trvalé nové pole do tabulky krajinného pokryvu. (Syntax nástroje prostudujte v nápovědě.) Prohlédněte si výslednou tabulku. Následně nové pole opět smažte nástrojem <em>Delete Field</em>.</p>
+</blockquote>
+<h2 id="vypocet-hodnot-pole">Výpočet hodnot pole</h2>
+<p>Výpočet hodnot pole tabulky se provádí nástrojem <strong>Calculate Field</strong> z nástrojové sady <em>Fields</em> balíčku <em>Data Management Tools</em>. Prvním parametrem je cesta ke vstupní datové sadě, druhým název pole, které chceme vypočítat. Následuje výraz výpočtu.</p>
+<p>Následující ukázka prezentuje nejjednodušší možný výpočet, kdy je celé pole vyplněno konstantní hodnotou. Nejprve do datové sady "obce_LK.shp" přidáme celočíselné pole s názvem "CONST" a vyplníme ho konstantní hodnotou 100. Dále podobným způsobem přidáme textové pole s názvem "MESSAGE" a vyplníme ho textem "Hello world!":</p>
+<pre><code class="language-python">import arcpy
+
+obce = &quot;obce_LK.shp&quot;
+
+# Add a numeric (integer) field
+arcpy.management.AddField(obce, &quot;CONST&quot;, &quot;LONG&quot;)
+
+# Fill the field with a constant of 100
+arcpy.management.CalculateField(obce, &quot;CONST&quot;, 100)
+
+# Add a text field
+arcpy.management.AddField(obce, &quot;MESSAGE&quot;, &quot;TEXT&quot;)
+
+# Fill the field with a constant of 100
+arcpy.management.CalculateField(obce, &quot;MESSAGE&quot;, '&quot;Hello world!&quot;')
+
+</code></pre>
+<p>Všimněte si, že v případě textového atributu bylo třeba výraz "Hello world!" napsat pomocí obou typů uvozovek: <code>'"Hello world!"'</code>. To proto, že součástí výrazu musí v případě textu být i uvozovky, přičemž samotný výraz je nástroji předáván také jako text. Vnější, jednoduché uvozovky ohraničují celý text výrazu, kdežto vnitřní, dvojité uvozovky jsou již součástí výrazu samotného a sdělují, že obsah výrazu je text. (Tyto vnější uvozovky odpovídají uvozovkám, které bychom byli nuceni použít v okně <em>Field Calculator</em> při "ručním" řešení výpočtu pole.)</p>
+<blockquote>
+<p><strong>Úkol 5.</strong> Pomocí uvedeného skriptu přidejte do datové sady obcí uvedená pole a vyplňte je nějakou konstantní hodnotou. Prohlédněte si výsledek v ArcGIS. Následně pole zase smažte (pomocí Pythonu).</p>
+</blockquote>
+<p>Při vyplňování pole je možné použít hodnoty kteréhokoli jiného, již existujícího pole. Na toto pole se lze odkázat jeho názvem, uvedeným mezi vykřičníky (viz dále). Je přitom možné hodnoty různých polí libovolně kombinovat, provádět s nimi výpočty apod. Ve výrazu je možné použít jakoukoli funkci či operaci, která je součástí základní výbavy Pythonu. Jen je třeba čtvrtým, volitelným parametrem nástroje <em>Calculate Field</em> specifikovat, jaký jazyk ve výrazu používat (resp. že používáme Python). Volba jazyka má vliv i na to, jakým způsobem se odkazujeme na jiná pole (uvedené vykřičníky se používají pouze v případě jazyka Python). V ukázce níže používáme specifikaci jazyka "PYTHON_9.3", což je jazyk výrazů založený na Python, v podobě, v jaké byl používán od verze ArcGIS 9.3 dále.</p>
+<p>Ukážeme si výpočet pole pomocí hodnot jiného pole na příkladu, kdy do pole "NAZEV_2", které nejprve přidáme do datové sady "obce_LK.shp", zkopírujeme text anglického názvu obce, ovšem převedený na velká písmena. V Pythonu je možné libovolný textový řetězec převést na velká resp. malá písmena metodou řetězce <code>upper</code> resp. <code>lower</code>:</p>
+<pre><code class="language-console">&gt;&gt;&gt; &quot;HelLo&quot;.upper()
+'HELLO'
+&gt;&gt;&gt; &quot;HelLo&quot;.lower()
+'hello'
+</code></pre>
+<p>Nyní zmíněná ukázka vyplnění pole:</p>
+<pre><code class="language-python">import arcpy
+
+obce = &quot;obce_LK.shp&quot;
+
+# add a new field
+arcpy.management.AddField(obce, &quot;NAZEV_2&quot;, &quot;TEXT&quot;)
+
+# fill the field with uppercase names from the field NAZEV_ENG
+arcpy.management.CalculateField(obce, &quot;NAZEV_2&quot;, '!NAZEV_ENG!.upper()', &quot;PYTHON_9.3&quot;)
+</code></pre>
+<p>Všimněte si použití vykřičníků pro odkaz na pole "NAZEV_ENG" v rámci výrazu, a na použití metody <code>upper</code>.</p>
+<blockquote>
+<p><strong>Úkol 6.</strong> Obdobným způsobem, jako v předchozí ukázce, vytvořte pole s názvy obcí psanými malými písmeny.</p>
+</blockquote>
+<p>Velmi častou úlohou je výpočet geometrických vlastností prvků do atributu. Příkladem může být výpočet ploch polygonů do atributu nazvaného např. "AREA_KM". "Ruční" řešení by spočívalo v použití nástroje <em>Calculate Geometry</em> dostupného v kontextovém menu příslušného pole. V Pythonu se operace provede opět pomocí nástroje <em>Calculate Field</em>, kde se v rámci výrazu odkážeme na speciální pole "Shape" a jeho vlastnost "area" pomocí <code>!shape.area!</code> (chceme-li výsledek ve čtverečních kilometrech, je nutné do výrazu zakomponovat i převod jednotek):</p>
+<p>```python
+import arcpy</p>
+<p>obce = "obce_LK.shp"</p>
+<h1 id="add-a-new-field-for-areas">add a new field for areas</h1>
+<p>arcpy.management.AddField(obce, "AREA_KM", "DOUBLE")</p>
+<h1 id="fill-the-field-with-areas-in-squared-kilometers">fill the field with areas in squared kilometers</h1>
+<p>arcpy.management.CalculateField(obce, "AREA_KM", '!shape.area!/1000000', "PYTHON_9.3")
+ ```</p>
+<blockquote>
+<p><strong>Úkol 7.</strong> Do datové sady "UrbanAtlas_LK.shp" přidejte pole "PARATIO" a vypočtěte do něj poměr obvodu a plochy (tzv. "Perimeter-Area Ratio"), což je krajinná metrika popisující míru složitosti tvaru krajinných plošek.</p>
+</blockquote>
+<h2 id="sumarizace-pole">Sumarizace pole</h2>
+<p>Dokončení odtoků...</p>
+<h2 id="atributove-vybery">Atributové výběry</h2>
+<p>Kde všude se může vyskytnout SQL dotaz..</p>
+<p>Select</p>
+<p>Jak vytvořit vrstvu v Pythonu</p>
+<p>Opakovaný výběr ve vrstvě.. (např. vyplňování pole dle atributu?)</p>
+<p>Uložení vrstvy?</p>
+<h2 id="shrnuti">Shrnutí</h2>
+<h2 id="ulohy">Úlohy</h2>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" class="btn btn-neutral float-right" title="Lekce 15: Kurzory">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" class="btn btn-neutral" title="Lekce 12: Uživatelská rozhraní"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/vojta-bartak/Python-for-ArcGIS-CZU/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

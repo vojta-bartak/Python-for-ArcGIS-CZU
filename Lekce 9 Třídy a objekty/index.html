@@ -88,6 +88,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Lekce%2012%20U%C5%BEivatelsk%C3%A1%20rozhran%C3%AD%20n%C3%A1stroj%C5%AF/">Lekce 12: Uživatelská rozhraní</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Lekce%2013%20Atributov%C3%A9%20operace/">Lekce 13: Atributové operace</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Lekce%2018%20Rastrov%C3%A9%20anal%C3%BDzy/">Lekce 18: Rastrové analýzy</a>
@@ -162,12 +164,12 @@
     def get_older(self):
         self.age = self.age + 1
 </code></pre>
-<p>Vidíme, že tělo třídy obsahuje postupně definice třech funkcí. První z nich je tzv. <em>konstruktor</em> třídy a budeme se mu věnuvat níže. Druhé dvě funkce, tedy <code>woof</code> a <code>get_older</code>, jsou metody, které bude mít každá instance této třídy k dispozici. Jediným parametrem obou funkcí je parametr <code>self</code>, pomocí kterého se lze uvnitř funkcí odkazovat na vlastnosti daného objektu (<code>self.name</code> a <code>self.age</code>). Parametr <code>self</code> je u všech metod povinný, vedle něj mohou metody obsahovat i další parametry (což není náš případ).</p>
+<p>Vidíme, že tělo třídy obsahuje postupně definice třech funkcí. První z nich je tzv. <em>konstruktor</em> třídy a budeme se mu věnuvat níže. Druhé dvě funkce, tedy <code>woof</code> a <code>get_older</code>, jsou metody, které bude mít každá instance této třídy k dispozici. Jediným parametrem obou funkcí je parametr <code>self</code>, pomocí kterého se lze uvnitř funkcí odkazovat na vlastnosti daného objektu (<code>self.name</code> a <code>self.age</code>). Parametr <code>self</code> je u všech metod povinný, vedle něj mohou metody obsahovat i další parametry.</p>
 <p>Vidíme, že metoda <code>woof</code> pouze vytiskne text, ve kterém se použije jméno daného psa, na němž se bude metoda volat (toto jméno bude totiž uloženo ve vlastnosti <code>self.name</code>). Metoda <code>get_older</code> zvýší hodnotu vlastnosti <code>self.age</code> o jedna.</p>
 <p><strong>Konstruktor třídy</strong> se jmenuje vždy stejně, a to <code>__init__</code> (před a po slově <code>init</code> jsou dvě podtržítka za sebou). Je to funkce, která se automaticky volá při vytváření každé nové instance (tj. objektu) třídy. V této funkci jsou také definovány vlastnosti, které bude každý pes mít k dispozici. Jsou to proměnné <code>self.name</code> a <code>self.age</code>. Slovo <code>self</code> zde vždy odkazuje k budoucí instanci třídy a je povinným (prvním) parametrem každé metody.</p>
 <p>Co tedy bude dělat konstruktor třídy <code>Dog</code>? Nastaví hodnotu vlastnosti <code>self.name</code> na hodnotu parametru <code>name</code> a hodnotu vlastnosti <code>self.age</code> na hodnotu 0. Parametr <code>name</code> konstruktoru bude muset uživatel při vytváření objektu zadat (nebude tedy možné vytvořit bezejmenného psa).</p>
 <blockquote>
-<p><strong>Úkol 1.</strong> Napište zhora uvedenou definici třídy <code>Dog</code> do skriptu a skript spusťte.</p>
+<p><strong>Úkol 1.</strong> Napište shora uvedenou definici třídy <code>Dog</code> do skriptu a skript spusťte.</p>
 </blockquote>
 <p>Vytvoření konkrétního objektu třídy se provádí voláním funkce, která má stejný název jako daná třída. Ve skutečnosti se tím volá konstruktor třídy. Při volání této funkce je třeba určit hodnoty parametrů v tom pořadí, jak jsou definovány v konstruktoru (ovšem s vynecháním parametru <code>self</code>). Funkce vrací objekt dané třídy, který je zpravidla žádoucí uložit do nějaké proměnné.</p>
 <p>V našem případě se bude tedy funkce jmenovat <code>Dog</code> a jejím jediným parametrem bude <code>name</code>:</p>
@@ -201,13 +203,13 @@ Woof woof, I'm Zeryk
 &gt;&gt;&gt; alik.age
 1
 </code></pre>
-<pre><code class="language-python">
-</code></pre>
-<pre><code class="language-python">
-</code></pre>
-<pre><code class="language-python">
-</code></pre>
 <p>V Pythonu jsou všechno objekty..</p>
+<pre><code class="language-python">
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
 <h2 id="vlastnosti-objektu-vs-vlastnosti-tridy">Vlastnosti objektu vs vlastnosti třídy</h2>
 <h2 id="dedicnost">Dědičnost</h2>
 <h2 id="ulohy">Úlohy</h2>
