@@ -94,6 +94,14 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#vypocet-hodnot-pole">Výpočet hodnot pole</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sumarizace-pole">Sumarizace pole</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#atributove-vybery">Atributové výběry</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shrnuti">Shrnutí</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ulohy">Úlohy</a>
+    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Lekce%2015%20Proch%C3%A1zen%C3%AD%20tabulek%20pomoc%C3%AD%20kurzor%C5%AF/">Lekce 15: Kurzory</a>
@@ -170,16 +178,16 @@
 <h2 id="pridani-a-smazani-pole">Přidání a smazání pole</h2>
 <p>Nástroje pro práci s poli atributových tabulek, jako je přidání pole, smazání pole, či výpočet hodnot pole, nalezneme v nástrojové sadě <em>Data Management Tools -&gt; Fields</em>.</p>
 <p><strong>Přidání pole</strong> se provádí nástrojem <em>Add Field</em>. Jeho použití si předvedeme na příkladu přidání textového pole "NEWFIELD" do tabulky vrstvy "obce_LK". Operaci můžeme provést např. v okně <em>Python</em> v mapovém dokumentu ArcMap, abychom si mohli okamžitě prohlédnout výsledek. </p>
-<pre><code class="language-python">arcpy.management.AddField(&quot;obce_LK&quot;, &quot;NEWFIELD&quot;, &quot;TEXT&quot;)
+<pre><code class="language-console">&gt;&gt;&gt; arcpy.management.AddField(&quot;obce_LK&quot;, &quot;NEWFIELD&quot;, &quot;TEXT&quot;)
 </code></pre>
 <blockquote>
 <p><strong>Úkol 1.</strong> Zadejte do příkazového řádku okna <em>Python</em> výše uvedený příkaz a prohlédněte si výsledek v atributové tabulce.</p>
 </blockquote>
 <p>Jak je z ukázky patrno, prvním parametrem nástroje je název vstupní tabulky (je možné zadat jak vektorovou třídu prvků - pak se použije její atributová tabulka, nebo samostatnou tabulku ve formátu DBF). Druhým parametrem je název přidávaného pole. Třetím parametrem je datový typ pole (kompletní výčet typů, které je možné použít, naleznete v nápovědě k nástroji). Dalšími nepovinnými parametry bychom mohli nastavit omezení pro daný formát, jako je např. maximální délka textového řetězce (v případě textového pole), počet platných číslic (<em>scale</em>) a desetinných míst (<em>precision</em>) v případě číselného typu apod. (V ukázce se spokojujeme s výchozím nastavením těchto parametrů.)</p>
-<p>Pokus přidat pole stejného názvu ještě jednou... </p>
-<p>Smazání pole</p>
+<p>Při přidávání pole je třeba dávat pozor na to, zda pole s daným názvem již v tabulce není. Pokud ano, nástroj <em>Add Field</em> pole přidá a pouze na existenci původního pole se stejným názvem upozorní hláškou typu "Warning". Tím se ovšem původní pole nenávratně smaže. </p>
+<p>Existující pole (pokud není povinné, jako např. pole FID či Shape) lze smazat pomocí nástroje <strong>Delete Field</strong> (<em>Data Management Tools -&gt; Fields</em>). Jeho použití je zřejmé (pokud ne, prostudujte si nápovědu k tomuto nástroji).</p>
 <blockquote>
-<p><strong>Úkol 2.</strong> Napište funkci <code>AddNewField</code>, která do zadané tabulky/třídy prvků přidá nové pole zadaného názvu. Funkce však nejprve vyhodnotí, zda pole s tímto názvem již v tabulce není, a pokud ano, toto původní pole smaže a nahradí je polem novým. </p>
+<p><strong>Úkol 2.</strong> Pole, které jste vytvořili v úkolu 1, opět smažte nástrojem <em>Delete Field</em>.</p>
 </blockquote>
 <h2 id="propojovani-tabulek">Propojování tabulek</h2>
 <p>Propojení tabulek pomocí metody <em>join</em> má za následek přidání pole (či polí) z připojované tabulky do cílové tabulky, a to na základě nějakého společného atributu (tzv. <em>klíče</em>). Tento typ propojení je možný v případě, kdy jednomu řádku cílové tabulky odpovídá max. jeden řádek připojované tabulky (jinak by totiž nebylo možné rozhodnout, který řádek připojované tabulky se má k danému řádku cílové tabulky připojit). Zároveň platí, že jednomu řádku připojované tabulky může odpovídat jeden či více řádků cílové tabulky. Jeden řádek připojované tabulky se totiž může zkopírovat do libovolného množství řádků cílové tabulky.</p>
@@ -187,7 +195,7 @@
 <p>Propojení metodou <em>join</em> lze vpraxi provést dvěma způsoby:</p>
 <ul>
 <li>jako dočasné propojení, které je definované pouze v rámci vrstev,</li>
-<li>jako permanentní rozšíření cílové tabulky o nové řádky, zkopírované z připojované tabulky.</li>
+<li>jako permanentní rozšíření cílové tabulky o nové sloupce, zkopírované z připojované tabulky.</li>
 </ul>
 <h3 id="docasne-propojeni">Dočasné propojení</h3>
 <p>Dočasné propojení je právě ten způsob, který jste pravděpodobně zvyklí provádět v prostředí ArcGIS "ručně".</p>
@@ -261,7 +269,7 @@ srazky
 <p>Pokud chceme připojit pole trvale, máme dvě možnosti:</p>
 <ul>
 <li>Provedeme nejprve dočasné propojení výše uvedeným způsobem, a pak výslednou vrstvu uložíme do nové datové sady, např. nástrojem <strong>Copy Features</strong> (<em>Data Management Tools</em> <em>-&gt;</em> <em>General</em>).</li>
-<li>Připojíme pole přímo do tabulky zdrojové datové sady pomocí nástroje <strong>Join Field</strong> (<em>Data Management Tools -&gt; Joins</em>). Zde je možné připojit buď všechna pole, nebo jen vybraná. Připojená pole se stanou trvalou součástí zdrojové tabulky.</li>
+<li>Připojíme pole přímo do tabulky zdrojové datové sady pomocí nástroje <strong>Join Field</strong> (<em>Data Management Tools -&gt; Joins</em>). Zde je možné připojit buď všechna pole, nebo jen vybraná. Připojená pole se stanou trvalou součástí cílové tabulky.</li>
 </ul>
 <blockquote>
 <p><strong>Úkol 4.</strong> Pomocí nástroje <em>Join Field</em> připojte z tabulky součinitelů odtoku pole s hodnotami součinitele ("ko_vsak") jako trvalé nové pole do tabulky krajinného pokryvu. (Syntax nástroje prostudujte v nápovědě.) Prohlédněte si výslednou tabulku. Následně nové pole opět smažte nástrojem <em>Delete Field</em>.</p>
@@ -313,14 +321,16 @@ arcpy.management.CalculateField(obce, &quot;NAZEV_2&quot;, '!NAZEV_ENG!.upper()'
 <p><strong>Úkol 6.</strong> Obdobným způsobem, jako v předchozí ukázce, vytvořte pole s názvy obcí psanými malými písmeny.</p>
 </blockquote>
 <p>Velmi častou úlohou je výpočet geometrických vlastností prvků do atributu. Příkladem může být výpočet ploch polygonů do atributu nazvaného např. "AREA_KM". "Ruční" řešení by spočívalo v použití nástroje <em>Calculate Geometry</em> dostupného v kontextovém menu příslušného pole. V Pythonu se operace provede opět pomocí nástroje <em>Calculate Field</em>, kde se v rámci výrazu odkážeme na speciální pole "Shape" a jeho vlastnost "area" pomocí <code>!shape.area!</code> (chceme-li výsledek ve čtverečních kilometrech, je nutné do výrazu zakomponovat i převod jednotek):</p>
-<p>```python
-import arcpy</p>
-<p>obce = "obce_LK.shp"</p>
-<h1 id="add-a-new-field-for-areas">add a new field for areas</h1>
-<p>arcpy.management.AddField(obce, "AREA_KM", "DOUBLE")</p>
-<h1 id="fill-the-field-with-areas-in-squared-kilometers">fill the field with areas in squared kilometers</h1>
-<p>arcpy.management.CalculateField(obce, "AREA_KM", '!shape.area!/1000000', "PYTHON_9.3")
- ```</p>
+<pre><code class="language-python">import arcpy
+
+obce = &quot;obce_LK.shp&quot;
+
+# add a new field for areas
+arcpy.management.AddField(obce, &quot;AREA_KM&quot;, &quot;DOUBLE&quot;)
+
+# fill the field with areas in squared kilometers
+arcpy.management.CalculateField(obce, &quot;AREA_KM&quot;, '!shape.area!/1000000', &quot;PYTHON_9.3&quot;)
+</code></pre>
 <blockquote>
 <p><strong>Úkol 7.</strong> Do datové sady "UrbanAtlas_LK.shp" přidejte pole "PARATIO" a vypočtěte do něj poměr obvodu a plochy (tzv. "Perimeter-Area Ratio"), což je krajinná metrika popisující míru složitosti tvaru krajinných plošek.</p>
 </blockquote>
