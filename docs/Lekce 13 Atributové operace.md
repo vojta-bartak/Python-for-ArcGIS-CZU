@@ -27,19 +27,19 @@ Nástroje pro práci s poli atributových tabulek, jako je přidání pole, smaz
 
 **Přidání pole** se provádí nástrojem *Add Field*. Jeho použití si předvedeme na příkladu přidání textového pole "NEWFIELD" do tabulky vrstvy "obce_LK". Operaci můžeme provést např. v okně *Python* v mapovém dokumentu ArcMap, abychom si mohli okamžitě prohlédnout výsledek. 
 
-```python
-arcpy.management.AddField("obce_LK", "NEWFIELD", "TEXT")
+```console
+>>> arcpy.management.AddField("obce_LK", "NEWFIELD", "TEXT")
 ```
 
 > **Úkol 1.** Zadejte do příkazového řádku okna *Python* výše uvedený příkaz a prohlédněte si výsledek v atributové tabulce.
 
 Jak je z ukázky patrno, prvním parametrem nástroje je název vstupní tabulky (je možné zadat jak vektorovou třídu prvků - pak se použije její atributová tabulka, nebo samostatnou tabulku ve formátu DBF). Druhým parametrem je název přidávaného pole. Třetím parametrem je datový typ pole (kompletní výčet typů, které je možné použít, naleznete v nápovědě k nástroji). Dalšími nepovinnými parametry bychom mohli nastavit omezení pro daný formát, jako je např. maximální délka textového řetězce (v případě textového pole), počet platných číslic (*scale*) a desetinných míst (*precision*) v případě číselného typu apod. (V ukázce se spokojujeme s výchozím nastavením těchto parametrů.)
 
-Pokus přidat pole stejného názvu ještě jednou... 
+Při přidávání pole je třeba dávat pozor na to, zda pole s daným názvem již v tabulce není. Pokud ano, nástroj *Add Field* pole přidá a pouze na existenci původního pole se stejným názvem upozorní hláškou typu "Warning". Tím se ovšem původní pole nenávratně smaže. 
 
-Smazání pole
+Existující pole (pokud není povinné, jako např. pole FID či Shape) lze smazat pomocí nástroje **Delete Field** (*Data Management Tools -> Fields*). Jeho použití je zřejmé (pokud ne, prostudujte si nápovědu k tomuto nástroji).
 
-> **Úkol 2.** Napište funkci `AddNewField`, která do zadané tabulky/třídy prvků přidá nové pole zadaného názvu. Funkce však nejprve vyhodnotí, zda pole s tímto názvem již v tabulce není, a pokud ano, toto původní pole smaže a nahradí je polem novým. 
+> **Úkol 2.** Pole, které jste vytvořili v úkolu 1, opět smažte nástrojem *Delete Field*.
 
 ## Propojování tabulek
 
@@ -50,7 +50,7 @@ Vedle metody *join* je v ArcGIS k dispozici ještě metoda *relate*, která umo�
 Propojení metodou *join* lze vpraxi provést dvěma způsoby:
 
 - jako dočasné propojení, které je definované pouze v rámci vrstev,
-- jako permanentní rozšíření cílové tabulky o nové řádky, zkopírované z připojované tabulky.
+- jako permanentní rozšíření cílové tabulky o nové sloupce, zkopírované z připojované tabulky.
 
 ### Dočasné propojení
 
@@ -145,7 +145,7 @@ Smazání vrstvy je důležité proto, že při vytvoření vrstvy z nějaké da
 Pokud chceme připojit pole trvale, máme dvě možnosti:
 
 - Provedeme nejprve dočasné propojení výše uvedeným způsobem, a pak výslednou vrstvu uložíme do nové datové sady, např. nástrojem **Copy Features** (*Data Management Tools* *->* *General*).
-- Připojíme pole přímo do tabulky zdrojové datové sady pomocí nástroje **Join Field** (*Data Management Tools -> Joins*). Zde je možné připojit buď všechna pole, nebo jen vybraná. Připojená pole se stanou trvalou součástí zdrojové tabulky.
+- Připojíme pole přímo do tabulky zdrojové datové sady pomocí nástroje **Join Field** (*Data Management Tools -> Joins*). Zde je možné připojit buď všechna pole, nebo jen vybraná. Připojená pole se stanou trvalou součástí cílové tabulky.
 
 > **Úkol 4.** Pomocí nástroje *Join Field* připojte z tabulky součinitelů odtoku pole s hodnotami součinitele ("ko_vsak") jako trvalé nové pole do tabulky krajinného pokryvu. (Syntax nástroje prostudujte v nápovědě.) Prohlédněte si výslednou tabulku. Následně nové pole opět smažte nástrojem *Delete Field*.
 
@@ -209,7 +209,7 @@ Všimněte si použití vykřičníků pro odkaz na pole "NAZEV_ENG" v rámci v�
 
 Velmi častou úlohou je výpočet geometrických vlastností prvků do atributu. Příkladem může být výpočet ploch polygonů do atributu nazvaného např. "AREA_KM". "Ruční" řešení by spočívalo v použití nástroje *Calculate Geometry* dostupného v kontextovém menu příslušného pole. V Pythonu se operace provede opět pomocí nástroje *Calculate Field*, kde se v rámci výrazu odkážeme na speciální pole "Shape" a jeho vlastnost "area" pomocí `!shape.area!` (chceme-li výsledek ve čtverečních kilometrech, je nutné do výrazu zakomponovat i převod jednotek):
 
- ```python
+```python
 import arcpy
 
 obce = "obce_LK.shp"
@@ -219,7 +219,7 @@ arcpy.management.AddField(obce, "AREA_KM", "DOUBLE")
 
 # fill the field with areas in squared kilometers
 arcpy.management.CalculateField(obce, "AREA_KM", '!shape.area!/1000000', "PYTHON_9.3")
- ```
+```
 
 > **Úkol 7.** Do datové sady "UrbanAtlas_LK.shp" přidejte pole "PARATIO" a vypočtěte do něj poměr obvodu a plochy (tzv. "Perimeter-Area Ratio"), což je krajinná metrika popisující míru složitosti tvaru krajinných plošek.
 
